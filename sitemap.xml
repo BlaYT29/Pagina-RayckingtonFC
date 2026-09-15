@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- INICIO -->
+    <url>
+        <loc>https://rayckingtonfc.cl/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- NOSOTROS -->
+    <url>
+        <loc>https://rayckingtonfc.cl/nosotros.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- PLANTEL -->
+    <url>
+        <loc>https://rayckingtonfc.cl/plantel.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- PARTIDOS -->
+    <url>
+        <loc>https://rayckingtonfc.cl/partidos.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- NOTICIAS -->
+    <url>
+        <loc>https://rayckingtonfc.cl/noticias.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- GALERÍA -->
+    <url>
+        <loc>https://rayckingtonfc.cl/galeria.html</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- CONTACTO -->
+    <url>
+        <loc>https://rayckingtonfc.cl/contacto.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>

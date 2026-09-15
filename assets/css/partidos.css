@@ -1,0 +1,405 @@
+/* ===================================================
+   RAYCKINGTON FC
+   PARTIDOS CSS
+=================================================== */
+
+
+/* ===================================================
+   HERO STATS
+=================================================== */
+
+.hero-stats{
+
+    margin-top:40px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.hero-stat{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(10px);
+
+    padding:18px 30px;
+
+    border-radius:20px;
+
+    min-width:140px;
+
+}
+
+
+
+.hero-stat h3{
+
+    color:var(--yellow);
+
+    font-size:2rem;
+
+    margin-bottom:5px;
+
+}
+
+
+
+.hero-stat span{
+
+    color:#ddd;
+
+    font-size:.9rem;
+
+}
+
+
+
+/* ===================================================
+   TABLA DE POSICIONES
+=================================================== */
+
+.table-club{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#141414;
+
+}
+
+
+
+.table-club thead{
+
+    background:linear-gradient(
+        90deg,
+        var(--red),
+        var(--blue)
+    );
+
+}
+
+
+
+.table-club th{
+
+    padding:18px;
+
+    color:#fff;
+
+    text-align:center;
+
+    font-weight:600;
+
+}
+
+
+
+.table-club td{
+
+    padding:16px;
+
+    text-align:center;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+    color:#ddd;
+
+}
+
+
+
+.table-club tbody tr{
+
+    transition:.3s;
+
+}
+
+
+
+.table-club tbody tr:hover{
+
+    background:#1d1d1d;
+
+}
+
+
+
+/* FILA RAYCKINGTON */
+
+.rayckington-row{
+
+    background:rgba(200,16,46,.15);
+
+    font-weight:700;
+
+}
+
+
+
+.rayckington-row td{
+
+    color:#fff;
+
+}
+
+
+
+/* ===================================================
+   FIXTURE
+=================================================== */
+
+.fixture-card{
+
+    background:#181818;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+    height:100%;
+
+}
+
+
+
+.fixture-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+
+.fixture-card h3{
+
+    color:var(--yellow);
+
+    margin-bottom:20px;
+
+}
+
+
+
+.fixture-match{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.fixture-match:last-child{
+
+    border:none;
+
+}
+
+
+
+.fixture-team{
+
+    font-weight:600;
+
+    color:#fff;
+
+}
+
+
+
+.fixture-vs{
+
+    color:var(--red);
+
+    font-weight:700;
+
+}
+
+
+
+/* ===================================================
+   ESTADÍSTICAS
+=================================================== */
+
+.stat-box{
+
+    background:#181818;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+    height:100%;
+
+}
+
+
+
+.stat-box:hover{
+
+    transform:translateY(-10px);
+
+}
+
+
+
+.stat-box i{
+
+    font-size:2.5rem;
+
+    color:var(--yellow);
+
+    margin-bottom:15px;
+
+}
+
+
+
+.stat-box h2{
+
+    color:#fff;
+
+    font-size:2.5rem;
+
+}
+
+
+
+.stat-box p{
+
+    color:#bbb;
+
+}
+
+
+
+/* ===================================================
+   ETIQUETAS RESULTADOS
+=================================================== */
+
+.badge-win{
+
+    background:#198754;
+
+    color:#fff;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:.8rem;
+
+}
+
+
+
+.badge-draw{
+
+    background:#ffc107;
+
+    color:#000;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:.8rem;
+
+}
+
+
+
+.badge-loss{
+
+    background:#dc3545;
+
+    color:#fff;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:.8rem;
+
+}
+
+
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:992px){
+
+    .hero-stats{
+
+        gap:15px;
+
+    }
+
+}
+
+
+
+@media(max-width:768px){
+
+    .table-club{
+
+        font-size:.85rem;
+
+    }
+
+    .table-club th,
+
+    .table-club td{
+
+        padding:10px;
+
+    }
+
+}
+
+
+
+@media(max-width:576px){
+
+    .hero-stat{
+
+        width:100%;
+
+    }
+
+}

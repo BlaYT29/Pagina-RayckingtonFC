@@ -1,0 +1,68 @@
+[
+  {
+    "id": "GAL-2026-001",
+    "titulo": "Rayckington FC se convierte oficialmente en club deportivo",
+    "categoria": "Institucional",
+    "fecha": "2026-06-23",
+    "fechaTexto": "23 de junio de 2026",
+    "imagen": "assets/img/gallery/2026/club-deportivo-01.jpg",
+    "descripcion": "Uno de los momentos más importantes de la historia institucional de Rayckington FC.",
+    "publicada": true,
+    "destacada": true
+  },
+  {
+    "id": "GAL-2026-002",
+    "titulo": "Primera temporada oficial",
+    "categoria": "Partidos",
+    "fecha": "2026-07-04",
+    "fechaTexto": "4 de julio de 2026",
+    "imagen": "assets/img/gallery/2026/fin-apertura-01.jpg",
+    "descripcion": "Cierre de la primera participación oficial de Rayckington FC en la Liga Tobalaba.",
+    "publicada": true,
+    "destacada": false
+  },
+  {
+    "id": "GAL-2026-003",
+    "titulo": "Entrenamiento bajo la lluvia",
+    "categoria": "Entrenamientos",
+    "fecha": "2026-07-19",
+    "fechaTexto": "19 de julio de 2026",
+    "imagen": "assets/img/gallery/2026/entrenamiento-lluvia-01.jpg",
+    "descripcion": "El plantel continuó trabajando pese a las intensas lluvias.",
+    "publicada": true,
+    "destacada": false
+  },
+  {
+    "id": "GAL-2026-004",
+    "titulo": "Preparación para el Clausura 2026",
+    "categoria": "Entrenamientos",
+    "fecha": "2026-07-21",
+    "fechaTexto": "21 de julio de 2026",
+    "imagen": "assets/img/gallery/2026/preparacion-clausura-01.jpg",
+    "descripcion": "Rayckington FC inicia una nueva etapa de preparación deportiva.",
+    "publicada": true,
+    "destacada": false
+  },
+  {
+    "id": "GAL-2026-005",
+    "titulo": "Segunda rifa del club",
+    "categoria": "Actividades",
+    "fecha": "2026-07-20",
+    "fechaTexto": "20 de julio de 2026",
+    "imagen": "assets/img/gallery/2026/segunda-rifa-01.jpg",
+    "descripcion": "Actividad de recaudación destinada a apoyar los próximos proyectos deportivos.",
+    "publicada": true,
+    "destacada": false
+  },
+  {
+    "id": "GAL-2026-006",
+    "titulo": "Preparación para la gira internacional",
+    "categoria": "Internacional",
+    "fecha": "2026-07-21",
+    "fechaTexto": "21 de julio de 2026",
+    "imagen": "assets/img/gallery/2026/gira-argentina-01.jpg",
+    "descripcion": "El club trabaja en la organización de su primera gira internacional.",
+    "publicada": true,
+    "destacada": false
+  }
+]

@@ -1,0 +1,477 @@
+/* ===================================================
+   RAYCKINGTON FC
+   RESPONSIVE CSS
+=================================================== */
+
+
+/* ===================================================
+   PANTALLAS GRANDES
+=================================================== */
+
+
+@media(min-width:1400px){
+
+
+    .hero-content h1{
+
+        font-size:6rem;
+
+    }
+
+
+    .hero-panel{
+
+        padding:50px;
+
+    }
+
+
+    .section-title h2{
+
+        font-size:3.5rem;
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   NOTEBOOKS
+=================================================== */
+
+
+@media(max-width:1200px){
+
+
+    .hero-content h1{
+
+        font-size:4.5rem;
+
+    }
+
+
+
+    .hero-panel{
+
+        padding:30px;
+
+    }
+
+
+
+    .navbar-nav .nav-link{
+
+        padding-left:12px!important;
+
+        padding-right:12px!important;
+
+    }
+
+
+
+    .player-card img{
+
+        height:300px;
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   TABLETS
+=================================================== */
+
+
+@media(max-width:991px){
+
+
+    /* GENERAL */
+
+
+    body{
+
+        overflow-x:hidden;
+
+    }
+
+
+
+    .section{
+
+        padding:80px 0;
+
+    }
+
+
+
+    /* HERO */
+
+
+    .hero{
+
+        min-height:auto;
+
+        padding-top:150px;
+
+        padding-bottom:100px;
+
+        text-align:center;
+
+    }
+
+
+
+    .hero-content{
+
+        margin:auto;
+
+    }
+
+
+
+    .hero-content p{
+
+        margin-left:auto;
+
+        margin-right:auto;
+
+    }
+
+
+
+    .hero-panel{
+
+        margin-top:50px;
+
+    }
+
+
+
+    /* PARTIDOS */
+
+
+    .match-card .col-lg-4{
+
+        margin-bottom:40px;
+
+    }
+
+
+
+    /* HISTORIA */
+
+
+    #club img{
+
+        height:400px;
+
+        margin-bottom:30px;
+
+    }
+
+
+
+    /* FOOTER */
+
+
+    footer{
+
+        text-align:center;
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   CELULARES GRANDES
+=================================================== */
+
+
+@media(max-width:768px){
+
+
+    /* TITULOS */
+
+
+    .section-title h2{
+
+        font-size:2.2rem;
+
+    }
+
+
+
+    /* HERO */
+
+
+    .hero-content h1{
+
+        font-size:3rem;
+
+        letter-spacing:1px;
+
+    }
+
+
+
+    .hero-content h2{
+
+        font-size:1.6rem;
+
+    }
+
+
+
+    .hero-content p{
+
+        font-size:1rem;
+
+    }
+
+
+
+    .hero-content .btn{
+
+        width:100%;
+
+        margin-bottom:10px;
+
+    }
+
+
+
+    .hero-vs{
+
+        gap:15px;
+
+    }
+
+
+
+    /* RESULTADO */
+
+
+    .result-card h1{
+
+        font-size:2.8rem;
+
+    }
+
+
+
+    /* GALERIA */
+
+
+    .gallery{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    /* SPONSORS */
+
+
+    .sponsors{
+
+        gap:30px;
+
+    }
+
+
+
+    .sponsors img{
+
+        max-width:120px;
+
+    }
+
+
+
+}
+
+
+
+/* ===================================================
+   CELULARES PEQUEÑOS
+=================================================== */
+
+
+@media(max-width:480px){
+
+
+    .container{
+
+        width:94%;
+
+    }
+
+
+
+    /* NAVBAR */
+
+
+    .navbar-brand span{
+
+        display:none;
+
+    }
+
+
+
+    .navbar-brand img{
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+
+
+    /* HERO */
+
+
+    .hero{
+
+        padding-top:130px;
+
+    }
+
+
+
+    .hero-content h1{
+
+        font-size:2.4rem;
+
+    }
+
+
+
+    .hero-panel{
+
+        border-radius:20px;
+
+        padding:20px;
+
+    }
+
+
+
+    .hero-logo{
+
+        width:150px;
+
+    }
+
+
+
+    .hero-vs img{
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+
+
+    .hero-vs span{
+
+        font-size:1.4rem;
+
+    }
+
+
+
+    /* MATCH */
+
+
+    .match-card{
+
+        padding:20px;
+
+        border-radius:20px;
+
+    }
+
+
+
+    .team-logo{
+
+        width:80px;
+
+        height:80px;
+
+    }
+
+
+
+    /* CARDS */
+
+
+    .player-card img{
+
+        height:280px;
+
+    }
+
+
+
+    .news-card img{
+
+        height:220px;
+
+    }
+
+
+
+    /* FOOTER */
+
+
+    footer h3{
+
+        font-size:1.5rem;
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   LANDSCAPE MOBILE
+=================================================== */
+
+
+@media(max-height:500px) and (orientation:landscape){
+
+
+    .hero{
+
+        min-height:auto;
+
+        padding-top:120px;
+
+    }
+
+
+
+    .scroll-down{
+
+        display:none;
+
+    }
+
+
+}

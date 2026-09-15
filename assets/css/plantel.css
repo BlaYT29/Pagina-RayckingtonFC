@@ -1,0 +1,461 @@
+/* ===================================================
+   RAYCKINGTON FC
+   PLANTEL CSS
+=================================================== */
+
+
+/* ===================================================
+   RESUMEN DEL PLANTEL
+=================================================== */
+
+.squad-summary-card{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:32px 24px;
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    transition:.35s ease;
+}
+
+.squad-summary-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 24px 55px rgba(0,0,0,.42);
+}
+
+.squad-summary-card i{
+    width:62px;
+    height:62px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    margin-bottom:18px;
+    background:rgba(255,209,0,.12);
+    color:var(--yellow);
+    font-size:1.7rem;
+}
+
+.squad-summary-card strong{
+    display:block;
+    font-family:'Poppins',sans-serif;
+    font-size:2.4rem;
+    line-height:1;
+    margin-bottom:10px;
+    color:#fff;
+}
+
+.squad-summary-card span{
+    color:#aaa;
+    font-weight:500;
+}
+
+
+/* ===================================================
+   TARJETAS DE JUGADORES
+=================================================== */
+
+.player-card{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.28);
+    transition:.35s ease;
+}
+
+.player-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 60px rgba(0,0,0,.48);
+}
+
+.player-image{
+    position:relative;
+    height:360px;
+    overflow:hidden;
+    background:#202020;
+}
+
+.player-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.55s ease;
+}
+
+.player-card:hover .player-image img{
+    transform:scale(1.05);
+}
+
+.player-number{
+    position:absolute;
+    top:18px;
+    left:18px;
+    z-index:2;
+    min-width:54px;
+    height:54px;
+    padding:0 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:18px;
+    background:rgba(5,5,5,.78);
+    color:var(--yellow);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(10px);
+    font-family:'Poppins',sans-serif;
+    font-size:1.5rem;
+    font-weight:800;
+}
+
+.player-status{
+    position:absolute;
+    top:18px;
+    right:18px;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 13px;
+    border-radius:50px;
+    font-size:.76rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    backdrop-filter:blur(10px);
+}
+
+.status-available{
+    background:rgba(25,135,84,.88);
+    color:#fff;
+}
+
+.status-injured{
+    background:rgba(255,193,7,.92);
+    color:#111;
+}
+
+.status-inactive{
+    background:rgba(108,117,125,.9);
+    color:#fff;
+}
+
+.player-captain{
+    position:absolute;
+    left:18px;
+    bottom:18px;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 14px;
+    border-radius:50px;
+    background:rgba(255,209,0,.92);
+    color:#111;
+    font-size:.78rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+}
+
+.player-content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    padding:28px;
+}
+
+.player-position{
+    color:var(--yellow);
+    font-size:.8rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.player-content h3{
+    margin:10px 0 16px;
+    font-size:1.5rem;
+    line-height:1.25;
+}
+
+.player-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px 18px;
+    margin-bottom:24px;
+    color:#aaa;
+    font-size:.9rem;
+}
+
+.player-info span{
+    display:inline-flex;
+    align-items:center;
+}
+
+.player-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:auto;
+    margin-bottom:24px;
+}
+
+.player-stat{
+    padding:15px 10px;
+    text-align:center;
+    border-radius:16px;
+    background:#1d1d1d;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.player-stat strong{
+    display:block;
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    font-size:1.25rem;
+    margin-bottom:3px;
+}
+
+.player-stat span{
+    color:#969696;
+    font-size:.77rem;
+}
+
+.player-profile-button{
+    width:100%;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* ===================================================
+   TARJETAS DEL CUERPO TÉCNICO Y DIRECTIVA
+=================================================== */
+
+.staff-card{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.28);
+    transition:.35s ease;
+}
+
+.staff-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+}
+
+.staff-image{
+    height:320px;
+    overflow:hidden;
+    background:#202020;
+}
+
+.staff-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.55s ease;
+}
+
+.staff-card:hover .staff-image img{
+    transform:scale(1.05);
+}
+
+.staff-content{
+    flex:1;
+    padding:28px;
+}
+
+.staff-role{
+    display:inline-block;
+    color:var(--yellow);
+    font-size:.78rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.staff-content h3{
+    margin:10px 0 14px;
+    font-size:1.45rem;
+}
+
+.staff-content p{
+    margin-bottom:0;
+    color:#b8b8b8;
+}
+
+
+/* ===================================================
+   CTA FINAL DEL PLANTEL
+=================================================== */
+
+.plantel-cta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    padding:50px;
+    border-radius:30px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(200,16,46,.32),
+            rgba(5,25,80,.48)
+        ),
+        #111;
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 30px 70px rgba(0,0,0,.4);
+    overflow:hidden;
+}
+
+.plantel-cta-content{
+    max-width:720px;
+}
+
+.plantel-cta h2{
+    margin:24px 0 14px;
+    font-size:2.4rem;
+}
+
+.plantel-cta p{
+    margin-bottom:28px;
+}
+
+.plantel-cta-logo{
+    flex:0 0 220px;
+    display:flex;
+    justify-content:center;
+}
+
+.plantel-cta-logo img{
+    width:190px;
+    max-width:100%;
+    filter:drop-shadow(0 20px 30px rgba(0,0,0,.35));
+}
+
+
+/* ===================================================
+   ESTADO DE CARGA
+=================================================== */
+
+#plantel-cargando{
+    min-height:220px;
+}
+
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:991px){
+
+    .player-image{
+        height:330px;
+    }
+
+    .staff-image{
+        height:300px;
+    }
+
+    .plantel-cta{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .plantel-cta-content{
+        max-width:100%;
+    }
+
+    .plantel-cta-logo{
+        flex-basis:auto;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .player-image{
+        height:300px;
+    }
+
+    .player-content,
+    .staff-content{
+        padding:24px;
+    }
+
+    .plantel-cta{
+        padding:34px 24px;
+    }
+
+    .plantel-cta h2{
+        font-size:1.9rem;
+    }
+
+    .player-stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:480px){
+
+    .player-image{
+        height:275px;
+    }
+
+    .staff-image{
+        height:270px;
+    }
+
+    .player-number{
+        min-width:48px;
+        height:48px;
+        font-size:1.3rem;
+    }
+
+    .player-status{
+        top:14px;
+        right:14px;
+        font-size:.68rem;
+        padding:7px 10px;
+    }
+
+    .player-captain{
+        left:14px;
+        bottom:14px;
+        font-size:.68rem;
+    }
+
+    .player-stats{
+        gap:7px;
+    }
+
+    .player-stat{
+        padding:13px 6px;
+    }
+
+    .player-stat span{
+        font-size:.7rem;
+    }
+
+    .plantel-cta-logo img{
+        width:150px;
+    }
+
+}

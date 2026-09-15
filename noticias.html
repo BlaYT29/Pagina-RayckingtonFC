@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Noticias | Rayckington FC</title>
+
+    <meta
+        name="description"
+        content="Noticias, comunicados y actualidad oficial de Rayckington FC.">
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS general -->
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="assets/css/navbar.css">
+
+    <link rel="stylesheet" href="assets/css/hero.css">
+
+    <link rel="stylesheet" href="assets/css/sections.css">
+
+    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <link rel="stylesheet" href="assets/css/animations.css">
+
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <link rel="stylesheet" href="assets/css/pages.css">
+
+    <!-- CSS de noticias -->
+
+    <link rel="stylesheet" href="assets/css/noticias.css">
+
+</head>
+
+<body>
+
+<!-- ======================================
+                NAVBAR
+====================================== -->
+
+<nav
+    id="navbar"
+    class="navbar navbar-expand-lg fixed-top navbar-club">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand"
+            href="index.html">
+
+            <img
+                src="assets/img/logo/logo.png"
+                alt="Logo Rayckington FC">
+
+            <span>
+                Rayckington FC
+            </span>
+
+        </a>
+
+        <button
+            class="navbar-toggler border-0 shadow-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Abrir menú">
+
+            <i class="bi bi-list"></i>
+
+        </button>
+
+        <div
+            class="collapse navbar-collapse"
+            id="menu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="index.html">
+
+                        Inicio
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="nosotros.html">
+
+                        Nosotros
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="plantel.html">
+
+                        Plantel
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="partidos.html">
+
+                        Partidos
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="noticias.html">
+
+                        Noticias
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="galeria.html">
+
+                        Galería
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="contacto.html">
+
+                        Contacto
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item ms-lg-3">
+
+                    <a
+                        class="btn-club"
+                        href="contacto.html">
+
+                        Únete
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<main>
+
+<!-- ======================================
+            HERO INTERNO
+====================================== -->
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span class="club-badge">
+
+            Actualidad Oficial
+
+        </span>
+
+        <h1 class="mt-4">
+
+            Noticias
+
+        </h1>
+
+        <p>
+
+            Conoce las novedades, comunicados, resultados,
+            entrenamientos y actividades de Rayckington FC.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ======================================
+        BUSCADOR Y FILTROS
+====================================== -->
+
+<section class="section news-tools-section">
+
+    <div class="container">
+
+        <div class="news-tools">
+
+            <div class="news-search">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="search"
+                    id="buscador-noticias"
+                    placeholder="Buscar noticia..."
+                    autocomplete="off"
+                    aria-label="Buscar noticias">
+
+            </div>
+
+            <div
+                id="filtros-noticias"
+                class="news-filters">
+
+                <button
+                    type="button"
+                    class="news-filter active"
+                    data-categoria="todas">
+
+                    Todas
+
+                </button>
+
+                <button
+                    type="button"
+                    class="news-filter"
+                    data-categoria="Institucional">
+
+                    Institucional
+
+                </button>
+
+                <button
+                    type="button"
+                    class="news-filter"
+                    data-categoria="Comunicado">
+
+                    Comunicados
+
+                </button>
+
+                <button
+                    type="button"
+                    class="news-filter"
+                    data-categoria="Competencia">
+
+                    Competencia
+
+                </button>
+
+                <button
+                    type="button"
+                    class="news-filter"
+                    data-categoria="Partidos">
+
+                    Partidos
+
+                </button>
+
+                <button
+                    type="button"
+                    class="news-filter"
+                    data-categoria="Entrenamientos">
+
+                    Entrenamientos
+
+                </button>
+
+                <button
+                    type="button"
+                    class="news-filter"
+                    data-categoria="Actividades">
+
+                    Actividades
+
+                </button>
+
+                <button
+                    type="button"
+                    class="news-filter"
+                    data-categoria="Internacional">
+
+                    Internacional
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================
+            ESTADO DE CARGA
+====================================== -->
+
+<section
+    id="noticias-cargando"
+    class="section dark">
+
+    <div class="container text-center">
+
+        <div
+            class="spinner-border text-warning"
+            role="status"
+            aria-hidden="true">
+
+        </div>
+
+        <p class="mt-3 mb-0">
+
+            Cargando noticias...
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ======================================
+        NOTICIA DESTACADA
+====================================== -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span class="club-badge">
+
+                Destacada
+
+            </span>
+
+            <h2 class="mt-3">
+
+                Noticia Principal
+
+            </h2>
+
+            <p>
+
+                La publicación más importante de la actualidad
+                de Rayckington FC.
+
+            </p>
+
+        </div>
+
+        <div id="noticia-destacada">
+
+            <!-- Se genera desde noticias.json -->
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================
+            ÚLTIMAS NOTICIAS
+====================================== -->
+
+<section class="section dark">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span class="club-badge">
+
+                Actualidad
+
+            </span>
+
+            <h2 class="mt-3">
+
+                Últimas Noticias
+
+            </h2>
+
+            <p>
+
+                Revisa las publicaciones más recientes del club.
+
+            </p>
+
+        </div>
+
+        <div
+            id="noticias-vacio"
+            class="card-custom text-center"
+            hidden>
+
+            <i class="bi bi-newspaper fs-1 text-warning"></i>
+
+            <h3 class="mt-3">
+
+                No encontramos noticias
+
+            </h3>
+
+            <p class="mb-0">
+
+                Prueba con otra búsqueda o selecciona una categoría diferente.
+
+            </p>
+
+        </div>
+
+        <div
+            id="noticias-listado"
+            class="row g-4">
+
+            <!-- Las tarjetas se generan con noticias.js -->
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- =======================================
+                FOOTER
+======================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row gy-5">
+
+            <!-- =======================================
+                 IDENTIDAD DEL CLUB
+            ======================================== -->
+
+            <div class="col-lg-4">
+
+                <img
+                    src="assets/img/logo/logo.png"
+                    alt="Escudo oficial de Rayckington FC"
+                    class="mb-4">
+
+                <h3>
+                    Rayckington FC
+                </h3>
+
+                <p>
+                    Club de fútbol fundado en 2025,
+                    construido sobre el compromiso,
+                    la organización, la competencia
+                    y la pasión por el deporte.
+                </p>
+
+                <p class="footer-lema">
+                    “Nacimos para competir, jugamos para ganar.”
+                </p>
+
+                <!-- REDES SOCIALES -->
+
+                <div class="social d-flex gap-3 mt-4">
+
+                    <a
+                        href="https://www.instagram.com/rayckingtonfc/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram oficial de Rayckington FC">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- =======================================
+                 CLUB
+            ======================================== -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5 class="mb-4">
+                    Club
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li class="mb-3">
+                        <a href="index.html">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="nosotros.html">
+                            Nosotros
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="plantel.html">
+                            Plantel
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="partidos.html">
+                            Partidos
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- =======================================
+                 CONTENIDO
+            ======================================== -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5 class="mb-4">
+                    Contenido
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li class="mb-3">
+                        <a href="noticias.html">
+                            Noticias
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="galeria.html">
+                            Galería
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="contacto.html">
+                            Contacto
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- =======================================
+                 CONTACTO
+            ======================================== -->
+
+            <div class="col-lg-4">
+
+                <h5 class="mb-4">
+                    Contacto
+                </h5>
+
+                <p>
+
+                    <i class="bi bi-envelope-fill text-danger me-2"></i>
+
+                    <a href="mailto:rayckingtonfc@gmail.com">
+                        rayckingtonfc@gmail.com
+                    </a>
+
+                </p>
+
+                <p>
+
+                    <i class="bi bi-instagram text-danger me-2"></i>
+
+                    <a
+                        href="https://www.instagram.com/rayckingtonfc/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        @rayckingtonfc
+
+                    </a>
+
+                </p>
+
+                <p>
+
+                    <i class="bi bi-globe2 text-danger me-2"></i>
+
+                    <a href="https://rayckingtonfc.cl">
+                        rayckingtonfc.cl
+                    </a>
+
+                </p>
+
+                <p>
+
+                    <i class="bi bi-calendar-event-fill text-danger me-2"></i>
+
+                    Fundado en 2025
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =======================================
+                 SEPARADOR
+        ======================================== -->
+
+        <hr class="my-5">
+
+
+        <!-- =======================================
+                 FOOTER INFERIOR
+        ======================================== -->
+
+        <div class="row align-items-center gy-3">
+
+            <div class="col-md-6">
+
+                <p class="mb-0">
+
+                    © <span id="year"></span>
+                    Rayckington FC.
+                    Todos los derechos reservados.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-6 text-md-end">
+
+                <small class="footer-developer">
+
+                    Diseñado y desarrollado por
+                    <strong>BlaCorp</strong>.
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ======================================
+                SCRIPTS
+====================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+</script>
+
+<script src="assets/js/main.js"></script>
+
+<script src="assets/js/noticias.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,623 @@
+/* ===================================================
+   RAYCKINGTON FC
+   HERO CSS
+=================================================== */
+
+
+/* ===================================================
+   HERO PRINCIPAL
+=================================================== */
+
+.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.94) 0%,
+            rgba(0,0,0,.74) 48%,
+            rgba(0,0,0,.48) 100%
+        ),
+        url("../img/hero/hero-bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    padding:145px 0 95px;
+}
+
+
+/* Capa adicional */
+
+.hero .overlay{
+    position:absolute;
+    inset:0;
+    z-index:0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.12),
+            rgba(0,0,0,.32)
+        );
+
+    pointer-events:none;
+}
+
+
+/* Efecto rojo inferior */
+
+.hero::after{
+    content:"";
+    position:absolute;
+    right:-220px;
+    bottom:-260px;
+    width:680px;
+    height:680px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(200,16,46,.38),
+            rgba(200,16,46,.10) 45%,
+            transparent 72%
+        );
+
+    filter:blur(8px);
+    z-index:1;
+    pointer-events:none;
+}
+
+
+/* Efecto azul superior */
+
+.hero::before{
+    content:"";
+    position:absolute;
+    top:-240px;
+    left:-220px;
+    width:560px;
+    height:560px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(17,50,125,.25),
+            transparent 70%
+        );
+
+    z-index:1;
+    pointer-events:none;
+}
+
+
+/* Contenido por encima */
+
+.hero .container{
+    position:relative;
+    z-index:2;
+}
+
+
+/* ===================================================
+   TEXTO HERO
+=================================================== */
+
+.hero-content{
+    max-width:680px;
+    animation:heroLeft .9s ease both;
+}
+
+.hero-content .badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--red) !important;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:50px;
+
+    font-family:"Poppins",sans-serif;
+    font-size:.76rem;
+    font-weight:700;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+
+    box-shadow:0 10px 25px rgba(200,16,46,.25);
+}
+
+.hero-content h1{
+    margin-top:18px;
+    margin-bottom:0;
+
+    font-size:clamp(2.5rem,5vw,4.4rem);
+    line-height:1;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+
+    text-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+.hero-content h2{
+    margin-top:22px;
+    margin-bottom:0;
+
+    max-width:620px;
+
+    color:var(--yellow);
+
+    font-size:clamp(1.55rem,3vw,2.55rem);
+    line-height:1.15;
+    font-weight:700;
+}
+
+.hero-content p{
+    margin-top:25px;
+    margin-bottom:0;
+
+    max-width:610px;
+
+    color:#d2d2d2;
+    font-size:1.08rem;
+    line-height:1.8;
+}
+
+
+/* ===================================================
+   BOTONES HERO
+=================================================== */
+
+.hero-content .btn{
+    min-height:52px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:13px 30px;
+    font-weight:600;
+    transition:.3s ease;
+}
+
+.hero-content .btn-outline-light{
+    border:1px solid rgba(255,255,255,.55);
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(8px);
+}
+
+.hero-content .btn-outline-light:hover{
+    color:#111;
+    background:#fff;
+    border-color:#fff;
+    transform:translateY(-2px);
+}
+
+
+/* ===================================================
+   PANEL DERECHO
+=================================================== */
+
+.hero-panel{
+    max-width:430px;
+    margin-left:auto;
+    padding:34px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.11),
+            rgba(255,255,255,.04)
+        );
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:30px;
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.52),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    animation:heroRight 1s ease both;
+}
+
+
+/* ===================================================
+   ESCUDO
+=================================================== */
+
+.hero-logo{
+    width:210px;
+    max-width:80%;
+    height:auto;
+    margin:auto;
+
+    filter:
+        drop-shadow(
+            0 20px 28px rgba(0,0,0,.48)
+        );
+
+    transition:
+        transform .4s ease,
+        filter .4s ease;
+}
+
+.hero-logo:hover{
+    transform:scale(1.055) rotate(2deg);
+
+    filter:
+        drop-shadow(
+            0 24px 36px rgba(0,0,0,.62)
+        );
+}
+
+
+/* ===================================================
+   TARJETA DEL PRÓXIMO PARTIDO
+=================================================== */
+
+.hero-match{
+    padding:24px;
+
+    background:rgba(0,0,0,.38);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+
+    text-align:center;
+}
+
+.hero-match-label,
+.hero-match small{
+    display:block;
+
+    color:var(--yellow);
+
+    font-size:.71rem;
+    font-weight:800;
+    letter-spacing:2.4px;
+    text-transform:uppercase;
+}
+
+.hero-match h3{
+    margin:9px 0 0;
+
+    font-size:1.18rem;
+    line-height:1.35;
+}
+
+
+/* ===================================================
+   EQUIPOS Y VS
+=================================================== */
+
+.hero-vs{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    gap:16px;
+
+    margin:26px 0 22px;
+}
+
+.hero-vs > div{
+    min-width:0;
+    text-align:center;
+}
+
+.hero-vs img{
+    width:76px;
+    height:76px;
+
+    object-fit:contain;
+
+    filter:drop-shadow(0 8px 14px rgba(0,0,0,.32));
+}
+
+.hero-vs p{
+    margin:10px 0 0;
+
+    color:#f2f2f2;
+    font-size:.82rem;
+    font-weight:600;
+    line-height:1.25;
+
+    overflow-wrap:anywhere;
+}
+
+.hero-vs > span{
+    color:var(--yellow);
+
+    font-family:"Poppins",sans-serif;
+    font-size:1.8rem;
+    font-weight:800;
+}
+
+
+/* ===================================================
+   INFORMACIÓN DEL PARTIDO
+=================================================== */
+
+.hero-match hr{
+    margin:20px 0;
+    border-color:rgba(255,255,255,.15);
+    opacity:1;
+}
+
+.hero-match .row{
+    align-items:start;
+}
+
+.hero-match strong{
+    display:block;
+
+    color:#fff;
+    font-size:.82rem;
+    line-height:1.4;
+}
+
+.hero-match .row p{
+    margin:6px 0 0;
+
+    color:#aaa;
+    font-size:.78rem;
+    line-height:1.4;
+}
+
+
+/* Estado de carga */
+
+.hero-match .spinner-border{
+    width:2rem;
+    height:2rem;
+}
+
+
+/* ===================================================
+   SCROLL
+=================================================== */
+
+.scroll-down{
+    position:absolute;
+    bottom:27px;
+    left:50%;
+    z-index:5;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:44px;
+    height:44px;
+
+    color:#fff;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:50%;
+
+    background:rgba(0,0,0,.28);
+    backdrop-filter:blur(8px);
+
+    font-size:1.25rem;
+    text-decoration:none;
+
+    transform:translateX(-50%);
+    animation:bounce 2s infinite;
+}
+
+.scroll-down:hover{
+    color:var(--yellow);
+    border-color:rgba(255,209,0,.45);
+}
+
+
+/* ===================================================
+   ANIMACIONES
+=================================================== */
+
+@keyframes heroLeft{
+
+    from{
+        opacity:0;
+        transform:translateX(-55px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+
+}
+
+@keyframes heroRight{
+
+    from{
+        opacity:0;
+        transform:translateX(55px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+
+}
+
+@keyframes bounce{
+
+    0%,
+    100%{
+        transform:translate(-50%,0);
+    }
+
+    50%{
+        transform:translate(-50%,10px);
+    }
+
+}
+
+
+/* ===================================================
+   TABLET
+=================================================== */
+
+@media(max-width:991px){
+
+    .hero{
+        min-height:auto;
+        padding:145px 0 100px;
+        text-align:center;
+        background-position:center;
+    }
+
+    .hero-content{
+        max-width:760px;
+        margin:auto;
+    }
+
+    .hero-content h2,
+    .hero-content p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-content .d-flex{
+        justify-content:center;
+    }
+
+    .hero-panel{
+        max-width:560px;
+        margin:30px auto 0;
+    }
+
+    .hero-logo{
+        width:190px;
+    }
+
+}
+
+
+/* ===================================================
+   MOBILE
+=================================================== */
+
+@media(max-width:576px){
+
+    .hero{
+        padding:125px 0 85px;
+    }
+
+    .hero::after{
+        right:-300px;
+        bottom:-300px;
+    }
+
+    .hero-content h1{
+        font-size:2.65rem;
+        letter-spacing:.6px;
+    }
+
+    .hero-content h2{
+        font-size:1.55rem;
+    }
+
+    .hero-content p{
+        font-size:.98rem;
+        line-height:1.7;
+    }
+
+    .hero-content .d-flex{
+        display:grid !important;
+        grid-template-columns:1fr;
+        width:100%;
+    }
+
+    .hero-content .btn{
+        width:100%;
+    }
+
+    .hero-panel{
+        padding:22px 17px;
+        border-radius:24px;
+    }
+
+    .hero-logo{
+        width:155px;
+    }
+
+    .hero-match{
+        padding:20px 14px;
+        border-radius:20px;
+    }
+
+    .hero-vs{
+        grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);
+        gap:7px;
+        margin:22px 0;
+    }
+
+    .hero-vs img{
+        width:58px;
+        height:58px;
+    }
+
+    .hero-vs p{
+        font-size:.7rem;
+    }
+
+    .hero-vs > span{
+        font-size:1.35rem;
+    }
+
+    .hero-match h3{
+        font-size:1rem;
+    }
+
+    .hero-match strong{
+        font-size:.72rem;
+    }
+
+    .hero-match .row p{
+        font-size:.69rem;
+    }
+
+    .scroll-down{
+        width:38px;
+        height:38px;
+        bottom:20px;
+        font-size:1rem;
+    }
+
+}
+
+
+/* ===================================================
+   PANTALLAS MUY PEQUEÑAS
+=================================================== */
+
+@media(max-width:380px){
+
+    .hero-content h1{
+        font-size:2.25rem;
+    }
+
+    .hero-panel{
+        padding:18px 12px;
+    }
+
+    .hero-vs img{
+        width:50px;
+        height:50px;
+    }
+
+    .hero-vs p{
+        font-size:.64rem;
+    }
+
+}

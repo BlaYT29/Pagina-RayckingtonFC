@@ -1,0 +1,13 @@
+{
+  "patrocinadores": [
+    {
+      "id": "mercado-libre",
+      "nombre": "Mercado Libre",
+      "logo": "assets/img/sponsors/mercado-libre.webp",
+      "enlace": "https://www.mercadolibre.cl/",
+      "textoEnlace": "Visitar sitio",
+      "activo": true,
+      "orden": 1
+    }
+  ]
+}

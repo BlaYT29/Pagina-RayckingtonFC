@@ -1,0 +1,408 @@
+/* ===================================================
+   RAYCKINGTON FC
+   JUGADOR CSS
+=================================================== */
+
+
+/* ===================================================
+   HERO DEL JUGADOR
+=================================================== */
+
+.player-page-header{
+    position:relative;
+    overflow:hidden;
+}
+
+.player-page-header::after{
+    content:"";
+    position:absolute;
+    inset:auto -120px -180px auto;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(255,209,0,.08);
+    filter:blur(20px);
+    pointer-events:none;
+}
+
+
+/* ===================================================
+   PERFIL PRINCIPAL
+=================================================== */
+
+.player-profile{
+    max-width:1120px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:30px;
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 30px 75px rgba(0,0,0,.45);
+}
+
+.player-profile-image{
+    position:relative;
+    height:100%;
+    min-height:650px;
+    overflow:hidden;
+    background:#202020;
+}
+
+.player-profile-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s ease;
+}
+
+.player-profile:hover .player-profile-image img{
+    transform:scale(1.025);
+}
+
+
+/* ===================================================
+   DORSAL, ESTADO Y CAPITÁN
+=================================================== */
+
+.player-profile-number{
+    position:absolute;
+    top:24px;
+    left:24px;
+    z-index:2;
+    min-width:74px;
+    height:74px;
+    padding:0 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:22px;
+    background:rgba(5,5,5,.82);
+    color:var(--yellow);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(12px);
+    font-family:'Poppins',sans-serif;
+    font-size:2rem;
+    font-weight:800;
+}
+
+.player-profile-status{
+    position:absolute;
+    top:24px;
+    right:24px;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    border-radius:50px;
+    font-size:.8rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    backdrop-filter:blur(12px);
+}
+
+.profile-status-available{
+    background:rgba(25,135,84,.92);
+    color:#fff;
+}
+
+.profile-status-injured{
+    background:rgba(255,193,7,.94);
+    color:#111;
+}
+
+.profile-status-inactive{
+    background:rgba(108,117,125,.92);
+    color:#fff;
+}
+
+.player-profile-captain{
+    position:absolute;
+    left:24px;
+    bottom:24px;
+    z-index:2;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:11px 17px;
+    border-radius:50px;
+    background:rgba(255,209,0,.95);
+    color:#111;
+    font-size:.82rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+}
+
+
+/* ===================================================
+   CONTENIDO DEL PERFIL
+=================================================== */
+
+.player-profile-content{
+    height:100%;
+    padding:52px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.player-profile-position{
+    color:var(--yellow);
+    font-size:.82rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1.3px;
+}
+
+.player-profile-content h2{
+    margin:14px 0 32px;
+    font-size:2.55rem;
+    line-height:1.15;
+}
+
+
+/* ===================================================
+   DATOS DEL JUGADOR
+=================================================== */
+
+.player-profile-data{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+
+.player-data-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:17px 18px;
+    border-radius:18px;
+    background:#1d1d1d;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.player-data-icon{
+    flex:0 0 46px;
+    width:46px;
+    height:46px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    background:rgba(200,16,46,.14);
+    color:var(--red);
+    font-size:1.15rem;
+}
+
+.player-data-item span{
+    display:block;
+    margin-bottom:3px;
+    color:#929292;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+}
+
+.player-data-item strong{
+    display:block;
+    color:#fff;
+    font-size:.98rem;
+}
+
+
+/* ===================================================
+   ESTADÍSTICAS
+=================================================== */
+
+.player-profile-stats{
+    max-width:1120px;
+    margin:70px auto 0;
+}
+
+.profile-stat-card{
+    height:100%;
+    min-height:165px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px 18px;
+    border-radius:22px;
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    transition:.35s ease;
+}
+
+.profile-stat-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 25px 55px rgba(0,0,0,.43);
+}
+
+.profile-stat-card i{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:14px;
+    border-radius:17px;
+    background:rgba(255,209,0,.11);
+    color:var(--yellow);
+    font-size:1.35rem;
+}
+
+.profile-stat-card strong{
+    display:block;
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    font-size:2rem;
+    line-height:1;
+    margin-bottom:8px;
+}
+
+.profile-stat-card span{
+    color:#aaa;
+    font-size:.84rem;
+    font-weight:500;
+}
+
+.profile-stat-card.stat-yellow i{
+    color:#ffc107;
+    background:rgba(255,193,7,.12);
+}
+
+.profile-stat-card.stat-red i{
+    color:#dc3545;
+    background:rgba(220,53,69,.12);
+}
+
+
+/* ===================================================
+   JUGADOR NO ENCONTRADO
+=================================================== */
+
+#jugador-no-encontrado .card-custom{
+    max-width:720px;
+    margin:auto;
+}
+
+
+/* ===================================================
+   ESTADO DE CARGA
+=================================================== */
+
+#jugador-cargando{
+    min-height:240px;
+}
+
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:991px){
+
+    .player-profile-image{
+        min-height:540px;
+    }
+
+    .player-profile-content{
+        padding:40px;
+    }
+
+    .player-profile-content h2{
+        font-size:2.15rem;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .player-profile-image{
+        min-height:440px;
+    }
+
+    .player-profile-content{
+        padding:30px 24px;
+    }
+
+    .player-profile-content h2{
+        font-size:1.85rem;
+        margin-bottom:24px;
+    }
+
+    .player-profile-data{
+        grid-template-columns:1fr;
+    }
+
+    .player-profile-number{
+        min-width:60px;
+        height:60px;
+        font-size:1.6rem;
+    }
+
+    .profile-stat-card{
+        min-height:145px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .player-profile{
+        border-radius:22px;
+    }
+
+    .player-profile-image{
+        min-height:360px;
+    }
+
+    .player-profile-number{
+        top:15px;
+        left:15px;
+        min-width:52px;
+        height:52px;
+        border-radius:16px;
+        font-size:1.35rem;
+    }
+
+    .player-profile-status{
+        top:15px;
+        right:15px;
+        padding:8px 11px;
+        font-size:.68rem;
+    }
+
+    .player-profile-captain{
+        left:15px;
+        bottom:15px;
+        padding:8px 12px;
+        font-size:.68rem;
+    }
+
+    .player-profile-content{
+        padding:26px 20px;
+    }
+
+    .player-data-item{
+        padding:14px;
+    }
+
+    .profile-stat-card{
+        min-height:135px;
+        padding:18px 10px;
+    }
+
+    .profile-stat-card strong{
+        font-size:1.65rem;
+    }
+
+    .profile-stat-card span{
+        font-size:.74rem;
+    }
+
+}

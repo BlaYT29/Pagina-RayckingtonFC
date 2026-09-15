@@ -1,0 +1,122 @@
+[
+  {
+    "pos": 1,
+    "club": "La Plaza United",
+    "pj": 9,
+    "v": 8,
+    "e": 0,
+    "d": 1,
+    "gf": 23,
+    "gc": 6,
+    "dg": 17,
+    "pts": 24
+  },
+  {
+    "pos": 2,
+    "club": "Atlético Independiente",
+    "pj": 9,
+    "v": 7,
+    "e": 0,
+    "d": 2,
+    "gf": 23,
+    "gc": 9,
+    "dg": 14,
+    "pts": 21
+  },
+  {
+    "pos": 3,
+    "club": "Huachalomo",
+    "pj": 9,
+    "v": 6,
+    "e": 2,
+    "d": 1,
+    "gf": 28,
+    "gc": 13,
+    "dg": 15,
+    "pts": 20
+  },
+  {
+    "pos": 4,
+    "club": "Atlético",
+    "pj": 9,
+    "v": 4,
+    "e": 2,
+    "d": 3,
+    "gf": 24,
+    "gc": 16,
+    "dg": 8,
+    "pts": 14
+  },
+  {
+    "pos": 5,
+    "club": "7H Hermanos",
+    "pj": 8,
+    "v": 4,
+    "e": 0,
+    "d": 4,
+    "gf": 28,
+    "gc": 19,
+    "dg": 9,
+    "pts": 12
+  },
+  {
+    "pos": 6,
+    "club": "Real Santa Rosa",
+    "pj": 9,
+    "v": 3,
+    "e": 1,
+    "d": 5,
+    "gf": 17,
+    "gc": 19,
+    "dg": -2,
+    "pts": 10
+  },
+  {
+    "pos": 7,
+    "club": "Unión Gloriosa",
+    "pj": 9,
+    "v": 2,
+    "e": 2,
+    "d": 5,
+    "gf": 16,
+    "gc": 27,
+    "dg": -11,
+    "pts": 8
+  },
+  {
+    "pos": 8,
+    "club": "El Método",
+    "pj": 9,
+    "v": 2,
+    "e": 2,
+    "d": 5,
+    "gf": 10,
+    "gc": 28,
+    "dg": -18,
+    "pts": 8
+  },
+  {
+    "pos": 9,
+    "club": "Rayckington FC",
+    "pj": 9,
+    "v": 1,
+    "e": 3,
+    "d": 5,
+    "gf": 12,
+    "gc": 26,
+    "dg": -14,
+    "pts": 6
+  },
+  {
+    "pos": 10,
+    "club": "Atlético Tobalaba",
+    "pj": 8,
+    "v": 1,
+    "e": 0,
+    "d": 7,
+    "gf": 7,
+    "gc": 25,
+    "dg": -18,
+    "pts": 3
+  }
+]

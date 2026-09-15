@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Partidos | Rayckington FC</title>
+    <meta name="description" content="Partidos, resultados, tabla de posiciones y estadísticas de Rayckington FC.">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS del proyecto -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/hero.css">
+    <link rel="stylesheet" href="assets/css/sections.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
+    <link rel="stylesheet" href="assets/css/partidos.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-club">
+    <div class="container">
+
+        <a class="navbar-brand" href="index.html">
+            <img src="assets/img/logo/logo.png" alt="Rayckington FC">
+            <span>Rayckington FC</span>
+        </a>
+
+        <button
+            class="navbar-toggler border-0 shadow-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Abrir navegación">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="nosotros.html">Nosotros</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="plantel.html">Plantel</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="partidos.html">Partidos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="noticias.html">Noticias</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="galeria.html">Galería</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+                    <a class="btn-club" href="contacto.html">Únete</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+
+    <!-- HERO -->
+    <section class="page-header">
+        <div class="container">
+
+            <span class="club-badge" id="hero-temporada">
+                Cargando temporada...
+            </span>
+
+            <h1 class="mt-4">
+                Partidos y Resultados
+            </h1>
+
+            <p id="hero-descripcion">
+                Cargando información de la temporada...
+            </p>
+
+            <div class="hero-stats">
+
+                <div class="hero-stat">
+                    <h3 id="hero-posicion">--</h3>
+                    <span>Posición</span>
+                </div>
+
+                <div class="hero-stat">
+                    <h3 id="hero-puntos">--</h3>
+                    <span>Puntos</span>
+                </div>
+
+                <div class="hero-stat">
+                    <h3 id="hero-gf">--</h3>
+                    <span>Goles a Favor</span>
+                </div>
+
+                <div class="hero-stat">
+                    <h3 id="hero-gc">--</h3>
+                    <span>Goles en Contra</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SELECTOR DE TEMPORADA -->
+    <section class="section">
+        <div class="container">
+
+            <div class="section-title">
+                <span class="club-badge">Temporadas</span>
+                <h2 class="mt-3">Selecciona un torneo</h2>
+                <p>
+                    Cambia entre Apertura y Clausura sin modificar el HTML.
+                </p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+
+                    <label for="selector-temporada" class="form-label fw-bold">
+                        Temporada disponible
+                    </label>
+
+                    <select id="selector-temporada" class="form-select form-select-lg">
+                        <option value="2026/apertura">Apertura 2026</option>
+                        <option value="2026/clausura">Clausura 2026</option>
+                    </select>
+
+                    <p id="estado-temporada" class="text-center mt-3 mb-0"></p>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MENSAJE DE CARGA / ERROR -->
+    <section id="estado-carga" class="section dark">
+        <div class="container text-center">
+            <div class="spinner-border text-warning" role="status" aria-hidden="true"></div>
+            <p class="mt-3 mb-0">Cargando información del torneo...</p>
+        </div>
+    </section>
+
+    <!-- CONTENIDO DINÁMICO -->
+    <div id="contenido-partidos" hidden>
+
+        <!-- RESUMEN -->
+        <section class="section dark">
+            <div class="container">
+
+                <div class="section-title">
+                    <span class="club-badge">Resumen</span>
+                    <h2 class="mt-3" id="titulo-resumen">Temporada</h2>
+                    <p id="texto-resumen"></p>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-controller"></i>
+                            <h2 id="stat-pj">0</h2>
+                            <p>Partidos Jugados</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-trophy-fill"></i>
+                            <h2 id="stat-pg">0</h2>
+                            <p>Victorias</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-dash-circle-fill"></i>
+                            <h2 id="stat-pe">0</h2>
+                            <p>Empates</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-x-circle-fill"></i>
+                            <h2 id="stat-pp">0</h2>
+                            <p>Derrotas</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TABLA -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-title">
+                    <span class="club-badge">Clasificación</span>
+                    <h2 class="mt-3">Tabla de Posiciones</h2>
+                    <p>Clasificación del torneo seleccionado.</p>
+                </div>
+
+                <div id="tabla-vacia" class="card-custom text-center" hidden>
+                    <i class="bi bi-table fs-1 text-warning"></i>
+                    <h3 class="mt-3">Tabla aún no disponible</h3>
+                    <p class="mb-0">
+                        Se mostrará automáticamente cuando agregues equipos a
+                        <code>tabla.json</code>.
+                    </p>
+                </div>
+
+                <div id="contenedor-tabla" class="table-responsive">
+                    <table class="table-club">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Club</th>
+                                <th>PJ</th>
+                                <th>V</th>
+                                <th>E</th>
+                                <th>D</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>DG</th>
+                                <th>Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-posiciones"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FIXTURE -->
+        <section class="section dark">
+            <div class="container">
+
+                <div class="section-title">
+                    <span class="club-badge">Calendario</span>
+                    <h2 class="mt-3">Fixture del Torneo</h2>
+                    <p>Partidos agrupados automáticamente por fecha.</p>
+                </div>
+
+                <div id="fixture-vacio" class="card-custom text-center" hidden>
+                    <i class="bi bi-calendar-event fs-1 text-warning"></i>
+                    <h3 class="mt-3">Fixture aún no disponible</h3>
+                    <p class="mb-0">
+                        Se mostrará automáticamente cuando agregues partidos a
+                        <code>fixture.json</code>.
+                    </p>
+                </div>
+
+                <div id="fixture-listado" class="row g-4"></div>
+
+            </div>
+        </section>
+
+        <!-- DATOS ADICIONALES -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-title">
+                    <span class="club-badge">Rendimiento</span>
+                    <h2 class="mt-3">Datos de Rayckington FC</h2>
+                    <p>Resumen estadístico de la temporada seleccionada.</p>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-bullseye"></i>
+                            <h2 id="stat-gf">0</h2>
+                            <p>Goles a Favor</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-shield-exclamation"></i>
+                            <h2 id="stat-gc">0</h2>
+                            <p>Goles en Contra</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <h2 id="stat-dg">0</h2>
+                            <p>Diferencia de Gol</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-box">
+                            <i class="bi bi-award-fill"></i>
+                            <h2 id="stat-pts">0</h2>
+                            <p>Puntos</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</main>
+
+<!-- =======================================
+                FOOTER
+======================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row gy-5">
+
+            <!-- =======================================
+                 IDENTIDAD DEL CLUB
+            ======================================== -->
+
+            <div class="col-lg-4">
+
+                <img
+                    src="assets/img/logo/logo.png"
+                    alt="Escudo oficial de Rayckington FC"
+                    class="mb-4">
+
+                <h3>
+                    Rayckington FC
+                </h3>
+
+                <p>
+                    Club de fútbol fundado en 2025,
+                    construido sobre el compromiso,
+                    la organización, la competencia
+                    y la pasión por el deporte.
+                </p>
+
+                <p class="footer-lema">
+                    “Nacimos para competir, jugamos para ganar.”
+                </p>
+
+                <!-- REDES SOCIALES -->
+
+                <div class="social d-flex gap-3 mt-4">
+
+                    <a
+                        href="https://www.instagram.com/rayckingtonfc/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram oficial de Rayckington FC">
+
+                        <i class="bi bi-instagram"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- =======================================
+                 CLUB
+            ======================================== -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5 class="mb-4">
+                    Club
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li class="mb-3">
+                        <a href="index.html">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="nosotros.html">
+                            Nosotros
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="plantel.html">
+                            Plantel
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="partidos.html">
+                            Partidos
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- =======================================
+                 CONTENIDO
+            ======================================== -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5 class="mb-4">
+                    Contenido
+                </h5>
+
+                <ul class="list-unstyled">
+
+                    <li class="mb-3">
+                        <a href="noticias.html">
+                            Noticias
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="galeria.html">
+                            Galería
+                        </a>
+                    </li>
+
+                    <li class="mb-3">
+                        <a href="contacto.html">
+                            Contacto
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- =======================================
+                 CONTACTO
+            ======================================== -->
+
+            <div class="col-lg-4">
+
+                <h5 class="mb-4">
+                    Contacto
+                </h5>
+
+                <p>
+
+                    <i class="bi bi-envelope-fill text-danger me-2"></i>
+
+                    <a href="mailto:rayckingtonfc@gmail.com">
+                        rayckingtonfc@gmail.com
+                    </a>
+
+                </p>
+
+                <p>
+
+                    <i class="bi bi-instagram text-danger me-2"></i>
+
+                    <a
+                        href="https://www.instagram.com/rayckingtonfc/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        @rayckingtonfc
+
+                    </a>
+
+                </p>
+
+                <p>
+
+                    <i class="bi bi-globe2 text-danger me-2"></i>
+
+                    <a href="https://rayckingtonfc.cl">
+                        rayckingtonfc.cl
+                    </a>
+
+                </p>
+
+                <p>
+
+                    <i class="bi bi-calendar-event-fill text-danger me-2"></i>
+
+                    Fundado en 2025
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =======================================
+                 SEPARADOR
+        ======================================== -->
+
+        <hr class="my-5">
+
+
+        <!-- =======================================
+                 FOOTER INFERIOR
+        ======================================== -->
+
+        <div class="row align-items-center gy-3">
+
+            <div class="col-md-6">
+
+                <p class="mb-0">
+
+                    © <span id="year"></span>
+                    Rayckington FC.
+                    Todos los derechos reservados.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-6 text-md-end">
+
+                <small class="footer-developer">
+
+                    Diseñado y desarrollado por
+                    <strong>BlaCorp</strong>.
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/partidos.js"></script>
+
+</body>
+</html>

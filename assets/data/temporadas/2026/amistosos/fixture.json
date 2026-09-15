@@ -1,0 +1,42 @@
+[
+  {
+    "id": "AMI2026-001",
+    "fecha": 1,
+    "orden": 1,
+
+    "competencia": "Partido Amistoso",
+    "temporada": "Amistosos 2026",
+    "categoria": "Todo Competidor",
+
+    "estado": "Finalizado",
+
+    "fechaPartido": "2026-07-30",
+    "hora": "20:00",
+
+    "estadio": "Colegio Cumbres",
+
+    "local": "Rayckington FC",
+    "visita": "Unab Medicina",
+
+    "golesLocal": 2,
+    "golesVisita": 2,
+
+    "resultadoRayckington": "Empate",
+
+    "mvp": "Marcelo Chelo",
+
+    "goleadores": ["Santiago Parcero y Alexander Rayo"],
+
+    "asistencias": [],
+
+    "tarjetas": [],
+
+    "observaciones": "Partido amistoso de preparación previo al Torneo Clausura.",
+
+    "galeria": [],
+
+    "video": "",
+
+    "noticia": ""
+  }
+]

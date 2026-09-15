@@ -1,0 +1,589 @@
+/* ===================================================
+   RAYCKINGTON FC
+   GALERÍA CSS
+=================================================== */
+
+
+/* ===================================================
+   BUSCADOR Y FILTROS
+=================================================== */
+
+.gallery-tools-section{
+
+    padding:60px 0;
+
+    background:#111;
+
+}
+
+
+.gallery-tools{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:24px;
+
+}
+
+
+.gallery-search{
+
+    position:relative;
+
+    width:min(100%,650px);
+
+}
+
+
+.gallery-search i{
+
+    position:absolute;
+
+    left:20px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#aaa;
+
+    font-size:1.1rem;
+
+    z-index:2;
+
+}
+
+
+.gallery-search input{
+
+    width:100%;
+
+    height:58px;
+
+    padding:0 25px 0 52px;
+
+    border-radius:50px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    background:#1a1a1a;
+
+    color:#fff;
+
+    outline:none;
+
+    transition:.3s ease;
+
+}
+
+
+.gallery-search input::placeholder{
+
+    color:#8f8f8f;
+
+}
+
+
+.gallery-search input:focus{
+
+    border-color:var(--yellow);
+
+    box-shadow:0 0 0 4px rgba(255,209,0,.1);
+
+}
+
+
+.gallery-filters{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+
+.gallery-filter{
+
+    border:none;
+
+    padding:11px 20px;
+
+    border-radius:50px;
+
+    background:#1b1b1b;
+
+    color:#ddd;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    transition:.3s ease;
+
+    cursor:pointer;
+
+}
+
+
+.gallery-filter:hover,
+.gallery-filter.active{
+
+    background:var(--red);
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 24px rgba(200,16,46,.25);
+
+}
+
+
+/* ===================================================
+   TARJETAS DE GALERÍA
+=================================================== */
+
+.gallery-card{
+
+    height:100%;
+
+    background:#151515;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+    transition:.35s ease;
+
+}
+
+
+.gallery-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+
+}
+
+
+.gallery-open{
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:0;
+
+    border:none;
+
+    background:transparent;
+
+    color:inherit;
+
+    text-align:left;
+
+    cursor:pointer;
+
+}
+
+
+.gallery-card-image{
+
+    position:relative;
+
+    height:300px;
+
+    overflow:hidden;
+
+    background:#202020;
+
+}
+
+
+.gallery-card-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.55s ease;
+
+}
+
+
+.gallery-card:hover .gallery-card-image img{
+
+    transform:scale(1.07);
+
+}
+
+
+.gallery-card-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(0,0,0,.38);
+
+    opacity:0;
+
+    transition:.35s ease;
+
+}
+
+
+.gallery-card-overlay i{
+
+    width:58px;
+
+    height:58px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+
+    color:#fff;
+
+    font-size:1.5rem;
+
+    border:1px solid rgba(255,255,255,.2);
+
+}
+
+
+.gallery-card:hover .gallery-card-overlay{
+
+    opacity:1;
+
+}
+
+
+.gallery-category{
+
+    position:absolute;
+
+    top:18px;
+
+    left:18px;
+
+    z-index:2;
+
+    padding:8px 15px;
+
+    border-radius:50px;
+
+    background:var(--red);
+
+    color:#fff;
+
+    font-size:.75rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
+}
+
+
+.gallery-card-content{
+
+    padding:25px;
+
+    flex:1;
+
+}
+
+
+.gallery-card-content h3{
+
+    font-size:1.35rem;
+
+    line-height:1.3;
+
+    margin-bottom:12px;
+
+}
+
+
+.gallery-card-content p{
+
+    margin-bottom:0;
+
+}
+
+
+.gallery-date{
+
+    color:#aaa;
+
+    font-size:.9rem;
+
+    margin-bottom:14px!important;
+
+}
+
+
+/* ===================================================
+   MODAL
+=================================================== */
+
+.gallery-modal-content{
+
+    background:#101010;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    box-shadow:0 30px 90px rgba(0,0,0,.7);
+
+}
+
+
+.gallery-modal-header{
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    padding:28px 32px;
+
+}
+
+
+.gallery-modal-header .btn-close{
+
+    opacity:.85;
+
+}
+
+
+.gallery-modal-header .btn-close:hover{
+
+    opacity:1;
+
+}
+
+
+.gallery-modal-body{
+
+    padding:0;
+
+}
+
+
+.gallery-modal-image{
+
+    width:100%;
+
+    max-height:72vh;
+
+    overflow:hidden;
+
+    background:#050505;
+
+}
+
+
+.gallery-modal-image img{
+
+    width:100%;
+
+    height:100%;
+
+    max-height:72vh;
+
+    object-fit:contain;
+
+    margin:auto;
+
+}
+
+
+.gallery-modal-info{
+
+    padding:28px 32px 32px;
+
+}
+
+
+.gallery-modal-date{
+
+    color:#aaa;
+
+    margin-bottom:15px;
+
+}
+
+
+/* ===================================================
+   MODAL BACKDROP
+=================================================== */
+
+.modal-backdrop.show{
+
+    opacity:.82;
+
+}
+
+
+/* ===================================================
+   ESTADO VACÍO
+=================================================== */
+
+#galeria-vacia{
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+
+/* ===================================================
+   RESPONSIVE TABLET
+=================================================== */
+
+@media(max-width:991px){
+
+    .gallery-card-image{
+
+        height:270px;
+
+    }
+
+
+    .gallery-modal-header{
+
+        padding:24px;
+
+    }
+
+
+    .gallery-modal-info{
+
+        padding:24px;
+
+    }
+
+}
+
+
+/* ===================================================
+   RESPONSIVE MOBILE
+=================================================== */
+
+@media(max-width:768px){
+
+    .gallery-tools-section{
+
+        padding:45px 0;
+
+    }
+
+
+    .gallery-card-image{
+
+        height:240px;
+
+    }
+
+
+    .gallery-filter{
+
+        padding:10px 16px;
+
+    }
+
+
+    .gallery-modal-header{
+
+        align-items:flex-start;
+
+    }
+
+
+    .gallery-modal-header h2{
+
+        font-size:1.5rem;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .gallery-filter{
+
+        width:100%;
+
+    }
+
+
+    .gallery-card-content{
+
+        padding:22px;
+
+    }
+
+
+    .gallery-card-image{
+
+        height:220px;
+
+    }
+
+
+    .gallery-modal-header{
+
+        padding:20px;
+
+    }
+
+
+    .gallery-modal-info{
+
+        padding:20px;
+
+    }
+
+}

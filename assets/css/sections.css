@@ -1,0 +1,1050 @@
+/* ===================================================
+   RAYCKINGTON FC
+   SECTIONS CSS
+=================================================== */
+
+
+/* ===================================================
+   SECCIONES GENERALES
+=================================================== */
+
+.section{
+    position:relative;
+    padding:100px 0;
+    overflow:hidden;
+    background:#101010;
+}
+
+.section.dark{
+    background:#090909;
+}
+
+.section-title{
+    max-width:760px;
+    margin:0 auto 55px;
+    text-align:center;
+}
+
+.section-title h2{
+    margin-bottom:14px;
+    color:#fff;
+    font-size:clamp(2rem,4vw,3rem);
+    line-height:1.15;
+    font-weight:800;
+}
+
+.section-title p{
+    max-width:650px;
+    margin:0 auto;
+    color:#aaa;
+    font-size:1rem;
+    line-height:1.75;
+}
+
+
+/* ===================================================
+   ETIQUETA DEL CLUB
+=================================================== */
+
+.club-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:8px 15px;
+
+    color:var(--yellow);
+    background:rgba(255,209,0,.08);
+    border:1px solid rgba(255,209,0,.22);
+    border-radius:50px;
+
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+}
+
+
+/* ===================================================
+   TARJETAS GENERALES
+=================================================== */
+
+.card-custom{
+    height:100%;
+    padding:32px 25px;
+
+    background:#151515;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:24px;
+
+    box-shadow:0 16px 38px rgba(0,0,0,.25);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.card-custom:hover{
+    transform:translateY(-7px);
+    border-color:rgba(255,209,0,.18);
+    box-shadow:0 26px 60px rgba(0,0,0,.42);
+}
+
+.card-custom h2{
+    color:#fff;
+    font-family:"Poppins",sans-serif;
+    font-size:2.4rem;
+    font-weight:800;
+}
+
+.card-custom p{
+    color:#aaa;
+}
+
+
+/* ===================================================
+   MATCH CENTER
+=================================================== */
+
+.match-card,
+.result-card{
+    max-width:1100px;
+    margin:auto;
+    padding:50px 42px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        ),
+        #141414;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:30px;
+
+    box-shadow:0 28px 70px rgba(0,0,0,.4);
+}
+
+.match-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.match-card::before{
+    content:"";
+    position:absolute;
+    top:-180px;
+    left:50%;
+    width:360px;
+    height:360px;
+    border-radius:50%;
+
+    background:rgba(255,209,0,.055);
+    filter:blur(30px);
+    transform:translateX(-50%);
+    pointer-events:none;
+}
+
+.match-card .row,
+.result-card .row{
+    position:relative;
+    z-index:1;
+}
+
+.team-logo{
+    width:150px;
+    height:150px;
+    max-width:100%;
+    object-fit:contain;
+
+    filter:drop-shadow(0 14px 22px rgba(0,0,0,.35));
+}
+
+.match-card h3,
+.result-card h4{
+    color:#fff;
+    font-weight:700;
+}
+
+.match-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px 15px;
+
+    color:#111;
+    background:var(--yellow);
+    border-radius:50px;
+
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+}
+
+.match-vs-title{
+    margin:24px 0;
+    color:#fff;
+    font-family:"Poppins",sans-serif;
+    font-size:4rem;
+    font-weight:800;
+}
+
+.match-card p{
+    margin-bottom:10px;
+    color:#b7b7b7;
+}
+
+.match-card p i{
+    color:var(--yellow);
+}
+
+
+/* ===================================================
+   ÚLTIMO RESULTADO
+=================================================== */
+
+.result-card{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(200,16,46,.12),
+            rgba(14,41,105,.12)
+        ),
+        #141414;
+}
+
+.result-score{
+    margin:24px 0 14px;
+
+    color:#fff;
+    font-family:"Poppins",sans-serif;
+    font-size:clamp(3.3rem,7vw,5.4rem);
+    font-weight:800;
+    line-height:1;
+}
+
+.result-card p{
+    color:#c5c5c5;
+}
+
+.result-card small{
+    color:#888;
+}
+
+
+/* ===================================================
+   HISTORIA DEL CLUB
+=================================================== */
+
+#inicio-historia-imagen{
+    width:100%;
+    min-height:480px;
+    object-fit:cover;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+#inicio-historia-parrafos p{
+    color:#b8b8b8;
+    line-height:1.85;
+}
+
+#inicio-historia-parrafos p:last-child{
+    margin-bottom:0;
+}
+
+
+/* ===================================================
+   JUGADORES DESTACADOS
+=================================================== */
+
+.inicio-player-card{
+    height:100%;
+    overflow:hidden;
+
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+
+    box-shadow:0 16px 38px rgba(0,0,0,.28);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.inicio-player-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,209,0,.18);
+    box-shadow:0 26px 60px rgba(0,0,0,.48);
+}
+
+.inicio-player-image{
+    position:relative;
+    height:330px;
+    overflow:hidden;
+    background:#202020;
+}
+
+.inicio-player-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    transition:transform .5s ease;
+}
+
+.inicio-player-card:hover .inicio-player-image img{
+    transform:scale(1.045);
+}
+
+.inicio-player-number{
+    position:absolute;
+    top:16px;
+    left:16px;
+    z-index:2;
+
+    min-width:52px;
+    height:48px;
+    padding:0 13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:var(--yellow);
+    background:rgba(0,0,0,.76);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;
+    backdrop-filter:blur(9px);
+
+    font-family:"Poppins",sans-serif;
+    font-size:1.25rem;
+    font-weight:800;
+}
+
+.inicio-player-status{
+    position:absolute;
+    top:16px;
+    right:16px;
+    z-index:2;
+
+    display:inline-flex;
+    align-items:center;
+
+    padding:7px 11px;
+
+    border-radius:50px;
+
+    font-size:.65rem;
+    font-weight:800;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+}
+
+.inicio-player-status.available{
+    color:#fff;
+    background:rgba(25,135,84,.9);
+}
+
+.inicio-player-status.injured{
+    color:#111;
+    background:rgba(255,193,7,.94);
+}
+
+.inicio-player-captain{
+    position:absolute;
+    left:16px;
+    bottom:16px;
+    z-index:2;
+
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
+    padding:8px 12px;
+
+    color:#111;
+    background:rgba(255,209,0,.94);
+    border-radius:50px;
+
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+
+.inicio-player-card .p-4{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.inicio-player-position{
+    color:var(--yellow);
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.inicio-player-card h4{
+    margin-bottom:8px;
+    color:#fff;
+    font-size:1.3rem;
+}
+
+.inicio-player-card p{
+    color:#999;
+}
+
+.inicio-player-card .btn{
+    margin-top:auto;
+}
+
+
+/* ===================================================
+   NOTICIAS DEL INICIO
+=================================================== */
+
+.inicio-news-card{
+    height:100%;
+    overflow:hidden;
+
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+
+    box-shadow:0 16px 38px rgba(0,0,0,.28);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.inicio-news-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(200,16,46,.28);
+    box-shadow:0 26px 60px rgba(0,0,0,.48);
+}
+
+.inicio-news-image{
+    position:relative;
+    display:block;
+    height:235px;
+    overflow:hidden;
+    background:#202020;
+}
+
+.inicio-news-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    transition:transform .5s ease;
+}
+
+.inicio-news-card:hover .inicio-news-image img{
+    transform:scale(1.055);
+}
+
+.inicio-news-featured{
+    position:absolute;
+    top:15px;
+    left:15px;
+
+    padding:7px 11px;
+
+    color:#111;
+    background:var(--yellow);
+    border-radius:50px;
+
+    font-size:.67rem;
+    font-weight:800;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+
+.inicio-news-meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.inicio-news-meta span{
+    color:var(--red);
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+}
+
+.inicio-news-meta small{
+    color:#8f8f8f;
+    font-size:.73rem;
+    text-align:right;
+}
+
+.inicio-news-card h4{
+    color:#fff;
+    font-size:1.28rem;
+    line-height:1.35;
+}
+
+.inicio-news-card p{
+    display:-webkit-box;
+    overflow:hidden;
+
+    color:#aaa;
+    line-height:1.7;
+
+    -webkit-box-orient:vertical;
+-webkit-line-clamp:3;
+line-clamp:3;
+}
+
+
+/* ===================================================
+   GALERÍA DEL INICIO
+=================================================== */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+}
+
+.inicio-gallery-item{
+    position:relative;
+    min-height:280px;
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+
+    background:#1b1b1b;
+    text-decoration:none;
+
+    box-shadow:0 14px 34px rgba(0,0,0,.25);
+}
+
+.inicio-gallery-item:nth-child(1),
+.inicio-gallery-item:nth-child(5){
+    grid-column:span 2;
+}
+
+.inicio-gallery-item img{
+    width:100%;
+    height:100%;
+    min-height:280px;
+    object-fit:cover;
+
+    transition:
+        transform .55s ease,
+        filter .55s ease;
+}
+
+.inicio-gallery-item:hover img{
+    transform:scale(1.055);
+    filter:brightness(.72);
+}
+
+.inicio-gallery-overlay{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+
+    padding:24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 32%,
+            rgba(0,0,0,.88) 100%
+        );
+
+    opacity:.92;
+    transition:opacity .3s ease;
+}
+
+.inicio-gallery-item:hover .inicio-gallery-overlay{
+    opacity:1;
+}
+
+.inicio-gallery-overlay span{
+    color:var(--yellow);
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.inicio-gallery-overlay h4{
+    max-width:85%;
+    margin:8px 0 0;
+
+    color:#fff;
+    font-size:1.15rem;
+    line-height:1.35;
+}
+
+.inicio-gallery-overlay i{
+    position:absolute;
+    right:22px;
+    bottom:23px;
+
+    color:#fff;
+    font-size:1.3rem;
+}
+
+.gallery-empty{
+    grid-column:1 / -1;
+
+    padding:50px 25px;
+    text-align:center;
+
+    background:#151515;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:24px;
+}
+
+.gallery-empty > i{
+    display:block;
+    margin-bottom:15px;
+
+    color:var(--yellow);
+    font-size:2.8rem;
+}
+
+.gallery-empty h3{
+    color:#fff;
+}
+
+.gallery-empty p{
+    color:#999;
+}
+
+
+/* ===================================================
+   PATROCINADORES
+=================================================== */
+
+.sponsors-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px;
+
+    max-width:950px;
+    margin:auto;
+}
+
+.sponsor-card{
+    min-height:265px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    text-align:center;
+    text-decoration:none;
+
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+
+    box-shadow:0 16px 38px rgba(0,0,0,.28);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.sponsor-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,209,0,.25);
+    box-shadow:0 26px 60px rgba(0,0,0,.48);
+}
+
+.sponsor-logo-wrapper{
+    width:100%;
+    height:130px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:22px;
+    padding:14px;
+
+    background:#fff;
+    border-radius:18px;
+}
+
+.sponsor-card img{
+    width:auto;
+    height:auto;
+    max-width:240px;
+    max-height:105px;
+    object-fit:contain;
+
+    transition:transform .35s ease;
+}
+
+.sponsor-card:hover img{
+    transform:scale(1.04);
+}
+
+.sponsor-name{
+    color:#fff;
+    font-family:"Poppins",sans-serif;
+    font-size:1.15rem;
+    font-weight:700;
+}
+
+.sponsor-link{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    margin-top:8px;
+
+    color:var(--yellow);
+    font-size:.82rem;
+    font-weight:700;
+}
+
+.sponsors-empty{
+    grid-column:1 / -1;
+
+    padding:55px 25px;
+    text-align:center;
+
+    background:#151515;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+}
+
+.sponsors-empty > i{
+    display:block;
+    margin-bottom:16px;
+
+    color:var(--yellow);
+    font-size:2.7rem;
+}
+
+.sponsors-empty h3{
+    color:#fff;
+}
+
+.sponsors-empty p{
+    max-width:560px;
+    margin:0 auto;
+    color:#999;
+}
+
+
+/* ===================================================
+   LLAMADO A POSTULAR
+=================================================== */
+
+.plantel-cta{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:45px;
+
+    padding:55px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(200,16,46,.32),
+            rgba(13,42,111,.34)
+        ),
+        #111;
+
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:30px;
+
+    box-shadow:0 30px 72px rgba(0,0,0,.4);
+}
+
+.plantel-cta::after{
+    content:"";
+    position:absolute;
+    right:-150px;
+    bottom:-180px;
+
+    width:400px;
+    height:400px;
+
+    border-radius:50%;
+    background:rgba(255,209,0,.07);
+    filter:blur(15px);
+}
+
+.plantel-cta-content{
+    position:relative;
+    z-index:2;
+
+    max-width:720px;
+}
+
+.plantel-cta h2{
+    margin:22px 0 14px;
+
+    color:#fff;
+    font-size:clamp(2rem,4vw,2.8rem);
+    line-height:1.18;
+}
+
+.plantel-cta p{
+    max-width:650px;
+    margin-bottom:28px;
+
+    color:#c2c2c2;
+    line-height:1.75;
+}
+
+.plantel-cta-logo{
+    position:relative;
+    z-index:2;
+
+    flex:0 0 210px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.plantel-cta-logo img{
+    width:185px;
+    max-width:100%;
+
+    filter:drop-shadow(0 20px 30px rgba(0,0,0,.38));
+}
+
+
+/* ===================================================
+   ESTADO GENERAL DE CARGA
+=================================================== */
+
+#inicio-cargando{
+    min-height:220px;
+}
+
+
+/* ===================================================
+   TABLET
+=================================================== */
+
+@media(max-width:991px){
+
+    .section{
+        padding:85px 0;
+    }
+
+    .match-card,
+    .result-card{
+        padding:42px 30px;
+    }
+
+    .team-logo{
+        width:125px;
+        height:125px;
+    }
+
+    .match-vs-title{
+        font-size:3.2rem;
+    }
+
+    #inicio-historia-imagen{
+        min-height:390px;
+    }
+
+    .gallery{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .inicio-gallery-item:nth-child(1),
+    .inicio-gallery-item:nth-child(5){
+        grid-column:span 1;
+    }
+
+    .plantel-cta{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .plantel-cta-content{
+        max-width:100%;
+    }
+
+    .plantel-cta p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .plantel-cta-logo{
+        flex-basis:auto;
+    }
+
+}
+
+
+/* ===================================================
+   MOBILE
+=================================================== */
+
+@media(max-width:768px){
+
+    .section{
+        padding:72px 0;
+    }
+
+    .section-title{
+        margin-bottom:42px;
+    }
+
+    .section-title h2{
+        font-size:2rem;
+    }
+
+    .match-card,
+    .result-card{
+        padding:35px 22px;
+        border-radius:24px;
+    }
+
+    .team-logo{
+        width:105px;
+        height:105px;
+    }
+
+    .match-vs-title{
+        margin:15px 0;
+        font-size:2.8rem;
+    }
+
+    .result-score{
+        margin:18px 0 12px;
+    }
+
+    #inicio-historia-imagen{
+        min-height:310px;
+    }
+
+    .inicio-player-image{
+        height:315px;
+    }
+
+    .inicio-news-image{
+        height:225px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .inicio-gallery-item,
+    .inicio-gallery-item img{
+        min-height:260px;
+    }
+
+    .sponsors-grid{
+        grid-template-columns:1fr;
+    }
+
+    .sponsor-card{
+        min-height:235px;
+    }
+
+    .plantel-cta{
+        padding:38px 25px;
+    }
+
+    .plantel-cta-logo img{
+        width:155px;
+    }
+
+}
+
+
+/* ===================================================
+   PANTALLAS PEQUEÑAS
+=================================================== */
+
+@media(max-width:480px){
+
+    .section{
+        padding:62px 0;
+    }
+
+    .card-custom{
+        padding:27px 20px;
+    }
+
+    .match-card,
+    .result-card{
+        padding:30px 17px;
+    }
+
+    .team-logo{
+        width:90px;
+        height:90px;
+    }
+
+    .inicio-player-image{
+        height:285px;
+    }
+
+    .inicio-news-meta{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:5px;
+    }
+
+    .inicio-news-meta small{
+        text-align:left;
+    }
+
+    .inicio-gallery-item,
+    .inicio-gallery-item img{
+        min-height:235px;
+    }
+
+    .inicio-gallery-overlay{
+        padding:20px;
+    }
+
+    .sponsor-logo-wrapper{
+        height:115px;
+    }
+
+    .sponsor-card img{
+        max-width:200px;
+        max-height:90px;
+    }
+
+    .plantel-cta{
+        padding:32px 20px;
+        border-radius:24px;
+    }
+
+}

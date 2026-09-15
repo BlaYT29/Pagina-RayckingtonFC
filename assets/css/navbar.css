@@ -1,0 +1,358 @@
+/* ===================================================
+   RAYCKINGTON FC
+   NAVBAR CSS
+=================================================== */
+
+
+/* ===================================================
+   NAVBAR BASE
+=================================================== */
+
+
+.navbar-club{
+
+    padding:20px 0;
+
+    background:transparent;
+
+    transition:.4s ease;
+
+    z-index:1000;
+
+}
+
+
+/* Navbar al hacer scroll */
+
+.navbar-scrolled{
+
+    background:rgba(10,10,10,.92);
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+    padding:12px 0;
+
+    box-shadow:
+
+    0 10px 35px rgba(0,0,0,.35);
+
+}
+
+
+
+/* ===================================================
+   LOGO
+=================================================== */
+
+
+.navbar-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.navbar-brand img{
+
+    width:65px;
+
+    height:65px;
+
+    object-fit:contain;
+
+    transition:.35s;
+
+}
+
+
+.navbar-brand:hover img{
+
+    transform:scale(1.08);
+
+}
+
+
+.navbar-brand span{
+
+    color:white;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:1.35rem;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+
+.navbar-brand span:hover{
+
+    color:var(--yellow);
+
+}
+
+
+
+/* ===================================================
+   MENU
+=================================================== */
+
+
+.navbar-nav{
+
+    gap:10px;
+
+}
+
+
+.navbar-nav .nav-link{
+
+    position:relative;
+
+    color:white;
+
+    font-family:'Poppins',sans-serif;
+
+    font-weight:500;
+
+    padding:10px 18px!important;
+
+    transition:.3s;
+
+}
+
+
+
+/* Línea animada */
+
+.navbar-nav .nav-link::after{
+
+
+    content:"";
+
+    position:absolute;
+
+    bottom:2px;
+
+    left:50%;
+
+    width:0;
+
+    height:3px;
+
+    background:var(--yellow);
+
+    transform:translateX(-50%);
+
+    border-radius:20px;
+
+    transition:.35s;
+
+}
+
+
+
+.navbar-nav .nav-link:hover{
+
+
+    color:var(--yellow);
+
+}
+
+
+
+.navbar-nav .nav-link:hover::after{
+
+
+    width:60%;
+
+}
+
+
+
+/* Página activa */
+
+
+.navbar-nav .active{
+
+    color:var(--yellow)!important;
+
+}
+
+
+.navbar-nav .active::after{
+
+    width:60%!important;
+
+}
+
+
+
+/* ===================================================
+   BOTÓN ÚNETE
+=================================================== */
+
+
+.btn-club{
+
+    background:var(--red);
+
+    color:white;
+
+    padding:12px 30px;
+
+    border-radius:50px;
+
+    font-family:'Poppins';
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+
+
+.btn-club:hover{
+
+
+    background:var(--yellow);
+
+    color:#111;
+
+    transform:translateY(-4px);
+
+    box-shadow:
+
+    0 10px 25px rgba(255,209,0,.25);
+
+}
+
+
+
+/* ===================================================
+   HAMBURGUESA
+=================================================== */
+
+
+.navbar-toggler{
+
+    color:white;
+
+    font-size:2rem;
+
+}
+
+
+.navbar-toggler:focus{
+
+    box-shadow:none;
+
+}
+
+
+
+/* ===================================================
+   MENU MOBILE
+=================================================== */
+
+
+@media(max-width:991px){
+
+
+    .navbar-collapse{
+
+
+        margin-top:20px;
+
+        padding:25px;
+
+        background:
+
+        rgba(15,15,15,.95);
+
+
+        backdrop-filter:blur(15px);
+
+
+        border-radius:20px;
+
+
+        box-shadow:
+
+        0 20px 50px rgba(0,0,0,.5);
+
+    }
+
+
+
+    .navbar-nav{
+
+
+        gap:0;
+
+    }
+
+
+
+    .navbar-nav .nav-link{
+
+
+        padding:15px!important;
+
+    }
+
+
+
+    .btn-club{
+
+
+        display:block;
+
+        text-align:center;
+
+        margin-top:20px;
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   MOBILE PEQUEÑO
+=================================================== */
+
+
+@media(max-width:576px){
+
+
+    .navbar-brand img{
+
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+
+
+    .navbar-brand span{
+
+
+        font-size:1.1rem;
+
+    }
+
+
+}

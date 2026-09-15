@@ -1,0 +1,45 @@
+{
+  "anio": 2026,
+
+  "competiciones": [
+    {
+      "id": "apertura",
+      "nombre": "Torneo Apertura 2026",
+      "tipo": "Liga",
+      "activa": false,
+      "mostrarEnInicio": true,
+      "usarParaResultados": true,
+      "orden": 1
+    },
+
+    {
+      "id": "clausura",
+      "nombre": "Torneo Clausura 2026",
+      "tipo": "Liga",
+      "activa": true,
+      "mostrarEnInicio": true,
+      "usarParaResultados": true,
+      "orden": 2
+    },
+
+    {
+      "id": "amistosos",
+      "nombre": "Partidos Amistosos 2026",
+      "tipo": "Amistosos",
+      "activa": true,
+      "mostrarEnInicio": true,
+      "usarParaResultados": true,
+      "orden": 3
+    },
+
+    {
+      "id": "argentina",
+      "nombre": "Gira Argentina 2026",
+      "tipo": "Internacional",
+      "activa": true,
+      "mostrarEnInicio": true,
+      "usarParaResultados": true,
+      "orden": 4
+    }
+  ]
+}

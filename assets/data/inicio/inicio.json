@@ -1,0 +1,100 @@
+{
+  "configuracion": {
+    "temporadas": {
+      "anioActivo": 2026,
+      "archivoCompeticiones": "competiciones.json"
+    },
+
+    "cantidadNoticias": 3,
+    "cantidadJugadoresDestacados": 4,
+    "cantidadFotosGaleria": 6
+  },
+
+  "hero": {
+    "etiqueta": "Sitio Oficial",
+    "titulo": "RAYCKINGTON FC",
+    "subtitulo": "Un proyecto construido desde cero.",
+    "descripcion": "Fundado en 2025, Rayckington FC nació con un objetivo claro: crear un club donde el compromiso, la organización y la pasión por el fútbol estén por encima de cualquier resultado.",
+
+    "botonPrincipal": {
+      "texto": "Conócenos",
+      "enlace": "nosotros.html"
+    },
+
+    "botonSecundario": {
+      "texto": "Plantel",
+      "enlace": "plantel.html"
+    }
+  },
+
+  "partidosRespaldo": {
+    "proximoPartido": {
+      "mostrar": true,
+      "competencia": "Partido por confirmar",
+      "temporada": "Temporada 2026",
+      "fechaTexto": "Fecha por confirmar",
+      "hora": "Horario por confirmar",
+      "estadio": "Recinto por confirmar",
+
+      "local": {
+        "nombre": "Rayckington FC",
+        "logo": "assets/img/logo/logo.png"
+      },
+
+      "visita": {
+        "nombre": "Unab Medicina",
+        "logo": "assets/img/logo/rivales/logosgrande/unabmedicina.png"
+      }
+    },
+
+    "ultimoResultado": {
+      "mostrar": true,
+      "competencia": "Liga Tobalaba Todo Competidor",
+      "temporada": "Apertura 2026",
+      "fechaTexto": "Último partido oficial",
+
+      "local": {
+        "nombre": "Rayckington FC",
+        "logo": "assets/img/logo/logo.png",
+        "goles": 1
+      },
+
+      "visita": {
+        "nombre": "El Metodo",
+        "logo": "assets/img/logo/rivales/logosgrande/ElMetodo.png",
+        "goles": 1
+      }
+    }
+  },
+
+  "historia": {
+    "etiqueta": "Nuestra Historia",
+    "titulo": "Un proyecto construido desde cero.",
+
+    "parrafos": [
+      "Rayckington FC nació a finales de 2025 con una idea clara: crear un club deportivo basado en el compromiso, la organización y la pasión por el fútbol.",
+      "Tras meses de planificación, el 1 de enero de 2026 el club realizó su primer entrenamiento oficial, iniciando un proyecto que continúa creciendo temporada tras temporada.",
+      "Hoy Rayckington FC sigue consolidándose como una institución deportiva enfocada en el desarrollo de jugadores, la competencia y el crecimiento institucional."
+    ],
+
+    "imagen": "assets/img/hero/hero-bg.jpg",
+
+    "boton": {
+      "texto": "Conocer más",
+      "enlace": "nosotros.html"
+    }
+  },
+
+  "estadisticasClub": {
+    "fundacion": 2025,
+    "categorias": 2,
+    "temporadasOficiales": 1
+  },
+
+  "jugadoresDestacados": [
+    "vicente-borquez",
+    "alexander-rayo",
+    "boris-valenzuela",
+    "gabriel-abarca"
+  ]
+}

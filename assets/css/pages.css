@@ -1,0 +1,99 @@
+/* ===================================================
+   HERO INTERNO
+=================================================== */
+
+
+.page-header{
+
+    margin-top:90px;
+
+    height:350px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    position:relative;
+
+    padding-top:80px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        rgba(0,0,0,.85),
+        rgba(0,0,0,.65)
+    ),
+
+    url("../img/hero/hero-bg.jpg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+}
+
+
+
+
+.page-header::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(200,16,46,.25),
+        rgba(0,61,165,.25)
+    );
+
+}
+
+
+
+.page-header .container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+.page-header h1{
+
+    font-size:
+
+    clamp(2.5rem,5vw,4rem);
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+.page-header p{
+
+    font-size:1.1rem;
+
+    margin:auto;
+
+}
