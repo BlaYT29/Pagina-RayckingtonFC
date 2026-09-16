@@ -38,5 +38,72 @@
     "video": "",
 
     "noticia": ""
+},
+{
+  "id": "AMI2026-002",
+  "fecha": 2,
+  "orden": 2,
+  "competencia": "Partido Amistoso",
+  "temporada": "Amistosos 2026",
+  "categoria": "Todo Competidor",
+
+  "estado": "Finalizado",
+
+  "fechaPartido": "2026-08-20",
+  "hora": "",
+  "estadio": "Colegio Cumbres",
+
+  "local": "Rayckington FC",
+  "visita": "UNAB Medicina",
+
+  "golesLocal": 3,
+  "golesVisita": 2,
+
+  "resultadoRayckington": "Victoria",
+
+  "mvp": "",
+  "goleadores": [],
+  "asistencias": [],
+  "tarjetas": [],
+
+  "observaciones": "Fecha provisoria hasta confirmar la fecha oficial del partido.",
+
+  "galeria": [],
+  "video": "",
+  "noticia": ""
+},
+{
+  "id": "AMI2026-003",
+  "fecha": 3,
+  "orden": 3,
+  "competencia": "Partido Amistoso",
+  "temporada": "Amistosos 2026",
+  "categoria": "Todo Competidor",
+
+  "estado": "Finalizado",
+
+  "fechaPartido": "2026-08-30",
+  "hora": "",
+  "estadio": "",
+
+  "local": "Rayckington FC",
+  "visita": "Juventud Los Olmos",
+
+  "golesLocal": 6,
+  "golesVisita": 1,
+
+  "resultadoRayckington": "Victoria",
+
+  "mvp": "",
+  "goleadores": [],
+  "asistencias": [],
+  "tarjetas": [],
+
+  "observaciones": "Partido amistoso disputado el domingo 30 de agosto de 2026.",
+
+  "galeria": [],
+  "video": "",
+  "noticia": ""
+
   }
 ]

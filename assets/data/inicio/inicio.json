@@ -27,45 +27,45 @@
     }
   },
 
-  "partidosRespaldo": {
-    "proximoPartido": {
-      "mostrar": true,
-      "competencia": "Partido por confirmar",
-      "temporada": "Temporada 2026",
-      "fechaTexto": "Fecha por confirmar",
-      "hora": "Horario por confirmar",
-      "estadio": "Recinto por confirmar",
+"partidosRespaldo": {
+  "proximoPartido": {
+    "mostrar": false,
+    "competencia": "Próximo partido por confirmar",
+    "temporada": "Temporada 2026",
+    "fechaTexto": "Fecha por confirmar",
+    "hora": "Horario por confirmar",
+    "estadio": "Recinto por confirmar",
 
-      "local": {
-        "nombre": "Rayckington FC",
-        "logo": "assets/img/logo/logo.png"
-      },
-
-      "visita": {
-        "nombre": "Unab Medicina",
-        "logo": "assets/img/logo/rivales/logosgrande/unabmedicina.png"
-      }
+    "local": {
+      "nombre": "Rayckington FC",
+      "logo": "assets/img/logo/logo.png"
     },
 
-    "ultimoResultado": {
-      "mostrar": true,
-      "competencia": "Liga Tobalaba Todo Competidor",
-      "temporada": "Apertura 2026",
-      "fechaTexto": "Último partido oficial",
-
-      "local": {
-        "nombre": "Rayckington FC",
-        "logo": "assets/img/logo/logo.png",
-        "goles": 1
-      },
-
-      "visita": {
-        "nombre": "El Metodo",
-        "logo": "assets/img/logo/rivales/logosgrande/ElMetodo.png",
-        "goles": 1
-      }
+    "visita": {
+      "nombre": "Rival por confirmar",
+      "logo": "assets/img/logo/rivales/default.png"
     }
   },
+
+  "ultimoResultado": {
+    "mostrar": true,
+    "competencia": "Partido Amistoso",
+    "temporada": "Amistosos 2026",
+    "fechaTexto": "30 de agosto de 2026",
+
+    "local": {
+      "nombre": "Rayckington FC",
+      "logo": "assets/img/logo/logo.png",
+      "goles": 6
+    },
+
+    "visita": {
+      "nombre": "Juventud Los Olmos",
+      "logo": "assets/img/logo/rivales/logosgrande/juventud-los-olmos.png",
+      "goles": 1
+    }
+  }
+},
 
   "historia": {
     "etiqueta": "Nuestra Historia",
