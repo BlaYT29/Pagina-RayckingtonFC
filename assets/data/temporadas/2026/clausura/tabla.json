@@ -1,6 +1,6 @@
 [
   {
-    "pos": 1,
+    "pos": 2,
     "club": "ATLETICO",
     "pj": 1,
     "v": 1,
@@ -12,7 +12,7 @@
     "pts": 3
   },
   {
-    "pos": 2,
+    "pos": 4,
     "club": "ATLETICO INDEPENDIENTE",
     "pj": 0,
     "v": 0,
@@ -24,31 +24,31 @@
     "pts": 0
   },
   {
-    "pos": 2,
+    "pos": 3,
     "club": "ATLETICO VALLE CENTRAL",
-    "pj": 0,
-    "v": 0,
+    "pj": 1,
+    "v": 1,
     "e": 0,
     "d": 0,
-    "gf": 0,
-    "gc": 0,
-    "dg": 0,
-    "pts": 0
+    "gf": 3,
+    "gc": 2,
+    "dg": 1,
+    "pts": 3
   },
   {
-    "pos": 2,
+    "pos": 9,
     "club": "CORDILLERANOS",
-    "pj": 0,
+    "pj": 1,
     "v": 0,
     "e": 0,
-    "d": 0,
-    "gf": 0,
-    "gc": 0,
-    "dg": 0,
+    "d": 1,
+    "gf": 1,
+    "gc": 4,
+    "dg": -3,
     "pts": 0
   },
   {
-    "pos": 2,
+    "pos": 4,
     "club": "DE 20 VAN 7",
     "pj": 0,
     "v": 0,
@@ -60,7 +60,7 @@
     "pts": 0
   },
   {
-    "pos": 2,
+    "pos": 4,
     "club": "HUACHALOMO",
     "pj": 0,
     "v": 0,
@@ -72,31 +72,31 @@
     "pts": 0
   },
   {
-    "pos": 2,
+    "pos": 1,
     "club": "LA PLAZA UNITED",
-    "pj": 0,
-    "v": 0,
+    "pj": 1,
+    "v": 1,
     "e": 0,
     "d": 0,
-    "gf": 0,
-    "gc": 0,
-    "dg": 0,
-    "pts": 0
+    "gf": 4,
+    "gc": 1,
+    "dg": 3,
+    "pts": 3
   },
   {
-    "pos": 2,
+    "pos": 7,
     "club": "THE MACHINE",
-    "pj": 0,
+    "pj": 1,
     "v": 0,
     "e": 0,
-    "d": 0,
-    "gf": 0,
-    "gc": 0,
-    "dg": 0,
+    "d": 1,
+    "gf": 2,
+    "gc": 3,
+    "dg": -1,
     "pts": 0
   },
   {
-    "pos": 9,
+    "pos": 8,
     "club": "Rayckington FC",
     "pj": 1,
     "v": 0,
