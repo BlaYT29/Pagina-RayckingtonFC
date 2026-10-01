@@ -64,5 +64,17 @@
     "descripcion": "El club trabaja en la organización de su primera gira internacional.",
     "publicada": true,
     "destacada": false
+  },
+
+  {
+    "id": "GAL-2026-007",
+    "titulo": "Primera Partido Clausura 2026",
+    "categoria": "Partidos",
+    "fecha": "2026-09-30",
+    "fechaTexto": "30 de octubre de 2026",
+    "imagen": "assets/img/gallery/2026/primer partido clausura 2026.jpeg",
+    "descripcion": "Primer Partido oficial del clausura 2026",
+    "publicada": true,
+    "destacada": false
   }
 ]
