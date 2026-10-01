@@ -8,7 +8,7 @@
     "temporada": "Clausura 2026",
     "categoria": "Todo Competidor",
 
-    "estado": "En juego",
+    "estado": "Finalizado",
 
     "fechaPartido": "2026-09-30",
     "hora": "21:00",
@@ -17,13 +17,13 @@
     "local": "Rayckington FC",
     "visita": "Atlético FC",
 
-    "golesLocal": 1,
+    "golesLocal": 2,
     "golesVisita": 4,
 
     "resultadoRayckington": "",
 
     "mvp": "",
-    "goleadores": ["pedro Cayuqueo"],
+    "goleadores": ["pedro Cayuqueo, Vicente Borquez"],
     "asistencias": [],
     "tarjetas": ["Gutty"],
 
