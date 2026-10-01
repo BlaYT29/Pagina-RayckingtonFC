@@ -530,6 +530,7 @@ const LOGOS_EQUIPOS_INICIO = {
     "universidad andres bello - medicina":
         "assets/img/logo/rivales/logosgrande/unabmedicina.png"
 
+
 };
 
 

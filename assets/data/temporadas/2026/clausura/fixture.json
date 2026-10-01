@@ -1,34 +1,115 @@
 [
   {
-    "id": "CLA2026-001",
+  "id": "CLA2026-001",
+  "fecha": 1,
+  "orden": 1,
+  "competencia": "Liga Tobalaba Todo Competidor",
+  "temporada": "Clausura 2026",
+  "categoria": "Todo Competidor",
+  "estado": "Finalizado",
+  "fechaPartido": "2026-09-30",
+  "hora": "21:00",
+  "estadio": "Honorino Landa",
+  "local": "ATLETICO",
+  "visita": "RAYCKINGTON FC",
+  "golesLocal": 4,
+  "golesVisita": 2,
+  "resultadoRayckington": "Derrota",
+  "mvp": "",
+  "goleadores": [
+    {
+      "jugador": "Vicente Borquez",
+      "goles": 1
+    },
+    {
+      "jugador": "Pedro Cayuqueo",
+      "goles": 1
+    }
+  ],
+  "asistencias": [],
+  "tarjetas": [
+    {
+      "jugador": "Gutty",
+      "tipo": "Amarilla"
+    }
+  ],
+  "observaciones": "Fecha 1 del Torneo Clausura 2026. ATLETICO venció 4-2 a Rayckington FC.",
+  "galeria": [],
+  "video": "",
+  "noticia": ""
+},
+  {
+    "id": "CLA2026-002",
     "fecha": 1,
-    "orden": 1,
-
+    "orden": 2,
     "competencia": "Liga Tobalaba Todo Competidor",
     "temporada": "Clausura 2026",
     "categoria": "Todo Competidor",
-
-    "estado": "Finalizado",
-
+    "estado": "Programado",
     "fechaPartido": "2026-09-30",
-    "hora": "21:00",
-    "estadio": "Honorino Landa",
-
-    "local": "Rayckington FC",
-    "visita": "Atlético FC",
-
-    "golesLocal": 2,
-    "golesVisita": 4,
-
+    "hora": "22:00",
+    "estadio": "Por confirmar",
+    "local": "LA PLAZA UNITED",
+    "visita": "CORDILLERANOS",
+    "golesLocal": null,
+    "golesVisita": null,
     "resultadoRayckington": "",
-
     "mvp": "",
-    "goleadores": ["pedro Cayuqueo, Vicente Borquez"],
+    "goleadores": [],
     "asistencias": [],
-    "tarjetas": ["Gutty"],
-
-    "observaciones": "Primer partido de Rayckington FC en el Torneo Clausura 2026.",
-
+    "tarjetas": [],
+    "observaciones": "Fecha 1 del Torneo Clausura 2026.",
+    "galeria": [],
+    "video": "",
+    "noticia": ""
+  },
+  {
+    "id": "CLA2026-003",
+    "fecha": 1,
+    "orden": 3,
+    "competencia": "Liga Tobalaba Todo Competidor",
+    "temporada": "Clausura 2026",
+    "categoria": "Todo Competidor",
+    "estado": "Programado",
+    "fechaPartido": "2026-09-30",
+    "hora": "23:00",
+    "estadio": "Por confirmar",
+    "local": "ATLETICO VALLE CENTRAL",
+    "visita": "THE MACHINE",
+    "golesLocal": null,
+    "golesVisita": null,
+    "resultadoRayckington": "",
+    "mvp": "",
+    "goleadores": [],
+    "asistencias": [],
+    "tarjetas": [],
+    "observaciones": "Fecha 1 del Torneo Clausura 2026.",
+    "galeria": [],
+    "video": "",
+    "noticia": ""
+  },
+  {
+    "id": "CLA2026-004",
+    "fecha": 1,
+    "orden": 4,
+    "competencia": "Liga Tobalaba Todo Competidor",
+    "temporada": "Clausura 2026",
+    "categoria": "Todo Competidor",
+    "estado": "Programado",
+    "fechaPartido": "2026-10-01",
+    "hora": "22:00",
+    "estadio": "Por confirmar",
+    "cancha": "Cancha 2",
+    "local": "HUACHALOMO",
+    "visita": "ATLETICO INDEPENDIENTE",
+    "golesLocal": null,
+    "golesVisita": null,
+    "resultadoRayckington": "",
+    "mvp": "",
+    "goleadores": [],
+    "asistencias": [],
+    "tarjetas": [],
+    "observaciones": "Fecha 1 del Torneo Clausura 2026.",
     "galeria": [],
     "video": "",
     "noticia": ""
