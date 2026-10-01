@@ -1,8 +1,7 @@
 {
   "temporada": "Clausura 2026",
-  "totalJugadores": 27,
+  "totalJugadores": 33,
   "jugadores": [
-
     {
       "id": "JUG-2026-001",
       "slug": "gabriel-abarca",
@@ -29,13 +28,12 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-002",
       "slug": "nicolas-nunez",
       "nombre": "Nicolás Núñez",
       "nombreCompleto": "Nicolás Núñez",
-      "numero": 77,
+      "numero": 68,
       "foto": "assets/img/jugadores/nicolas-nunez.webp",
       "posicion": "PO",
       "nombrePosicion": "Arquero",
@@ -56,13 +54,12 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-003",
       "slug": "nicolas-michelis",
-      "nombre": "Nicolas Michelis",
+      "nombre": "Nicolás Michelis",
       "nombreCompleto": "Nicolas Michelis",
-      "numero": 26,
+      "numero": 27,
       "foto": "assets/img/jugadores/nico-michelis.webp",
       "posicion": "PO",
       "nombrePosicion": "Arquero",
@@ -83,12 +80,11 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-004",
       "slug": "boris-valenzuela",
       "nombre": "Boris Valenzuela",
-      "nombreCompleto": "Boris Valenzuela Troncoso",
+      "nombreCompleto": "Boris Darío Valenzuela Troncoso",
       "numero": 2,
       "foto": "assets/img/jugadores/boris-valenzuela.webp",
       "posicion": "DFC",
@@ -96,7 +92,7 @@
       "categoria": "Sub-18",
       "fechaNacimiento": "2007-08-05",
       "estado": "DISPONIBLE",
-      "capitan": false,
+      "capitan": true,
       "estadisticas": {
         "partidos": 1,
         "titularidades": 0,
@@ -110,7 +106,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-005",
       "slug": "martin-ahumada",
@@ -137,7 +132,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-006",
       "slug": "sebastian-alcaino",
@@ -164,34 +158,6 @@
         "mvp": 0
       }
     },
-
-    {
-      "id": "JUG-2026-007",
-      "slug": "nabih-zabala",
-      "nombre": "Nabih Zabala",
-      "nombreCompleto": "Nabih Zabala",
-      "numero": 15,
-      "foto": "assets/img/jugadores/nabih-zabala.webp",
-      "posicion": "LI",
-      "nombrePosicion": "Lateral Izquierdo",
-      "categoria": "Adulta",
-      "fechaNacimiento": "",
-      "estado": "DISPONIBLE",
-      "capitan": false,
-      "estadisticas": {
-        "partidos": 0,
-        "titularidades": 0,
-        "suplencias": 0,
-        "minutos": 0,
-        "goles": 0,
-        "asistencias": 0,
-        "amarillas": 0,
-        "rojas": 0,
-        "porteriasInvictas": 0,
-        "mvp": 0
-      }
-    },
-
     {
       "id": "JUG-2026-008",
       "slug": "marcelo-bugueno",
@@ -218,7 +184,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-009",
       "slug": "felipe-munoz",
@@ -236,7 +201,7 @@
         "partidos": 1,
         "titularidades": 1,
         "suplencias": 0,
-        "minutos": 40,
+        "minutos": 60,
         "goles": 0,
         "asistencias": 0,
         "amarillas": 0,
@@ -245,17 +210,16 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-010",
       "slug": "andres-perez",
       "nombre": "Andrés Pérez",
-      "nombreCompleto": "Andrés Pérez",
+      "nombreCompleto": "Andrés David Pérez Lucena",
       "numero": 12,
       "foto": "assets/img/jugadores/andres-perez.webp",
       "posicion": "LD",
       "nombrePosicion": "Lateral Derecho",
-      "categoria": "Sub-18",
+      "categoria": "Adulta",
       "fechaNacimiento": "2007-09-17",
       "estado": "DISPONIBLE",
       "capitan": false,
@@ -272,7 +236,7 @@
         "mvp": 0
       }
     },
-        {
+    {
       "id": "JUG-2026-011",
       "slug": "diego-vasquez",
       "nombre": "Diego Vásquez",
@@ -282,7 +246,7 @@
       "posicion": "MCD",
       "nombrePosicion": "Mediocampista Defensivo",
       "categoria": "Adulta",
-      "fechaNacimiento": "2000-04-20",
+      "fechaNacimiento": "2001-04-15",
       "estado": "DISPONIBLE",
       "capitan": false,
       "estadisticas": {
@@ -298,18 +262,17 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-012",
       "slug": "martin-trivino",
       "nombre": "Martín Triviño",
-      "nombreCompleto": "Martín Triviño",
+      "nombreCompleto": "Martín Cristóbal Triviño Ortiz",
       "numero": 5,
       "foto": "assets/img/jugadores/martin-trivino.webp",
       "posicion": "MC",
       "nombrePosicion": "Mediocampista Central",
       "categoria": "Sub-18",
-      "fechaNacimiento": "",
+      "fechaNacimiento": "2008-06-07",
       "estado": "DISPONIBLE",
       "capitan": false,
       "estadisticas": {
@@ -325,7 +288,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-013",
       "slug": "alexander-rayo",
@@ -335,10 +297,10 @@
       "foto": "assets/img/jugadores/mediocampista/alexander-rayo.webp",
       "posicion": "MC",
       "nombrePosicion": "Mediocampista Central",
-      "categoria": "Sub-18",
+      "categoria": "Adulta",
       "fechaNacimiento": "2007-06-29",
       "estado": "DISPONIBLE",
-      "capitan": true,
+      "capitan": false,
       "estadisticas": {
         "partidos": 1,
         "titularidades": 1,
@@ -352,7 +314,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-014",
       "slug": "miguel-basaez",
@@ -379,7 +340,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-015",
       "slug": "juliano-gutierrez",
@@ -406,7 +366,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-016",
       "slug": "pedro-cayuqueo",
@@ -433,7 +392,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-017",
       "slug": "agustin-allende",
@@ -460,7 +418,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-018",
       "slug": "fabian-marquez",
@@ -487,7 +444,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-019",
       "slug": "esteban-thiers",
@@ -514,7 +470,7 @@
         "mvp": 0
       }
     },
-        {
+    {
       "id": "JUG-2026-020",
       "slug": "vicente-borquez",
       "nombre": "Vicente Borquez",
@@ -537,21 +493,20 @@
         "amarillas": 0,
         "rojas": 0,
         "porteriasInvictas": 0,
-        "mvp": 0
+        "mvp": 1
       }
     },
-
     {
       "id": "JUG-2026-021",
       "slug": "gilmer-azuaje",
       "nombre": "Gilmer Azuaje",
-      "nombreCompleto": "Gilmer Azuaje",
+      "nombreCompleto": "Gilmer Adrián Azuaje Benítez",
       "numero": 19,
       "foto": "assets/img/jugadores/gilmer-azuaje.webp",
       "posicion": "EXD",
       "nombrePosicion": "Extremo Derecho",
       "categoria": "Sub-18",
-      "fechaNacimiento": "",
+      "fechaNacimiento": "2011-01-20",
       "estado": "DISPONIBLE",
       "capitan": false,
       "estadisticas": {
@@ -567,7 +522,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-022",
       "slug": "alejo-bustamante",
@@ -594,12 +548,11 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-023",
       "slug": "santiago-parcero",
       "nombre": "Santiago Parcero",
-      "nombreCompleto": "Santiago Parcero",
+      "nombreCompleto": "Santiago Nicolás Parcero Shibar",
       "numero": 11,
       "foto": "assets/img/jugadores/santiago-parcero.webp",
       "posicion": "EXI",
@@ -621,34 +574,6 @@
         "mvp": 0
       }
     },
-
-    {
-      "id": "JUG-2026-024",
-      "slug": "francisco-salles",
-      "nombre": "Francisco Salles",
-      "nombreCompleto": "Francisco Salles",
-      "numero": 35,
-      "foto": "assets/img/jugadores/francisco-salles.webp",
-      "posicion": "EXI",
-      "nombrePosicion": "Extremo Izquierdo",
-      "categoria": "Sub-18",
-      "fechaNacimiento": "2008-01-07",
-      "estado": "DISPONIBLE",
-      "capitan": false,
-      "estadisticas": {
-        "partidos": 0,
-        "titularidades": 0,
-        "suplencias": 0,
-        "minutos": 0,
-        "goles": 0,
-        "asistencias": 0,
-        "amarillas": 0,
-        "rojas": 0,
-        "porteriasInvictas": 0,
-        "mvp": 0
-      }
-    },
-
     {
       "id": "JUG-2026-025",
       "slug": "lukas-acharan",
@@ -675,34 +600,6 @@
         "mvp": 0
       }
     },
-
-    {
-      "id": "JUG-2026-026",
-      "slug": "cristobal-alonso",
-      "nombre": "Cristóbal Alonso",
-      "nombreCompleto": "Cristóbal Francisco Alonso Griesshammer",
-      "numero": 9,
-      "foto": "assets/img/jugadores/cristobal-alonso.webp",
-      "posicion": "DC",
-      "nombrePosicion": "Delantero Centro",
-      "categoria": "Sub-18",
-      "fechaNacimiento": "2007-12-13",
-      "estado": "DISPONIBLE",
-      "capitan": false,
-      "estadisticas": {
-        "partidos": 0,
-        "titularidades": 0,
-        "suplencias": 0,
-        "minutos": 0,
-        "goles": 0,
-        "asistencias": 0,
-        "amarillas": 0,
-        "rojas": 0,
-        "porteriasInvictas": 0,
-        "mvp": 0
-      }
-    },
-
     {
       "id": "JUG-2026-027",
       "slug": "benjamin-lackington",
@@ -729,7 +626,6 @@
         "mvp": 0
       }
     },
-
     {
       "id": "JUG-2026-028",
       "slug": "benjamin-rossa",
@@ -737,8 +633,8 @@
       "nombreCompleto": "Benjamín Alonso Rossa Candia",
       "numero": 16,
       "foto": "assets/img/jugadores/benjamin-rossa.webp",
-      "posicion": "DC",
-      "nombrePosicion": "Delantero Centro",
+      "posicion": "EXD",
+      "nombrePosicion": "Extremo Derecho",
       "categoria": "Sub-18",
       "fechaNacimiento": "2010-02-23",
       "estado": "DISPONIBLE",
@@ -755,7 +651,214 @@
         "porteriasInvictas": 0,
         "mvp": 0
       }
+    },
+    {
+      "id": "JUG-2026-029",
+      "slug": "julio-farias",
+      "nombre": "Julio Farías",
+      "nombreCompleto": "Julio Ignacio Farías Gajardo",
+      "numero": 37,
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "LI",
+      "nombrePosicion": "Lateral Izquierdo",
+      "categoria": "Adulta",
+      "fechaNacimiento": "2002-05-23",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 0,
+        "titularidades": 0,
+        "suplencias": 0,
+        "minutos": 0,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
+    },
+    {
+      "id": "JUG-2026-030",
+      "slug": "patricio-chiappa",
+      "nombre": "Patricio Chiappa",
+      "nombreCompleto": "Patricio Esteban Chiappa Huenchullan",
+      "numero": 28,
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "DFC",
+      "nombrePosicion": "Defensa Central",
+      "categoria": "Adulta",
+      "fechaNacimiento": "2006-12-31",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 1,
+        "titularidades": 1,
+        "suplencias": 0,
+        "minutos": 30,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
+    },
+    {
+      "id": "JUG-2026-031",
+      "slug": "cristian-castillo",
+      "nombre": "Cristián Castillo",
+      "nombreCompleto": "Cristian Castillo Lackington",
+      "numero": 18,
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "MC",
+      "nombrePosicion": "Mediocampista",
+      "categoria": "Adulta",
+      "fechaNacimiento": "1991-01-16",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 0,
+        "titularidades": 0,
+        "suplencias": 0,
+        "minutos": 0,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
+    },
+    {
+      "id": "JUG-2026-032",
+      "slug": "sebastian-neira",
+      "nombre": "Sebastián Neira",
+      "nombreCompleto": "Sebastián Ignacio Neira González",
+      "numero": 4,
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "DFC",
+      "nombrePosicion": "Defensa Central",
+      "categoria": "Adulta",
+      "fechaNacimiento": "2001-06-26",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 0,
+        "titularidades": 0,
+        "suplencias": 0,
+        "minutos": 0,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
+    },
+    {
+      "id": "JUG-2026-033",
+      "slug": "diego-bugueno",
+      "nombre": "Diego Bugueño",
+      "nombreCompleto": "Diego Hernán Bugueño Cárdenas",
+      "numero": 24,
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "LD",
+      "nombrePosicion": "Lateral Derecho",
+      "categoria": "Adulta",
+      "fechaNacimiento": "2006-08-26",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 0,
+        "titularidades": 0,
+        "suplencias": 0,
+        "minutos": 0,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
+    },
+    {
+      "id": "JUG-2026-034",
+      "slug": "cristobal-rodriguez",
+      "nombre": "Cristóbal Rodríguez",
+      "nombreCompleto": "Cristóbal Rodríguez Andrés Muños",
+      "numero": "",
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "MCO",
+      "nombrePosicion": "Mediapunta",
+      "categoria": "Sub-18",
+      "fechaNacimiento": "2010-12-20",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 1,
+        "titularidades": 0,
+        "suplencias": 1,
+        "minutos": 25,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
+    },
+    {
+      "id": "JUG-2026-035",
+      "slug": "andres-concha",
+      "nombre": "Andrés Concha",
+      "nombreCompleto": "Andrés Caín Concha Villegas",
+      "numero": 22,
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "PO",
+      "nombrePosicion": "Arquero",
+      "categoria": "Adulta",
+      "fechaNacimiento": "2007-08-10",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 1,
+        "titularidades": 1,
+        "suplencias": 0,
+        "minutos": 30,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
+    },
+    {
+      "id": "JUG-2026-038",
+      "slug": "gustavo-nicolas",
+      "nombre": "Gustavo Nicolás",
+      "nombreCompleto": "Gustavo Nicolás",
+      "numero": "",
+      "foto": "assets/img/jugadores/jugador-default.webp",
+      "posicion": "DFC",
+      "nombrePosicion": "Defensa Central",
+      "categoria": "Adulta",
+      "fechaNacimiento": "",
+      "estado": "DISPONIBLE",
+      "capitan": false,
+      "estadisticas": {
+        "partidos": 1,
+        "titularidades": 1,
+        "suplencias": 0,
+        "minutos": 40,
+        "goles": 0,
+        "asistencias": 0,
+        "amarillas": 0,
+        "rojas": 0,
+        "porteriasInvictas": 0,
+        "mvp": 0
+      }
     }
-
   ]
 }

@@ -37,16 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    selectorTemporada.addEventListener("change", () => {
-
-        cargarTemporada(selectorTemporada.value);
-
-    });
+selectorTemporada.addEventListener("change", () => {
 
     cargarTemporada(selectorTemporada.value);
 
 });
 
+// Clausura como temporada predeterminada
+selectorTemporada.value = "2026/clausura";
+
+cargarTemporada(selectorTemporada.value);
+
+});
 /* ===================================================
    CARGAR TEMPORADA
 =================================================== */
