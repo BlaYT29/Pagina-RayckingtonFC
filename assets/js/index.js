@@ -515,11 +515,11 @@ const LOGOS_EQUIPOS_INICIO = {
     "7h hermanos":
         "assets/img/logo/rivales/logosgrande/7h-hermanos.png",
 
-    "atletico fc":
-        "assets/img/logo/rivales/logosgrande/atletico-fc-1-128x126.png",
+"atletico fc":
+    "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
 
-    "atletico":
-        "assets/img/logo/rivales/logosgrande/atletico-fc-1-128x126.png",
+"atletico":
+    "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
 
     "unab medicina":
         "assets/img/logo/rivales/logosgrande/unabmedicina.png",
