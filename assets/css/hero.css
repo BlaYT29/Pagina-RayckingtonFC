@@ -621,3 +621,49 @@
     }
 
 }
+/* =========================================
+   PARTIDO EN DIRECTO
+========================================= */
+
+.hero-match-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 800;
+}
+
+.live-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #ff2d2d;
+    display: inline-block;
+
+    animation: livePulse 1.2s infinite;
+}
+
+.hero-live-score {
+    font-size: 1.6rem;
+    font-weight: 800;
+    min-width: 80px;
+    text-align: center;
+}
+
+@keyframes livePulse {
+
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.35;
+        transform: scale(0.75);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}

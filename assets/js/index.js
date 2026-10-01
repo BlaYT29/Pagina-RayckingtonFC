@@ -468,6 +468,8 @@ async function cargarJsonSeguroInicio(
     }
 
 }
+
+
 /* ===================================================
    LOGOS DE EQUIPOS
 =================================================== */
@@ -513,21 +515,20 @@ const LOGOS_EQUIPOS_INICIO = {
     "7h hermanos":
         "assets/img/logo/rivales/logosgrande/7h-hermanos.png",
 
-    "atlético":
-        "assets/img/logo/rivales/logosgrande/atletico.png",
+    "atletico fc":
+        "assets/img/logo/rivales/logosgrande/atletico-fc-1-128x126.png",
 
     "atletico":
-        "assets/img/logo/rivales/logosgrande/atletico.png",
+        "assets/img/logo/rivales/logosgrande/atletico-fc-1-128x126.png",
 
     "unab medicina":
-    "assets/img/logo/rivales/logosgrande/unabmedicina.png",
+        "assets/img/logo/rivales/logosgrande/unabmedicina.png",
 
-     "universidad andrés bello - medicina":
-    "assets/img/logo/rivales/logosgrande/unabmedicina.png",
+    "universidad andrés bello - medicina":
+        "assets/img/logo/rivales/logosgrande/unabmedicina.png",
 
-     "universidad andres bello - medicina":
-    "assets/img/logo/rivales/logosgrande/unabmedicina.png",
-
+    "universidad andres bello - medicina":
+        "assets/img/logo/rivales/logosgrande/unabmedicina.png"
 
 };
 
@@ -577,8 +578,6 @@ function renderizarHeroInicio() {
     );
 
 }
-
-
 /* ===================================================
    RENDERIZAR PARTIDOS
 =================================================== */
@@ -607,214 +606,6 @@ function renderizarPartidosInicio() {
 
 
 /* ===================================================
-   BUSCAR PRÓXIMO PARTIDO
-=================================================== */
-
-function buscarProximoPartidoInicio() {
-
-    const hoy =
-        obtenerInicioDia(
-            new Date()
-        );
-
-    const candidatos =
-        todosLosPartidosInicio
-
-            .filter(
-                partido =>
-                    partido &&
-                    partido.mostrarEnInicio === true
-            )
-
-            .filter(
-                partido =>
-                    participaRayckingtonInicio(
-                        partido
-                    )
-            )
-
-            .filter(
-                partido =>
-                    tieneFechaValidaInicio(
-                        partido.fechaPartido
-                    )
-            )
-
-            .filter(
-                partido =>
-                    !partidoFinalizadoInicio(
-                        partido
-                    )
-            )
-
-            .filter(
-                partido => {
-
-                    const fecha =
-                        crearFechaHoraPartidoInicio(
-                            partido.fechaPartido,
-                            partido.hora
-                        );
-
-                    return fecha >= hoy;
-
-                }
-            )
-
-            .sort(
-                ordenarPartidosPorFechaYHoraInicio
-            );
-
-    if (candidatos.length > 0) {
-
-        return normalizarPartidoInicio(
-            candidatos[0]
-        );
-
-    }
-
-    const respaldo =
-        datosInicio
-            ?.partidosRespaldo
-            ?.proximoPartido;
-
-    if (
-        respaldo &&
-        respaldo.mostrar === true
-    ) {
-
-        return normalizarPartidoRespaldoInicio(
-            respaldo
-        );
-
-    }
-
-    return crearProximoPartidoPendienteInicio();
-
-}
-
-
-/* ===================================================
-   BUSCAR ÚLTIMO RESULTADO
-=================================================== */
-
-function buscarUltimoResultadoInicio() {
-
-    const candidatos =
-        todosLosPartidosInicio
-
-            .filter(
-                partido =>
-                    partido &&
-                    partido.usarParaResultados === true
-            )
-
-            .filter(
-                partido =>
-                    participaRayckingtonInicio(
-                        partido
-                    )
-            )
-
-            .filter(
-                partido =>
-                    partidoFinalizadoInicio(
-                        partido
-                    )
-            )
-
-            .filter(
-                partido =>
-                    tieneFechaValidaInicio(
-                        partido.fechaPartido
-                    )
-            )
-
-            .sort(
-                ordenarPartidosPorFechaYHoraInicio
-            );
-
-    if (candidatos.length > 0) {
-
-        return normalizarPartidoInicio(
-            candidatos[
-                candidatos.length - 1
-            ]
-        );
-
-    }
-
-    const respaldo =
-        datosInicio
-            ?.partidosRespaldo
-            ?.ultimoResultado;
-
-    if (
-        respaldo &&
-        respaldo.mostrar === true
-    ) {
-
-        return normalizarResultadoRespaldoInicio(
-            respaldo
-        );
-
-    }
-
-    return null;
-
-}
-
-
-/* ===================================================
-   ORDENAR PARTIDOS POR FECHA Y HORA
-=================================================== */
-
-function ordenarPartidosPorFechaYHoraInicio(
-    partidoA,
-    partidoB
-) {
-
-    const fechaA =
-        crearFechaHoraPartidoInicio(
-            partidoA.fechaPartido,
-            partidoA.hora
-        );
-
-    const fechaB =
-        crearFechaHoraPartidoInicio(
-            partidoB.fechaPartido,
-            partidoB.hora
-        );
-
-    return fechaA - fechaB;
-
-}
-
-
-/* ===================================================
-   CREAR FECHA Y HORA DEL PARTIDO
-=================================================== */
-
-function crearFechaHoraPartidoInicio(
-    fecha,
-    hora
-) {
-
-    const horaValida =
-        /^\d{2}:\d{2}$/.test(
-            String(
-                hora || ""
-            )
-        )
-            ? hora
-            : "12:00";
-
-    return new Date(
-        `${fecha}T${horaValida}:00`
-    );
-
-}
-/* ===================================================
    RENDERIZAR PARTIDO DEL HERO
 =================================================== */
 
@@ -827,17 +618,64 @@ function renderizarPartidoHeroInicio(
             "hero-proximo-partido"
         );
 
-    if (!contenedor) {
-
+    if (!contenedor || !partido) {
         return;
-
     }
+
+    const estado =
+        String(
+            partido.estado || ""
+        )
+            .trim()
+            .toLowerCase();
+
+    const enDirecto =
+        estado.includes("en juego") ||
+        estado.includes("en directo") ||
+        estado.includes("en curso");
+
+    const golesLocal =
+        partido.local?.goles !== null &&
+        partido.local?.goles !== undefined &&
+        partido.local?.goles !== ""
+            ? partido.local.goles
+            : 0;
+
+    const golesVisita =
+        partido.visita?.goles !== null &&
+        partido.visita?.goles !== undefined &&
+        partido.visita?.goles !== ""
+            ? partido.visita.goles
+            : 0;
+
+    const etiquetaPartido =
+        enDirecto
+            ? `
+                <span class="live-dot"></span>
+                EN DIRECTO
+              `
+            : "PRÓXIMO PARTIDO";
+
+    const textoCentral =
+        enDirecto
+            ? `${golesLocal} - ${golesVisita}`
+            : "VS";
+
+    const textoHora =
+        enDirecto
+            ? "Partido en desarrollo"
+            : escaparInicio(
+                partido.hora
+            );
 
     contenedor.innerHTML = `
 
-        <small class="hero-match-label">
+        <small class="
+            hero-match-label
+            ${enDirecto ? "hero-match-live" : ""}
+        ">
 
-            PRÓXIMO PARTIDO
+            ${etiquetaPartido}
 
         </small>
 
@@ -855,9 +693,11 @@ function renderizarPartidoHeroInicio(
                 partido.local
             )}
 
-            <span>
+            <span class="
+                ${enDirecto ? "hero-live-score" : ""}
+            ">
 
-                VS
+                ${textoCentral}
 
             </span>
 
@@ -883,9 +723,7 @@ function renderizarPartidoHeroInicio(
 
                 <p>
 
-                    ${escaparInicio(
-                        partido.hora
-                    )}
+                    ${textoHora}
 
                 </p>
 
@@ -894,9 +732,7 @@ function renderizarPartidoHeroInicio(
             <div class="col">
 
                 <strong>
-
                     Recinto
-
                 </strong>
 
                 <p>
@@ -969,11 +805,57 @@ function renderizarProximoPartidoInicio(
             "inicio-proximo-partido"
         );
 
-    if (!contenedor) {
-
+    if (!contenedor || !partido) {
         return;
-
     }
+
+    const estado =
+        String(
+            partido.estado || ""
+        )
+            .trim()
+            .toLowerCase();
+
+    const enDirecto =
+        estado.includes("en juego") ||
+        estado.includes("en directo") ||
+        estado.includes("en curso");
+
+    const golesLocal =
+        partido.local?.goles !== null &&
+        partido.local?.goles !== undefined &&
+        partido.local?.goles !== ""
+            ? partido.local.goles
+            : 0;
+
+    const golesVisita =
+        partido.visita?.goles !== null &&
+        partido.visita?.goles !== undefined &&
+        partido.visita?.goles !== ""
+            ? partido.visita.goles
+            : 0;
+
+    const etiqueta =
+        enDirecto
+            ? `
+                <span class="live-dot"></span>
+                EN DIRECTO
+              `
+            : escaparInicio(
+                partido.temporada
+            );
+
+    const marcador =
+        enDirecto
+            ? `${golesLocal} - ${golesVisita}`
+            : "VS";
+
+    const textoHora =
+        enDirecto
+            ? "Partido en desarrollo"
+            : escaparInicio(
+                partido.hora
+            );
 
     contenedor.innerHTML = `
 
@@ -987,17 +869,21 @@ function renderizarProximoPartidoInicio(
 
                 <div class="col-lg-4 text-center">
 
-                    <span class="match-badge">
+                    <span class="
+                        match-badge
+                        ${enDirecto ? "hero-match-live" : ""}
+                    ">
 
-                        ${escaparInicio(
-                            partido.temporada
-                        )}
+                        ${etiqueta}
 
                     </span>
 
-                    <h2 class="match-vs-title">
+                    <h2 class="
+                        match-vs-title
+                        ${enDirecto ? "hero-live-score" : ""}
+                    ">
 
-                        VS
+                        ${marcador}
 
                     </h2>
 
@@ -1015,9 +901,7 @@ function renderizarProximoPartidoInicio(
 
                         <i class="bi bi-clock me-2"></i>
 
-                        ${escaparInicio(
-                            partido.hora
-                        )}
+                        ${textoHora}
 
                     </p>
 
@@ -1109,9 +993,7 @@ function renderizarUltimoResultadoInicio(
         );
 
     if (!contenedor) {
-
         return;
-
     }
 
     if (!partido) {
@@ -1120,18 +1002,18 @@ function renderizarUltimoResultadoInicio(
 
             <div class="result-card text-center">
 
-                <i class="bi bi-calendar-x display-5 text-warning"></i>
+                <i class="
+                    bi bi-calendar-x
+                    display-5
+                    text-warning
+                "></i>
 
                 <h3 class="mt-3">
-
                     Resultado no disponible
-
                 </h3>
 
                 <p>
-
                     Todavía no existen resultados cargados.
-
                 </p>
 
             </div>
@@ -1246,6 +1128,8 @@ function crearEquipoResultadoInicio(
     `;
 
 }
+
+
 /* ===================================================
    NORMALIZAR PARTIDO DE CUALQUIER COMPETICIÓN
 =================================================== */
@@ -1259,6 +1143,10 @@ function normalizarPartidoInicio(
         {};
 
     return {
+
+        estado:
+            partido.estado ||
+            "Programado",
 
         competencia:
             partido.competencia ||
@@ -1327,6 +1215,8 @@ function normalizarPartidoInicio(
     };
 
 }
+
+
 /* ===================================================
    NORMALIZAR PRÓXIMO PARTIDO DE RESPALDO
 =================================================== */
@@ -1336,6 +1226,10 @@ function normalizarPartidoRespaldoInicio(
 ) {
 
     return {
+
+        estado:
+            partido.estado ||
+            "Programado",
 
         competencia:
             partido.competencia ||
@@ -1358,6 +1252,7 @@ function normalizarPartidoRespaldoInicio(
             "Recinto por confirmar",
 
         local: {
+
             nombre:
                 partido.local?.nombre ||
                 "Rayckington FC",
@@ -1367,10 +1262,13 @@ function normalizarPartidoRespaldoInicio(
                 LOGO_RAYCKINGTON,
 
             goles:
+                partido.local?.goles ??
                 null
+
         },
 
         visita: {
+
             nombre:
                 partido.visita?.nombre ||
                 "Rival por confirmar",
@@ -1380,7 +1278,9 @@ function normalizarPartidoRespaldoInicio(
                 LOGO_RIVAL_DEFAULT,
 
             goles:
+                partido.visita?.goles ??
                 null
+
         }
 
     };
@@ -1398,17 +1298,20 @@ function normalizarResultadoRespaldoInicio(
 
     return {
 
+        estado:
+            "Finalizado",
+
         competencia:
             partido.competencia ||
-            "Liga Tobalaba Todo Competidor",
+            "Partido de Rayckington FC",
 
         temporada:
             partido.temporada ||
-            "Apertura 2026",
+            "Temporada 2026",
 
         fechaTexto:
             partido.fechaTexto ||
-            "Último partido oficial",
+            "Último partido",
 
         hora:
             "",
@@ -1417,6 +1320,7 @@ function normalizarResultadoRespaldoInicio(
             "",
 
         local: {
+
             nombre:
                 partido.local?.nombre ||
                 "Rayckington FC",
@@ -1427,9 +1331,11 @@ function normalizarResultadoRespaldoInicio(
 
             goles:
                 partido.local?.goles
+
         },
 
         visita: {
+
             nombre:
                 partido.visita?.nombre ||
                 "Rival",
@@ -1440,6 +1346,7 @@ function normalizarResultadoRespaldoInicio(
 
             goles:
                 partido.visita?.goles
+
         }
 
     };
@@ -1453,26 +1360,27 @@ function normalizarResultadoRespaldoInicio(
 
 function crearProximoPartidoPendienteInicio() {
 
-const configuracion =
-    datosInicio
-        ?.configuracion
-        ?.temporadas ||
-    {};
+    const configuracion =
+        datosInicio
+            ?.configuracion
+            ?.temporadas ||
+        {};
 
-const anio =
-    Number(
-        configuracion.anioActivo
-    ) || 2026;
+    const anio =
+        Number(
+            configuracion.anioActivo
+        ) || 2026;
 
-const temporada =
-    `Temporada ${anio}`;
-
-const competencia =
-    "Próximo partido por confirmar";
+    const temporada =
+        `Temporada ${anio}`;
 
     return {
 
-        competencia,
+        estado:
+            "Programado",
+
+        competencia:
+            "Próximo partido por confirmar",
 
         temporada,
 
@@ -1486,6 +1394,7 @@ const competencia =
             "Recinto por confirmar",
 
         local: {
+
             nombre:
                 "Rayckington FC",
 
@@ -1494,9 +1403,11 @@ const competencia =
 
             goles:
                 null
+
         },
 
         visita: {
+
             nombre:
                 "Rival por confirmar",
 
@@ -1505,6 +1416,7 @@ const competencia =
 
             goles:
                 null
+
         }
 
     };
@@ -1544,8 +1456,17 @@ function normalizarTextoEquipoInicio(
     return String(
         texto || ""
     )
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
         .trim()
-        .toLowerCase();
+        .toLowerCase()
+        .replace(
+            /\s+/g,
+            " "
+        );
 
 }
 
@@ -1591,6 +1512,31 @@ function partidoFinalizadoInicio(
             .trim()
             .toLowerCase();
 
+    const estadosNoFinalizados = [
+
+        "programado",
+        "en juego",
+        "en directo",
+        "en curso",
+        "suspendido",
+        "aplazado",
+        "postergado"
+
+    ];
+
+    if (
+        estadosNoFinalizados.some(
+            estadoPendiente =>
+                estado.includes(
+                    estadoPendiente
+                )
+        )
+    ) {
+
+        return false;
+
+    }
+
     const golesLocalValidos =
         partido?.golesLocal !== null &&
         partido?.golesLocal !== undefined &&
@@ -1626,6 +1572,249 @@ function partidoFinalizadoInicio(
 
 
 /* ===================================================
+   BUSCAR PRÓXIMO PARTIDO
+=================================================== */
+
+function buscarProximoPartidoInicio() {
+
+    const hoy =
+        new Date();
+
+    hoy.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+    const candidatos =
+        todosLosPartidosInicio
+
+            .filter(
+                partido => {
+
+                    if (
+                        partido.mostrarEnInicio !== true
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        !participaRayckingtonInicio(
+                            partido
+                        )
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        !partido.fechaPartido
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        partidoFinalizadoInicio(
+                            partido
+                        )
+                    ) {
+                        return false;
+                    }
+
+                    const fechaPartido =
+                        crearFechaHoraPartidoInicio(
+                            partido.fechaPartido,
+                            partido.hora
+                        );
+
+                    if (
+                        Number.isNaN(
+                            fechaPartido.getTime()
+                        )
+                    ) {
+                        return false;
+                    }
+
+                    return (
+                        fechaPartido >= hoy
+                    );
+
+                }
+            )
+
+            .sort(
+                ordenarPartidosPorFechaYHoraInicio
+            );
+
+    if (
+        candidatos.length > 0
+    ) {
+
+        return normalizarPartidoInicio(
+            candidatos[0]
+        );
+
+    }
+
+    const respaldo =
+        datosInicio
+            ?.partidosRespaldo
+            ?.proximoPartido;
+
+    if (respaldo) {
+
+        return normalizarPartidoRespaldoInicio(
+            respaldo
+        );
+
+    }
+
+    return crearProximoPartidoPendienteInicio();
+
+}
+
+
+/* ===================================================
+   BUSCAR ÚLTIMO RESULTADO
+=================================================== */
+
+function buscarUltimoResultadoInicio() {
+
+    const resultados =
+        todosLosPartidosInicio
+
+            .filter(
+                partido => {
+
+                    if (
+                        partido.usarParaResultados !== true
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        !participaRayckingtonInicio(
+                            partido
+                        )
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        !partido.fechaPartido
+                    ) {
+                        return false;
+                    }
+
+                    return partidoFinalizadoInicio(
+                        partido
+                    );
+
+                }
+            )
+
+            .sort(
+                ordenarPartidosPorFechaYHoraInicio
+            );
+
+    if (
+        resultados.length > 0
+    ) {
+
+        const ultimoPartido =
+            resultados[
+                resultados.length - 1
+            ];
+
+        return normalizarPartidoInicio(
+            ultimoPartido
+        );
+
+    }
+
+    const respaldo =
+        datosInicio
+            ?.partidosRespaldo
+            ?.ultimoResultado;
+
+    if (respaldo) {
+
+        return normalizarResultadoRespaldoInicio(
+            respaldo
+        );
+
+    }
+
+    return null;
+
+}
+
+
+/* ===================================================
+   ORDENAR PARTIDOS POR FECHA Y HORA
+=================================================== */
+
+function ordenarPartidosPorFechaYHoraInicio(
+    partidoA,
+    partidoB
+) {
+
+    const fechaA =
+        crearFechaHoraPartidoInicio(
+            partidoA.fechaPartido,
+            partidoA.hora
+        );
+
+    const fechaB =
+        crearFechaHoraPartidoInicio(
+            partidoB.fechaPartido,
+            partidoB.hora
+        );
+
+    return fechaA - fechaB;
+
+}
+
+
+/* ===================================================
+   CREAR FECHA Y HORA DEL PARTIDO
+=================================================== */
+
+function crearFechaHoraPartidoInicio(
+    fecha,
+    hora
+) {
+
+    const fechaValida =
+        String(
+            fecha || ""
+        ).trim();
+
+    if (!fechaValida) {
+
+        return new Date(
+            "Invalid Date"
+        );
+
+    }
+
+    const horaValida =
+        /^\d{2}:\d{2}$/.test(
+            String(
+                hora || ""
+            )
+        )
+            ? hora
+            : "12:00";
+
+    return new Date(
+        `${fechaValida}T${horaValida}:00`
+    );
+
+}
+
+
+/* ===================================================
    FECHA VÁLIDA
 =================================================== */
 
@@ -1634,9 +1823,7 @@ function tieneFechaValidaInicio(
 ) {
 
     if (!fecha) {
-
         return false;
-
     }
 
     const objetoFecha =
@@ -1675,7 +1862,9 @@ function obtenerInicioDia(
 ) {
 
     const copia =
-        new Date(fecha);
+        new Date(
+            fecha
+        );
 
     copia.setHours(
         0,
@@ -1721,7 +1910,11 @@ function formatearFechaPartidoInicio(
     fecha
 ) {
 
-    if (!tieneFechaValidaInicio(fecha)) {
+    if (
+        !tieneFechaValidaInicio(
+            fecha
+        )
+    ) {
 
         return "Fecha por confirmar";
 
@@ -1732,10 +1925,17 @@ function formatearFechaPartidoInicio(
     ).toLocaleDateString(
         "es-CL",
         {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric"
+            weekday:
+                "long",
+
+            day:
+                "numeric",
+
+            month:
+                "long",
+
+            year:
+                "numeric"
         }
     );
 
@@ -1750,16 +1950,28 @@ function obtenerMarcadorInicio(
     valor
 ) {
 
-    const numero =
-        Number(valor);
+    if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ) {
 
-    return Number.isFinite(numero)
+        return "-";
+
+    }
+
+    const numero =
+        Number(
+            valor
+        );
+
+    return Number.isFinite(
+        numero
+    )
         ? numero
         : "-";
 
 }
-
-
 /* ===================================================
    RENDERIZAR ESTADÍSTICAS DEL INICIO
 =================================================== */
@@ -1802,13 +2014,15 @@ function renderizarEstadisticasInicio() {
             ?.temporadasOficiales ||
         1;
 
-    /* ==========================================
-       BUSCAR LA COMPETICIÓN ACTIVA
-    ========================================== */
+
+    /* ===================================================
+       BUSCAR COMPETICIÓN ACTIVA
+    =================================================== */
 
     const estadisticaActiva =
         todasLasEstadisticasInicio.find(
-            item => item.activa === true
+            item =>
+                item.activa === true
         );
 
     const estadisticas =
@@ -1820,6 +2034,11 @@ function renderizarEstadisticasInicio() {
         obtenerNumeroInicio(
             estadisticas?.pj
         );
+
+
+    /* ===================================================
+       MOSTRAR DATOS
+    =================================================== */
 
     colocarTextoInicio(
         "inicio-total-jugadores",
@@ -1851,6 +2070,8 @@ function renderizarEstadisticasInicio() {
     );
 
 }
+
+
 /* ===================================================
    NÚMERO SEGURO
 =================================================== */
@@ -1860,13 +2081,19 @@ function obtenerNumeroInicio(
 ) {
 
     const numero =
-        Number(valor);
+        Number(
+            valor
+        );
 
-    return Number.isFinite(numero)
+    return Number.isFinite(
+        numero
+    )
         ? numero
         : 0;
 
 }
+
+
 /* ===================================================
    RENDERIZAR HISTORIA
 =================================================== */
@@ -1889,6 +2116,11 @@ function renderizarHistoriaInicio() {
         "Un proyecto construido desde cero."
     );
 
+
+    /* ===================================================
+       IMAGEN
+    =================================================== */
+
     const imagen =
         document.getElementById(
             "inicio-historia-imagen"
@@ -1904,6 +2136,11 @@ function renderizarHistoriaInicio() {
             "Historia de Rayckington FC";
 
     }
+
+
+    /* ===================================================
+       PÁRRAFOS
+    =================================================== */
 
     const parrafosContenedor =
         document.getElementById(
@@ -1938,6 +2175,11 @@ function renderizarHistoriaInicio() {
 
     }
 
+
+    /* ===================================================
+       BOTÓN
+    =================================================== */
+
     configurarEnlaceInicio(
         "inicio-historia-boton",
         historia.boton
@@ -1958,9 +2200,7 @@ function renderizarJugadoresDestacadosInicio() {
         );
 
     if (!contenedor) {
-
         return;
-
     }
 
     const jugadores =
@@ -2005,7 +2245,14 @@ function renderizarJugadoresDestacadosInicio() {
 
     contenedor.innerHTML = "";
 
-    if (destacados.length === 0) {
+
+    /* ===================================================
+       SIN JUGADORES DESTACADOS
+    =================================================== */
+
+    if (
+        destacados.length === 0
+    ) {
 
         contenedor.innerHTML = `
 
@@ -2013,7 +2260,11 @@ function renderizarJugadoresDestacadosInicio() {
 
                 <div class="card-custom text-center">
 
-                    <i class="bi bi-people-fill display-5 text-warning"></i>
+                    <i class="
+                        bi bi-people-fill
+                        display-5
+                        text-warning
+                    "></i>
 
                     <h3 class="mt-3">
 
@@ -2023,7 +2274,8 @@ function renderizarJugadoresDestacadosInicio() {
 
                     <p>
 
-                        Pronto conocerás a los protagonistas del plantel.
+                        Pronto conocerás a los protagonistas
+                        del plantel.
 
                     </p>
 
@@ -2036,6 +2288,11 @@ function renderizarJugadoresDestacadosInicio() {
         return;
 
     }
+
+
+    /* ===================================================
+       CREAR TARJETAS
+    =================================================== */
 
     destacados.forEach(
         jugador => {
@@ -2089,7 +2346,10 @@ function crearTarjetaJugadorDestacadoInicio(
 
     return `
 
-        <article class="player-card inicio-player-card">
+        <article class="
+            player-card
+            inicio-player-card
+        ">
 
             <div class="inicio-player-image">
 
@@ -2138,6 +2398,7 @@ function crearTarjetaJugadorDestacadoInicio(
                 }
 
             </div>
+
 
             <div class="p-4">
 
@@ -2196,9 +2457,7 @@ function renderizarNoticiasInicio() {
         );
 
     if (!contenedor) {
-
         return;
-
     }
 
     const cantidad =
@@ -2217,13 +2476,11 @@ function renderizarNoticiasInicio() {
 
     const publicadas =
         noticias
-
             .filter(
                 noticia =>
                     noticia &&
                     noticia.publicada === true
             )
-
             .sort(
                 (noticiaA, noticiaB) =>
                     new Date(
@@ -2233,7 +2490,6 @@ function renderizarNoticiasInicio() {
                         noticiaA.fecha
                     )
             )
-
             .slice(
                 0,
                 cantidad
@@ -2241,7 +2497,9 @@ function renderizarNoticiasInicio() {
 
     contenedor.innerHTML = "";
 
-    if (publicadas.length === 0) {
+    if (
+        publicadas.length === 0
+    ) {
 
         contenedor.innerHTML = `
 
@@ -2249,7 +2507,11 @@ function renderizarNoticiasInicio() {
 
                 <div class="card-custom text-center">
 
-                    <i class="bi bi-newspaper display-5 text-warning"></i>
+                    <i class="
+                        bi bi-newspaper
+                        display-5
+                        text-warning
+                    "></i>
 
                     <h3 class="mt-3">
 
@@ -2309,7 +2571,10 @@ function crearTarjetaNoticiaInicio(
 
     return `
 
-        <article class="news-card inicio-news-card">
+        <article class="
+            news-card
+            inicio-news-card
+        ">
 
             <a
                 href="noticia.html?slug=${encodeURIComponent(
@@ -2400,7 +2665,10 @@ function crearTarjetaNoticiaInicio(
 
                     Leer más
 
-                    <i class="bi bi-arrow-right ms-2"></i>
+                    <i class="
+                        bi bi-arrow-right
+                        ms-2
+                    "></i>
 
                 </a>
 
@@ -2422,9 +2690,7 @@ function formatearFechaNoticiaInicio(
 ) {
 
     if (!fecha) {
-
         return "";
-
     }
 
     const objetoFecha =
@@ -2445,9 +2711,14 @@ function formatearFechaNoticiaInicio(
     return objetoFecha.toLocaleDateString(
         "es-CL",
         {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
+            day:
+                "numeric",
+
+            month:
+                "long",
+
+            year:
+                "numeric"
         }
     );
 
@@ -2466,9 +2737,7 @@ function renderizarGaleriaInicio() {
         );
 
     if (!contenedor) {
-
         return;
-
     }
 
     const cantidad =
@@ -2524,7 +2793,9 @@ function renderizarGaleriaInicio() {
 
     contenedor.innerHTML = "";
 
-    if (seleccionadas.length === 0) {
+    if (
+        seleccionadas.length === 0
+    ) {
 
         contenedor.innerHTML = `
 
@@ -2609,7 +2880,9 @@ function renderizarGaleriaInicio() {
 
                     </h4>
 
-                    <i class="bi bi-arrow-up-right"></i>
+                    <i class="
+                        bi bi-arrow-up-right
+                    "></i>
 
                 </div>
 
@@ -2661,9 +2934,7 @@ function renderizarSponsorsInicio() {
         );
 
     if (!contenedor) {
-
         return;
-
     }
 
     const patrocinadores =
@@ -2675,13 +2946,11 @@ function renderizarSponsorsInicio() {
 
     const activos =
         patrocinadores
-
             .filter(
                 patrocinador =>
                     patrocinador &&
                     patrocinador.activo === true
             )
-
             .sort(
                 (patrocinadorA, patrocinadorB) =>
                     obtenerNumeroInicio(
@@ -2694,7 +2963,9 @@ function renderizarSponsorsInicio() {
 
     contenedor.innerHTML = "";
 
-    if (activos.length === 0) {
+    if (
+        activos.length === 0
+    ) {
 
         contenedor.innerHTML = `
 
@@ -2787,7 +3058,9 @@ function renderizarSponsorsInicio() {
                         "Visitar sitio"
                     )}
 
-                    <i class="bi bi-box-arrow-up-right"></i>
+                    <i class="
+                        bi bi-box-arrow-up-right
+                    "></i>
 
                 </span>
 
@@ -2818,9 +3091,7 @@ function configurarEnlaceInicio(
         );
 
     if (!enlace) {
-
         return;
-
     }
 
     if (
@@ -2854,9 +3125,7 @@ function obtenerEnlaceSeguroInicio(
         ).trim();
 
     if (!valor) {
-
         return "#";
-
     }
 
     const permitido =
@@ -2891,9 +3160,7 @@ function colocarTextoInicio(
         );
 
     if (!elemento) {
-
         return;
-
     }
 
     elemento.textContent =
@@ -2934,9 +3201,7 @@ function mostrarErrorGeneralInicio() {
         );
 
     if (!carga) {
-
         return;
-
     }
 
     carga.hidden = false;
@@ -2945,9 +3210,18 @@ function mostrarErrorGeneralInicio() {
 
         <div class="container">
 
-            <div class="alert alert-danger text-center mb-0">
+            <div class="
+                alert
+                alert-danger
+                text-center
+                mb-0
+            ">
 
-                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <i class="
+                    bi
+                    bi-exclamation-triangle-fill
+                    me-2
+                "></i>
 
                 No fue posible cargar completamente la portada.
                 Revisa los archivos JSON y abre la página con Live Server.

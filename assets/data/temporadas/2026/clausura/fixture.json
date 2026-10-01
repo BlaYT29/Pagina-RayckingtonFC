@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": "CLA2026-001",
+    "fecha": 1,
+    "orden": 1,
+
+    "competencia": "Liga Tobalaba Todo Competidor",
+    "temporada": "Clausura 2026",
+    "categoria": "Todo Competidor",
+
+    "estado": "En juego",
+
+    "fechaPartido": "2026-09-30",
+    "hora": "21:00",
+    "estadio": "Honorino Landa",
+
+    "local": "Rayckington FC",
+    "visita": "Atlético FC",
+
+    "golesLocal": 0,
+    "golesVisita": 1,
+
+    "resultadoRayckington": "",
+
+    "mvp": "",
+    "goleadores": [],
+    "asistencias": [],
+    "tarjetas": [],
+
+    "observaciones": "Primer partido de Rayckington FC en el Torneo Clausura 2026.",
+
+    "galeria": [],
+    "video": "",
+    "noticia": ""
+  }
+]

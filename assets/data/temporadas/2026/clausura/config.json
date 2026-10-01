@@ -5,12 +5,12 @@
   "temporada": "Clausura 2026",
   "anio": 2026,
   "categoria": "Todo Competidor",
-  "estado": "Próximamente",
+  "estado": "En desarrollo",
   "totalEquipos": 10,
   "totalFechas": 9,
   "clubDestacado": "Rayckington FC",
-  "descripcion": "Próximo torneo oficial de Rayckington FC.",
+  "descripcion": "torneo oficial de Rayckington FC.",
   "logoCompetencia": "",
-  "fechaInicio": "",
+  "fechaInicio": "2026-09-30",
   "fechaFin": ""
 }

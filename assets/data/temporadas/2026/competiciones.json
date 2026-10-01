@@ -7,7 +7,7 @@
       "nombre": "Torneo Apertura 2026",
       "tipo": "Liga",
       "activa": false,
-      "mostrarEnInicio": true,
+      "mostrarEnInicio": false,
       "usarParaResultados": true,
       "orden": 1
     },
