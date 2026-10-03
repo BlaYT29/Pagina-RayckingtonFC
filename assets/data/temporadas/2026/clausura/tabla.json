@@ -12,19 +12,19 @@
     "pts": 3
   },
   {
-    "pos": 4,
+    "pos": 6,
     "club": "ATLETICO INDEPENDIENTE",
-    "pj": 0,
+    "pj": 1,
     "v": 0,
     "e": 0,
-    "d": 0,
-    "gf": 0,
-    "gc": 0,
-    "dg": 0,
+    "d": 1,
+    "gf": 1,
+    "gc": 2,
+    "dg": -1,
     "pts": 0
   },
   {
-    "pos": 3,
+    "pos": 4,
     "club": "ATLETICO VALLE CENTRAL",
     "pj": 1,
     "v": 1,
@@ -48,7 +48,7 @@
     "pts": 0
   },
   {
-    "pos": 4,
+    "pos": 5,
     "club": "DE 20 VAN 7",
     "pj": 0,
     "v": 0,
@@ -60,16 +60,16 @@
     "pts": 0
   },
   {
-    "pos": 4,
+    "pos": 3,
     "club": "HUACHALOMO",
-    "pj": 0,
-    "v": 0,
+    "pj": 1,
+    "v": 1,
     "e": 0,
     "d": 0,
-    "gf": 0,
-    "gc": 0,
-    "dg": 0,
-    "pts": 0
+    "gf": 2,
+    "gc": 1,
+    "dg": 1,
+    "pts": 3
   },
   {
     "pos": 1,
