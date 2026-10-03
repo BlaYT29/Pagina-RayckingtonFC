@@ -503,7 +503,7 @@ const LOGOS_EQUIPOS_INICIO = {
     "huachalomo":
         "assets/img/logo/rivales/logosgrande/huachalomo.png",
 
-    "la plaza united":
+    "la plaza":
         "assets/img/logo/rivales/logosgrande/la-plaza-united.png",
 
     "unión gloriosa":
