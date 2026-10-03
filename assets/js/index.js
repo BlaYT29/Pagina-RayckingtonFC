@@ -530,10 +530,10 @@ const LOGOS_EQUIPOS_INICIO = {
     "universidad andres bello - medicina":
         "assets/img/logo/rivales/logosgrande/unabmedicina.png",
 
-    "atlético valle central":
+    "valle central":
     "assets/img/logo/rivales/logospequeños/atletico-valle-central.png",
 
-    "atletico valle central":
+    "valle central":
     "assets/img/logo/rivales/logospequeños/atletico-valle-central.png" 
 
 
