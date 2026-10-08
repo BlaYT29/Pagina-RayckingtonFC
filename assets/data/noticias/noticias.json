@@ -270,5 +270,36 @@
     "preparacion-torneo-clausura-2026",
     "fin-primera-temporada-oficial"
   ]
+},
+{
+  "id": "NOT-2026-010",
+  "slug": "rayckington-atletico-valle-central-clausura-2026",
+  "titulo": "Rayckington FC cayó por la mínima tras un partido marcado por la polémica",
+  "subtitulo": "El equipo dominó gran parte del encuentro y se fue al descanso en ventaja, pero Atlético Valle Central terminó imponiéndose por 2-1.",
+  "fecha": "2026-10-07",
+  "fechaTexto": "7 de octubre de 2026",
+  "autor": "Rayckington FC",
+  "categoria": "Competencia",
+  "imagen": "assets/img/noticias/2026/rayckington-atletico-valle-central.png",
+  "imagenAlt": "Rayckington FC 1-2 Atlético Valle Central - Clausura 2026",
+  "destacada": true,
+  "publicada": true,
+  "resumen": "Rayckington FC mostró una importante evolución futbolística y dominó gran parte del encuentro, pero Atlético Valle Central consiguió remontar y quedarse con la victoria por 2-1.",
+  "contenido": [
+    "Rayckington FC disputó este miércoles 7 de octubre su segundo encuentro del Torneo Clausura 2026 de la Liga Tobalaba, enfrentando a Atlético Valle Central en un partido que terminó con derrota por 2-1.",
+    "El resultado no reflejó completamente lo ocurrido durante gran parte del encuentro. Rayckington tomó la iniciativa desde los primeros minutos, controló el desarrollo del primer tiempo y generó varias oportunidades de peligro.",
+    "La superioridad del equipo se tradujo en el marcador luego de una recuperación que terminó con Vicente Borquez anotando el 1-0. Con esa ventaja, Rayckington se fue al descanso.",
+    "Durante el segundo tiempo el equipo continuó generando ocasiones, pero el encuentro comenzó a complicarse luego de un penal sancionado a favor de Atlético Valle Central. Desde la perspectiva del club, la jugada generó importantes dudas. El rival convirtió el lanzamiento y estableció el 1-1.",
+    "El partido también estuvo marcado por situaciones arbitrales que generaron molestia en el equipo. Una de ellas ocurrió cuando Rayckington advirtió que Atlético Valle Central se encontraba momentáneamente con 12 jugadores dentro del terreno de juego, situación que posteriormente fue corregida.",
+    "Rayckington continuó buscando el segundo gol y tuvo oportunidades para volver a ponerse en ventaja. Sin embargo, en la última acción del partido, Atlético Valle Central consiguió el 2-1 definitivo.",
+    "Más allá del resultado, el encuentro dejó señales positivas. Rayckington mostró una evolución importante en su funcionamiento colectivo, mayor dominio de balón y una propuesta mucho más competitiva durante prácticamente todo el partido.",
+    "El desafío ahora será transformar este crecimiento futbolístico en resultados durante las próximas fechas del Torneo Clausura."
+  ],
+  "galeria": [],
+  "video": "",
+  "enlaceExterno": "",
+  "relacionadas": [
+    "debut-clausura-2026-atletico"
+  ]
 }
 ]
