@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portal del Jugador | Rayckington FC</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+        .contenedor {
+            width: min(1100px, 92%);
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        .logo {
+            width: 100px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #b9c2cf;
+            margin-bottom: 35px;
+        }
+
+        .login-card,
+        .portal-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #111d2c;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #26364a;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #435267;
+            background: #07111f;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            border: 0;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            background: #d71920;
+            color: white;
+        }
+
+        button:hover {
+            opacity: .9;
+        }
+
+        #mensaje-login {
+            margin-top: 20px;
+            text-align: center;
+            color: #ffcc00;
+        }
+
+        #portal {
+            display: none;
+        }
+
+        .bienvenida {
+            background: #111d2c;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #26364a;
+        }
+
+        .bienvenida h2 {
+            text-align: left;
+            margin: 0 0 5px;
+        }
+
+        .bienvenida p {
+            color: #b9c2cf;
+            margin: 0;
+        }
+
+        .cuotas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .cuota {
+            background: #111d2c;
+            border: 1px solid #26364a;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .cuota h3 {
+            margin-top: 0;
+        }
+
+        .monto {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 15px 0;
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .pendiente {
+            background: #5a4200;
+            color: #ffd966;
+        }
+
+        .pagado {
+            background: #143d23;
+            color: #78e49c;
+        }
+
+        .cerrar-sesion {
+            width: auto;
+            padding: 10px 20px;
+            margin-top: 25px;
+            background: #26364a;
+        }
+
+        .sin-cuotas {
+            color: #b9c2cf;
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <img
+        src="assets/img/logo/logo.png"
+        alt="Rayckington FC"
+        class="logo"
+    >
+
+    <h1>Portal del Jugador</h1>
+
+    <p class="subtitulo">
+        Rayckington FC · Gestión privada de cuotas y pagos
+    </p>
+
+
+    <!-- LOGIN -->
+
+    <section id="login" class="login-card">
+
+        <h2>Iniciar sesión</h2>
+
+        <form id="form-login">
+
+            <label for="email">
+                Correo electrónico
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                autocomplete="email"
+                required
+            >
+
+            <label for="password">
+                Contraseña
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit">
+                Ingresar
+            </button>
+
+        </form>
+
+        <div id="mensaje-login"></div>
+
+    </section>
+
+
+    <!-- PORTAL -->
+
+    <section id="portal">
+
+        <div class="bienvenida">
+
+            <h2 id="nombre-jugador">
+                Jugador
+            </h2>
+
+            <p>
+                Estado de cuenta personal
+            </p>
+
+        </div>
+
+
+<h2>Mis cuotas</h2>
+
+<div id="lista-cuotas" class="cuotas-grid"></div>
+
+
+<!-- ================================================
+     REGISTRAR PAGO
+================================================ -->
+
+<div class="portal-card" style="margin-top: 35px; max-width: 100%;">
+
+    <h2>Registrar transferencia</h2>
+
+    <p class="subtitulo">
+        Selecciona las cuotas que estás pagando y adjunta tu comprobante.
+    </p>
+
+    <form id="form-pago">
+
+        <div id="cuotas-pago"></div>
+
+        <label for="monto-total">
+            Monto total transferido
+        </label>
+
+        <input
+            id="monto-total"
+            type="number"
+            min="1"
+            placeholder="Ej: 55000"
+            required
+        >
+
+        <label for="fecha-transferencia">
+            Fecha de transferencia
+        </label>
+
+        <input
+            id="fecha-transferencia"
+            type="date"
+            required
+        >
+
+        <label for="numero-operacion">
+            Número de operación
+        </label>
+
+        <input
+            id="numero-operacion"
+            type="text"
+            placeholder="Opcional"
+        >
+
+        <label for="comprobante">
+            Comprobante de transferencia
+        </label>
+
+        <input
+            id="comprobante"
+            type="file"
+            accept="image/*,.pdf"
+            required
+        >
+
+        <label for="observaciones-pago">
+            Observaciones
+        </label>
+
+        <input
+            id="observaciones-pago"
+            type="text"
+            placeholder="Opcional"
+        >
+
+        <button type="submit">
+            Registrar pago
+        </button>
+
+        <div id="mensaje-pago"></div>
+
+    </form>
+
+</div>
+
+
+<button
+    id="btn-cerrar"
+    class="cerrar-sesion"
+>
+    Cerrar sesión
+</button>
+
+    </section>
+
+</div>
+
+
+<script type="module">
+
+import {
+    createClient
+} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+
+/* ===================================================
+   CONFIGURACIÓN SUPABASE
+=================================================== */
+
+const SUPABASE_URL =
+    "https://auutiadcyhhwxzkeernd.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_luWCBHYOSUsFbmgPU4GoiQ_9nmBMRHe";
+
+
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* ===================================================
+   ELEMENTOS
+=================================================== */
+
+const login =
+    document.getElementById("login");
+
+const portal =
+    document.getElementById("portal");
+
+const formLogin =
+    document.getElementById("form-login");
+
+const mensajeLogin =
+    document.getElementById("mensaje-login");
+
+const nombreJugador =
+    document.getElementById("nombre-jugador");
+
+const listaCuotas =
+    document.getElementById("lista-cuotas");
+
+const cuotasPago =
+    document.getElementById("cuotas-pago");
+
+let cuotasPendientesJugador = [];
+
+const montoTotalInput =
+    document.getElementById("monto-total");
+
+    const formPago =
+    document.getElementById("form-pago");
+
+const fechaTransferenciaInput =
+    document.getElementById("fecha-transferencia");
+
+const numeroOperacionInput =
+    document.getElementById("numero-operacion");
+
+const comprobanteInput =
+    document.getElementById("comprobante");
+
+const observacionesPagoInput =
+    document.getElementById("observaciones-pago");
+
+const mensajePago =
+    document.getElementById("mensaje-pago");
+
+let jugadorActual = null;
+
+const btnCerrar =
+    document.getElementById("btn-cerrar");
+
+
+/* ===================================================
+   LOGIN
+=================================================== */
+
+formLogin.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+        mensajeLogin.textContent =
+            "Ingresando...";
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+        const password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        const {
+            data,
+            error
+        } =
+            await supabase.auth
+                .signInWithPassword({
+                    email,
+                    password
+                });
+
+
+        if (error) {
+
+            console.error(error);
+
+            mensajeLogin.textContent =
+                "Correo o contraseña incorrectos.";
+
+            return;
+        }
+
+
+        mensajeLogin.textContent = "";
+
+        await cargarPortal();
+
+    }
+);
+
+
+/* ===================================================
+   CARGAR PORTAL
+=================================================== */
+
+async function cargarPortal() {
+
+    const {
+        data: usuarioData
+    } =
+        await supabase.auth.getUser();
+
+
+    const usuario =
+        usuarioData?.user;
+
+
+    if (!usuario) {
+
+        mostrarLogin();
+
+        return;
+    }
+
+
+    /* ===============================================
+       PERFIL DEL JUGADOR
+    =============================================== */
+
+    const {
+        data: jugador,
+        error: errorJugador
+    } =
+        await supabase
+            .from("jugadores")
+            .select(
+                "id,nombre,nombre_completo,estado"
+            )
+            .eq(
+                "user_id",
+                usuario.id
+            )
+            .single();
+
+
+    if (
+        errorJugador ||
+        !jugador
+    ) {
+
+        console.error(
+            errorJugador
+        );
+
+        mensajeLogin.textContent =
+            "No existe un jugador vinculado a esta cuenta.";
+
+        await supabase.auth.signOut();
+
+        mostrarLogin();
+
+        return;
+    }
+
+    jugadorActual = jugador;
+
+    nombreJugador.textContent =
+        jugador.nombre_completo ||
+        jugador.nombre;
+
+
+    /* ===============================================
+       CUOTAS
+    =============================================== */
+
+    const {
+        data: cuotas,
+        error: errorCuotas
+    } =
+        await supabase
+            .from("cuotas")
+            .select(
+                "id,concepto,periodo,monto,fecha_vencimiento,estado"
+            )
+            .eq(
+                "jugador_id",
+                jugador.id
+            )
+            .order(
+                "fecha_vencimiento",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (errorCuotas) {
+
+        console.error(
+            errorCuotas
+        );
+
+        listaCuotas.innerHTML = `
+            <p class="sin-cuotas">
+                No se pudieron cargar las cuotas.
+            </p>
+        `;
+
+    } else {
+
+renderizarCuotas(
+    cuotas || []
+);
+
+cuotasPendientesJugador =
+    (cuotas || []).filter(
+        (cuota) =>
+            String(
+                cuota.estado || ""
+            )
+                .trim()
+                .toUpperCase() === "PENDIENTE"
+    );
+
+renderizarCuotasParaPago(
+    cuotasPendientesJugador
+);
+
+    }
+
+
+    login.style.display = "none";
+
+    portal.style.display = "block";
+
+}
+
+/* ===================================================
+   CALCULAR MONTO TOTAL SELECCIONADO
+=================================================== */
+
+function actualizarMontoSeleccionado() {
+
+    const seleccionadas =
+        document.querySelectorAll(
+            ".cuota-seleccionada:checked"
+        );
+
+    let total = 0;
+
+    seleccionadas.forEach(
+        (checkbox) => {
+
+            total +=
+                Number(
+                    checkbox.dataset.monto
+                ) || 0;
+
+        }
+    );
+
+    if (montoTotalInput) {
+
+        montoTotalInput.value =
+            total > 0
+                ? total
+                : "";
+
+    }
+
+}
+
+
+/* ===================================================
+   MOSTRAR CUOTAS
+=================================================== */
+
+function renderizarCuotas(
+    cuotas
+) {
+
+    if (
+        !cuotas.length
+    ) {
+
+        listaCuotas.innerHTML = `
+            <p class="sin-cuotas">
+                No tienes cuotas registradas.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    listaCuotas.innerHTML =
+        cuotas
+            .map(
+                (cuota) => {
+
+                    const estado =
+                        String(
+                            cuota.estado ||
+                            "PENDIENTE"
+                        ).toUpperCase();
+
+
+                    const claseEstado =
+                        estado === "PAGADO"
+                            ? "pagado"
+                            : "pendiente";
+
+
+                    return `
+                        <article class="cuota">
+
+                            <h3>
+                                ${escaparHTML(
+                                    obtenerTituloCuota(
+                                        cuota
+                                    )
+                                )}
+                            </h3>
+
+                            <div class="monto">
+                                ${formatearDinero(
+                                    cuota.monto
+                                )}
+                            </div>
+
+                            ${
+                                cuota.fecha_vencimiento
+                                ? `
+                                    <p>
+                                        Vence:
+                                        ${formatearFecha(
+                                            cuota.fecha_vencimiento
+                                        )}
+                                    </p>
+                                  `
+                                : ""
+                            }
+
+                            <span
+                                class="estado ${claseEstado}"
+                            >
+                                ${escaparHTML(
+                                    estado
+                                )}
+                            </span>
+
+                        </article>
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* ===================================================
+   TITULO CUOTA
+=================================================== */
+
+function obtenerTituloCuota(
+    cuota
+) {
+
+    if (
+        cuota.concepto ===
+            "MENSUALIDAD" &&
+        cuota.periodo
+    ) {
+
+        const fecha =
+            new Date(
+                `${cuota.periodo}T00:00:00`
+            );
+
+
+        const periodo =
+            new Intl.DateTimeFormat(
+                "es-CL",
+                {
+                    month: "long",
+                    year: "numeric"
+                }
+            )
+                .format(fecha);
+
+
+        return (
+            periodo
+                .charAt(0)
+                .toUpperCase() +
+            periodo.slice(1)
+        );
+
+    }
+
+
+    return cuota.concepto;
+
+}
+
+
+/* ===================================================
+   DINERO
+=================================================== */
+
+function formatearDinero(
+    monto
+) {
+
+    return new Intl.NumberFormat(
+        "es-CL",
+        {
+            style: "currency",
+            currency: "CLP",
+            maximumFractionDigits: 0
+        }
+    ).format(
+        Number(monto) || 0
+    );
+
+}
+
+
+/* ===================================================
+   FECHA
+=================================================== */
+
+function formatearFecha(
+    fecha
+) {
+
+    return new Intl.DateTimeFormat(
+        "es-CL"
+    ).format(
+        new Date(
+            `${fecha}T00:00:00`
+        )
+    );
+
+}
+
+
+/* ===================================================
+   ESCAPAR HTML
+=================================================== */
+
+function escaparHTML(
+    texto
+) {
+
+    return String(
+        texto ?? ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            "\"",
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+/* ===================================================
+   CUOTAS DISPONIBLES PARA PAGAR
+=================================================== */
+
+function renderizarCuotasParaPago(
+    cuotas
+) {
+
+    if (!cuotasPago) {
+        return;
+    }
+
+
+    if (!cuotas.length) {
+
+        cuotasPago.innerHTML = `
+            <p class="sin-cuotas">
+                No tienes cuotas pendientes.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    cuotasPago.innerHTML =
+        cuotas
+            .map(
+                (cuota) => {
+
+                    return `
+                        <label
+                            style="
+                                display:flex;
+                                align-items:center;
+                                gap:12px;
+                                padding:14px;
+                                margin-bottom:12px;
+                                border:1px solid #26364a;
+                                border-radius:10px;
+                                cursor:pointer;
+                            "
+                        >
+
+                            <input
+                                type="checkbox"
+                                class="cuota-seleccionada"
+                                value="${cuota.id}"
+                                data-monto="${cuota.monto}"
+                                style="
+                                    width:auto;
+                                    margin:0;
+                                "
+                            >
+
+                            <span>
+
+                                <strong>
+                                    ${escaparHTML(
+                                        obtenerTituloCuota(
+                                            cuota
+                                        )
+                                    )}
+                                </strong>
+
+                                <br>
+
+                                ${formatearDinero(
+                                    cuota.monto
+                                )}
+
+                            </span>
+
+                        </label>
+                    `;
+
+                }
+            )
+            .join("");
+
+            const checkboxes =
+    cuotasPago.querySelectorAll(
+        ".cuota-seleccionada"
+    );
+
+checkboxes.forEach(
+    (checkbox) => {
+
+        checkbox.addEventListener(
+            "change",
+            actualizarMontoSeleccionado
+        );
+
+    }
+);
+
+}
+
+/* ===================================================
+   REGISTRAR PAGO
+=================================================== */
+
+formPago.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+        mensajePago.textContent = "";
+
+        if (!jugadorActual) {
+
+            mensajePago.textContent =
+                "No se pudo identificar al jugador.";
+
+            return;
+        }
+
+
+        /* ==========================================
+           CUOTAS SELECCIONADAS
+        ========================================== */
+
+        const seleccionadas =
+            Array.from(
+                document.querySelectorAll(
+                    ".cuota-seleccionada:checked"
+                )
+            );
+
+
+        if (!seleccionadas.length) {
+
+            mensajePago.textContent =
+                "Selecciona al menos una cuota.";
+
+            return;
+        }
+
+
+        const montoTotal =
+            Number(
+                montoTotalInput.value
+            );
+
+
+        if (
+            !montoTotal ||
+            montoTotal <= 0
+        ) {
+
+            mensajePago.textContent =
+                "El monto transferido no es válido.";
+
+            return;
+        }
+
+
+        const archivo =
+            comprobanteInput.files[0];
+
+
+        if (!archivo) {
+
+            mensajePago.textContent =
+                "Debes adjuntar el comprobante.";
+
+            return;
+        }
+
+
+        mensajePago.textContent =
+            "Registrando pago...";
+
+
+        /* ==========================================
+           USUARIO AUTENTICADO
+        ========================================== */
+
+        const {
+            data: usuarioData,
+            error: errorUsuario
+        } =
+            await supabase.auth.getUser();
+
+
+        if (
+            errorUsuario ||
+            !usuarioData?.user
+        ) {
+
+            mensajePago.textContent =
+                "Tu sesión expiró. Vuelve a iniciar sesión.";
+
+            return;
+        }
+
+
+        const usuario =
+            usuarioData.user;
+
+
+        /* ==========================================
+           ID DEL PAGO
+        ========================================== */
+
+        const pagoId =
+            crypto.randomUUID();
+
+
+        /* ==========================================
+           NOMBRE SEGURO DEL ARCHIVO
+        ========================================== */
+
+        const extension =
+            archivo.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+        const nombreArchivo =
+            `comprobante.${extension}`;
+
+        const rutaComprobante =
+            `${usuario.id}/${pagoId}/${nombreArchivo}`;
+
+
+        /* ==========================================
+           SUBIR COMPROBANTE
+        ========================================== */
+
+        const {
+            error: errorArchivo
+        } =
+            await supabase.storage
+                .from("comprobantes-pagos")
+                .upload(
+                    rutaComprobante,
+                    archivo,
+                    {
+                        upsert: false
+                    }
+                );
+
+
+        if (errorArchivo) {
+
+            console.error(
+                errorArchivo
+            );
+
+            mensajePago.textContent =
+                "No se pudo subir el comprobante.";
+
+            return;
+        }
+
+
+        /* ==========================================
+           CREAR PAGO
+        ========================================== */
+
+        const {
+            error: errorPago
+        } =
+            await supabase
+                .from("pagos")
+                .insert({
+                    id: pagoId,
+                    jugador_id:
+                        jugadorActual.id,
+
+                    monto_total:
+                        montoTotal,
+
+                    fecha_transferencia:
+                        fechaTransferenciaInput.value,
+
+                    numero_operacion:
+                        numeroOperacionInput.value.trim() ||
+                        null,
+
+                    comprobante_path:
+                        rutaComprobante,
+
+                    estado:
+                        "PENDIENTE",
+
+                    observaciones:
+                        observacionesPagoInput.value.trim() ||
+                        null
+                });
+
+
+        if (errorPago) {
+
+            console.error(
+                errorPago
+            );
+
+            mensajePago.textContent =
+                "No se pudo registrar el pago.";
+
+            return;
+        }
+
+
+        /* ==========================================
+           RELACIONAR PAGO CON CUOTAS
+        ========================================== */
+
+        const detalles =
+            seleccionadas.map(
+                (checkbox) => ({
+                    pago_id:
+                        pagoId,
+
+                    cuota_id:
+                        checkbox.value,
+
+                    monto_aplicado:
+                        Number(
+                            checkbox.dataset.monto
+                        ) || 0
+                })
+            );
+
+
+        const {
+            error: errorDetalles
+        } =
+            await supabase
+                .from("pago_cuotas")
+                .insert(
+                    detalles
+                );
+
+
+        if (errorDetalles) {
+
+            console.error(
+                errorDetalles
+            );
+
+            mensajePago.textContent =
+                "El pago se registró, pero hubo un problema al asociar las cuotas.";
+
+            return;
+        }
+
+
+        /* ==========================================
+           ÉXITO
+        ========================================== */
+
+        mensajePago.textContent =
+            "Pago registrado correctamente. Quedó pendiente de revisión por Tesorería.";
+
+
+        formPago.reset();
+
+        actualizarMontoSeleccionado();
+
+    }
+);
+
+/* ===================================================
+   CERRAR SESIÓN
+=================================================== */
+
+btnCerrar.addEventListener(
+    "click",
+    async () => {
+
+        await supabase.auth
+            .signOut();
+
+        mostrarLogin();
+
+    }
+);
+
+
+/* ===================================================
+   LOGIN VISIBLE
+=================================================== */
+
+function mostrarLogin() {
+
+    portal.style.display =
+        "none";
+
+    login.style.display =
+        "block";
+
+}
+
+
+/* ===================================================
+   SESIÓN EXISTENTE
+=================================================== */
+
+const {
+    data: sesionInicial
+} =
+    await supabase.auth
+        .getSession();
+
+
+if (
+    sesionInicial?.session
+) {
+
+    await cargarPortal();
+
+}
+
+</script>
+
+</body>
+</html>

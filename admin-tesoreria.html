@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Tesorería | Rayckington FC
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/admin-tesoreria.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="contenedor">
+
+
+    <!-- ==========================================
+         LOGIN
+    =========================================== -->
+
+    <section
+        id="login-admin"
+        class="login-admin"
+    >
+
+        <img
+            src="assets/img/logo/logo.png"
+            class="logo login-logo"
+            alt="Rayckington FC"
+        >
+
+
+        <h2>
+            Tesorería Rayckington FC
+        </h2>
+
+
+        <form id="form-login-admin">
+
+            <label for="admin-email">
+                Correo electrónico
+            </label>
+
+
+            <input
+                id="admin-email"
+                type="email"
+                autocomplete="email"
+                required
+            >
+
+
+            <label for="admin-password">
+                Contraseña
+            </label>
+
+
+            <input
+                id="admin-password"
+                type="password"
+                autocomplete="current-password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="btn btn-principal btn-full"
+            >
+                Ingresar
+            </button>
+
+        </form>
+
+
+        <div id="mensaje-login"></div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         PANEL ADMINISTRATIVO
+    =========================================== -->
+
+    <section id="panel-admin">
+
+
+        <!-- ==========================================
+             HEADER
+        =========================================== -->
+
+        <header class="header-admin">
+
+            <div class="header-club">
+
+                <img
+                    src="assets/img/logo/logo.png"
+                    class="logo"
+                    alt="Rayckington FC"
+                >
+
+
+                <div>
+
+                    <h1>
+                        Tesorería
+                    </h1>
+
+                    <p>
+                        Panel administrativo · Rayckington FC
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="btn-cerrar-admin"
+                class="btn btn-cerrar"
+                type="button"
+            >
+                Cerrar sesión
+            </button>
+
+        </header>
+
+
+
+        <!-- ==========================================
+             MENU PRINCIPAL
+        =========================================== -->
+
+        <nav class="admin-menu">
+
+
+            <button
+                class="menu-btn activo"
+                data-vista="resumen"
+                type="button"
+            >
+                Resumen
+            </button>
+
+
+            <button
+                class="menu-btn"
+                data-vista="jugadores"
+                type="button"
+            >
+                Jugadores
+            </button>
+
+
+            <button
+                class="menu-btn"
+                data-vista="pagos"
+                type="button"
+            >
+                Pagos
+            </button>
+
+
+        </nav>
+
+
+
+        <!-- ==========================================
+             VISTA RESUMEN
+        =========================================== -->
+
+        <section
+            id="vista-resumen"
+            class="vista-admin activa"
+        >
+
+
+            <!-- DASHBOARD -->
+<div class="acciones-resumen">
+
+    <div>
+
+        <strong>
+            Gestión mensual
+        </strong>
+
+        <span>
+            Genera únicamente las cuotas que falten del mes actual.
+        </span>
+
+    </div>
+
+
+    <button
+        type="button"
+        id="btn-generar-mensualidades"
+        class="btn btn-generar-cuotas"
+    >
+        Generar mensualidades
+    </button>
+
+</div>
+
+
+<div
+    id="mensaje-generacion-cuotas"
+    class="mensaje-generacion-cuotas"
+></div>
+            <section class="dashboard">
+
+
+                <article class="stat-card">
+
+                    <span>
+                        Pagos pendientes
+                    </span>
+
+                    <strong id="stat-pendientes">
+                        0
+                    </strong>
+
+                </article>
+
+
+
+                <article class="stat-card">
+
+                    <span>
+                        Recaudado aprobado
+                    </span>
+
+                    <strong id="stat-recaudado">
+                        $0
+                    </strong>
+
+                </article>
+
+
+
+                <article class="stat-card">
+
+                    <span>
+                        Pagos aprobados
+                    </span>
+
+                    <strong id="stat-aprobados">
+                        0
+                    </strong>
+
+                </article>
+
+
+
+                <article class="stat-card">
+
+                    <span>
+                        Pagos rechazados
+                    </span>
+
+                    <strong id="stat-rechazados">
+                        0
+                    </strong>
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- MENSAJES -->
+
+            <div id="mensaje"></div>
+
+
+
+            <!-- PAGOS PENDIENTES -->
+
+            <section class="panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="etiqueta">
+                            Tesorería
+                        </span>
+
+                        <h2>
+                            Pagos pendientes
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="badge-pendientes"
+                        class="badge"
+                    >
+                        0 pendientes
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="lista-pagos"
+                    class="pagos-grid"
+                ></div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- ==========================================
+             VISTA JUGADORES
+        =========================================== -->
+
+        <section
+            id="vista-jugadores"
+            class="vista-admin"
+        >
+
+
+            <section class="panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="etiqueta">
+                            Plantel
+                        </span>
+
+                        <h2>
+                            Estado de jugadores
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="badge-jugadores"
+                        class="badge badge-azul"
+                    >
+                        0 jugadores
+                    </span>
+
+                </div>
+
+
+
+                <!-- BUSCADOR -->
+
+                <div class="jugadores-herramientas">
+
+                    <input
+                        type="search"
+                        id="buscar-jugador"
+                        class="buscador-jugadores"
+                        placeholder="Buscar jugador..."
+                    >
+
+                </div>
+
+
+
+                <!-- LISTADO -->
+
+                <div
+                    id="lista-jugadores"
+                    class="jugadores-grid"
+                ></div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- ==========================================
+             DETALLE JUGADOR
+        =========================================== -->
+
+        <section
+            id="vista-detalle-jugador"
+            class="vista-admin"
+        >
+
+
+            <button
+                id="btn-volver-jugadores"
+                class="btn btn-volver"
+                type="button"
+            >
+                ← Volver a jugadores
+            </button>
+
+
+
+            <section class="panel detalle-jugador-panel">
+
+
+                <!-- CABECERA -->
+
+                <div class="detalle-jugador-header">
+
+                    <div>
+
+                        <span class="etiqueta">
+                            Ficha financiera
+                        </span>
+
+                        <h2 id="detalle-jugador-nombre">
+                            Jugador
+                        </h2>
+
+                        <p id="detalle-jugador-tipo"></p>
+
+                    </div>
+
+
+                    <span
+                        id="detalle-jugador-estado"
+                        class="estado-financiero"
+                    ></span>
+
+                </div>
+
+
+
+                <!-- RESUMEN FINANCIERO -->
+
+                <div class="detalle-resumen">
+
+
+                    <article class="detalle-stat">
+
+                        <span>
+                            Total pagado
+                        </span>
+
+                        <strong id="detalle-total-pagado">
+                            $0
+                        </strong>
+
+                    </article>
+
+
+
+                    <article class="detalle-stat">
+
+                        <span>
+                            Total pendiente
+                        </span>
+
+                        <strong id="detalle-total-pendiente">
+                            $0
+                        </strong>
+
+                    </article>
+
+
+
+                    <article class="detalle-stat">
+
+                        <span>
+                            Cuotas pendientes
+                        </span>
+
+                        <strong id="detalle-cuotas-pendientes">
+                            0
+                        </strong>
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- MENSUALIDADES -->
+
+                <div class="detalle-meses-header">
+
+                    <div>
+
+                        <span class="etiqueta">
+                            Mensualidades
+                        </span>
+
+                        <h3>
+                            Estado por mes
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    id="detalle-lista-cuotas"
+                    class="detalle-cuotas"
+                ></div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- ==========================================
+             VISTA PAGOS
+        =========================================== -->
+
+        <section
+            id="vista-pagos"
+            class="vista-admin"
+        >
+
+
+            <section class="panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="etiqueta">
+                            Tesorería
+                        </span>
+
+                        <h2>
+                            Historial de pagos
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        id="badge-total-pagos"
+                        class="badge badge-azul"
+                    >
+                        0 pagos
+                    </span>
+
+                </div>
+
+
+
+                <!-- FILTROS - LOS ACTIVAREMOS DESPUÉS -->
+
+<div
+    id="filtros-historial-pagos"
+    class="filtros-pagos"
+>
+
+    <input
+        type="search"
+        id="buscar-pago"
+        class="buscador-jugadores"
+        placeholder="Buscar jugador..."
+    >
+
+
+    <div class="filtros-estado-pagos">
+
+        <button
+            type="button"
+            class="filtro-pago-btn activo"
+            data-estado-pago="TODOS"
+        >
+            Todos
+        </button>
+
+
+        <button
+            type="button"
+            class="filtro-pago-btn"
+            data-estado-pago="PENDIENTE"
+        >
+            Pendientes
+        </button>
+
+
+        <button
+            type="button"
+            class="filtro-pago-btn"
+            data-estado-pago="APROBADO"
+        >
+            Aprobados
+        </button>
+
+
+        <button
+            type="button"
+            class="filtro-pago-btn"
+            data-estado-pago="RECHAZADO"
+        >
+            Rechazados
+        </button>
+
+    </div>
+
+</div>
+
+
+
+                <!-- LISTADO DE PAGOS -->
+
+                <div
+                    id="lista-historial-pagos"
+                    class="pagos-grid"
+                >
+
+                    <div class="vacio">
+                        Cargando historial...
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+    </section>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+=========================================== -->
+
+<script
+    type="module"
+    src="assets/js/admin-tesoreria.js"
+></script>
+
+
+</body>
+
+</html>

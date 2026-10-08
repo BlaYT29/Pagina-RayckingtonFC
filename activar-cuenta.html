@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Activar cuenta | Rayckington FC
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/activar-cuenta.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="activar-wrapper">
+
+        <section class="activar-card">
+
+            <img
+                src="assets/img/logo/logo.png"
+                class="activar-logo"
+                alt="Rayckington FC"
+            >
+
+
+            <span class="activar-etiqueta">
+                Portal del Jugador
+            </span>
+
+
+            <h1>
+                Activa tu cuenta
+            </h1>
+
+
+            <p class="activar-texto">
+                Crea tu contraseña para acceder
+                al portal privado de Rayckington FC.
+            </p>
+
+
+            <form id="form-activar">
+
+                <label for="password">
+                    Nueva contraseña
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                >
+
+
+                <label for="password-confirmacion">
+                    Confirmar contraseña
+                </label>
+
+                <input
+                    id="password-confirmacion"
+                    type="password"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                >
+
+
+                <button
+                    id="btn-activar"
+                    type="submit"
+                >
+                    Activar mi cuenta
+                </button>
+
+            </form>
+
+
+            <div id="mensaje-activar"></div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="assets/js/activar-cuenta.js"
+    ></script>
+
+</body>
+
+</html>
