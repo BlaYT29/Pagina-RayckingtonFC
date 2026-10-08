@@ -26,14 +26,14 @@
   {
     "pos": 4,
     "club": "ATLETICO VALLE CENTRAL",
-    "pj": 1,
-    "v": 1,
+    "pj": 2,
+    "v": 2,
     "e": 0,
     "d": 0,
-    "gf": 3,
-    "gc": 2,
-    "dg": 1,
-    "pts": 3
+    "gf": 4,
+    "gc": 4,
+    "dg": 2,
+    "pts": 6
   },
   {
     "pos": 9,
@@ -98,13 +98,13 @@
   {
     "pos": 8,
     "club": "Rayckington FC",
-    "pj": 1,
+    "pj": 2,
     "v": 0,
     "e": 0,
-    "d": 1,
-    "gf": 2,
+    "d": 2,
+    "gf": 3,
     "gc": 4,
-    "dg": -2,
+    "dg": -3,
     "pts": 0
   }
 ]
