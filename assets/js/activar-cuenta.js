@@ -531,40 +531,168 @@ form?.addEventListener(
 
 
         /* ===========================================
-           VINCULAR AUTH CON JUGADOR
-        =========================================== */
+   COMPROBAR SI ES ADMINISTRADOR
+=========================================== */
 
-        const {
-            error: errorVincular
-        } =
-            await supabase.rpc(
-                "vincular_mi_cuenta"
-            );
-
-
-        if (errorVincular) {
-
-            console.error(
-                "Error vinculando jugador:",
-                errorVincular
-            );
+const {
+    data: usuarioData,
+    error: errorUsuario
+} =
+    await supabase.auth
+        .getUser();
 
 
-            mostrarMensaje(
-                errorVincular.message ||
-                "La cuenta fue creada, pero no pudimos vincularla con tu ficha de jugador.",
-                "error"
-            );
+if (
+    errorUsuario ||
+    !usuarioData?.user
+) {
+
+    console.error(
+        "Error obteniendo usuario:",
+        errorUsuario
+    );
 
 
-            bloquearFormulario(
-                false
-            );
+    mostrarMensaje(
+        "No se pudo comprobar la cuenta.",
+        "error"
+    );
 
 
-            return;
+    bloquearFormulario(
+        false
+    );
 
-        }
+
+    return;
+
+}
+
+
+const usuario =
+    usuarioData.user;
+
+
+/* ===========================================
+   BUSCAR ADMINISTRADOR
+=========================================== */
+
+const {
+    data: administrador,
+    error: errorAdministrador
+} =
+    await supabase
+        .from(
+            "administradores"
+        )
+        .select(`
+            id,
+            nombre,
+            estado
+        `)
+        .eq(
+            "user_id",
+            usuario.id
+        )
+        .eq(
+            "estado",
+            "ACTIVO"
+        )
+        .maybeSingle();
+
+
+if (errorAdministrador) {
+
+    console.error(
+        "Error comprobando administrador:",
+        errorAdministrador
+    );
+
+}
+
+
+/* ===========================================
+   SI ES ADMINISTRADOR
+=========================================== */
+
+if (administrador) {
+
+    if (form) {
+
+        form.style.display =
+            "none";
+
+    }
+
+
+    mensaje.innerHTML = `
+        <strong>
+            Cuenta administrativa activada correctamente ✅
+        </strong>
+
+        <br><br>
+
+        Bienvenido/a,
+        ${administrador.nombre}.
+
+        <br>
+
+        Entrando al panel de Tesorería...
+    `;
+
+
+    setTimeout(
+        () => {
+
+            window.location.href =
+                "admin-tesoreria.html";
+
+        },
+        1800
+    );
+
+
+    return;
+
+}
+
+
+/* ===========================================
+   SI NO ES ADMIN, VINCULAR COMO JUGADOR
+=========================================== */
+
+const {
+    error: errorVincular
+} =
+    await supabase.rpc(
+        "vincular_mi_cuenta"
+    );
+
+
+if (errorVincular) {
+
+    console.error(
+        "Error vinculando jugador:",
+        errorVincular
+    );
+
+
+    mostrarMensaje(
+        errorVincular.message ||
+        "La cuenta fue creada, pero no pudimos vincularla con tu ficha de jugador.",
+        "error"
+    );
+
+
+    bloquearFormulario(
+        false
+    );
+
+
+    return;
+
+}
+        
 
 
         /* ===========================================
