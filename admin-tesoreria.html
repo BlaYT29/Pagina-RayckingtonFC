@@ -1,674 +1,4265 @@
 <!DOCTYPE html>
+
+
+
 <html lang="es">
+
+
 
 <head>
 
+
+
     <meta charset="UTF-8">
 
+
+
     <meta
+
         name="viewport"
+
         content="width=device-width, initial-scale=1.0"
+
     >
+
+
 
     <title>
-        Tesorería | Rayckington FC
+
+        Panel Administrativo | Rayckington FC
+
     </title>
 
+
+
     <link
+
         rel="stylesheet"
+
         href="assets/css/admin-tesoreria.css"
+
     >
 
+
+
 </head>
+
+
+
 
 
 <body>
 
 
-<div class="contenedor">
 
 
-    <!-- ==========================================
-         LOGIN
-    =========================================== -->
 
-    <section
-        id="login-admin"
-        class="login-admin"
-    >
+<!-- ===================================================
 
-        <img
-            src="assets/img/logo/logo.png"
-            class="logo login-logo"
-            alt="Rayckington FC"
+     LOGIN ADMINISTRATIVO
+
+=================================================== -->
+
+
+
+<section
+
+    id="login-admin"
+
+    class="admin-login"
+
+>
+
+
+
+    <div class="admin-login-card">
+
+
+
+
+
+        <div class="admin-login-brand">
+
+
+
+            <img
+
+                src="assets/img/logo/logo.png"
+
+                alt="Rayckington FC"
+
+                class="admin-login-logo"
+
+            >
+
+
+
+            <span class="admin-eyebrow">
+
+                Área privada
+
+            </span>
+
+
+
+            <h1>
+
+                Panel Administrativo
+
+            </h1>
+
+
+
+            <p>
+
+                Rayckington FC
+
+            </p>
+
+
+
+        </div>
+
+
+
+
+
+        <form
+
+            id="form-login-admin"
+
+            class="admin-login-form"
+
         >
 
 
-        <h2>
-            Tesorería Rayckington FC
-        </h2>
-
-
-        <form id="form-login-admin">
-
-            <label for="admin-email">
-                Correo electrónico
-            </label>
-
-
-            <input
-                id="admin-email"
-                type="email"
-                autocomplete="email"
-                required
-            >
-
-
-            <label for="admin-password">
-                Contraseña
-            </label>
-
-
-            <input
-                id="admin-password"
-                type="password"
-                autocomplete="current-password"
-                required
-            >
-
-
-            <button
-                type="submit"
-                class="btn btn-principal btn-full"
-            >
-                Ingresar
-            </button>
-
-        </form>
-
-
-        <div id="mensaje-login"></div>
-
-    </section>
 
 
 
-    <!-- ==========================================
-         PANEL ADMINISTRATIVO
-    =========================================== -->
-
-    <section id="panel-admin">
+            <div class="admin-form-group">
 
 
-        <!-- ==========================================
-             HEADER
-        =========================================== -->
 
-        <header class="header-admin">
+                <label for="admin-email">
 
-            <div class="header-club">
+                    Correo electrónico
 
-                <img
-                    src="assets/img/logo/logo.png"
-                    class="logo"
-                    alt="Rayckington FC"
+                </label>
+
+
+
+                <input
+
+                    id="admin-email"
+
+                    type="email"
+
+                    autocomplete="email"
+
+                    placeholder="correo@ejemplo.cl"
+
+                    required
+
                 >
 
 
-                <div>
-
-                    <h1>
-                        Tesorería
-                    </h1>
-
-                    <p>
-                        Panel administrativo · Rayckington FC
-                    </p>
-
-                </div>
 
             </div>
 
 
+
+
+
+            <div class="admin-form-group">
+
+
+
+                <label for="admin-password">
+
+                    Contraseña
+
+                </label>
+
+
+
+                <input
+
+                    id="admin-password"
+
+                    type="password"
+
+                    autocomplete="current-password"
+
+                    placeholder="••••••••"
+
+                    required
+
+                >
+
+
+
+            </div>
+
+
+
+
+
             <button
-                id="btn-cerrar-admin"
-                class="btn btn-cerrar"
-                type="button"
+
+                type="submit"
+
+                class="btn btn-principal btn-full"
+
             >
-                Cerrar sesión
+
+                Ingresar al panel
+
             </button>
 
-        </header>
 
 
 
-        <!-- ==========================================
-             MENU PRINCIPAL
-        =========================================== -->
+
+        </form>
+
+
+
+
+
+        <div id="mensaje-login"></div>
+
+
+
+
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ===================================================
+
+     PANEL ADMINISTRATIVO
+
+=================================================== -->
+
+
+
+<section id="panel-admin">
+
+
+
+
+
+    <!-- ===================================================
+
+         SIDEBAR
+
+    =================================================== -->
+
+
+
+    <aside
+
+        id="admin-sidebar"
+
+        class="admin-sidebar"
+
+    >
+
+
+
+
+
+        <div class="sidebar-brand">
+
+
+
+            <img
+
+                src="assets/img/logo/logo.png"
+
+                alt="Rayckington FC"
+
+                class="sidebar-logo"
+
+            >
+
+
+
+            <div>
+
+
+
+                <strong>
+
+                    Rayckington FC
+
+                </strong>
+
+
+
+                <span>
+
+                    Panel Administrativo
+
+                </span>
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
 
         <nav class="admin-menu">
 
 
+
+
+
             <button
+
                 class="menu-btn activo"
+
                 data-vista="resumen"
+
                 type="button"
+
             >
-                Resumen
+
+
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+
+                </span>
+
+
+
+                <span>
+
+                    Inicio
+
+                </span>
+
+
+
             </button>
 
 
+
+
+
+
+
             <button
+
                 class="menu-btn"
+
                 data-vista="jugadores"
+
                 type="button"
+
             >
-                Jugadores
+
+
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+
+                </span>
+
+
+
+                <span>
+
+                    Jugadores
+
+                </span>
+
+
+
             </button>
+
+
+
+
+
 
 
             <button
+
                 class="menu-btn"
-                data-vista="pagos"
+
+                data-vista="mensualidades"
+
                 type="button"
+
             >
-                Pagos
+
+
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 14v4M10 16h4"/></svg>
+
+                </span>
+
+
+
+                <span>
+
+                    Mensualidades
+
+                </span>
+
+
+
             </button>
+
+
+
+
+
+
+
+            <button
+
+                class="menu-btn"
+
+                data-vista="pagos"
+
+                type="button"
+
+            >
+
+
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
+
+                </span>
+
+
+
+                <span>
+
+                    Pagos
+
+                </span>
+
+
+
+            </button>
+
+
+
+
+
+
+
+            <button
+
+                class="menu-btn"
+
+                data-vista="rifas"
+
+                type="button"
+
+            >
+
+
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9a3 3 0 0 0 0 6v4h18v-4a3 3 0 0 0 0-6V5H3zM13 8v2M13 14v2"/></svg>
+
+                </span>
+
+
+
+                <span>
+
+                    Rifas
+
+                </span>
+
+
+
+            </button>
+
+
+
+
+
+
+
+            <button
+
+                class="menu-btn"
+
+                data-vista="egresos"
+
+                type="button"
+
+            >
+
+
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+
+                </span>
+
+
+
+                <span>
+
+                    Egresos
+
+                </span>
+
+
+
+            </button>
+
+
+
+
+
+
+
+            <div class="sidebar-separador"></div>
+
+
+
+
+
+
+
+            <button
+
+                class="menu-btn"
+
+                data-vista="cuenta"
+
+                type="button"
+
+            >
+
+
+
+                <span class="menu-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+
+                </span>
+
+
+
+                <span>
+
+                    Mi cuenta
+
+                </span>
+
+
+
+            </button>
+
+
+
 
 
         </nav>
 
 
 
-        <!-- ==========================================
-             VISTA RESUMEN
-        =========================================== -->
-
-        <section
-            id="vista-resumen"
-            class="vista-admin activa"
-        >
 
 
-            <!-- DASHBOARD -->
-<div class="acciones-resumen">
-
-    <div>
-
-        <strong>
-            Gestión mensual
-        </strong>
-
-        <span>
-            Genera únicamente las cuotas que falten del mes actual.
-        </span>
-
-    </div>
 
 
-    <button
-        type="button"
-        id="btn-generar-mensualidades"
-        class="btn btn-generar-cuotas"
-    >
-        Generar mensualidades
-    </button>
-
-</div>
+        <div class="sidebar-footer">
 
 
-<div
-    id="mensaje-generacion-cuotas"
-    class="mensaje-generacion-cuotas"
-></div>
-            <section class="dashboard">
+
+            <span>
+
+                Rayckington FC
+
+            </span>
 
 
-                <article class="stat-card">
 
-                    <span>
-                        Pagos pendientes
+            <small>
+
+                Nacimos para competir,<br>
+
+                jugamos para ganar.
+
+            </small>
+
+
+
+        </div>
+
+
+
+
+
+    </aside>
+
+
+
+
+
+
+
+    <!-- ===================================================
+
+         AREA PRINCIPAL
+
+    =================================================== -->
+
+
+
+    <div class="admin-main">
+
+
+
+
+
+        <!-- ===================================================
+
+             HEADER SUPERIOR
+
+        =================================================== -->
+
+
+
+        <header class="admin-topbar">
+
+
+
+
+
+            <div class="admin-topbar-left">
+
+
+
+                <button
+
+                    type="button"
+
+                    id="btn-admin-menu"
+
+                    class="admin-menu-mobile"
+
+                >
+
+                    ☰
+
+                </button>
+
+
+
+
+
+                <div>
+
+
+
+                    <span class="admin-eyebrow">
+
+                        Rayckington FC
+
                     </span>
 
-                    <strong id="stat-pendientes">
-                        0
+
+
+                    <h1 id="admin-titulo-vista">
+
+                        Panel Administrativo
+
+                    </h1>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="admin-usuario-mini">
+
+
+
+                <div class="admin-avatar">
+
+                    R
+
+                </div>
+
+
+
+                <div>
+
+
+
+                    <strong id="admin-nombre-header">
+
+                        Administrador
+
                     </strong>
 
-                </article>
 
-
-
-                <article class="stat-card">
 
                     <span>
-                        Recaudado aprobado
+
+                        Acceso autorizado
+
                     </span>
 
-                    <strong id="stat-recaudado">
-                        $0
-                    </strong>
 
-                </article>
+
+                </div>
 
 
 
-                <article class="stat-card">
-
-                    <span>
-                        Pagos aprobados
-                    </span>
-
-                    <strong id="stat-aprobados">
-                        0
-                    </strong>
-
-                </article>
+            </div>
 
 
 
-                <article class="stat-card">
-
-                    <span>
-                        Pagos rechazados
-                    </span>
-
-                    <strong id="stat-rechazados">
-                        0
-                    </strong>
-
-                </article>
 
 
-            </section>
+        </header>
 
 
 
-            <!-- MENSAJES -->
+
+
+
+
+        <main class="admin-content">
+
+
+
+
+
+            <!-- ===================================================
+
+                 MENSAJE GLOBAL
+
+            =================================================== -->
+
+
 
             <div id="mensaje"></div>
 
 
 
-            <!-- PAGOS PENDIENTES -->
-
-            <section class="panel">
 
 
-                <div class="panel-header">
+
+
+            <!-- ===================================================
+
+                 VISTA INICIO / RESUMEN
+
+            =================================================== -->
+
+
+
+            <section
+
+                id="vista-resumen"
+
+                class="vista-admin activa"
+
+            >
+
+
+
+
+
+                <!-- BIENVENIDA -->
+
+
+
+                <section class="admin-hero">
+
+
 
                     <div>
 
-                        <span class="etiqueta">
-                            Tesorería
+
+
+                        <span class="admin-eyebrow">
+
+                            Gestión institucional
+
                         </span>
 
-                        <h2>
-                            Pagos pendientes
+
+
+                        <h2 id="admin-saludo">
+
+                            Panel Administrativo
+
                         </h2>
+
+
+
+                        <p>
+
+                            Revisa el estado financiero,
+
+                            los jugadores y las actividades
+
+                            de Rayckington FC.
+
+                        </p>
+
+
 
                     </div>
 
 
-                    <span
-                        id="badge-pendientes"
-                        class="badge"
-                    >
-                        0 pendientes
-                    </span>
-
-                </div>
 
 
-                <div
-                    id="lista-pagos"
-                    class="pagos-grid"
-                ></div>
+
+                    <div class="admin-hero-logo">
+
+
+
+                        <img
+
+                            src="assets/img/logo/logo.png"
+
+                            alt="Rayckington FC"
+
+                        >
+
+
+
+                    </div>
+
+
+
+                </section>
+
+
+
+
+
+
+
+                <!-- ESTADÍSTICAS PRINCIPALES -->
+
+
+
+                <section class="dashboard">
+
+
+
+
+
+                    <article class="stat-card">
+
+
+
+                        <span>
+
+                            Pagos pendientes
+
+                        </span>
+
+
+
+                        <strong id="stat-pendientes">
+
+                            0
+
+                        </strong>
+
+
+
+                        <small>
+
+                            Por revisar
+
+                        </small>
+
+
+
+                    </article>
+
+
+
+
+
+
+
+                    <article class="stat-card">
+
+
+
+                        <span>
+
+                            Recaudado aprobado
+
+                        </span>
+
+
+
+                        <strong id="stat-recaudado">
+
+                            $0
+
+                        </strong>
+
+
+
+                        <small>
+
+                            Ingresos registrados
+
+                        </small>
+
+
+
+                    </article>
+
+
+
+
+
+
+
+                    <article class="stat-card">
+
+
+
+                        <span>
+
+                            Pagos aprobados
+
+                        </span>
+
+
+
+                        <strong id="stat-aprobados">
+
+                            0
+
+                        </strong>
+
+
+
+                        <small>
+
+                            Transferencias validadas
+
+                        </small>
+
+
+
+                    </article>
+
+
+
+
+
+
+
+                    <article class="stat-card">
+
+
+
+                        <span>
+
+                            Pagos rechazados
+
+                        </span>
+
+
+
+                        <strong id="stat-rechazados">
+
+                            0
+
+                        </strong>
+
+
+
+                        <small>
+
+                            Pagos observados
+
+                        </small>
+
+
+
+                    </article>
+
+
+
+
+
+                </section>
+
+
+
+
+
+
+
+                <!-- ACCESOS RÁPIDOS -->
+
+
+
+                <section class="admin-section">
+
+
+
+                    <div class="section-heading">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Gestión
+
+                            </span>
+
+
+
+                            <h2>
+
+                                Accesos rápidos
+
+                            </h2>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="accesos-grid">
+
+
+
+
+
+                        <button
+
+                            type="button"
+
+                            class="acceso-card"
+
+                            data-acceso-vista="jugadores"
+
+                        >
+
+
+
+                            <span class="acceso-icon">
+
+                                ⚽
+
+                            </span>
+
+
+
+                            <strong>
+
+                                Jugadores
+
+                            </strong>
+
+
+
+                            <small>
+
+                                Revisar plantel
+
+                            </small>
+
+
+
+                        </button>
+
+
+
+
+
+
+
+                        <button
+
+                            type="button"
+
+                            class="acceso-card"
+
+                            data-acceso-vista="mensualidades"
+
+                        >
+
+
+
+                            <span class="acceso-icon">
+
+                                $
+
+                            </span>
+
+
+
+                            <strong>
+
+                                Mensualidades
+
+                            </strong>
+
+
+
+                            <small>
+
+                                Gestión de cuotas
+
+                            </small>
+
+
+
+                        </button>
+
+
+
+
+
+
+
+                        <button
+
+                            type="button"
+
+                            class="acceso-card"
+
+                            data-acceso-vista="pagos"
+
+                        >
+
+
+
+                            <span class="acceso-icon">
+
+                                ↔
+
+                            </span>
+
+
+
+                            <strong>
+
+                                Pagos
+
+                            </strong>
+
+
+
+                            <small>
+
+                                Revisar transferencias
+
+                            </small>
+
+
+
+                        </button>
+
+
+
+
+
+
+
+                        <button
+
+                            type="button"
+
+                            class="acceso-card"
+
+                            data-acceso-vista="rifas"
+
+                        >
+
+
+
+                            <span class="acceso-icon">
+
+                                ★
+
+                            </span>
+
+
+
+                            <strong>
+
+                                Rifas
+
+                            </strong>
+
+
+
+                            <small>
+
+                                Administrar actividades
+
+                            </small>
+
+
+
+                        </button>
+
+
+
+
+
+                    </div>
+
+
+
+                </section>
+
+
+
+
+
+
+
+                <!-- PAGOS PENDIENTES -->
+
+
+
+                <section class="admin-section">
+
+
+
+                    <div class="section-heading">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Tesorería
+
+                            </span>
+
+
+
+                            <h2>
+
+                                Pagos pendientes
+
+                            </h2>
+
+
+
+                        </div>
+
+
+
+
+
+                        <span
+
+                            id="badge-pendientes"
+
+                            class="badge"
+
+                        >
+
+                            0 pendientes
+
+                        </span>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div
+
+                        id="lista-pagos"
+
+                        class="pagos-grid"
+
+                    ></div>
+
+
+
+                </section>
+
+
+
 
 
             </section>
 
 
-        </section>
 
 
 
-        <!-- ==========================================
-             VISTA JUGADORES
-        =========================================== -->
-
-        <section
-            id="vista-jugadores"
-            class="vista-admin"
-        >
 
 
-            <section class="panel">
+            <!-- ===================================================
+
+                 VISTA JUGADORES
+
+            =================================================== -->
 
 
-                <div class="panel-header">
 
-                    <div>
+            <section
 
-                        <span class="etiqueta">
-                            Plantel
+                id="vista-jugadores"
+
+                class="vista-admin"
+
+            >
+
+
+
+
+
+                <section class="admin-section">
+
+
+
+
+
+                    <div class="section-heading">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Plantel
+
+                            </span>
+
+
+
+                            <h2>
+
+                                Jugadores
+
+                            </h2>
+
+
+
+                            <p>
+
+                                Estado financiero y acceso
+
+                                al portal de cada integrante.
+
+                            </p>
+
+
+
+                        </div>
+
+
+
+
+
+                        <span
+
+                            id="badge-jugadores"
+
+                            class="badge badge-azul"
+
+                        >
+
+                            0 jugadores
+
                         </span>
 
-                        <h2>
-                            Estado de jugadores
-                        </h2>
+
 
                     </div>
 
 
-                    <span
-                        id="badge-jugadores"
-                        class="badge badge-azul"
-                    >
-                        0 jugadores
-                    </span>
+
+
+
+
+
+                    <div class="admin-toolbar">
+
+
+
+                        <input
+
+                            type="search"
+
+                            id="buscar-jugador"
+
+                            class="buscador-jugadores"
+
+                            placeholder="Buscar jugador..."
+
+                        >
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div
+
+                        id="lista-jugadores"
+
+                        class="jugadores-grid"
+
+                    ></div>
+
+
+
+
+
+                </section>
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- ===================================================
+
+                 DETALLE JUGADOR
+
+            =================================================== -->
+
+
+
+            <section
+
+                id="vista-detalle-jugador"
+
+                class="vista-admin"
+
+            >
+
+
+
+
+
+                <button
+
+                    id="btn-volver-jugadores"
+
+                    class="btn btn-volver"
+
+                    type="button"
+
+                >
+
+                    ← Volver a jugadores
+
+                </button>
+
+
+
+
+
+
+
+                <section class="admin-section detalle-jugador-panel">
+
+
+
+
+
+                    <div class="detalle-jugador-header">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Ficha financiera
+
+                            </span>
+
+
+
+                            <h2 id="detalle-jugador-nombre">
+
+                                Jugador
+
+                            </h2>
+
+
+
+                            <p id="detalle-jugador-tipo"></p>
+
+
+
+                        </div>
+
+
+
+
+
+                        <span
+
+                            id="detalle-jugador-estado"
+
+                            class="estado-financiero"
+
+                        ></span>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="detalle-resumen">
+
+
+
+
+
+                        <article class="detalle-stat">
+
+
+
+                            <span>
+
+                                Total pagado
+
+                            </span>
+
+
+
+                            <strong id="detalle-total-pagado">
+
+                                $0
+
+                            </strong>
+
+
+
+                        </article>
+
+
+
+
+
+
+
+                        <article class="detalle-stat">
+
+
+
+                            <span>
+
+                                Total pendiente
+
+                            </span>
+
+
+
+                            <strong id="detalle-total-pendiente">
+
+                                $0
+
+                            </strong>
+
+
+
+                        </article>
+
+
+
+
+
+
+
+                        <article class="detalle-stat">
+
+
+
+                            <span>
+
+                                Cuotas pendientes
+
+                            </span>
+
+
+
+                            <strong id="detalle-cuotas-pendientes">
+
+                                0
+
+                            </strong>
+
+
+
+                        </article>
+
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="detalle-meses-header">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Mensualidades
+
+                            </span>
+
+
+
+                            <h3>
+
+                                Estado por mes
+
+                            </h3>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div
+
+                        id="detalle-lista-cuotas"
+
+                        class="detalle-cuotas"
+
+                    ></div>
+
+
+
+
+
+                </section>
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- ===================================================
+
+                 VISTA MENSUALIDADES
+
+            =================================================== -->
+
+
+
+            <section
+
+                id="vista-mensualidades"
+
+                class="vista-admin"
+
+            >
+
+
+
+
+
+                <div class="section-heading">
+
+
+
+                    <div>
+
+
+
+                        <span class="admin-eyebrow">
+
+                            Tesorería
+
+                        </span>
+
+
+
+                        <h2>
+
+                            Mensualidades
+
+                        </h2>
+
+
+
+                        <p>
+
+                            Administra la generación y
+
+                            seguimiento de las cuotas del plantel.
+
+                        </p>
+
+
+
+                    </div>
+
+
 
                 </div>
 
 
 
-                <!-- BUSCADOR -->
 
-                <div class="jugadores-herramientas">
+
+
+
+                <!-- GENERACIÓN -->
+
+
+
+                <section class="admin-section">
+
+
+
+                    <div class="mensualidades-accion">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Mes actual
+
+                            </span>
+
+
+
+                            <h3>
+
+                                Generar mensualidades
+
+                            </h3>
+
+
+
+                            <p>
+
+                                El sistema crea solamente las cuotas
+
+                                faltantes y evita duplicados.
+
+                            </p>
+
+
+
+                        </div>
+
+
+
+
+
+                        <button
+
+                            type="button"
+
+                            id="btn-generar-mensualidades"
+
+                            class="btn btn-generar-cuotas"
+
+                        >
+
+                            Generar mensualidades
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div
+
+                        id="mensaje-generacion-cuotas"
+
+                        class="mensaje-generacion-cuotas"
+
+                    ></div>
+
+
+
+                </section>
+
+
+
+
+
+
+
+                <!-- FUTURO RESUMEN -->
+
+
+
+                <section class="admin-section admin-placeholder">
+
+
+
+                    <span class="admin-eyebrow">
+
+                        Próximamente
+
+                    </span>
+
+
+
+                    <h3>
+
+                        Resumen de mensualidades
+
+                    </h3>
+
+
+
+                    <p>
+
+                        Aquí incorporaremos el resumen general
+
+                        de deuda, pagos por mes y saldos anteriores.
+
+                    </p>
+
+
+
+                </section>
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- ===================================================
+
+                 VISTA PAGOS
+
+            =================================================== -->
+
+
+
+            <section
+
+                id="vista-pagos"
+
+                class="vista-admin"
+
+            >
+
+
+
+
+
+                <section class="admin-section">
+
+
+
+
+
+                    <div class="section-heading">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Tesorería
+
+                            </span>
+
+
+
+                            <h2>
+
+                                Historial de pagos
+
+                            </h2>
+
+
+
+                            <p>
+
+                                Consulta transferencias aprobadas,
+
+                                pendientes y rechazadas.
+
+                            </p>
+
+
+
+                        </div>
+
+
+
+
+
+                        <span
+
+                            id="badge-total-pagos"
+
+                            class="badge badge-azul"
+
+                        >
+
+                            0 pagos
+
+                        </span>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- FILTROS -->
+
+
+
+                    <div
+
+                        id="filtros-historial-pagos"
+
+                        class="filtros-pagos"
+
+                    >
+
+
+
+
+
+                        <input
+
+                            type="search"
+
+                            id="buscar-pago"
+
+                            class="buscador-jugadores"
+
+                            placeholder="Buscar jugador..."
+
+                        >
+
+
+
+
+
+
+
+                        <div class="filtros-estado-pagos">
+
+
+
+
+
+                            <button
+
+                                type="button"
+
+                                class="filtro-pago-btn activo"
+
+                                data-estado-pago="TODOS"
+
+                            >
+
+                                Todos
+
+                            </button>
+
+
+
+
+
+                            <button
+
+                                type="button"
+
+                                class="filtro-pago-btn"
+
+                                data-estado-pago="PENDIENTE"
+
+                            >
+
+                                Pendientes
+
+                            </button>
+
+
+
+
+
+                            <button
+
+                                type="button"
+
+                                class="filtro-pago-btn"
+
+                                data-estado-pago="APROBADO"
+
+                            >
+
+                                Aprobados
+
+                            </button>
+
+
+
+
+
+                            <button
+
+                                type="button"
+
+                                class="filtro-pago-btn"
+
+                                data-estado-pago="RECHAZADO"
+
+                            >
+
+                                Rechazados
+
+                            </button>
+
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div
+
+                        id="lista-historial-pagos"
+
+                        class="pagos-grid"
+
+                    >
+
+
+
+                        <div class="vacio">
+
+                            Cargando historial...
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                </section>
+
+
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- ===================================================
+
+                 VISTA RIFAS
+
+            =================================================== -->
+
+
+
+            <section
+
+                id="vista-rifas"
+
+                class="vista-admin"
+
+            >
+
+
+
+
+
+                <div class="rifas-cabecera">
+
+
+
+                    <span class="admin-eyebrow">
+
+                        Actividades
+
+                    </span>
+
+
+
+                    <h2>
+
+                        Gestión de rifas
+
+                    </h2>
+
+
+
+                    <p>
+
+                        Crea nuevas rifas, configura sus premios
+
+                        y administra las actividades del club.
+
+                    </p>
+
+
+
+
+
+                    <span
+
+                        id="badge-rifas"
+
+                        class="badge badge-azul"
+
+                    >
+
+                        0 rifas
+
+                    </span>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <!-- CREAR RIFA -->
+
+
+
+                <section class="admin-section rifa-crear-panel">
+
+
+
+
+
+                    <div class="section-heading section-heading-center">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Nueva actividad
+
+                            </span>
+
+
+
+                            <h2>
+
+                                Crear nueva rifa
+
+                            </h2>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <form
+
+                        id="form-rifa-admin"
+
+                        class="form-rifa"
+
+                    >
+
+
+
+
+
+                        <div class="form-rifa-grid">
+
+
+
+
+
+                            <div class="form-rifa-grupo">
+
+
+
+                                <label for="rifa-numero">
+
+                                    Número de rifa
+
+                                </label>
+
+
+
+                                <input
+
+                                    id="rifa-numero"
+
+                                    type="number"
+
+                                    min="1"
+
+                                    value="1"
+
+                                    required
+
+                                >
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="form-rifa-grupo">
+
+
+
+                                <label for="rifa-periodo">
+
+                                    Mes
+
+                                </label>
+
+
+
+                                <input
+
+                                    id="rifa-periodo"
+
+                                    type="month"
+
+                                    required
+
+                                >
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="form-rifa-grupo">
+
+
+
+                                <label for="rifa-valor">
+
+                                    Valor por participación
+
+                                </label>
+
+
+
+                                <input
+
+                                    id="rifa-valor"
+
+                                    type="number"
+
+                                    min="1"
+
+                                    value="1000"
+
+                                    required
+
+                                >
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="form-rifa-grupo">
+
+
+
+                                <label for="rifa-estado">
+
+                                    Estado
+
+                                </label>
+
+
+
+                                <select
+
+                                    id="rifa-estado"
+
+                                    required
+
+                                >
+
+
+
+                                    <option value="BORRADOR">
+
+                                        Borrador
+
+                                    </option>
+
+
+
+                                    <option value="ACTIVA">
+
+                                        Activa
+
+                                    </option>
+
+
+
+                                    <option value="CERRADA">
+
+                                        Cerrada
+
+                                    </option>
+
+
+
+                                </select>
+
+
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-rifa-grid">
+
+
+
+
+
+                            <div class="form-rifa-grupo">
+
+
+
+                                <label for="rifa-fecha-inicio">
+
+                                    Fecha de inicio
+
+                                </label>
+
+
+
+                                <input
+
+                                    id="rifa-fecha-inicio"
+
+                                    type="date"
+
+                                    required
+
+                                >
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="form-rifa-grupo">
+
+
+
+                                <label for="rifa-fecha-cierre">
+
+                                    Fecha de cierre
+
+                                </label>
+
+
+
+                                <input
+
+                                    id="rifa-fecha-cierre"
+
+                                    type="date"
+
+                                >
+
+
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-rifa-grupo">
+
+
+
+                            <label for="rifa-titulo">
+
+                                Título
+
+                            </label>
+
+
+
+                            <input
+
+                                id="rifa-titulo"
+
+                                type="text"
+
+                                maxlength="150"
+
+                                placeholder="Ej: Gran Rifa Rayckington FC"
+
+                            >
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-rifa-grupo">
+
+
+
+                            <label for="rifa-descripcion">
+
+                                Descripción
+
+                            </label>
+
+
+
+                            <textarea
+
+                                id="rifa-descripcion"
+
+                                rows="3"
+
+                                placeholder="Opcional"
+
+                            ></textarea>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <!-- PREMIOS -->
+
+
+
+                        <div class="premios-rifa-header">
+
+
+
+                            <div>
+
+
+
+                                <span class="admin-eyebrow">
+
+                                    Premios
+
+                                </span>
+
+
+
+                                <h3>
+
+                                    Premios de la rifa
+
+                                </h3>
+
+
+
+                                <p>
+
+                                    Agrega todos los premios
+
+                                    disponibles para esta actividad.
+
+                                </p>
+
+
+
+                            </div>
+
+
+
+
+
+                            <button
+
+                                type="button"
+
+                                id="btn-agregar-premio"
+
+                                class="btn btn-agregar-premio"
+
+                            >
+
+                                + Agregar premio
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div id="premios-rifa-admin"></div>
+
+
+
+
+
+
+
+                        <button
+
+                            type="submit"
+
+                            id="btn-crear-rifa"
+
+                            class="btn btn-principal btn-crear-rifa"
+
+                        >
+
+                            Crear rifa
+
+                        </button>
+
+
+
+
+
+
+
+                        <div
+
+                            id="mensaje-rifa"
+
+                            class="mensaje-rifa"
+
+                        ></div>
+
+
+
+
+
+                    </form>
+
+
+
+
+
+                </section>
+
+
+
+
+
+
+
+                <!-- RIFAS CREADAS -->
+
+
+
+                <section class="admin-section rifas-listado-panel">
+
+
+
+
+
+                    <div class="section-heading section-heading-center">
+
+
+
+                        <div>
+
+
+
+                            <span class="admin-eyebrow">
+
+                                Historial
+
+                            </span>
+
+
+
+                            <h2>
+
+                                Rifas creadas
+
+                            </h2>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div
+
+                        id="lista-rifas-admin"
+
+                        class="lista-rifas-admin"
+
+                    >
+
+
+
+                        <div class="vacio">
+
+                            Cargando rifas...
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                </section>
+
+
+
+
+
+            </section>
+
+
+
+            <!-- ===================================================
+
+     ADMINISTRAR RIFA
+
+=================================================== -->
+
+
+
+<section
+
+    id="vista-detalle-rifa"
+
+    class="vista-admin"
+
+>
+
+
+
+
+
+    <button
+
+        type="button"
+
+        id="btn-volver-rifas"
+
+        class="btn btn-volver"
+
+    >
+
+        ← Volver a rifas
+
+    </button>
+
+
+
+
+
+    <div class="rifas-cabecera">
+
+
+
+        <span class="admin-eyebrow">
+
+            Administración
+
+        </span>
+
+
+
+        <h2 id="detalle-rifa-titulo">
+
+            Administrar rifa
+
+        </h2>
+
+
+
+        <p>
+
+            Modifica la información, los premios
+
+            y el estado de esta actividad.
+
+        </p>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <section class="admin-section rifa-crear-panel">
+
+
+
+
+
+        <form
+
+            id="form-editar-rifa"
+
+            class="form-rifa"
+
+        >
+
+
+
+
+
+            <input
+
+                type="hidden"
+
+                id="editar-rifa-id"
+
+            >
+
+
+
+
+
+            <div class="form-rifa-grid">
+
+
+
+
+
+                <div class="form-rifa-grupo">
+
+
+
+                    <label for="editar-rifa-numero">
+
+                        Número de rifa
+
+                    </label>
+
+
 
                     <input
-                        type="search"
-                        id="buscar-jugador"
-                        class="buscador-jugadores"
-                        placeholder="Buscar jugador..."
+
+                        id="editar-rifa-numero"
+
+                        type="number"
+
+                        min="1"
+
+                        required
+
                     >
+
+
 
                 </div>
 
 
 
-                <!-- LISTADO -->
-
-                <div
-                    id="lista-jugadores"
-                    class="jugadores-grid"
-                ></div>
-
-
-            </section>
-
-
-        </section>
 
 
 
-        <!-- ==========================================
-             DETALLE JUGADOR
-        =========================================== -->
 
-        <section
-            id="vista-detalle-jugador"
-            class="vista-admin"
-        >
+                <div class="form-rifa-grupo">
+
+
+
+                    <label for="editar-rifa-periodo">
+
+                        Mes
+
+                    </label>
+
+
+
+                    <input
+
+                        id="editar-rifa-periodo"
+
+                        type="month"
+
+                        required
+
+                    >
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="form-rifa-grupo">
+
+
+
+                    <label for="editar-rifa-valor">
+
+                        Valor por participación
+
+                    </label>
+
+
+
+                    <input
+
+                        id="editar-rifa-valor"
+
+                        type="number"
+
+                        min="1"
+
+                        required
+
+                    >
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="form-rifa-grupo">
+
+
+
+                    <label for="editar-rifa-estado">
+
+                        Estado
+
+                    </label>
+
+
+
+                    <select
+
+                        id="editar-rifa-estado"
+
+                        required
+
+                    >
+
+
+
+                        <option value="BORRADOR">
+
+                            Borrador
+
+                        </option>
+
+
+
+                        <option value="ACTIVA">
+
+                            Activa
+
+                        </option>
+
+
+
+                        <option value="CERRADA">
+
+                            Cerrada
+
+                        </option>
+
+
+
+                    </select>
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-rifa-grid">
+
+
+
+
+
+                <div class="form-rifa-grupo">
+
+
+
+                    <label for="editar-rifa-fecha-inicio">
+
+                        Fecha de inicio
+
+                    </label>
+
+
+
+                    <input
+
+                        id="editar-rifa-fecha-inicio"
+
+                        type="date"
+
+                        required
+
+                    >
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="form-rifa-grupo">
+
+
+
+                    <label for="editar-rifa-fecha-cierre">
+
+                        Fecha de cierre
+
+                    </label>
+
+
+
+                    <input
+
+                        id="editar-rifa-fecha-cierre"
+
+                        type="date"
+
+                    >
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-rifa-grupo">
+
+
+
+                <label for="editar-rifa-titulo">
+
+                    Título
+
+                </label>
+
+
+
+                <input
+
+                    id="editar-rifa-titulo"
+
+                    type="text"
+
+                    maxlength="150"
+
+                >
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-rifa-grupo">
+
+
+
+                <label for="editar-rifa-descripcion">
+
+                    Descripción
+
+                </label>
+
+
+
+                <textarea
+
+                    id="editar-rifa-descripcion"
+
+                    rows="3"
+
+                ></textarea>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- PREMIOS -->
+
+
+
+            <div class="premios-rifa-header">
+
+
+
+                <div>
+
+
+
+                    <span class="admin-eyebrow">
+
+                        Premios
+
+                    </span>
+
+
+
+                    <h3>
+
+                        Premios de la rifa
+
+                    </h3>
+
+
+
+                    <p>
+
+                        Puedes agregar, modificar
+
+                        o eliminar premios.
+
+                    </p>
+
+
+
+                </div>
+
+
+
+
+
+                <button
+
+                    type="button"
+
+                    id="btn-agregar-premio-editar"
+
+                    class="btn btn-agregar-premio"
+
+                >
+
+                    + Agregar premio
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div id="premios-rifa-editar"></div>
+
+
+
+
+
 
 
             <button
-                id="btn-volver-jugadores"
-                class="btn btn-volver"
-                type="button"
+
+                type="submit"
+
+                id="btn-guardar-rifa"
+
+                class="btn btn-principal btn-crear-rifa"
+
             >
-                ← Volver a jugadores
+
+                Guardar cambios
+
             </button>
 
 
 
-            <section class="panel detalle-jugador-panel">
 
 
-                <!-- CABECERA -->
 
-                <div class="detalle-jugador-header">
 
-                    <div>
+            <div
 
-                        <span class="etiqueta">
-                            Ficha financiera
-                        </span>
+                id="mensaje-editar-rifa"
 
-                        <h2 id="detalle-jugador-nombre">
-                            Jugador
-                        </h2>
+                class="mensaje-rifa"
 
-                        <p id="detalle-jugador-tipo"></p>
+            ></div>
 
-                    </div>
 
 
-                    <span
-                        id="detalle-jugador-estado"
-                        class="estado-financiero"
-                    ></span>
 
-                </div>
 
+        </form>
 
 
-                <!-- RESUMEN FINANCIERO -->
 
-                <div class="detalle-resumen">
-
-
-                    <article class="detalle-stat">
-
-                        <span>
-                            Total pagado
-                        </span>
-
-                        <strong id="detalle-total-pagado">
-                            $0
-                        </strong>
-
-                    </article>
-
-
-
-                    <article class="detalle-stat">
-
-                        <span>
-                            Total pendiente
-                        </span>
-
-                        <strong id="detalle-total-pendiente">
-                            $0
-                        </strong>
-
-                    </article>
-
-
-
-                    <article class="detalle-stat">
-
-                        <span>
-                            Cuotas pendientes
-                        </span>
-
-                        <strong id="detalle-cuotas-pendientes">
-                            0
-                        </strong>
-
-                    </article>
-
-
-                </div>
-
-
-
-                <!-- MENSUALIDADES -->
-
-                <div class="detalle-meses-header">
-
-                    <div>
-
-                        <span class="etiqueta">
-                            Mensualidades
-                        </span>
-
-                        <h3>
-                            Estado por mes
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    id="detalle-lista-cuotas"
-                    class="detalle-cuotas"
-                ></div>
-
-
-            </section>
-
-
-        </section>
-
-
-
-        <!-- ==========================================
-             VISTA PAGOS
-        =========================================== -->
-
-        <section
-            id="vista-pagos"
-            class="vista-admin"
-        >
-
-
-            <section class="panel">
-
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <span class="etiqueta">
-                            Tesorería
-                        </span>
-
-                        <h2>
-                            Historial de pagos
-                        </h2>
-
-                    </div>
-
-
-                    <span
-                        id="badge-total-pagos"
-                        class="badge badge-azul"
-                    >
-                        0 pagos
-                    </span>
-
-                </div>
-
-
-
-                <!-- FILTROS - LOS ACTIVAREMOS DESPUÉS -->
-
-<div
-    id="filtros-historial-pagos"
-    class="filtros-pagos"
->
-
-    <input
-        type="search"
-        id="buscar-pago"
-        class="buscador-jugadores"
-        placeholder="Buscar jugador..."
-    >
-
-
-    <div class="filtros-estado-pagos">
-
-        <button
-            type="button"
-            class="filtro-pago-btn activo"
-            data-estado-pago="TODOS"
-        >
-            Todos
-        </button>
-
-
-        <button
-            type="button"
-            class="filtro-pago-btn"
-            data-estado-pago="PENDIENTE"
-        >
-            Pendientes
-        </button>
-
-
-        <button
-            type="button"
-            class="filtro-pago-btn"
-            data-estado-pago="APROBADO"
-        >
-            Aprobados
-        </button>
-
-
-        <button
-            type="button"
-            class="filtro-pago-btn"
-            data-estado-pago="RECHAZADO"
-        >
-            Rechazados
-        </button>
-
-    </div>
-
-</div>
-
-
-
-                <!-- LISTADO DE PAGOS -->
-
-                <div
-                    id="lista-historial-pagos"
-                    class="pagos-grid"
-                >
-
-                    <div class="vacio">
-                        Cargando historial...
-                    </div>
-
-                </div>
-
-
-            </section>
-
-
-        </section>
 
 
     </section>
 
 
-</div>
+        <!-- ===================================================
+             CONTROL DE ENTREGAS DE LA RIFA
+        =================================================== -->
+
+        <section class="admin-section rifa-operacion-panel">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="admin-eyebrow">
+                        Recaudación
+                    </span>
+
+                    <h2>
+                        Control de entregas
+                    </h2>
+
+                    <p>
+                        Revisa las transferencias enviadas por los jugadores,
+                        sus compradores y el avance real de esta rifa.
+                    </p>
+                </div>
+
+                <span
+                    id="badge-entregas-rifa"
+                    class="badge badge-azul"
+                >
+                    0 entregas
+                </span>
+
+            </div>
+
+
+            <div class="rifa-operacion-dashboard">
+
+                <article class="rifa-operacion-stat">
+                    <span>Pendientes</span>
+                    <strong id="rifa-stat-pendientes">0</strong>
+                    <small>Por revisar</small>
+                </article>
+
+                <article class="rifa-operacion-stat">
+                    <span>Aprobadas</span>
+                    <strong id="rifa-stat-aprobadas">0</strong>
+                    <small>Entregas validadas</small>
+                </article>
+
+                <article class="rifa-operacion-stat">
+                    <span>Participaciones aprobadas</span>
+                    <strong id="rifa-stat-participaciones">0</strong>
+                    <small>Solo entregas aprobadas</small>
+                </article>
+
+                <article class="rifa-operacion-stat">
+                    <span>Recaudación aprobada</span>
+                    <strong id="rifa-stat-recaudado">$0</strong>
+                    <small>Ingresos validados</small>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <section class="admin-section rifa-entregas-panel">
+
+            <div class="section-heading">
+                <div>
+                    <span class="admin-eyebrow">
+                        Tesorería
+                    </span>
+
+                    <h2>
+                        Entregas pendientes
+                    </h2>
+
+                    <p>
+                        Comprueba la transferencia antes de aprobar
+                        o rechazar una entrega.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="lista-entregas-rifa-pendientes"
+                class="lista-entregas-rifa"
+            >
+                <div class="vacio">
+                    Cargando entregas...
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="admin-section rifa-ranking-panel">
+
+            <div class="section-heading">
+                <div>
+                    <span class="admin-eyebrow">
+                        Rendimiento
+                    </span>
+
+                    <h2>
+                        Ranking de la rifa
+                    </h2>
+
+                    <p>
+                        El ranking considera únicamente entregas aprobadas.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="lista-ranking-rifa"
+                class="lista-ranking-rifa"
+            >
+                <div class="vacio">
+                    Aún no hay entregas aprobadas.
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="admin-section rifa-historial-panel">
+
+            <div class="section-heading">
+                <div>
+                    <span class="admin-eyebrow">
+                        Historial
+                    </span>
+
+                    <h2>
+                        Todas las entregas
+                    </h2>
+
+                    <p>
+                        Consulta entregas pendientes, aprobadas y rechazadas.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                id="lista-entregas-rifa-historial"
+                class="lista-entregas-rifa"
+            >
+                <div class="vacio">
+                    Cargando historial...
+                </div>
+            </div>
+
+        </section>
 
 
 
-<!-- ==========================================
+
+
+
+</section>
+
+
+
+
+
+
+
+            <!-- ===================================================
+
+                 VISTA EGRESOS
+
+            =================================================== -->
+
+
+
+            <section
+
+                id="vista-egresos"
+
+                class="vista-admin"
+
+            >
+
+
+
+                <div class="section-heading egresos-heading">
+
+                    <div>
+
+                        <span class="admin-eyebrow">
+                            Finanzas
+                        </span>
+
+                        <h2>
+                            Control de egresos
+                        </h2>
+
+                        <p>
+                            Registra cada salida de dinero y mantén la tesorería
+                            del club respaldada y ordenada.
+                        </p>
+
+                    </div>
+
+                    <span
+                        id="badge-egresos"
+                        class="badge-admin"
+                    >
+                        0 movimientos
+                    </span>
+
+                </div>
+
+
+
+                <section class="egresos-stats">
+
+                    <article class="stat-card">
+
+                        <span>
+                            Egresos registrados
+                        </span>
+
+                        <strong id="egresos-total">
+                            $0
+                        </strong>
+
+                        <small>
+                            Excluye movimientos anulados
+                        </small>
+
+                    </article>
+
+                    <article class="stat-card">
+
+                        <span>
+                            Mes actual
+                        </span>
+
+                        <strong id="egresos-mes">
+                            $0
+                        </strong>
+
+                        <small>
+                            Gastos registrados este mes
+                        </small>
+
+                    </article>
+
+                    <article class="stat-card">
+
+                        <span>
+                            Movimientos activos
+                        </span>
+
+                        <strong id="egresos-cantidad">
+                            0
+                        </strong>
+
+                        <small>
+                            Egresos contabilizados
+                        </small>
+
+                    </article>
+
+                    <article class="stat-card">
+
+                        <span>
+                            Anulados
+                        </span>
+
+                        <strong id="egresos-anulados">
+                            0
+                        </strong>
+
+                        <small>
+                            Conservados para auditoría
+                        </small>
+
+                    </article>
+
+                </section>
+
+
+
+                <div class="egresos-layout">
+
+                    <section class="admin-section egreso-form-card">
+
+                        <div class="section-mini-heading">
+
+                            <div>
+
+                                <span class="admin-eyebrow">
+                                    Nuevo movimiento
+                                </span>
+
+                                <h3>
+                                    Registrar egreso
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="egreso-form-intro">
+                            <span class="egreso-form-intro-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>
+                            </span>
+                            <div>
+                                <strong>Nuevo gasto del club</strong>
+                                <span>Los movimientos registrados impactarán el saldo financiero cuando estén activos.</span>
+                            </div>
+                        </div>
+
+                        <form id="form-egreso-admin" class="egreso-form">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+
+                                    <label for="egreso-fecha">
+                                        Fecha
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        id="egreso-fecha"
+                                        required
+                                    >
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="egreso-categoria">
+                                        Categoría
+                                    </label>
+
+                                    <select
+                                        id="egreso-categoria"
+                                        required
+                                    >
+                                        <option value="">
+                                            Seleccionar
+                                        </option>
+                                        <option value="CANCHAS">
+                                            Canchas
+                                        </option>
+                                        <option value="TORNEOS">
+                                            Torneos y ligas
+                                        </option>
+                                        <option value="TRANSPORTE">
+                                            Transporte
+                                        </option>
+                                        <option value="INDUMENTARIA">
+                                            Indumentaria
+                                        </option>
+                                        <option value="IMPLEMENTOS">
+                                            Implementos deportivos
+                                        </option>
+                                        <option value="ARBITRAJE">
+                                            Arbitraje
+                                        </option>
+                                        <option value="ADMINISTRACION">
+                                            Administración
+                                        </option>
+                                        <option value="ALIMENTACION">
+                                            Alimentación
+                                        </option>
+                                        <option value="MARKETING">
+                                            Marketing y difusión
+                                        </option>
+                                        <option value="OTROS">
+                                            Otros
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="egreso-concepto">
+                                    Concepto
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="egreso-concepto"
+                                    maxlength="180"
+                                    placeholder="Ej: Arriendo cancha entrenamiento"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+
+                                    <label for="egreso-monto">
+                                        Monto
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        id="egreso-monto"
+                                        min="1"
+                                        step="1"
+                                        placeholder="45000"
+                                        required
+                                    >
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="egreso-metodo">
+                                        Método de pago
+                                    </label>
+
+                                    <select id="egreso-metodo">
+                                        <option value="">
+                                            No informado
+                                        </option>
+                                        <option value="TRANSFERENCIA">
+                                            Transferencia
+                                        </option>
+                                        <option value="EFECTIVO">
+                                            Efectivo
+                                        </option>
+                                        <option value="DEBITO_CREDITO">
+                                            Débito / Crédito
+                                        </option>
+                                        <option value="MERCADO_PAGO">
+                                            Mercado Pago
+                                        </option>
+                                        <option value="OTRO">
+                                            Otro
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="egreso-comprobante">
+                                    Comprobante
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="egreso-comprobante"
+                                    accept="image/*,.pdf"
+                                >
+
+                                <small class="form-help">
+                                    Opcional · PDF o imagen · máximo 10 MB.
+                                </small>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="egreso-observaciones">
+                                    Observaciones
+                                </label>
+
+                                <textarea
+                                    id="egreso-observaciones"
+                                    rows="4"
+                                    maxlength="500"
+                                    placeholder="Información adicional del gasto..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                id="btn-registrar-egreso"
+                                class="btn btn-primary egreso-submit"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                                Registrar egreso
+                            </button>
+
+                            <div
+                                id="mensaje-egreso"
+                                class="mensaje-egreso"
+                            ></div>
+
+                        </form>
+
+                    </section>
+
+
+
+                    <section class="admin-section egresos-historial-card">
+
+                        <div class="section-mini-heading egresos-historial-heading">
+
+                            <div>
+
+                                <span class="admin-eyebrow">
+                                    Historial
+                                </span>
+
+                                <h3>
+                                    Movimientos registrados
+                                </h3>
+
+                            </div>
+
+                            <select
+                                id="filtro-egresos"
+                                class="filtro-egresos"
+                                aria-label="Filtrar egresos por estado"
+                            >
+                                <option value="TODOS">
+                                    Todos
+                                </option>
+                                <option value="REGISTRADO">
+                                    Registrados
+                                </option>
+                                <option value="ANULADO">
+                                    Anulados
+                                </option>
+                            </select>
+
+                        </div>
+
+                        <div id="lista-egresos-admin">
+
+                            <div class="vacio egresos-empty">
+                                <span class="egresos-empty-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M9 10h6M9 14h6"/></svg>
+                                </span>
+                                <strong>Sin movimientos todavía</strong>
+                                <span>Cuando registres un egreso aparecerá aquí con su respaldo y estado.</span>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </section>
+
+
+
+
+
+
+
+            <!-- ===================================================
+
+                 MI CUENTA
+
+            =================================================== -->
+
+
+
+            <section
+
+                id="vista-cuenta"
+
+                class="vista-admin"
+
+            >
+
+
+
+
+
+                <div class="section-heading section-heading-center">
+
+
+
+                    <div>
+
+
+
+                        <span class="admin-eyebrow">
+
+                            Perfil
+
+                        </span>
+
+
+
+                        <h2>
+
+                            Mi cuenta
+
+                        </h2>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <section class="admin-section admin-cuenta-card">
+
+
+
+
+
+                    <div class="admin-cuenta-avatar">
+
+
+
+                        <img
+
+                            src="assets/img/logo/logo.png"
+
+                            alt="Rayckington FC"
+
+                        >
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="admin-cuenta-info">
+
+
+
+                        <span>
+
+                            Administrador
+
+                        </span>
+
+
+
+                        <strong id="admin-cuenta-nombre">
+
+                            Administrador
+
+                        </strong>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="admin-cuenta-datos">
+
+
+
+
+
+                        <div>
+
+
+
+                            <span>
+
+                                Correo
+
+                            </span>
+
+
+
+                            <strong id="admin-cuenta-email">
+
+                                -
+
+                            </strong>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div>
+
+
+
+                            <span>
+
+                                Estado
+
+                            </span>
+
+
+
+                            <strong>
+
+                                ACTIVO
+
+                            </strong>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div>
+
+
+
+                            <span>
+
+                                Rol
+
+                            </span>
+
+
+
+                            <strong>
+
+                                Administrador
+
+                            </strong>
+
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <button
+
+                        id="btn-cerrar-admin"
+
+                        class="btn btn-cerrar btn-full"
+
+                        type="button"
+
+                    >
+
+                        Cerrar sesión
+
+                    </button>
+
+
+
+
+
+                </section>
+
+
+
+
+
+            </section>
+
+
+
+
+
+        </main>
+
+
+
+
+
+
+
+        <!-- ===================================================
+
+             FOOTER
+
+        =================================================== -->
+
+
+
+        <footer class="admin-footer">
+
+
+
+            <span>
+
+                Rayckington FC · Panel Administrativo
+
+            </span>
+
+
+
+            <small>
+
+                Nacimos para competir, jugamos para ganar.
+
+            </small>
+
+
+
+        </footer>
+
+
+
+
+
+    </div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ===================================================
+
      JAVASCRIPT
-=========================================== -->
+
+=================================================== -->
+
+
 
 <script
+
     type="module"
+
     src="assets/js/admin-tesoreria.js"
+
 ></script>
 
 
+
+
+
 </body>
+
+
 
 </html>

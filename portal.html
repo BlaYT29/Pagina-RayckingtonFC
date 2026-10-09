@@ -1,895 +1,1679 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
+
 
 <head>
 
+
+
     <meta charset="UTF-8">
 
+
+
     <meta
+
         name="viewport"
+
         content="width=device-width, initial-scale=1.0"
+
     >
+
+
 
     <title>
+
         Portal del Jugador | Rayckington FC
+
     </title>
 
+
+
     <link
+
         rel="stylesheet"
+
         href="assets/css/portal.css"
+
     >
 
+
+
 </head>
+
+
+
 
 
 <body>
 
 
+
+
+
 <!-- =================================================
+
      LOGIN
+
 ================================================== -->
 
+
+
 <section
+
     id="login"
+
     class="login-page"
+
 >
+
+
 
     <div class="login-card">
 
+
+
         <img
+
             src="assets/img/logo/logo.png"
+
             alt="Rayckington FC"
+
             class="login-logo"
+
         >
 
 
+
+
+
         <span class="portal-label">
+
             Área privada
+
         </span>
 
 
+
+
+
         <h1>
+
             Portal del Jugador
+
         </h1>
 
 
+
+
+
         <p class="login-subtitle">
+
             Rayckington FC
+
         </p>
+
+
+
 
 
         <form id="form-login">
 
+
+
             <label for="email">
+
                 Correo electrónico
+
             </label>
 
 
+
+
+
             <input
+
                 id="email"
+
                 type="email"
+
                 autocomplete="email"
+
                 required
+
             >
+
+
+
 
 
             <label for="password">
+
                 Contraseña
+
             </label>
 
 
+
+
+
             <input
+
                 id="password"
+
                 type="password"
+
                 autocomplete="current-password"
+
                 required
+
             >
+
+
+
 
 
             <button
+
                 type="submit"
+
                 class="btn btn-primary"
+
             >
+
                 Ingresar al portal
+
             </button>
+
+
 
         </form>
 
 
+
+
+
         <div id="mensaje-login"></div>
 
+
+
     </div>
+
+
 
 </section>
 
 
 
+
+
+
+
 <!-- =================================================
+
      PORTAL
+
 ================================================== -->
+
+
 
 <section id="portal">
 
 
+
+
+
     <!-- =============================================
+
          HEADER
+
     ============================================== -->
+
+
 
     <header class="portal-header">
 
+
+
         <div class="portal-header-inner">
+
+
 
             <div class="club-brand">
 
+
+
                 <img
+
                     src="assets/img/logo/logo.png"
+
                     alt="Rayckington FC"
+
                     class="header-logo"
+
                 >
+
+
 
                 <div>
 
+
+
                     <strong>
+
                         Rayckington FC
+
                     </strong>
 
+
+
                     <span>
+
                         Portal del Jugador
+
                     </span>
 
+
+
                 </div>
+
+
 
             </div>
 
 
+
+
+
             <button
+
                 id="btn-menu-mobile"
+
                 class="menu-mobile-btn"
+
                 type="button"
+
             >
+
                 ☰
+
             </button>
 
 
+
+
+
             <nav
+
                 id="portal-menu"
+
                 class="portal-menu"
+
             >
 
+
+
                 <button
+
                     type="button"
+
                     class="portal-menu-btn activo"
+
                     data-vista="inicio"
+
                 >
+
                     Inicio
+
                 </button>
 
 
+
+
+
                 <button
+
                     type="button"
+
                     class="portal-menu-btn"
+
                     data-vista="cuotas"
+
                 >
+
                     Mis Mensualidades
+
                 </button>
 
 
+
+
+
                 <button
+
                     type="button"
+
                     class="portal-menu-btn"
+
                     data-vista="pagos"
+
                 >
+
                     Pagos y transferencias
+
                 </button>
 
 
+
+
+
                 <button
+
                     type="button"
+
                     class="portal-menu-btn"
+
                     data-vista="aportes"
+
                 >
+
                     Rifas y aportes
+
                 </button>
+
+
+
 
 
                 <button
+
                     type="button"
+
                     class="portal-menu-btn"
+
                     data-vista="cuenta"
+
                 >
+
                     Mi cuenta
+
                 </button>
+
+
 
             </nav>
 
+
+
         </div>
 
+
+
     </header>
+
+
+
+
 
 
 
     <main class="portal-contenedor">
 
 
+
+
+
         <!-- =========================================
+
              INICIO
+
         ========================================== -->
 
+
+
         <section
+
             id="vista-inicio"
+
             class="portal-vista activa"
+
         >
+
+
 
             <section class="bienvenida-card">
 
+
+
                 <div>
 
+
+
                     <span class="portal-label">
+
                         Bienvenido
+
                     </span>
 
 
+
+
+
                     <h1 id="saludo-jugador">
+
                         Hola 👋
+
                     </h1>
 
 
+
+
+
                     <p>
+
                         Este es tu espacio privado dentro
+
                         de Rayckington FC.
+
                     </p>
 
+
+
                 </div>
+
+
+
 
 
                 <div class="escudo-bienvenida">
 
+
+
                     <img
+
                         src="assets/img/logo/logo.png"
+
                         alt="Rayckington FC"
+
                     >
+
+
 
                 </div>
 
+
+
             </section>
+
+
+
+
 
 
 
             <!-- RESUMEN FINANCIERO -->
 
+
+
             <section class="resumen-financiero">
 
 
+
+
+
                 <article class="resumen-card">
 
+
+
                     <span>
+
                         Estado financiero
+
                     </span>
+
+
 
                     <strong
+
                         id="estado-financiero"
+
                         class="estado-financiero"
+
                     >
+
                         -
+
                     </strong>
+
+
 
                 </article>
 
 
 
+
+
+
+
                 <article class="resumen-card">
 
+
+
                     <span>
+
                         Total pendiente
+
                     </span>
+
+
 
                     <strong id="total-pendiente">
+
                         $0
+
                     </strong>
+
+
 
                 </article>
 
 
 
+
+
+
+
                 <article class="resumen-card">
 
+
+
                     <span>
+
                         Total pagado
+
                     </span>
+
+
 
                     <strong id="total-pagado">
+
                         $0
+
                     </strong>
 
+
+
                 </article>
+
+
+
+
 
 
 
                 <article class="resumen-card">
 
+
+
                     <span>
+
                         Cuotas pendientes
+
                     </span>
 
+
+
                     <strong id="cantidad-pendientes">
+
                         0
+
                     </strong>
 
+
+
                 </article>
+
+
+
 
 
             </section>
+
+
+
+
 
 
 
             <!-- AVISO -->
 
+
+
             <section class="portal-card aviso-card">
 
+
+
                 <span class="portal-label">
+
                     Información
+
                 </span>
 
+
+
                 <h2>
+
                     Tesorería Rayckington FC
+
                 </h2>
 
+
+
                 <p>
+
                     Puedes revisar tus obligaciones,
+
                     registrar transferencias y conocer
+
                     el estado de cada pago desde este portal.
+
                 </p>
+
+
 
             </section>
 
+
+
         </section>
 
 
 
+
+
+
+
         <!-- =========================================
+
              MIS CUOTAS
+
         ========================================== -->
 
+
+
         <section
+
             id="vista-cuotas"
+
             class="portal-vista"
+
         >
+
+
 
             <div class="section-heading">
 
+
+
                 <span class="portal-label">
+
                     Tesorería
+
                 </span>
 
+
+
                 <h2>
+
                     Mis cuotas
+
                 </h2>
 
+
+
                 <p>
+
                     Revisa tus mensualidades y obligaciones
+
                     registradas en el club.
+
                 </p>
 
+
+
             </div>
+
+
+
 
 
             <div
+
                 id="lista-cuotas"
+
                 class="cuotas-grid"
+
             ></div>
+
+
 
         </section>
 
 
 
+
+
+
+
         <!-- =========================================
+
              PAGOS
+
         ========================================== -->
 
+
+
         <section
+
             id="vista-pagos"
+
             class="portal-vista"
+
         >
+
+
 
             <div class="section-heading">
 
+
+
                 <span class="portal-label">
+
                     Transferencias
+
                 </span>
 
+
+
                 <h2>
+
                     Mis pagos
+
                 </h2>
 
+
+
                 <p>
+
                     Registra una transferencia y revisa
+
                     su estado en Tesorería.
+
                 </p>
 
+
+
             </div>
+
+
+
+
 
 
 
             <!-- HISTORIAL -->
 
+
+
             <section class="portal-card">
+
+
 
                 <div class="card-heading">
 
+
+
                     <div>
 
+
+
                         <span class="portal-label">
+
                             Historial
+
                         </span>
 
+
+
                         <h3>
+
                             Pagos registrados
+
                         </h3>
+
+
 
                     </div>
 
+
+
                 </div>
+
+
+
 
 
                 <div
+
                     id="historial-pagos-jugador"
+
                     class="historial-pagos"
+
                 >
 
+
+
                     <div class="portal-vacio">
+
                         Cargando pagos...
+
                     </div>
+
+
 
                 </div>
 
+
+
             </section>
+
+
+
+
 
 
 
             <!-- REGISTRAR TRANSFERENCIA -->
 
+
+
             <section class="portal-card registrar-pago-card">
+
+
 
                 <div class="card-heading">
 
+
+
                     <div>
 
+
+
                         <span class="portal-label">
+
                             Nuevo pago
+
                         </span>
 
+
+
                         <h3>
+
                             Registrar transferencia
+
                         </h3>
 
+
+
                     </div>
+
+
 
                 </div>
 
 
+
+
+
                 <p class="texto-secundario">
+
                     Selecciona las obligaciones que estás
+
                     pagando y adjunta tu comprobante.
+
                 </p>
+
+
+
 
 
                 <form id="form-pago">
 
 
+
+
+
                     <div
+
                         id="cuotas-pago"
+
                         class="cuotas-pago"
+
                     ></div>
 
 
+
+
+
                     <div class="form-grid">
 
 
+
+
+
                         <div class="form-group">
+
+
 
                             <label for="monto-total">
+
                                 Monto total transferido
+
                             </label>
 
+
+
                             <input
+
                                 id="monto-total"
+
                                 type="number"
+
                                 min="1"
+
                                 placeholder="Ej: 30000"
+
                                 required
+
                             >
 
+
+
                         </div>
+
+
+
+
 
 
 
                         <div class="form-group">
 
+
+
                             <label for="fecha-transferencia">
+
                                 Fecha de transferencia
+
                             </label>
 
+
+
                             <input
+
                                 id="fecha-transferencia"
+
                                 type="date"
+
                                 required
+
                             >
+
+
 
                         </div>
 
 
+
+
+
                     </div>
+
+
+
+
 
 
 
                     <div class="form-grid">
 
 
+
+
+
                         <div class="form-group">
+
+
 
                             <label for="numero-operacion">
+
                                 Número de operación
+
                             </label>
 
+
+
                             <input
+
                                 id="numero-operacion"
+
                                 type="text"
+
                                 placeholder="Opcional"
+
                             >
 
+
+
                         </div>
+
+
+
+
 
 
 
                         <div class="form-group">
 
+
+
                             <label for="comprobante">
+
                                 Comprobante
+
                             </label>
 
+
+
                             <input
+
                                 id="comprobante"
+
                                 type="file"
+
                                 accept="image/*,.pdf"
+
                                 required
+
                             >
 
+
+
                         </div>
+
+
+
 
 
                     </div>
+
+
+
+
 
 
 
                     <div class="form-group">
 
+
+
                         <label for="observaciones-pago">
+
                             Observaciones
+
                         </label>
 
+
+
                         <input
+
                             id="observaciones-pago"
+
                             type="text"
+
                             placeholder="Opcional"
+
                         >
+
+
 
                     </div>
 
 
 
+
+
+
+
                     <button
+
                         type="submit"
+
                         class="btn btn-primary"
+
                     >
+
                         Registrar pago
+
                     </button>
+
+
+
 
 
                     <div id="mensaje-pago"></div>
 
+
+
                 </form>
 
+
+
             </section>
+
+
 
         </section>
 
 
 
+
+
+
+
         <!-- =========================================
+
              RIFAS Y APORTES
+
         ========================================== -->
 
+
+
         <section
+
             id="vista-aportes"
+
             class="portal-vista"
+
         >
+
+
 
             <div class="section-heading">
 
+
+
                 <span class="portal-label">
+
                     Club
+
                 </span>
 
+
+
                 <h2>
+
                     Rifas y aportes
+
                 </h2>
 
+
+
                 <p>
-                    Registra información relacionada
-                    con actividades y aportes del club.
+
+                    Revisa las rifas activas del club, registra tus
+
+                    compradores y entrega la recaudación desde tu portal.
+
                 </p>
+
+
 
             </div>
 
 
 
-            <!-- RIFA -->
-
-            <article class="desplegable-card">
-
-                <button
-                    type="button"
-                    class="desplegable-header"
-                    data-desplegable="rifas"
-                >
-
-                    <div>
-
-                        <span class="desplegable-icono">
-                            🎟️
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Rifas
-                            </strong>
-
-                            <span>
-                                Entrega y recaudación
-                            </span>
-
-                        </div>
-
-                    </div>
+            <!-- RIFAS -->
 
 
-                    <span class="desplegable-flecha">
-                        +
-                    </span>
 
-                </button>
+            <div
 
+                id="rifas-jugador-lista"
 
-                <div
-                    id="desplegable-rifas"
-                    class="desplegable-contenido"
-                >
+                class="rifas-jugador-lista"
 
-                    <p class="texto-secundario">
-                        Aquí podrás informar números vendidos,
-                        dinero recaudado y entregar respaldos.
-                    </p>
+            >
 
+                <div class="portal-vacio">
 
-                    <div class="portal-proximamente">
-                        Formulario de rifas próximamente.
-                    </div>
+                    Cargando rifas...
 
                 </div>
 
-            </article>
+            </div>
 
 
 
             <!-- APORTES -->
 
-            <article class="desplegable-card">
+
+
+            <article class="desplegable-card aportes-extraordinarios-card">
+
+
 
                 <button
+
                     type="button"
+
                     class="desplegable-header"
+
                     data-desplegable="aportes"
+
                 >
+
+
 
                     <div>
 
+
+
                         <span class="desplegable-icono">
+
                             💰
+
                         </span>
+
+
 
                         <div>
 
+
+
                             <strong>
+
                                 Aportes
+
                             </strong>
 
+
+
                             <span>
+
                                 Actividades y aportes extraordinarios
+
                             </span>
 
+
+
                         </div>
+
+
 
                     </div>
 
 
+
                     <span class="desplegable-flecha">
+
                         +
+
                     </span>
+
+
 
                 </button>
 
 
+
                 <div
+
                     id="desplegable-aportes"
+
                     class="desplegable-contenido"
+
                 >
 
+
+
                     <p class="texto-secundario">
+
                         Esta sección permitirá registrar
+
                         aportes extraordinarios del jugador.
+
                     </p>
 
 
+
                     <div class="portal-proximamente">
+
                         Formulario de aportes próximamente.
+
                     </div>
+
+
 
                 </div>
 
+
+
             </article>
+
 
 
         </section>
 
 
 
+
+
         <!-- =========================================
+
              MI CUENTA
+
         ========================================== -->
 
+
+
         <section
+
             id="vista-cuenta"
+
             class="portal-vista"
+
         >
+
+
 
             <div class="section-heading">
 
+
+
                 <span class="portal-label">
+
                     Perfil
+
                 </span>
 
+
+
                 <h2>
+
                     Mi cuenta
+
                 </h2>
+
+
 
             </div>
 
 
 
+
+
+
+
             <section class="portal-card cuenta-card">
+
+
 
                 <div class="cuenta-avatar">
 
+
+
                     <img
+
                         src="assets/img/logo/logo.png"
+
                         alt="Rayckington FC"
+
                     >
 
+
+
                 </div>
+
+
+
 
 
                 <div class="cuenta-info">
 
+
+
                     <span>
+
                         Jugador
+
                     </span>
 
+
+
                     <strong id="nombre-jugador">
+
                         Jugador
+
                     </strong>
 
+
+
                 </div>
+
+
+
+
 
 
 
                 <div class="cuenta-datos">
 
 
+
+
+
                     <div>
 
+
+
                         <span>
+
                             Correo
+
                         </span>
+
+
 
                         <strong id="cuenta-email">
+
                             -
+
                         </strong>
+
+
 
                     </div>
 
 
 
+
+
+
+
                     <div>
 
+
+
                         <span>
+
                             Fecha de ingreso
+
                         </span>
+
+
 
                         <strong id="cuenta-fecha-ingreso">
+
                             -
+
                         </strong>
 
+
+
                     </div>
+
+
+
+
 
 
 
                     <div>
 
+
+
                         <span>
+
                             Estado
+
                         </span>
 
+
+
                         <strong id="cuenta-estado">
+
                             ACTIVO
+
                         </strong>
 
+
+
                     </div>
+
+
+
 
 
                 </div>
 
 
 
+
+
+
+
                 <button
+
                     id="btn-cerrar"
+
                     type="button"
+
                     class="btn btn-secondary"
+
                 >
+
                     Cerrar sesión
+
                 </button>
+
+
 
             </section>
 
+
+
         </section>
+
+
+
 
 
     </main>
 
 
 
+
+
+
+
     <!-- =============================================
+
          FOOTER
+
     ============================================== -->
+
+
 
     <footer class="portal-footer">
 
+
+
         <img
+
             src="assets/img/logo/logo.png"
+
             alt="Rayckington FC"
+
         >
 
+
+
         <p>
+
             Rayckington FC
+
         </p>
 
+
+
         <span>
+
             Nacimos para competir, jugamos para ganar.
+
         </span>
 
+
+
     </footer>
+
+
+
 
 
 </section>
 
 
 
+
+
+
+
 <script
+
     type="module"
+
     src="assets/js/portal.js"
+
 ></script>
 
 
+
+
+
 </body>
+
+
 
 </html>
