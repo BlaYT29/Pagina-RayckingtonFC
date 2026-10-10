@@ -100,6 +100,13 @@ const statRechazados =
     );
 
 
+const statSaldoNeto = document.getElementById("stat-saldo-neto");
+const statDeudaJugadores = document.getElementById("stat-deuda-jugadores");
+const statEgresosDashboard = document.getElementById("stat-egresos-dashboard");
+const statJugadoresDeuda = document.getElementById("stat-jugadores-deuda");
+let totalRecaudacionGeneral = 0;
+
+
 const badgePendientes =
     document.getElementById(
         "badge-pendientes"
@@ -2200,15 +2207,21 @@ const detalleTotalPagado =
     );
 
 
-const detalleTotalPendiente =
+const detalleSaldoAnterior =
     document.getElementById(
-        "detalle-total-pendiente"
+        "detalle-saldo-anterior"
     );
 
 
-const detalleCuotasPendientes =
+const detalleMensualidadesPendientes =
     document.getElementById(
-        "detalle-cuotas-pendientes"
+        "detalle-mensualidades-pendientes"
+    );
+
+
+const detalleTotalPendiente =
+    document.getElementById(
+        "detalle-total-pendiente"
     );
 
 
@@ -2226,7 +2239,59 @@ const btnGenerarMensualidades =
 const mensajeGeneracionCuotas =
     document.getElementById(
         "mensaje-generacion-cuotas"
-    );    
+    );
+
+
+const mensualidadesDeudaTotal =
+    document.getElementById(
+        "mensualidades-deuda-total"
+    );
+
+
+const mensualidadesSaldoAnterior =
+    document.getElementById(
+        "mensualidades-saldo-anterior"
+    );
+
+
+const mensualidadesMesesPendientes =
+    document.getElementById(
+        "mensualidades-meses-pendientes"
+    );
+
+
+const mensualidadesJugadoresDeuda =
+    document.getElementById(
+        "mensualidades-jugadores-deuda"
+    );
+
+
+const badgeDeudores =
+    document.getElementById(
+        "badge-deudores"
+    );
+
+
+const buscarDeudaJugadorInput =
+    document.getElementById(
+        "buscar-deuda-jugador"
+    );
+
+
+const filtroDeudaJugadorInput =
+    document.getElementById(
+        "filtro-deuda-jugador"
+    );
+
+
+const listaDeudasJugadores =
+    document.getElementById(
+        "lista-deudas-jugadores"
+    );
+
+
+let vistaOrigenDetalleJugador =
+    "jugadores";    
 
 
 /* ===================================================
@@ -3405,6 +3470,8 @@ async function aprobarPago(
         cargarJugadores()
     ]);
 
+    await actualizarRecaudacionGeneral();
+
 }
 
 
@@ -3536,6 +3603,8 @@ async function rechazarPago(
         cargarJugadores()
     ]);
 
+    await actualizarRecaudacionGeneral();
+
 }
 /* ===================================================
    CARGAR EGRESOS
@@ -3608,6 +3677,7 @@ async function cargarEgresos() {
 
 
     renderizarEgresos();
+    actualizarResumenFinancieroInicio();
 
 }
 
@@ -4800,6 +4870,11 @@ function mostrarVistaAdmin(
         );
 
 
+    if (nombreVista === "mensualidades") {
+        renderizarResumenMensualidades();
+    }
+
+
     menuBotones.forEach(
         (boton) => {
 
@@ -5053,17 +5128,10 @@ function obtenerSaludoAdmin() {
 
 async function cargarJugadores() {
 
-    const [
-        resultadoJugadores,
-        resultadoCuotas,
-        resultadoPagos
-    ] =
+    const [resultadoJugadores, resultadoCuotas, resultadoPagos] =
         await Promise.all([
-
             supabase
-                .from(
-                    "jugadores"
-                )
+                .from("jugadores")
                 .select(`
                     id,
                     user_id,
@@ -5074,39 +5142,28 @@ async function cargarJugadores() {
                     fecha_nacimiento,
                     exento_mensualidad
                 `)
-                .order(
-                    "nombre_completo",
-                    {
-                        ascending: true
-                    }
-                ),
-
+                .order("nombre_completo", { ascending: true }),
 
             supabase
-                .from(
-                    "cuotas"
-                )
+                .from("cuotas")
                 .select(`
                     id,
                     jugador_id,
                     concepto,
                     periodo,
                     monto,
+                    fecha_vencimiento,
                     estado
                 `),
 
-
             supabase
-                .from(
-                    "pagos"
-                )
+                .from("pagos")
                 .select(`
                     id,
                     jugador_id,
                     monto_total,
                     estado
                 `)
-
         ]);
 
 
@@ -5115,7 +5172,6 @@ async function cargarJugadores() {
         resultadoCuotas.error ||
         resultadoPagos.error
     ) {
-
         console.error(
             "Error cargando jugadores:",
             resultadoJugadores.error,
@@ -5123,174 +5179,121 @@ async function cargarJugadores() {
             resultadoPagos.error
         );
 
+        if (listaJugadores) {
+            listaJugadores.innerHTML = `
+                <div class="vacio">No se pudieron cargar los jugadores.</div>
+            `;
+        }
 
-        listaJugadores.innerHTML = `
-            <div class="vacio">
-                No se pudieron cargar los jugadores.
-            </div>
-        `;
-
-
+        if (listaDeudasJugadores) {
+            listaDeudasJugadores.innerHTML = `
+                <div class="vacio">No se pudo cargar el resumen de deuda.</div>
+            `;
+        }
         return;
     }
 
 
-    const jugadores =
-        resultadoJugadores.data ||
-        [];
-
-
-    const cuotas =
-        resultadoCuotas.data ||
-        [];
-
-
-    const pagos =
-        resultadoPagos.data ||
-        [];
+    const jugadores = resultadoJugadores.data || [];
+    const cuotas = resultadoCuotas.data || [];
+    const pagos = resultadoPagos.data || [];
 
 
     jugadoresTesoreria =
-        jugadores.map(
-            (jugador) => {
+        jugadores.map((jugador) => {
 
-                const cuotasJugador =
-                    cuotas.filter(
-                        (cuota) =>
-                            cuota.jugador_id ===
-                            jugador.id
-                    );
+            const cuotasJugador =
+                cuotas.filter((cuota) =>
+                    cuota.jugador_id === jugador.id
+                );
 
+            const cuotasMensuales =
+                cuotasJugador.filter((cuota) =>
+                    normalizarEstado(cuota.concepto) === "MENSUALIDAD"
+                );
 
-                const cuotasMensuales =
-                    cuotasJugador.filter(
-                        (cuota) =>
-                            cuota.concepto ===
-                            "MENSUALIDAD"
-                    );
+            const cuotasSaldoAnterior =
+                cuotasJugador.filter((cuota) =>
+                    normalizarEstado(cuota.concepto) === "SALDO_ANTERIOR"
+                );
 
+            const cuotasMensualesPendientes =
+                cuotasMensuales.filter((cuota) =>
+                    normalizarEstado(cuota.estado) === "PENDIENTE"
+                );
 
-                const pendientes =
-                    cuotasMensuales.filter(
-                        (cuota) =>
-                            normalizarEstado(
-                                cuota.estado
-                            ) ===
-                            "PENDIENTE"
-                    );
+            const saldosAnterioresPendientes =
+                cuotasSaldoAnterior.filter((cuota) =>
+                    normalizarEstado(cuota.estado) === "PENDIENTE"
+                );
 
+            const montoMensualidadesPendientes =
+                cuotasMensualesPendientes.reduce(
+                    (total, cuota) => total + (Number(cuota.monto) || 0),
+                    0
+                );
 
-                const deuda =
-                    pendientes.reduce(
-                        (
-                            total,
-                            cuota
-                        ) =>
-                            total +
-                            (
-                                Number(
-                                    cuota.monto
-                                ) || 0
-                            ),
-                        0
-                    );
+            const saldoAnteriorPendiente =
+                saldosAnterioresPendientes.reduce(
+                    (total, cuota) => total + (Number(cuota.monto) || 0),
+                    0
+                );
 
+            const deudaTotal =
+                montoMensualidadesPendientes +
+                saldoAnteriorPendiente;
 
-                const pagosAprobados =
-                    pagos.filter(
-                        (pago) =>
-                            pago.jugador_id ===
-                                jugador.id &&
-                            normalizarEstado(
-                                pago.estado
-                            ) ===
-                                "APROBADO"
-                    );
+            const pagosAprobados =
+                pagos.filter((pago) =>
+                    pago.jugador_id === jugador.id &&
+                    normalizarEstado(pago.estado) === "APROBADO"
+                );
 
+            const pagado =
+                pagosAprobados.reduce(
+                    (total, pago) => total + (Number(pago.monto_total) || 0),
+                    0
+                );
 
-                const pagado =
-                    pagosAprobados.reduce(
-                        (
-                            total,
-                            pago
-                        ) =>
-                            total +
-                            (
-                                Number(
-                                    pago.monto_total
-                                ) || 0
-                            ),
-                        0
-                    );
+            let estadoFinanciero = "AL DÍA";
 
-
-                let estadoFinanciero =
-                    "AL DÍA";
-
-
-                if (
-                    normalizarEstado(
-                        jugador.estado
-                    ) ===
-                    "INACTIVO"
-                ) {
-
-                    estadoFinanciero =
-                        "INACTIVO";
-
-                } else if (
-                    jugador.exento_mensualidad
-                ) {
-
-                    estadoFinanciero =
-                        "EXENTO";
-
-                } else if (
-                    cuotasMensuales.length === 0
-                ) {
-
-                    estadoFinanciero =
-                        "SIN CUOTAS";
-
-                } else if (
-                    pendientes.length > 0
-                ) {
-
-                    estadoFinanciero =
-                        "CON DEUDA";
-
-                }
-
-
-                return {
-
-                    ...jugador,
-
-                    totalPagado:
-                        pagado,
-
-                    totalPendiente:
-                        deuda,
-
-                    cuotasPendientes:
-                        pendientes.length,
-
-                    estadoFinanciero
-
-                };
-
+            if (normalizarEstado(jugador.estado) === "INACTIVO") {
+                estadoFinanciero = "INACTIVO";
+            } else if (jugador.exento_mensualidad) {
+                estadoFinanciero = "EXENTO";
+            } else if (deudaTotal > 0) {
+                estadoFinanciero = "CON DEUDA";
+            } else if (
+                cuotasMensuales.length === 0 &&
+                cuotasSaldoAnterior.length === 0
+            ) {
+                estadoFinanciero = "SIN CUOTAS";
             }
-        );
+
+            return {
+                ...jugador,
+                totalPagado: pagado,
+                saldoAnteriorPendiente,
+                mensualidadesPendientes: montoMensualidadesPendientes,
+                totalPendiente: deudaTotal,
+                cuotasPendientes:
+                    cuotasMensualesPendientes.length +
+                    saldosAnterioresPendientes.length,
+                cuotasMensualesPendientes:
+                    cuotasMensualesPendientes.length,
+                cuotas: cuotasJugador,
+                estadoFinanciero
+            };
+        });
 
 
-    badgeJugadores.textContent =
-        `${jugadoresTesoreria.length} jugadores`;
+    if (badgeJugadores) {
+        badgeJugadores.textContent = `${jugadoresTesoreria.length} jugadores`;
+    }
 
-
-    renderizarJugadores(
-        jugadoresTesoreria
-    );
-
+    renderizarJugadores(jugadoresTesoreria);
+    renderizarResumenMensualidades();
+    actualizarResumenFinancieroInicio();
 }
 
 
@@ -5466,65 +5469,24 @@ function renderizarJugadores(
                             </div>
 
 
-                            <div
-                                class="jugador-finanzas"
-                            >
+                            <div class="jugador-finanzas">
 
-                                <div
-                                    class="jugador-finanza"
-                                >
-
-                                    <span>
-                                        Pagado
-                                    </span>
-
-                                    <strong>
-                                        ${formatearDinero(
-                                            jugador
-                                                .totalPagado
-                                        )}
-                                    </strong>
-
+                                <div class="jugador-finanza jugador-finanza-historico">
+                                    <span>Saldo anterior</span>
+                                    <strong>${formatearDinero(jugador.saldoAnteriorPendiente)}</strong>
                                 </div>
 
-
-                                <div
-                                    class="jugador-finanza"
-                                >
-
-                                    <span>
-                                        Pendiente
-                                    </span>
-
-                                    <strong>
-                                        ${formatearDinero(
-                                            jugador
-                                                .totalPendiente
-                                        )}
-                                    </strong>
-
+                                <div class="jugador-finanza">
+                                    <span>Mensualidades</span>
+                                    <strong>${formatearDinero(jugador.mensualidadesPendientes)}</strong>
                                 </div>
 
-
-                                <div
-                                    class="jugador-finanza"
-                                >
-
-                                    <span>
-                                        Cuotas pendientes
-                                    </span>
-
-                                    <strong>
-                                        ${
-                                            jugador
-                                                .cuotasPendientes
-                                        }
-                                    </strong>
-
+                                <div class="jugador-finanza jugador-finanza-total">
+                                    <span>Total pendiente</span>
+                                    <strong>${formatearDinero(jugador.totalPendiente)}</strong>
                                 </div>
 
                             </div>
-
 
                             <div
                                 class="portal-estado"
@@ -5646,15 +5608,18 @@ function conectarBotonesDetalleJugador() {
         .forEach(
             (boton) => {
 
+                if (boton.dataset.detalleConectado === "1") {
+                    return;
+                }
+
+                boton.dataset.detalleConectado = "1";
+
                 boton.addEventListener(
                     "click",
                     async () => {
-
                         await abrirDetalleJugador(
-                            boton.dataset
-                                .verJugador
+                            boton.dataset.verJugador
                         );
-
                     }
                 );
 
@@ -5687,12 +5652,23 @@ async function abrirDetalleJugador(
     }
 
 
+    vistaOrigenDetalleJugador =
+        vistaMensualidades?.classList.contains("activa")
+            ? "mensualidades"
+            : "jugadores";
+
+
     vistaResumen.classList.remove(
         "activa"
     );
 
 
     vistaJugadores.classList.remove(
+        "activa"
+    );
+
+
+    vistaMensualidades?.classList.remove(
         "activa"
     );
 
@@ -5754,19 +5730,16 @@ async function abrirDetalleJugador(
 
 
     detalleTotalPagado.textContent =
-        formatearDinero(
-            jugador.totalPagado
-        );
+        formatearDinero(jugador.totalPagado);
 
+    detalleSaldoAnterior.textContent =
+        formatearDinero(jugador.saldoAnteriorPendiente);
+
+    detalleMensualidadesPendientes.textContent =
+        formatearDinero(jugador.mensualidadesPendientes);
 
     detalleTotalPendiente.textContent =
-        formatearDinero(
-            jugador.totalPendiente
-        );
-
-
-    detalleCuotasPendientes.textContent =
-        jugador.cuotasPendientes;
+        formatearDinero(jugador.totalPendiente);
 
 
     detalleListaCuotas.innerHTML = `
@@ -5796,15 +5769,9 @@ async function abrirDetalleJugador(
                 "jugador_id",
                 jugadorId
             )
-            .eq(
+            .in(
                 "concepto",
-                "MENSUALIDAD"
-            )
-            .order(
-                "periodo",
-                {
-                    ascending: true
-                }
+                ["SALDO_ANTERIOR", "MENSUALIDAD"]
             );
 
 
@@ -5907,125 +5874,63 @@ function renderizarDetalleCuotas(
 ) {
 
     if (!cuotas.length) {
-
         detalleListaCuotas.innerHTML = `
             <div class="detalle-sin-cuotas">
-                Este jugador no tiene
-                mensualidades registradas.
+                Este jugador no tiene obligaciones registradas.
             </div>
         `;
-
-
         return;
-
     }
 
+    const cuotasOrdenadas = [...cuotas].sort((a, b) => {
+        const aHistorico = normalizarEstado(a.concepto) === "SALDO_ANTERIOR";
+        const bHistorico = normalizarEstado(b.concepto) === "SALDO_ANTERIOR";
+        if (aHistorico && !bHistorico) return -1;
+        if (!aHistorico && bHistorico) return 1;
+        return String(a.periodo || "").localeCompare(String(b.periodo || ""));
+    });
 
     detalleListaCuotas.innerHTML =
-        cuotas
-            .map(
-                (cuota) => {
+        cuotasOrdenadas.map((cuota) => {
+            const estado = normalizarEstado(cuota.estado);
+            const estaPagada = estado === "PAGADO";
+            const esSaldoAnterior =
+                normalizarEstado(cuota.concepto) === "SALDO_ANTERIOR";
+            const claseEstado = estaPagada ? "cuota-pagada" : "cuota-pendiente";
+            const titulo =
+                esSaldoAnterior ? "Saldo anterior" : formatearMes(cuota.periodo);
+            const subtitulo =
+                esSaldoAnterior
+                    ? "Deuda histórica · abril a agosto 2026"
+                    : "Mensualidad";
+            const etiquetaFecha =
+                esSaldoAnterior ? "Corte histórico" : "Vencimiento";
+            const valorFecha =
+                esSaldoAnterior ? "31/08/2026" : formatearFecha(cuota.fecha_vencimiento);
 
-                    const estado =
-                        normalizarEstado(
-                            cuota.estado
-                        );
+            return `
+                <article class="cuota-detalle ${esSaldoAnterior ? "cuota-detalle-historica" : ""}">
+                    <div class="cuota-detalle-periodo">
+                        <strong>${escaparHTML(titulo)}</strong>
+                        <span>${escaparHTML(subtitulo)}</span>
+                    </div>
 
+                    <div class="cuota-detalle-dato">
+                        <span>Monto</span>
+                        <strong>${formatearDinero(cuota.monto)}</strong>
+                    </div>
 
-                    const estaPagada =
-                        estado ===
-                        "PAGADO";
+                    <div class="cuota-detalle-dato">
+                        <span>${escaparHTML(etiquetaFecha)}</span>
+                        <strong>${escaparHTML(valorFecha)}</strong>
+                    </div>
 
-
-                    const claseEstado =
-                        estaPagada
-                            ? "cuota-pagada"
-                            : "cuota-pendiente";
-
-
-                    return `
-                        <article
-                            class="cuota-detalle"
-                        >
-
-                            <div
-                                class="cuota-detalle-periodo"
-                            >
-
-                                <strong>
-                                    ${
-                                        formatearMes(
-                                            cuota.periodo
-                                        )
-                                    }
-                                </strong>
-
-                                <span>
-                                    Mensualidad
-                                </span>
-
-                            </div>
-
-
-                            <div
-                                class="cuota-detalle-dato"
-                            >
-
-                                <span>
-                                    Monto
-                                </span>
-
-                                <strong>
-                                    ${
-                                        formatearDinero(
-                                            cuota.monto
-                                        )
-                                    }
-                                </strong>
-
-                            </div>
-
-
-                            <div
-                                class="cuota-detalle-dato"
-                            >
-
-                                <span>
-                                    Vencimiento
-                                </span>
-
-                                <strong>
-                                    ${
-                                        formatearFecha(
-                                            cuota
-                                                .fecha_vencimiento
-                                        )
-                                    }
-                                </strong>
-
-                            </div>
-
-
-                            <div>
-
-                                <span
-                                    class="
-                                        cuota-estado
-                                        ${claseEstado}
-                                    "
-                                >
-                                    ${estado}
-                                </span>
-
-                            </div>
-
-                        </article>
-                    `;
-
-                }
-            )
-            .join("");
-
+                    <div>
+                        <span class="cuota-estado ${claseEstado}">${estado}</span>
+                    </div>
+                </article>
+            `;
+        }).join("");
 }
 
 
@@ -6036,30 +5941,211 @@ function renderizarDetalleCuotas(
 btnVolverJugadores.addEventListener(
     "click",
     () => {
-
-        vistaDetalleJugador
-            .classList
-            .remove(
-                "activa"
-            );
-
-
-        vistaJugadores
-            .classList
-            .add(
-                "activa"
-            );
-
-
-        if (adminTituloVista) {
-
-            adminTituloVista.textContent =
-                "Jugadores";
-
-        }
-
+        vistaDetalleJugador.classList.remove("activa");
+        mostrarVistaAdmin(
+            vistaOrigenDetalleJugador || "jugadores"
+        );
     }
 );
+
+/* ===================================================
+   RESUMEN DE MENSUALIDADES Y DEUDAS
+=================================================== */
+
+function renderizarResumenMensualidades() {
+    const deudaTotal = jugadoresTesoreria.reduce(
+        (total, jugador) => total + (Number(jugador.totalPendiente) || 0),
+        0
+    );
+
+    const saldoAnterior = jugadoresTesoreria.reduce(
+        (total, jugador) => total + (Number(jugador.saldoAnteriorPendiente) || 0),
+        0
+    );
+
+    const mensualidadesPendientes = jugadoresTesoreria.reduce(
+        (total, jugador) => total + (Number(jugador.mensualidadesPendientes) || 0),
+        0
+    );
+
+    const jugadoresConDeuda = jugadoresTesoreria.filter(
+        (jugador) => Number(jugador.totalPendiente) > 0
+    );
+
+    if (mensualidadesDeudaTotal) {
+        mensualidadesDeudaTotal.textContent = formatearDinero(deudaTotal);
+    }
+    if (mensualidadesSaldoAnterior) {
+        mensualidadesSaldoAnterior.textContent = formatearDinero(saldoAnterior);
+    }
+    if (mensualidadesMesesPendientes) {
+        mensualidadesMesesPendientes.textContent = formatearDinero(mensualidadesPendientes);
+    }
+    if (mensualidadesJugadoresDeuda) {
+        mensualidadesJugadoresDeuda.textContent = jugadoresConDeuda.length;
+    }
+    if (badgeDeudores) {
+        badgeDeudores.textContent =
+            jugadoresConDeuda.length === 1
+                ? "1 con deuda"
+                : `${jugadoresConDeuda.length} con deuda`;
+    }
+
+    aplicarFiltrosMensualidades();
+}
+
+
+function aplicarFiltrosMensualidades() {
+    if (!listaDeudasJugadores) return;
+
+    const busqueda = String(buscarDeudaJugadorInput?.value || "")
+        .trim()
+        .toLowerCase();
+    const filtro = filtroDeudaJugadorInput?.value || "CON_DEUDA";
+
+    const filtrados = jugadoresTesoreria
+        .filter((jugador) => {
+            const nombre = String(
+                jugador.nombre_completo || jugador.nombre || ""
+            ).toLowerCase();
+            const tieneDeuda = Number(jugador.totalPendiente) > 0;
+            const cumpleFiltro =
+                filtro === "TODOS" ||
+                (filtro === "CON_DEUDA" && tieneDeuda) ||
+                (filtro === "AL_DIA" && !tieneDeuda);
+            return cumpleFiltro && nombre.includes(busqueda);
+        })
+        .sort((a, b) =>
+            Number(b.totalPendiente) - Number(a.totalPendiente) ||
+            String(a.nombre_completo || a.nombre || "")
+                .localeCompare(
+                    String(b.nombre_completo || b.nombre || ""),
+                    "es"
+                )
+        );
+
+    renderizarListaDeudasJugadores(filtrados);
+}
+
+
+function renderizarListaDeudasJugadores(jugadores) {
+    if (!listaDeudasJugadores) return;
+
+    if (!jugadores.length) {
+        listaDeudasJugadores.innerHTML = `
+            <div class="vacio">No hay jugadores que coincidan con este filtro.</div>
+        `;
+        return;
+    }
+
+    listaDeudasJugadores.innerHTML = jugadores.map((jugador) => {
+        const nombre = jugador.nombre_completo || jugador.nombre || "Jugador";
+
+        const cuotasPendientes = (jugador.cuotas || [])
+            .filter((cuota) =>
+                normalizarEstado(cuota.concepto) === "MENSUALIDAD" &&
+                normalizarEstado(cuota.estado) === "PENDIENTE"
+            )
+            .sort((a, b) =>
+                String(a.periodo || "").localeCompare(String(b.periodo || ""))
+            );
+
+        const meses = cuotasPendientes.length
+            ? cuotasPendientes.map((cuota) => `
+                <span class="deuda-mes-chip">
+                    ${escaparHTML(formatearMesCorto(cuota.periodo))}
+                    · ${formatearDinero(cuota.monto)}
+                </span>
+            `).join("")
+            : `
+                <span class="deuda-mes-chip deuda-mes-chip-ok">
+                    Sin mensualidades pendientes
+                </span>
+            `;
+
+        const tieneDeuda = Number(jugador.totalPendiente) > 0;
+        const estadoTexto = tieneDeuda ? "CON DEUDA" : jugador.estadoFinanciero;
+        const claseEstado = tieneDeuda
+            ? "estado-deuda"
+            : jugador.estadoFinanciero === "EXENTO"
+                ? "estado-exento"
+                : jugador.estadoFinanciero === "INACTIVO"
+                    ? "estado-inactivo"
+                    : "estado-ok";
+
+        return `
+            <article class="deuda-jugador-card">
+                <div class="deuda-jugador-top">
+                    <div>
+                        <span class="admin-eyebrow">Estado financiero</span>
+                        <h3>${escaparHTML(nombre)}</h3>
+                    </div>
+                    <span class="estado-financiero ${claseEstado}">
+                        ${escaparHTML(estadoTexto)}
+                    </span>
+                </div>
+
+                <div class="deuda-jugador-resumen">
+                    <div class="deuda-dato deuda-dato-historico">
+                        <span>Saldo anterior</span>
+                        <strong>${formatearDinero(jugador.saldoAnteriorPendiente)}</strong>
+                    </div>
+                    <div class="deuda-dato">
+                        <span>Mensualidades</span>
+                        <strong>${formatearDinero(jugador.mensualidadesPendientes)}</strong>
+                    </div>
+                    <div class="deuda-dato deuda-dato-total">
+                        <span>Total pendiente</span>
+                        <strong>${formatearDinero(jugador.totalPendiente)}</strong>
+                    </div>
+                </div>
+
+                <div class="deuda-meses">
+                    <span class="deuda-meses-label">Mensualidades pendientes</span>
+                    <div class="deuda-meses-chips">${meses}</div>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn btn-detalle deuda-btn-detalle"
+                    data-ver-jugador="${jugador.id}"
+                >
+                    Ver ficha financiera
+                </button>
+            </article>
+        `;
+    }).join("");
+
+    conectarBotonesDetalleJugador();
+}
+
+
+function formatearMesCorto(fecha) {
+    if (!fecha) return "";
+
+    const objetoFecha = new Date(`${fecha}T00:00:00`);
+    if (Number.isNaN(objetoFecha.getTime())) return String(fecha);
+
+    const texto = new Intl.DateTimeFormat(
+        "es-CL",
+        { month: "short", year: "2-digit" }
+    ).format(objetoFecha).replace(".", "");
+
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+
+buscarDeudaJugadorInput?.addEventListener(
+    "input",
+    aplicarFiltrosMensualidades
+);
+
+
+filtroDeudaJugadorInput?.addEventListener(
+    "change",
+    aplicarFiltrosMensualidades
+);
+
 
 /* ===================================================
    HISTORIAL DE PAGOS
@@ -9202,6 +9288,32 @@ function renderizarRankingRifa(
 
 
 /* ===================================================
+   RESUMEN FINANCIERO DEL INICIO
+=================================================== */
+function actualizarResumenFinancieroInicio() {
+    const totalDeuda = jugadoresTesoreria.reduce(
+        (total, jugador) => total + (Number(jugador.totalPendiente) || 0),
+        0
+    );
+
+    const jugadoresConDeuda = jugadoresTesoreria.filter(
+        (jugador) => (Number(jugador.totalPendiente) || 0) > 0
+    ).length;
+
+    const totalEgresos = egresosTesoreria
+        .filter((egreso) => normalizarEstado(egreso.estado) === "REGISTRADO")
+        .reduce((total, egreso) => total + (Number(egreso.monto) || 0), 0);
+
+    const saldoNeto = totalRecaudacionGeneral - totalEgresos;
+
+    if (statDeudaJugadores) statDeudaJugadores.textContent = formatearDinero(totalDeuda);
+    if (statEgresosDashboard) statEgresosDashboard.textContent = formatearDinero(totalEgresos);
+    if (statSaldoNeto) statSaldoNeto.textContent = formatearDinero(saldoNeto);
+    if (statJugadoresDeuda) statJugadoresDeuda.textContent = jugadoresConDeuda;
+}
+
+
+/* ===================================================
    RECAUDACIÓN GENERAL DEL PANEL
    Pagos aprobados + entregas de rifa aprobadas
 =================================================== */
@@ -9250,16 +9362,13 @@ async function actualizarRecaudacionGeneral() {
         );
 
 
+        totalRecaudacionGeneral = totalPagos;
+
         if (statRecaudado) {
-
-            statRecaudado.textContent =
-                formatearDinero(
-                    totalPagos
-                );
-
+            statRecaudado.textContent = formatearDinero(totalRecaudacionGeneral);
         }
 
-
+        actualizarResumenFinancieroInicio();
         return;
 
     }
@@ -9293,15 +9402,13 @@ async function actualizarRecaudacionGeneral() {
             );
 
 
+    totalRecaudacionGeneral = totalPagos + totalRifas;
+
     if (statRecaudado) {
-
-        statRecaudado.textContent =
-            formatearDinero(
-                totalPagos +
-                totalRifas
-            );
-
+        statRecaudado.textContent = formatearDinero(totalRecaudacionGeneral);
     }
+
+    actualizarResumenFinancieroInicio();
 
 }
 

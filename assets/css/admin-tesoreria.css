@@ -1,18 +1,38 @@
 /* ===================================================
 
+
+
    RAYCKINGTON FC
 
+
+
    PANEL ADMINISTRATIVO
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 * {
+
+
 
     box-sizing: border-box;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -20,37 +40,73 @@
 
 :root {
 
+
+
     --bg: #06101b;
+
+
 
     --bg-soft: #091522;
 
+
+
     --panel: #0d1a28;
+
+
 
     --panel-2: #111f30;
 
 
 
+
+
+
+
     --border: #24374b;
+
+
 
     --border-soft: #1b2b3d;
 
 
 
+
+
+
+
     --text: #f4f7fb;
+
+
 
     --muted: #8fa0b4;
 
 
 
+
+
+
+
     --red: #d71920;
+
+
 
     --red-dark: #9f1117;
 
 
 
+
+
+
+
     --blue: #274b7a;
 
+
+
     --blue-light: #8fc2ff;
+
+
+
+
 
 
 
@@ -58,25 +114,53 @@
 
 
 
+
+
+
+
     --green: #63d69a;
+
+
 
     --green-bg: rgba(25, 135, 84, .16);
 
 
 
+
+
+
+
     --danger: #ff777f;
+
+
 
     --danger-bg: rgba(180, 35, 44, .17);
 
 
 
+
+
+
+
     --shadow:
+
+
 
         0 20px 50px
 
+
+
         rgba(0, 0, 0, .25);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -84,9 +168,19 @@
 
 html {
 
+
+
     scroll-behavior: smooth;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -94,7 +188,13 @@ html {
 
 body {
 
+
+
     margin: 0;
+
+
+
+
 
 
 
@@ -102,35 +202,73 @@ body {
 
 
 
+
+
+
+
     font-family:
+
+
 
         Arial,
 
+
+
         Helvetica,
+
+
 
         sans-serif;
 
 
 
+
+
+
+
     background:
+
+
 
         radial-gradient(
 
+
+
             circle at top right,
+
+
 
             #15253c 0%,
 
+
+
             #08131f 35%,
 
+
+
             #040a11 100%
+
+
 
         );
 
 
 
+
+
+
+
     color: var(--text);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -138,15 +276,31 @@ body {
 
 button,
 
+
+
 input,
+
+
 
 textarea,
 
+
+
 select {
+
+
 
     font: inherit;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -154,9 +308,19 @@ select {
 
 button {
 
+
+
     -webkit-tap-highlight-color: transparent;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -164,9 +328,19 @@ button {
 
 img {
 
+
+
     max-width: 100%;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -174,13 +348,27 @@ img {
 
 input,
 
+
+
 textarea,
+
+
 
 select {
 
+
+
     color-scheme: dark;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -188,15 +376,29 @@ select {
 
 /* ===================================================
 
+
+
    BOTONES
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .btn {
 
+
+
     border: 0;
+
+
+
+
 
 
 
@@ -204,11 +406,23 @@ select {
 
 
 
+
+
+
+
     padding:
+
+
 
         12px
 
+
+
         18px;
+
+
+
+
 
 
 
@@ -216,7 +430,15 @@ select {
 
 
 
+
+
+
+
     font-weight: 800;
+
+
+
+
 
 
 
@@ -224,15 +446,33 @@ select {
 
 
 
+
+
+
+
     transition:
+
+
 
         transform .18s ease,
 
+
+
         opacity .18s ease,
+
+
 
         background .18s ease;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -240,15 +480,31 @@ select {
 
 .btn:hover {
 
+
+
     transform:
+
+
 
         translateY(-1px);
 
 
 
+
+
+
+
     opacity: .94;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -256,7 +512,13 @@ select {
 
 .btn:disabled {
 
+
+
     opacity: .5;
+
+
+
+
 
 
 
@@ -264,9 +526,21 @@ select {
 
 
 
+
+
+
+
     transform: none;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -274,9 +548,19 @@ select {
 
 .btn-full {
 
+
+
     width: 100%;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -284,17 +568,33 @@ select {
 
 .btn-principal {
 
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             135deg,
+
+
 
             var(--red),
 
+
+
             #b81319
 
+
+
         );
+
+
+
+
 
 
 
@@ -302,13 +602,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 10px 28px
 
+
+
         rgba(215, 25, 32, .18);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -316,23 +632,47 @@ select {
 
 .btn-cerrar {
 
+
+
     background:
+
+
 
         rgba(180, 35, 44, .15);
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid
+
+
 
         rgba(180, 35, 44, .30);
 
 
 
+
+
+
+
     color: #ff858b;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -340,13 +680,27 @@ select {
 
 .btn-comprobante {
 
+
+
     background: #274b7a;
+
+
+
+
 
 
 
     color: white;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -354,13 +708,27 @@ select {
 
 .btn-aprobar {
 
+
+
     background: #198754;
+
+
+
+
 
 
 
     color: white;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -368,13 +736,27 @@ select {
 
 .btn-rechazar {
 
+
+
     background: #b4232c;
+
+
+
+
 
 
 
     color: white;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -382,7 +764,13 @@ select {
 
 .btn-volver {
 
+
+
     margin-bottom: 22px;
+
+
+
+
 
 
 
@@ -390,9 +778,21 @@ select {
 
 
 
+
+
+
+
     color: white;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -400,7 +800,13 @@ select {
 
 .btn-detalle {
 
+
+
     width: 100%;
+
+
+
+
 
 
 
@@ -408,11 +814,21 @@ select {
 
 
 
+
+
+
+
     background: #274b7a;
 
 
 
+
+
+
+
     color: white;
+
+
 
 }
 
@@ -420,17 +836,37 @@ select {
 
 
 
+
+
+
+
+
+
 /* ===================================================
 
+
+
    LOGIN
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-login {
 
+
+
     min-height: 100vh;
+
+
+
+
 
 
 
@@ -438,7 +874,15 @@ select {
 
 
 
+
+
+
+
     align-items: center;
+
+
+
+
 
 
 
@@ -446,13 +890,29 @@ select {
 
 
 
+
+
+
+
     padding:
+
+
 
         40px
 
+
+
         20px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -460,41 +920,81 @@ select {
 
 .admin-login-card {
 
+
+
     width: min(
+
+
 
         430px,
 
+
+
         100%
+
+
 
     );
 
 
 
+
+
+
+
     padding:
 
+
+
         38px
+
+
 
         34px;
 
 
 
+
+
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             145deg,
+
+
 
             rgba(17, 31, 48, .97),
 
+
+
             rgba(8, 20, 32, .98)
+
+
 
         );
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid var(--border);
+
+
+
+
 
 
 
@@ -502,13 +1002,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 30px 80px
 
+
+
         rgba(0, 0, 0, .42);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -516,13 +1032,27 @@ select {
 
 .admin-login-brand {
 
+
+
     text-align: center;
+
+
+
+
 
 
 
     margin-bottom: 30px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -530,7 +1060,13 @@ select {
 
 .admin-login-logo {
 
+
+
     width: 100px;
+
+
+
+
 
 
 
@@ -538,13 +1074,29 @@ select {
 
 
 
+
+
+
+
     object-fit: contain;
+
+
+
+
 
 
 
     margin-bottom: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -552,11 +1104,21 @@ select {
 
 .admin-login-brand h1 {
 
+
+
     margin:
+
+
 
         7px 0
 
+
+
         5px;
+
+
+
+
 
 
 
@@ -564,9 +1126,21 @@ select {
 
 
 
+
+
+
+
     letter-spacing: -.7px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -574,7 +1148,13 @@ select {
 
 .admin-login-brand p {
 
+
+
     margin: 0;
+
+
+
+
 
 
 
@@ -582,9 +1162,21 @@ select {
 
 
 
+
+
+
+
     font-size: 14px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -592,9 +1184,19 @@ select {
 
 .admin-login-form {
 
+
+
     margin-top: 25px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -602,9 +1204,19 @@ select {
 
 .admin-form-group {
 
+
+
     margin-bottom: 18px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -612,7 +1224,13 @@ select {
 
 .admin-form-group label {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -620,7 +1238,15 @@ select {
 
 
 
+
+
+
+
     color: #dce5ef;
+
+
+
+
 
 
 
@@ -628,9 +1254,21 @@ select {
 
 
 
+
+
+
+
     font-weight: 800;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -638,25 +1276,49 @@ select {
 
 .admin-form-group input {
 
+
+
     width: 100%;
+
+
+
+
 
 
 
     padding:
 
+
+
         13px
+
+
 
         14px;
 
 
 
+
+
+
+
     border:
+
+
 
         1px solid #3b4e64;
 
 
 
+
+
+
+
     border-radius: 11px;
+
+
+
+
 
 
 
@@ -664,7 +1326,15 @@ select {
 
 
 
+
+
+
+
     color: white;
+
+
+
+
 
 
 
@@ -672,13 +1342,29 @@ select {
 
 
 
+
+
+
+
     transition:
+
+
 
         border-color .2s,
 
+
+
         box-shadow .2s;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -686,7 +1372,13 @@ select {
 
 .admin-form-group input:focus {
 
+
+
     outline: none;
+
+
+
+
 
 
 
@@ -694,13 +1386,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 0 0 3px
 
+
+
         rgba(215, 25, 32, .10);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -708,7 +1416,13 @@ select {
 
 #mensaje-login {
 
+
+
     min-height: 20px;
+
+
+
+
 
 
 
@@ -716,7 +1430,15 @@ select {
 
 
 
+
+
+
+
     text-align: center;
+
+
+
+
 
 
 
@@ -724,7 +1446,13 @@ select {
 
 
 
+
+
+
+
     font-size: 13px;
+
+
 
 }
 
@@ -732,21 +1460,43 @@ select {
 
 
 
+
+
+
+
+
+
 /* ===================================================
+
+
 
    PANEL PRINCIPAL
 
+
+
 =================================================== */
+
+
+
+
 
 
 
 #panel-admin {
 
+
+
     display: none;
 
 
 
+
+
+
+
     min-height: 100vh;
+
+
 
 }
 
@@ -754,21 +1504,45 @@ select {
 
 
 
+
+
+
+
+
+
 /* ===================================================
 
+
+
    SIDEBAR
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-sidebar {
+
+
 
     position: fixed;
 
 
 
+
+
+
+
     top: 0;
+
+
+
+
 
 
 
@@ -776,7 +1550,15 @@ select {
 
 
 
+
+
+
+
     bottom: 0;
+
+
+
+
 
 
 
@@ -784,7 +1566,15 @@ select {
 
 
 
+
+
+
+
     width: 265px;
+
+
+
+
 
 
 
@@ -792,45 +1582,93 @@ select {
 
 
 
+
+
+
+
     flex-direction: column;
+
+
+
+
 
 
 
     padding:
 
+
+
         26px
+
+
 
         18px;
 
 
 
+
+
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             180deg,
+
+
 
             #0b1724 0%,
 
+
+
             #07111b 100%
+
+
 
         );
 
 
 
+
+
+
+
     border-right:
+
+
 
         1px solid #213347;
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         12px 0 35px
 
+
+
         rgba(0, 0, 0, .16);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -838,11 +1676,21 @@ select {
 
 .sidebar-brand {
 
+
+
     display: flex;
 
 
 
+
+
+
+
     align-items: center;
+
+
+
+
 
 
 
@@ -850,19 +1698,41 @@ select {
 
 
 
+
+
+
+
     padding:
 
+
+
         0 8px
+
+
 
         24px;
 
 
 
+
+
+
+
     border-bottom:
+
+
 
         1px solid #1d3043;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -870,7 +1740,13 @@ select {
 
 .sidebar-logo {
 
+
+
     width: 52px;
+
+
+
+
 
 
 
@@ -878,9 +1754,21 @@ select {
 
 
 
+
+
+
+
     object-fit: contain;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -888,13 +1776,27 @@ select {
 
 .sidebar-brand strong {
 
+
+
     display: block;
+
+
+
+
 
 
 
     font-size: 15px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -902,7 +1804,13 @@ select {
 
 .sidebar-brand span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -910,13 +1818,29 @@ select {
 
 
 
+
+
+
+
     color: var(--muted);
+
+
+
+
 
 
 
     font-size: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -924,11 +1848,21 @@ select {
 
 .admin-menu {
 
+
+
     display: flex;
 
 
 
+
+
+
+
     flex-direction: column;
+
+
+
+
 
 
 
@@ -936,9 +1870,21 @@ select {
 
 
 
+
+
+
+
     margin-top: 24px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -946,7 +1892,13 @@ select {
 
 .menu-btn {
 
+
+
     width: 100%;
+
+
+
+
 
 
 
@@ -954,7 +1906,15 @@ select {
 
 
 
+
+
+
+
     align-items: center;
+
+
+
+
 
 
 
@@ -962,11 +1922,23 @@ select {
 
 
 
+
+
+
+
     padding:
+
+
 
         12px
 
+
+
         13px;
+
+
+
+
 
 
 
@@ -974,7 +1946,15 @@ select {
 
 
 
+
+
+
+
     border-radius: 11px;
+
+
+
+
 
 
 
@@ -982,7 +1962,15 @@ select {
 
 
 
+
+
+
+
     color: #93a2b4;
+
+
+
+
 
 
 
@@ -990,7 +1978,15 @@ select {
 
 
 
+
+
+
+
     font-size: 14px;
+
+
+
+
 
 
 
@@ -998,19 +1994,41 @@ select {
 
 
 
+
+
+
+
     cursor: pointer;
+
+
+
+
 
 
 
     transition:
 
+
+
         background .2s,
+
+
 
         color .2s,
 
+
+
         transform .2s;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1018,7 +2036,13 @@ select {
 
 .menu-btn:hover {
 
+
+
     background: #122235;
+
+
+
+
 
 
 
@@ -1026,11 +2050,25 @@ select {
 
 
 
+
+
+
+
     transform:
+
+
 
         translateX(2px);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1038,17 +2076,33 @@ select {
 
 .menu-btn.activo {
 
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             135deg,
+
+
 
             var(--red),
 
+
+
             #ad1319
 
+
+
         );
+
+
+
+
 
 
 
@@ -1056,13 +2110,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 8px 25px
 
+
+
         rgba(215, 25, 32, .18);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1070,7 +2140,13 @@ select {
 
 .menu-icon {
 
+
+
     width: 24px;
+
+
+
+
 
 
 
@@ -1078,11 +2154,23 @@ select {
 
 
 
+
+
+
+
     display: grid;
 
 
 
+
+
+
+
     place-items: center;
+
+
+
+
 
 
 
@@ -1090,9 +2178,21 @@ select {
 
 
 
+
+
+
+
     opacity: .95;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1100,19 +2200,39 @@ select {
 
 .sidebar-separador {
 
+
+
     height: 1px;
+
+
+
+
 
 
 
     margin:
 
+
+
         11px 5px;
+
+
+
+
 
 
 
     background: #1e3043;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1120,25 +2240,51 @@ select {
 
 .sidebar-footer {
 
+
+
     margin-top: auto;
+
+
+
+
 
 
 
     padding:
 
+
+
         20px
 
+
+
         8px
+
+
 
         5px;
 
 
 
+
+
+
+
     border-top:
+
+
 
         1px solid #1d3043;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1146,7 +2292,13 @@ select {
 
 .sidebar-footer span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -1154,13 +2306,29 @@ select {
 
 
 
+
+
+
+
     font-size: 12px;
+
+
+
+
 
 
 
     font-weight: 900;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1168,7 +2336,13 @@ select {
 
 .sidebar-footer small {
 
+
+
     color: #718398;
+
+
+
+
 
 
 
@@ -1176,7 +2350,13 @@ select {
 
 
 
+
+
+
+
     line-height: 1.5;
+
+
 
 }
 
@@ -1184,17 +2364,37 @@ select {
 
 
 
+
+
+
+
+
+
 /* ===================================================
 
+
+
    AREA PRINCIPAL
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-main {
 
+
+
     min-height: 100vh;
+
+
+
+
 
 
 
@@ -1202,11 +2402,21 @@ select {
 
 
 
+
+
+
+
     display: flex;
 
 
 
+
+
+
+
     flex-direction: column;
+
+
 
 }
 
@@ -1214,17 +2424,37 @@ select {
 
 
 
+
+
+
+
+
+
 /* ===================================================
 
+
+
    TOPBAR
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-topbar {
 
+
+
     min-height: 91px;
+
+
+
+
 
 
 
@@ -1232,7 +2462,15 @@ select {
 
 
 
+
+
+
+
     align-items: center;
+
+
+
+
 
 
 
@@ -1240,41 +2478,83 @@ select {
 
 
 
+
+
+
+
     gap: 25px;
+
+
+
+
 
 
 
     padding:
 
+
+
         18px
+
+
 
         clamp(
 
+
+
             22px,
+
+
 
             4vw,
 
+
+
             46px
+
+
 
         );
 
 
 
+
+
+
+
     background:
+
+
 
         rgba(6, 16, 27, .82);
 
 
 
+
+
+
+
     border-bottom:
+
+
 
         1px solid #1c2d40;
 
 
 
+
+
+
+
     backdrop-filter:
 
+
+
         blur(14px);
+
+
+
+
 
 
 
@@ -1282,13 +2562,29 @@ select {
 
 
 
+
+
+
+
     top: 0;
+
+
+
+
 
 
 
     z-index: 800;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1296,7 +2592,13 @@ select {
 
 .admin-topbar-left {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -1304,9 +2606,21 @@ select {
 
 
 
+
+
+
+
     gap: 15px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1314,27 +2628,55 @@ select {
 
 .admin-topbar h1 {
 
+
+
     margin:
 
+
+
         4px 0
+
+
 
         0;
 
 
 
+
+
+
+
     font-size:
+
+
 
         clamp(
 
+
+
             21px,
+
+
 
             2.8vw,
 
+
+
             27px
+
+
 
         );
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1342,7 +2684,13 @@ select {
 
 .admin-menu-mobile {
 
+
+
     display: none;
+
+
+
+
 
 
 
@@ -1350,13 +2698,27 @@ select {
 
 
 
+
+
+
+
     height: 42px;
+
+
+
+
 
 
 
     border:
 
+
+
         1px solid #2e4359;
+
+
+
+
 
 
 
@@ -1364,7 +2726,15 @@ select {
 
 
 
+
+
+
+
     background: #101f2f;
+
+
+
+
 
 
 
@@ -1372,13 +2742,29 @@ select {
 
 
 
+
+
+
+
     cursor: pointer;
+
+
+
+
 
 
 
     font-size: 20px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1386,7 +2772,13 @@ select {
 
 .admin-usuario-mini {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -1394,9 +2786,21 @@ select {
 
 
 
+
+
+
+
     gap: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1404,7 +2808,13 @@ select {
 
 .admin-avatar {
 
+
+
     width: 42px;
+
+
+
+
 
 
 
@@ -1412,7 +2822,15 @@ select {
 
 
 
+
+
+
+
     display: grid;
+
+
+
+
 
 
 
@@ -1420,27 +2838,57 @@ select {
 
 
 
+
+
+
+
     border-radius: 50%;
+
+
+
+
 
 
 
     background:
 
+
+
         linear-gradient(
+
+
 
             135deg,
 
+
+
             var(--red),
 
+
+
             #7f1217
+
+
 
         );
 
 
 
+
+
+
+
     font-weight: 900;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1448,13 +2896,27 @@ select {
 
 .admin-usuario-mini strong {
 
+
+
     display: block;
+
+
+
+
 
 
 
     font-size: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1462,7 +2924,13 @@ select {
 
 .admin-usuario-mini span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -1470,13 +2938,29 @@ select {
 
 
 
+
+
+
+
     color: var(--muted);
+
+
+
+
 
 
 
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1484,15 +2968,29 @@ select {
 
 /* ===================================================
 
+
+
    CONTENIDO
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-content {
 
+
+
     width: 100%;
+
+
+
+
 
 
 
@@ -1500,23 +2998,49 @@ select {
 
 
 
+
+
+
+
     padding:
+
+
 
         34px
 
+
+
         clamp(
+
+
 
             22px,
 
+
+
             4vw,
+
+
 
             48px
 
+
+
         )
+
+
 
         55px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1524,9 +3048,19 @@ select {
 
 .vista-admin {
 
+
+
     display: none;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1534,15 +3068,31 @@ select {
 
 .vista-admin.activa {
 
+
+
     display: block;
+
+
+
+
 
 
 
     animation:
 
+
+
         aparecerVista .20s ease;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1552,35 +3102,73 @@ select {
 
 
 
+
+
+
+
     from {
+
+
 
         opacity: 0;
 
 
 
+
+
+
+
         transform:
+
+
 
             translateY(3px);
 
+
+
     }
+
+
+
+
 
 
 
     to {
 
+
+
         opacity: 1;
+
+
+
+
 
 
 
         transform:
 
+
+
             translateY(0);
+
+
 
     }
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1588,7 +3176,13 @@ select {
 
 .admin-eyebrow {
 
+
+
     color: var(--yellow);
+
+
+
+
 
 
 
@@ -1596,7 +3190,15 @@ select {
 
 
 
+
+
+
+
     font-weight: 900;
+
+
+
+
 
 
 
@@ -1604,7 +3206,13 @@ select {
 
 
 
+
+
+
+
     letter-spacing: 1.15px;
+
+
 
 }
 
@@ -1612,17 +3220,37 @@ select {
 
 
 
+
+
+
+
+
+
 /* ===================================================
 
+
+
    HERO
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-hero {
 
+
+
     position: relative;
+
+
+
+
 
 
 
@@ -1630,7 +3258,15 @@ select {
 
 
 
+
+
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -1638,7 +3274,15 @@ select {
 
 
 
+
+
+
+
     align-items: center;
+
+
+
+
 
 
 
@@ -1646,37 +3290,75 @@ select {
 
 
 
+
+
+
+
     margin-bottom: 27px;
+
+
+
+
 
 
 
     padding:
 
+
+
         30px
+
+
 
         32px;
 
 
 
+
+
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             120deg,
+
+
 
             #11243a 0%,
 
+
+
             #0c1c2c 60%,
 
+
+
             #151a25 100%
+
+
 
         );
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #293e55;
+
+
+
+
 
 
 
@@ -1684,9 +3366,21 @@ select {
 
 
 
+
+
+
+
     box-shadow: var(--shadow);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1694,11 +3388,21 @@ select {
 
 .admin-hero::after {
 
+
+
     content: "";
 
 
 
+
+
+
+
     position: absolute;
+
+
+
+
 
 
 
@@ -1706,7 +3410,15 @@ select {
 
 
 
+
+
+
+
     height: 260px;
+
+
+
+
 
 
 
@@ -1714,7 +3426,15 @@ select {
 
 
 
+
+
+
+
     top: -100px;
+
+
+
+
 
 
 
@@ -1722,17 +3442,37 @@ select {
 
 
 
+
+
+
+
     background:
+
+
 
         rgba(215, 25, 32, .11);
 
 
 
+
+
+
+
     filter:
+
+
 
         blur(2px);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1740,27 +3480,55 @@ select {
 
 .admin-hero h2 {
 
+
+
     margin:
 
+
+
         8px 0
+
+
 
         9px;
 
 
 
+
+
+
+
     font-size:
+
+
 
         clamp(
 
+
+
             26px,
+
+
 
             4vw,
 
+
+
             36px
+
+
 
         );
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1768,11 +3536,21 @@ select {
 
 .admin-hero p {
 
+
+
     max-width: 580px;
 
 
 
+
+
+
+
     margin: 0;
+
+
+
+
 
 
 
@@ -1780,9 +3558,21 @@ select {
 
 
 
+
+
+
+
     line-height: 1.6;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1790,7 +3580,13 @@ select {
 
 .admin-hero-logo {
 
+
+
     position: relative;
+
+
+
+
 
 
 
@@ -1798,13 +3594,29 @@ select {
 
 
 
+
+
+
+
     flex:
+
+
 
         0 0
 
+
+
         115px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1812,7 +3624,13 @@ select {
 
 .admin-hero-logo img {
 
+
+
     width: 108px;
+
+
+
+
 
 
 
@@ -1820,21 +3638,45 @@ select {
 
 
 
+
+
+
+
     object-fit: contain;
+
+
+
+
 
 
 
     filter:
 
+
+
         drop-shadow(
+
+
 
             0 12px 28px
 
+
+
             rgba(0, 0, 0, .35)
+
+
 
         );
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1842,27 +3684,53 @@ select {
 
 /* ===================================================
 
+
+
    DASHBOARD
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .dashboard {
+
+
 
     display: grid;
 
 
 
+
+
+
+
     grid-template-columns:
+
+
 
         repeat(
 
+
+
             4,
+
+
 
             minmax(0, 1fr)
 
+
+
         );
+
+
+
+
 
 
 
@@ -1870,9 +3738,21 @@ select {
 
 
 
+
+
+
+
     margin-bottom: 28px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1880,11 +3760,21 @@ select {
 
 .stat-card {
 
+
+
     position: relative;
 
 
 
+
+
+
+
     overflow: hidden;
+
+
+
+
 
 
 
@@ -1892,23 +3782,47 @@ select {
 
 
 
+
+
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             145deg,
+
+
 
             #111f30,
 
+
+
             #0b1724
+
+
 
         );
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #263a50;
+
+
+
+
 
 
 
@@ -1916,13 +3830,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 11px 27px
 
+
+
         rgba(0, 0, 0, .16);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1930,7 +3860,13 @@ select {
 
 .stat-card::before {
 
+
+
     content: "";
+
+
+
+
 
 
 
@@ -1938,7 +3874,15 @@ select {
 
 
 
+
+
+
+
     left: 0;
+
+
+
+
 
 
 
@@ -1946,7 +3890,15 @@ select {
 
 
 
+
+
+
+
     bottom: 0;
+
+
+
+
 
 
 
@@ -1954,9 +3906,21 @@ select {
 
 
 
+
+
+
+
     background: var(--red);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1964,7 +3928,13 @@ select {
 
 .stat-card span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -1972,7 +3942,15 @@ select {
 
 
 
+
+
+
+
     color: #8798aa;
+
+
+
+
 
 
 
@@ -1980,9 +3958,21 @@ select {
 
 
 
+
+
+
+
     font-weight: 700;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1990,7 +3980,13 @@ select {
 
 .stat-card strong {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -1998,9 +3994,21 @@ select {
 
 
 
+
+
+
+
     letter-spacing: -.5px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2008,7 +4016,13 @@ select {
 
 .stat-card small {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -2016,13 +4030,29 @@ select {
 
 
 
+
+
+
+
     color: #64768a;
+
+
+
+
 
 
 
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2030,41 +4060,81 @@ select {
 
 /* ===================================================
 
+
+
    SECCIONES
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-section {
+
+
 
     margin-bottom: 28px;
 
 
 
+
+
+
+
     padding:
+
+
 
         26px;
 
 
 
+
+
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             145deg,
+
+
 
             rgba(16, 30, 46, .96),
 
+
+
             rgba(10, 21, 34, .96)
+
+
 
         );
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #263a50;
+
+
+
+
 
 
 
@@ -2072,13 +4142,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 14px 36px
 
+
+
         rgba(0, 0, 0, .19);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2086,7 +4172,13 @@ select {
 
 .section-heading {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -2094,7 +4186,15 @@ select {
 
 
 
+
+
+
+
     align-items: flex-start;
+
+
+
+
 
 
 
@@ -2102,9 +4202,21 @@ select {
 
 
 
+
+
+
+
     margin-bottom: 23px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2112,13 +4224,27 @@ select {
 
 .section-heading-center {
 
+
+
     justify-content: center;
+
+
+
+
 
 
 
     text-align: center;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2126,17 +4252,35 @@ select {
 
 .section-heading h2 {
 
+
+
     margin:
 
+
+
         7px 0
+
+
 
         5px;
 
 
 
+
+
+
+
     font-size: 25px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2144,13 +4288,27 @@ select {
 
 .section-heading h3 {
 
+
+
     margin:
+
+
 
         7px 0
 
+
+
         5px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2158,7 +4316,13 @@ select {
 
 .section-heading p {
 
+
+
     max-width: 660px;
+
+
+
+
 
 
 
@@ -2166,7 +4330,15 @@ select {
 
 
 
+
+
+
+
     color: var(--muted);
+
+
+
+
 
 
 
@@ -2174,9 +4346,21 @@ select {
 
 
 
+
+
+
+
     line-height: 1.55;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2184,15 +4368,29 @@ select {
 
 /* ===================================================
 
+
+
    BADGES
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .badge {
 
+
+
     display: inline-flex;
+
+
+
+
 
 
 
@@ -2200,15 +4398,31 @@ select {
 
 
 
+
+
+
+
     justify-content: center;
+
+
+
+
 
 
 
     padding:
 
+
+
         7px
 
+
+
         11px;
+
+
+
+
 
 
 
@@ -2216,9 +4430,19 @@ select {
 
 
 
+
+
+
+
     background:
 
+
+
         rgba(255, 193, 7, .13);
+
+
+
+
 
 
 
@@ -2226,7 +4450,15 @@ select {
 
 
 
+
+
+
+
     font-size: 10px;
+
+
+
+
 
 
 
@@ -2234,9 +4466,21 @@ select {
 
 
 
+
+
+
+
     white-space: nowrap;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2244,15 +4488,31 @@ select {
 
 .badge-azul {
 
+
+
     background:
+
+
 
         rgba(39, 75, 122, .30);
 
 
 
+
+
+
+
     color: #9ecbff;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2260,33 +4520,67 @@ select {
 
 /* ===================================================
 
+
+
    ACCESOS RÁPIDOS
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .accesos-grid {
+
+
 
     display: grid;
 
 
 
+
+
+
+
     grid-template-columns:
+
+
 
         repeat(
 
+
+
             4,
 
+
+
             minmax(0, 1fr)
+
+
 
         );
 
 
 
+
+
+
+
     gap: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2294,7 +4588,13 @@ select {
 
 .acceso-card {
 
+
+
     min-height: 125px;
+
+
+
+
 
 
 
@@ -2302,7 +4602,15 @@ select {
 
 
 
+
+
+
+
     flex-direction: column;
+
+
+
+
 
 
 
@@ -2310,7 +4618,15 @@ select {
 
 
 
+
+
+
+
     justify-content: center;
+
+
+
+
 
 
 
@@ -2318,9 +4634,19 @@ select {
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #273c52;
+
+
+
+
 
 
 
@@ -2328,7 +4654,15 @@ select {
 
 
 
+
+
+
+
     background: #0a1724;
+
+
+
+
 
 
 
@@ -2336,7 +4670,15 @@ select {
 
 
 
+
+
+
+
     text-align: left;
+
+
+
+
 
 
 
@@ -2344,15 +4686,33 @@ select {
 
 
 
+
+
+
+
     transition:
+
+
 
         transform .2s,
 
+
+
         border-color .2s,
+
+
 
         background .2s;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2360,9 +4720,17 @@ select {
 
 .acceso-card:hover {
 
+
+
     transform:
 
+
+
         translateY(-2px);
+
+
+
+
 
 
 
@@ -2370,9 +4738,21 @@ select {
 
 
 
+
+
+
+
     background: #0e1d2d;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2380,7 +4760,13 @@ select {
 
 .acceso-icon {
 
+
+
     width: 34px;
+
+
+
+
 
 
 
@@ -2388,11 +4774,23 @@ select {
 
 
 
+
+
+
+
     display: grid;
 
 
 
+
+
+
+
     place-items: center;
+
+
+
+
 
 
 
@@ -2400,13 +4798,27 @@ select {
 
 
 
+
+
+
+
     border-radius: 10px;
+
+
+
+
 
 
 
     background:
 
+
+
         rgba(215, 25, 32, .13);
+
+
+
+
 
 
 
@@ -2414,9 +4826,21 @@ select {
 
 
 
+
+
+
+
     font-weight: 900;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2424,9 +4848,19 @@ select {
 
 .acceso-card strong {
 
+
+
     font-size: 14px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2434,7 +4868,13 @@ select {
 
 .acceso-card small {
 
+
+
     margin-top: 5px;
+
+
+
+
 
 
 
@@ -2442,9 +4882,21 @@ select {
 
 
 
+
+
+
+
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2452,15 +4904,29 @@ select {
 
 /* ===================================================
 
+
+
    MENSAJES
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 #mensaje {
 
+
+
     min-height: 0;
+
+
+
+
 
 
 
@@ -2468,13 +4934,29 @@ select {
 
 
 
+
+
+
+
     color: var(--yellow);
+
+
+
+
 
 
 
     font-size: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2482,7 +4964,13 @@ select {
 
 .vacio {
 
+
+
     padding: 32px;
+
+
+
+
 
 
 
@@ -2490,13 +4978,29 @@ select {
 
 
 
+
+
+
+
     color: var(--muted);
+
+
+
+
 
 
 
     font-size: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2504,21 +5008,43 @@ select {
 
 /* ===================================================
 
+
+
    PAGOS
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .pagos-grid {
+
+
 
     display: grid;
 
 
 
+
+
+
+
     gap: 14px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2526,7 +5052,13 @@ select {
 
 .pago-card {
 
+
+
     padding: 20px;
+
+
+
+
 
 
 
@@ -2534,15 +5066,33 @@ select {
 
 
 
+
+
+
+
     border:
+
+
 
         1px solid #25394f;
 
 
 
+
+
+
+
     border-radius: 15px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2550,7 +5100,13 @@ select {
 
 .pago-top {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -2558,13 +5114,29 @@ select {
 
 
 
+
+
+
+
     align-items: flex-start;
+
+
+
+
 
 
 
     gap: 20px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2572,13 +5144,27 @@ select {
 
 .pago-jugador {
 
+
+
     margin: 0;
+
+
+
+
 
 
 
     font-size: 18px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2586,7 +5172,13 @@ select {
 
 .pago-concepto {
 
+
+
     margin-top: 5px;
+
+
+
+
 
 
 
@@ -2594,9 +5186,21 @@ select {
 
 
 
+
+
+
+
     font-size: 12px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2604,7 +5208,13 @@ select {
 
 .monto {
 
+
+
     color: var(--yellow);
+
+
+
+
 
 
 
@@ -2612,13 +5222,29 @@ select {
 
 
 
+
+
+
+
     font-weight: 900;
+
+
+
+
 
 
 
     white-space: nowrap;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2626,19 +5252,37 @@ select {
 
 .datos {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         repeat(
+
+
 
             3,
 
+
+
             minmax(0, 1fr)
 
+
+
         );
+
+
+
+
 
 
 
@@ -2646,9 +5290,21 @@ select {
 
 
 
+
+
+
+
     margin-top: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2656,7 +5312,13 @@ select {
 
 .dato {
 
+
+
     padding: 12px;
+
+
+
+
 
 
 
@@ -2664,9 +5326,21 @@ select {
 
 
 
+
+
+
+
     border-radius: 9px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2674,7 +5348,13 @@ select {
 
 .dato span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -2682,13 +5362,29 @@ select {
 
 
 
+
+
+
+
     color: #7f91a5;
+
+
+
+
 
 
 
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2696,7 +5392,13 @@ select {
 
 .acciones {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -2704,13 +5406,29 @@ select {
 
 
 
+
+
+
+
     gap: 9px;
+
+
+
+
 
 
 
     margin-top: 18px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2718,15 +5436,29 @@ select {
 
 /* ===================================================
 
+
+
    AUDITORÍA PAGOS
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .revision-pago {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -2734,7 +5466,15 @@ select {
 
 
 
+
+
+
+
     gap: 5px;
+
+
+
+
 
 
 
@@ -2742,7 +5482,15 @@ select {
 
 
 
+
+
+
+
     padding: 13px;
+
+
+
+
 
 
 
@@ -2750,15 +5498,33 @@ select {
 
 
 
+
+
+
+
     border-left:
+
+
 
         3px solid #274b7a;
 
 
 
+
+
+
+
     border-radius: 9px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2766,9 +5532,19 @@ select {
 
 .revision-pago strong {
 
+
+
     font-size: 12px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2776,13 +5552,27 @@ select {
 
 .revision-pago span {
 
+
+
     color: var(--muted);
+
+
+
+
 
 
 
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2790,13 +5580,27 @@ select {
 
 .revision-pago .motivo-rechazo {
 
+
+
     margin-top: 3px;
+
+
+
+
 
 
 
     color: #ff858b;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2804,7 +5608,13 @@ select {
 
 .sin-comprobante {
 
+
+
     display: inline-flex;
+
+
+
+
 
 
 
@@ -2812,15 +5622,31 @@ select {
 
 
 
+
+
+
+
     padding:
 
+
+
         9px
+
+
 
         12px;
 
 
 
+
+
+
+
     border-radius: 9px;
+
+
+
+
 
 
 
@@ -2828,7 +5654,15 @@ select {
 
 
 
+
+
+
+
     color: #8091a4;
+
+
+
+
 
 
 
@@ -2836,9 +5670,21 @@ select {
 
 
 
+
+
+
+
     font-weight: 700;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2846,15 +5692,29 @@ select {
 
 /* ===================================================
 
+
+
    FILTROS PAGOS
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .filtros-pagos {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -2862,7 +5722,15 @@ select {
 
 
 
+
+
+
+
     align-items: center;
+
+
+
+
 
 
 
@@ -2870,13 +5738,29 @@ select {
 
 
 
+
+
+
+
     flex-wrap: wrap;
+
+
+
+
 
 
 
     margin-bottom: 22px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2884,7 +5768,13 @@ select {
 
 .filtros-estado-pagos {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -2892,9 +5782,21 @@ select {
 
 
 
+
+
+
+
     gap: 7px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2902,17 +5804,33 @@ select {
 
 .filtro-pago-btn {
 
+
+
     padding:
 
+
+
         8px
+
+
 
         13px;
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #334a62;
+
+
+
+
 
 
 
@@ -2920,7 +5838,15 @@ select {
 
 
 
+
+
+
+
     background: #0a1724;
+
+
+
+
 
 
 
@@ -2928,7 +5854,15 @@ select {
 
 
 
+
+
+
+
     font-size: 11px;
+
+
+
+
 
 
 
@@ -2936,9 +5870,21 @@ select {
 
 
 
+
+
+
+
     cursor: pointer;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2946,13 +5892,27 @@ select {
 
 .filtro-pago-btn:hover {
 
+
+
     color: white;
+
+
+
+
 
 
 
     border-color: #597491;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2960,7 +5920,13 @@ select {
 
 .filtro-pago-btn.activo {
 
+
+
     background: var(--red);
+
+
+
+
 
 
 
@@ -2968,9 +5934,21 @@ select {
 
 
 
+
+
+
+
     color: white;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2978,17 +5956,35 @@ select {
 
 /* ===================================================
 
+
+
    TOOLBARS / BUSCADORES
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-toolbar {
+
+
 
     margin-bottom: 22px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2996,13 +5992,25 @@ select {
 
 .buscador-jugadores {
 
+
+
     width: min(
+
+
 
         430px,
 
+
+
         100%
 
+
+
     );
+
+
+
+
 
 
 
@@ -3010,17 +6018,35 @@ select {
 
 
 
+
+
+
+
     padding:
 
+
+
         12px
+
+
 
         14px;
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #3a4e64;
+
+
+
+
 
 
 
@@ -3028,7 +6054,15 @@ select {
 
 
 
+
+
+
+
     background: #07131f;
+
+
+
+
 
 
 
@@ -3036,9 +6070,21 @@ select {
 
 
 
+
+
+
+
     font-size: 14px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3046,7 +6092,13 @@ select {
 
 .buscador-jugadores:focus {
 
+
+
     outline: none;
+
+
+
+
 
 
 
@@ -3054,13 +6106,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 0 0 3px
 
+
+
         rgba(215, 25, 32, .10);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3068,33 +6136,67 @@ select {
 
 /* ===================================================
 
+
+
    JUGADORES
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .jugadores-grid {
+
+
 
     display: grid;
 
 
 
+
+
+
+
     grid-template-columns:
+
+
 
         repeat(
 
+
+
             2,
 
+
+
             minmax(0, 1fr)
+
+
 
         );
 
 
 
+
+
+
+
     gap: 15px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3102,27 +6204,53 @@ select {
 
 .jugador-admin-card {
 
+
+
     padding: 20px;
+
+
+
+
 
 
 
     background:
 
+
+
         linear-gradient(
+
+
 
             145deg,
 
+
+
             #0d1b2a,
 
+
+
             #091521
+
+
 
         );
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #283d53;
+
+
+
+
 
 
 
@@ -3130,13 +6258,29 @@ select {
 
 
 
+
+
+
+
     transition:
+
+
 
         transform .2s,
 
+
+
         border-color .2s;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3144,15 +6288,31 @@ select {
 
 .jugador-admin-card:hover {
 
+
+
     transform:
+
+
 
         translateY(-2px);
 
 
 
+
+
+
+
     border-color: #486783;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3160,7 +6320,13 @@ select {
 
 .jugador-admin-header {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -3168,13 +6334,29 @@ select {
 
 
 
+
+
+
+
     align-items: flex-start;
+
+
+
+
 
 
 
     gap: 15px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3182,13 +6364,27 @@ select {
 
 .jugador-admin-header h3 {
 
+
+
     margin: 0;
+
+
+
+
 
 
 
     font-size: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3196,7 +6392,13 @@ select {
 
 .jugador-tipo {
 
+
+
     margin-top: 5px;
+
+
+
+
 
 
 
@@ -3204,9 +6406,21 @@ select {
 
 
 
+
+
+
+
     font-size: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3214,19 +6428,37 @@ select {
 
 .jugador-finanzas {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         repeat(
+
+
 
             3,
 
+
+
             minmax(0, 1fr)
 
+
+
         );
+
+
+
+
 
 
 
@@ -3234,9 +6466,21 @@ select {
 
 
 
+
+
+
+
     margin-top: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3244,7 +6488,13 @@ select {
 
 .jugador-finanza {
 
+
+
     padding: 11px;
+
+
+
+
 
 
 
@@ -3252,9 +6502,21 @@ select {
 
 
 
+
+
+
+
     border-radius: 9px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3262,7 +6524,13 @@ select {
 
 .jugador-finanza span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -3270,13 +6538,29 @@ select {
 
 
 
+
+
+
+
     color: #7c8da0;
+
+
+
+
 
 
 
     font-size: 9px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3284,9 +6568,19 @@ select {
 
 .jugador-finanza strong {
 
+
+
     font-size: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3294,7 +6588,13 @@ select {
 
 .portal-estado {
 
+
+
     margin-top: 15px;
+
+
+
+
 
 
 
@@ -3302,9 +6602,19 @@ select {
 
 
 
+
+
+
+
     border-top:
 
+
+
         1px solid #22364a;
+
+
+
+
 
 
 
@@ -3312,9 +6622,21 @@ select {
 
 
 
+
+
+
+
     font-size: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3322,13 +6644,27 @@ select {
 
 .portal-activo {
 
+
+
     color: var(--green);
+
+
+
+
 
 
 
     font-weight: 900;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3336,13 +6672,27 @@ select {
 
 .portal-inactivo {
 
+
+
     color: var(--yellow);
+
+
+
+
 
 
 
     font-weight: 900;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3350,17 +6700,33 @@ select {
 
 /* ===================================================
 
+
+
    ESTADOS FINANCIEROS
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .estado-financiero,
+
+
 
 .cuota-estado {
 
+
+
     display: inline-flex;
+
+
+
+
 
 
 
@@ -3368,11 +6734,23 @@ select {
 
 
 
+
+
+
+
     padding:
+
+
 
         6px
 
+
+
         9px;
+
+
+
+
 
 
 
@@ -3380,7 +6758,15 @@ select {
 
 
 
+
+
+
+
     font-size: 9px;
+
+
+
+
 
 
 
@@ -3388,9 +6774,21 @@ select {
 
 
 
+
+
+
+
     white-space: nowrap;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3398,15 +6796,31 @@ select {
 
 .estado-ok,
 
+
+
 .cuota-pagada {
+
+
 
     background: var(--green-bg);
 
 
 
+
+
+
+
     color: var(--green);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3414,17 +6828,35 @@ select {
 
 .estado-deuda,
 
+
+
 .cuota-pendiente,
 
+
+
 .pago-rechazado {
+
+
 
     background: var(--danger-bg);
 
 
 
+
+
+
+
     color: var(--danger);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3432,15 +6864,31 @@ select {
 
 .estado-exento {
 
+
+
     background:
+
+
 
         rgba(39, 75, 122, .30);
 
 
 
+
+
+
+
     color: #9ecbff;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3448,15 +6896,31 @@ select {
 
 .estado-inactivo {
 
+
+
     background:
+
+
 
         rgba(120, 120, 120, .17);
 
 
 
+
+
+
+
     color: #bcbcbc;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3464,15 +6928,31 @@ select {
 
 .estado-sin-cuotas {
 
+
+
     background:
+
+
 
         rgba(255, 193, 7, .12);
 
 
 
+
+
+
+
     color: #ffd966;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3480,15 +6960,29 @@ select {
 
 /* ===================================================
 
+
+
    DETALLE JUGADOR
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .detalle-jugador-header {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -3496,7 +6990,15 @@ select {
 
 
 
+
+
+
+
     align-items: flex-start;
+
+
+
+
 
 
 
@@ -3504,9 +7006,21 @@ select {
 
 
 
+
+
+
+
     margin-bottom: 24px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3514,17 +7028,35 @@ select {
 
 .detalle-jugador-header h2 {
 
+
+
     margin:
 
+
+
         7px 0
+
+
 
         5px;
 
 
 
+
+
+
+
     font-size: 27px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3532,7 +7064,13 @@ select {
 
 .detalle-jugador-header p {
 
+
+
     margin: 0;
+
+
+
+
 
 
 
@@ -3540,9 +7078,21 @@ select {
 
 
 
+
+
+
+
     font-size: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3550,19 +7100,37 @@ select {
 
 .detalle-resumen {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         repeat(
+
+
 
             3,
 
+
+
             minmax(0, 1fr)
 
+
+
         );
+
+
+
+
 
 
 
@@ -3570,9 +7138,21 @@ select {
 
 
 
+
+
+
+
     margin-bottom: 30px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3580,7 +7160,13 @@ select {
 
 .detalle-stat {
 
+
+
     padding: 18px;
+
+
+
+
 
 
 
@@ -3588,15 +7174,33 @@ select {
 
 
 
+
+
+
+
     border:
+
+
 
         1px solid #263a50;
 
 
 
+
+
+
+
     border-radius: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3604,7 +7208,13 @@ select {
 
 .detalle-stat span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -3612,13 +7222,29 @@ select {
 
 
 
+
+
+
+
     color: #7f91a5;
+
+
+
+
 
 
 
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3626,9 +7252,19 @@ select {
 
 .detalle-stat strong {
 
+
+
     font-size: 21px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3636,15 +7272,31 @@ select {
 
 .detalle-meses-header {
 
+
+
     padding-bottom: 13px;
+
+
+
+
 
 
 
     border-bottom:
 
+
+
         1px solid #24374b;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3652,13 +7304,27 @@ select {
 
 .detalle-meses-header h3 {
 
+
+
     margin:
+
+
 
         7px 0
 
+
+
         0;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3666,7 +7332,13 @@ select {
 
 .detalle-cuotas {
 
+
+
     display: grid;
+
+
+
+
 
 
 
@@ -3674,9 +7346,21 @@ select {
 
 
 
+
+
+
+
     margin-top: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3684,19 +7368,37 @@ select {
 
 .cuota-detalle {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         1.4fr
 
-        1fr
+
 
         1fr
+
+
+
+        1fr
+
+
 
         auto;
+
+
+
+
 
 
 
@@ -3704,15 +7406,31 @@ select {
 
 
 
+
+
+
+
     gap: 13px;
+
+
+
+
 
 
 
     padding:
 
+
+
         15px
 
+
+
         16px;
+
+
+
+
 
 
 
@@ -3720,15 +7438,33 @@ select {
 
 
 
+
+
+
+
     border:
+
+
 
         1px solid #24384e;
 
 
 
+
+
+
+
     border-radius: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3736,13 +7472,27 @@ select {
 
 .cuota-detalle-periodo strong {
 
+
+
     display: block;
+
+
+
+
 
 
 
     font-size: 14px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3750,9 +7500,17 @@ select {
 
 .cuota-detalle-periodo span,
 
+
+
 .cuota-detalle-dato span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -3760,13 +7518,29 @@ select {
 
 
 
+
+
+
+
     color: #7c8da0;
+
+
+
+
 
 
 
     font-size: 9px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3774,9 +7548,19 @@ select {
 
 .cuota-detalle-dato strong {
 
+
+
     font-size: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3784,7 +7568,13 @@ select {
 
 .detalle-sin-cuotas {
 
+
+
     padding: 30px;
+
+
+
+
 
 
 
@@ -3792,7 +7582,15 @@ select {
 
 
 
+
+
+
+
     color: var(--muted);
+
+
+
+
 
 
 
@@ -3800,9 +7598,21 @@ select {
 
 
 
+
+
+
+
     border-radius: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3810,15 +7620,29 @@ select {
 
 /* ===================================================
 
+
+
    MENSUALIDADES
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .mensualidades-accion {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -3826,13 +7650,29 @@ select {
 
 
 
+
+
+
+
     align-items: center;
+
+
+
+
 
 
 
     gap: 25px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3840,17 +7680,35 @@ select {
 
 .mensualidades-accion h3 {
 
+
+
     margin:
 
+
+
         7px 0
+
+
 
         6px;
 
 
 
+
+
+
+
     font-size: 21px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3858,7 +7716,13 @@ select {
 
 .mensualidades-accion p {
 
+
+
     max-width: 560px;
+
+
+
+
 
 
 
@@ -3866,7 +7730,15 @@ select {
 
 
 
+
+
+
+
     color: var(--muted);
+
+
+
+
 
 
 
@@ -3874,9 +7746,21 @@ select {
 
 
 
+
+
+
+
     line-height: 1.5;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3884,17 +7768,33 @@ select {
 
 .btn-generar-cuotas {
 
+
+
     background:
+
+
 
         linear-gradient(
 
+
+
             135deg,
+
+
 
             #274b7a,
 
+
+
             #19395f
 
+
+
         );
+
+
+
+
 
 
 
@@ -3902,9 +7802,21 @@ select {
 
 
 
+
+
+
+
     white-space: nowrap;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3912,7 +7824,13 @@ select {
 
 .mensaje-generacion-cuotas {
 
+
+
     margin-top: 15px;
+
+
+
+
 
 
 
@@ -3920,9 +7838,21 @@ select {
 
 
 
+
+
+
+
     font-size: 12px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3930,25 +7860,51 @@ select {
 
 /* ===================================================
 
+
+
    PLACEHOLDER
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-placeholder {
+
+
 
     text-align: center;
 
 
 
+
+
+
+
     padding:
+
+
 
         45px
 
+
+
         25px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3956,7 +7912,13 @@ select {
 
 .placeholder-icon {
 
+
+
     width: 50px;
+
+
+
+
 
 
 
@@ -3964,7 +7926,15 @@ select {
 
 
 
+
+
+
+
     display: grid;
+
+
+
+
 
 
 
@@ -3972,11 +7942,23 @@ select {
 
 
 
+
+
+
+
     margin:
+
+
 
         0 auto
 
+
+
         16px;
+
+
+
+
 
 
 
@@ -3984,9 +7966,19 @@ select {
 
 
 
+
+
+
+
     background:
 
+
+
         rgba(39, 75, 122, .27);
+
+
+
+
 
 
 
@@ -3994,13 +7986,29 @@ select {
 
 
 
+
+
+
+
     font-size: 22px;
+
+
+
+
 
 
 
     font-weight: 900;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4008,13 +8016,27 @@ select {
 
 .admin-placeholder h3 {
 
+
+
     margin:
+
+
 
         8px 0
 
+
+
         8px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4022,13 +8044,25 @@ select {
 
 .admin-placeholder p {
 
+
+
     max-width: 560px;
+
+
+
+
 
 
 
     margin:
 
+
+
         0 auto;
+
+
+
+
 
 
 
@@ -4036,13 +8070,29 @@ select {
 
 
 
+
+
+
+
     font-size: 12px;
+
+
+
+
 
 
 
     line-height: 1.55;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4050,29 +8100,59 @@ select {
 
 /* ===================================================
 
+
+
    RIFAS
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .rifas-cabecera {
+
+
 
     max-width: 760px;
 
 
 
+
+
+
+
     margin:
 
+
+
         0 auto
+
+
 
         28px;
 
 
 
+
+
+
+
     text-align: center;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4080,27 +8160,55 @@ select {
 
 .rifas-cabecera h2 {
 
+
+
     margin:
 
+
+
         8px 0
+
+
 
         8px;
 
 
 
+
+
+
+
     font-size:
+
+
 
         clamp(
 
+
+
             29px,
+
+
 
             4vw,
 
+
+
             38px
+
+
 
         );
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4108,11 +8216,21 @@ select {
 
 .rifas-cabecera p {
 
+
+
     margin:
+
+
 
         0 auto
 
+
+
         14px;
+
+
+
+
 
 
 
@@ -4120,9 +8238,21 @@ select {
 
 
 
+
+
+
+
     line-height: 1.55;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4130,17 +8260,35 @@ select {
 
 .rifa-crear-panel {
 
+
+
     max-width: 900px;
+
+
+
+
 
 
 
     margin:
 
+
+
         0 auto
+
+
 
         32px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4148,29 +8296,59 @@ select {
 
 .form-rifa-grid {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         repeat(
+
+
 
             2,
 
+
+
             minmax(0, 1fr)
+
+
 
         );
 
 
 
+
+
+
+
     gap:
+
+
 
         0
 
+
+
         17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4178,9 +8356,19 @@ select {
 
 .form-rifa-grupo {
 
+
+
     margin-bottom: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4188,7 +8376,13 @@ select {
 
 .form-rifa-grupo label {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -4196,7 +8390,15 @@ select {
 
 
 
+
+
+
+
     color: #dce5ef;
+
+
+
+
 
 
 
@@ -4204,9 +8406,21 @@ select {
 
 
 
+
+
+
+
     font-weight: 800;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4214,11 +8428,21 @@ select {
 
 .form-rifa input,
 
+
+
 .form-rifa select,
+
+
 
 .form-rifa textarea {
 
+
+
     width: 100%;
+
+
+
+
 
 
 
@@ -4226,21 +8450,43 @@ select {
 
 
 
+
+
+
+
     padding:
 
+
+
         12px
+
+
 
         13px;
 
 
 
+
+
+
+
     border:
+
+
 
         1px solid #3a4d63;
 
 
 
+
+
+
+
     border-radius: 10px;
+
+
+
+
 
 
 
@@ -4248,13 +8494,29 @@ select {
 
 
 
+
+
+
+
     color: white;
+
+
+
+
 
 
 
     font-size: 13px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4262,13 +8524,27 @@ select {
 
 .form-rifa textarea {
 
+
+
     min-height: 90px;
+
+
+
+
 
 
 
     resize: vertical;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4276,11 +8552,21 @@ select {
 
 .form-rifa input:focus,
 
+
+
 .form-rifa select:focus,
+
+
 
 .form-rifa textarea:focus {
 
+
+
     outline: none;
+
+
+
+
 
 
 
@@ -4288,13 +8574,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 0 0 3px
 
+
+
         rgba(215, 25, 32, .10);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4302,11 +8604,21 @@ select {
 
 .premios-rifa-header {
 
+
+
     display: flex;
 
 
 
+
+
+
+
     justify-content: space-between;
+
+
+
+
 
 
 
@@ -4314,7 +8626,15 @@ select {
 
 
 
+
+
+
+
     gap: 20px;
+
+
+
+
 
 
 
@@ -4322,7 +8642,15 @@ select {
 
 
 
+
+
+
+
     margin-bottom: 17px;
+
+
+
+
 
 
 
@@ -4330,11 +8658,25 @@ select {
 
 
 
+
+
+
+
     border-top:
+
+
 
         1px solid #24374b;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4342,13 +8684,27 @@ select {
 
 .premios-rifa-header h3 {
 
+
+
     margin:
+
+
 
         6px 0
 
+
+
         5px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4356,7 +8712,13 @@ select {
 
 .premios-rifa-header p {
 
+
+
     margin: 0;
+
+
+
+
 
 
 
@@ -4364,9 +8726,21 @@ select {
 
 
 
+
+
+
+
     font-size: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4374,7 +8748,13 @@ select {
 
 .btn-agregar-premio {
 
+
+
     background: #274b7a;
+
+
+
+
 
 
 
@@ -4382,9 +8762,21 @@ select {
 
 
 
+
+
+
+
     white-space: nowrap;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4392,13 +8784,27 @@ select {
 
 #premios-rifa-admin {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     gap: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4406,19 +8812,37 @@ select {
 
 .premio-rifa-fila {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         46px
+
+
 
         1.1fr
 
+
+
         1fr
 
+
+
         auto;
+
+
+
+
 
 
 
@@ -4426,7 +8850,15 @@ select {
 
 
 
+
+
+
+
     gap: 10px;
+
+
+
+
 
 
 
@@ -4434,19 +8866,41 @@ select {
 
 
 
+
+
+
+
     background: #091622;
+
+
+
+
 
 
 
     border:
 
+
+
         1px solid #24394e;
+
+
+
+
 
 
 
     border-radius: 12px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4454,7 +8908,13 @@ select {
 
 .premio-rifa-numero {
 
+
+
     width: 38px;
+
+
+
+
 
 
 
@@ -4462,7 +8922,15 @@ select {
 
 
 
+
+
+
+
     display: grid;
+
+
+
+
 
 
 
@@ -4470,7 +8938,15 @@ select {
 
 
 
+
+
+
+
     border-radius: 10px;
+
+
+
+
 
 
 
@@ -4478,7 +8954,15 @@ select {
 
 
 
+
+
+
+
     color: #a7d2ff;
+
+
+
+
 
 
 
@@ -4486,9 +8970,21 @@ select {
 
 
 
+
+
+
+
     font-weight: 900;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4496,9 +8992,19 @@ select {
 
 .premio-rifa-fila input {
 
+
+
     margin: 0;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4506,31 +9012,63 @@ select {
 
 .btn-eliminar-premio {
 
+
+
     padding:
 
+
+
         9px
+
+
 
         11px;
 
 
 
+
+
+
+
     background:
+
+
 
         rgba(180, 35, 44, .14);
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid
+
+
 
         rgba(180, 35, 44, .28);
 
 
 
+
+
+
+
     color: #ff858b;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4538,13 +9076,25 @@ select {
 
 .btn-crear-rifa {
 
+
+
     width: min(
+
+
 
         340px,
 
+
+
         100%
 
+
+
     );
+
+
+
+
 
 
 
@@ -4552,17 +9102,37 @@ select {
 
 
 
+
+
+
+
     margin:
 
+
+
         26px auto
+
+
 
         0;
 
 
 
+
+
+
+
     padding: 14px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4570,7 +9140,13 @@ select {
 
 .mensaje-rifa {
 
+
+
     min-height: 18px;
+
+
+
+
 
 
 
@@ -4578,7 +9154,15 @@ select {
 
 
 
+
+
+
+
     text-align: center;
+
+
+
+
 
 
 
@@ -4586,9 +9170,21 @@ select {
 
 
 
+
+
+
+
     font-size: 11px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4596,13 +9192,25 @@ select {
 
 .rifas-listado-panel {
 
+
+
     max-width: 1050px;
+
+
+
+
 
 
 
     margin:
 
+
+
         0 auto;
+
+
+
+
 
 
 
@@ -4610,7 +9218,15 @@ select {
 
 
 
+
+
+
+
     border: 0;
+
+
+
+
 
 
 
@@ -4618,11 +9234,25 @@ select {
 
 
 
+
+
+
+
     padding:
+
+
 
         10px 0;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4630,25 +9260,51 @@ select {
 
 .lista-rifas-admin {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         repeat(
+
+
 
             2,
 
+
+
             minmax(0, 1fr)
+
+
 
         );
 
 
 
+
+
+
+
     gap: 15px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4656,7 +9312,13 @@ select {
 
 .rifa-admin-card {
 
+
+
     position: relative;
+
+
+
+
 
 
 
@@ -4664,27 +9326,55 @@ select {
 
 
 
+
+
+
+
     padding: 20px;
+
+
+
+
 
 
 
     background:
 
+
+
         linear-gradient(
+
+
 
             145deg,
 
+
+
             #101f30,
 
+
+
             #091622
+
+
 
         );
 
 
 
+
+
+
+
     border:
 
+
+
         1px solid #2a3e54;
+
+
+
+
 
 
 
@@ -4692,13 +9382,29 @@ select {
 
 
 
+
+
+
+
     box-shadow:
+
+
 
         0 12px 30px
 
+
+
         rgba(0, 0, 0, .16);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4706,7 +9412,13 @@ select {
 
 .rifa-admin-card::before {
 
+
+
     content: "";
+
+
+
+
 
 
 
@@ -4714,11 +9426,23 @@ select {
 
 
 
+
+
+
+
     top: 0;
 
 
 
+
+
+
+
     left: 0;
+
+
+
+
 
 
 
@@ -4726,23 +9450,49 @@ select {
 
 
 
+
+
+
+
     height: 3px;
+
+
+
+
 
 
 
     background:
 
+
+
         linear-gradient(
+
+
 
             90deg,
 
+
+
             var(--red),
+
+
 
             var(--yellow)
 
+
+
         );
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4750,7 +9500,13 @@ select {
 
 .rifa-admin-top {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -4758,13 +9514,29 @@ select {
 
 
 
+
+
+
+
     align-items: flex-start;
+
+
+
+
 
 
 
     gap: 18px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4772,17 +9544,35 @@ select {
 
 .rifa-admin-top h3 {
 
+
+
     margin:
 
+
+
         0 0
+
+
 
         5px;
 
 
 
+
+
+
+
     font-size: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4790,13 +9580,27 @@ select {
 
 .rifa-admin-subtitulo {
 
+
+
     color: #7f91a5;
+
+
+
+
 
 
 
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4804,15 +9608,29 @@ select {
 
 .rifa-estado {
 
+
+
     display: inline-flex;
+
+
+
+
 
 
 
     padding:
 
+
+
         6px
 
+
+
         9px;
+
+
+
+
 
 
 
@@ -4820,7 +9638,15 @@ select {
 
 
 
+
+
+
+
     font-size: 9px;
+
+
+
+
 
 
 
@@ -4828,9 +9654,21 @@ select {
 
 
 
+
+
+
+
     white-space: nowrap;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4838,15 +9676,31 @@ select {
 
 .rifa-estado-borrador {
 
+
+
     background:
+
+
 
         rgba(255, 193, 7, .13);
 
 
 
+
+
+
+
     color: #ffd966;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4854,13 +9708,27 @@ select {
 
 .rifa-estado-activa {
 
+
+
     background: var(--green-bg);
+
+
+
+
 
 
 
     color: var(--green);
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4868,15 +9736,31 @@ select {
 
 .rifa-estado-cerrada {
 
+
+
     background:
+
+
 
         rgba(120, 120, 120, .18);
 
 
 
+
+
+
+
     color: #c2c2c2;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4884,19 +9768,37 @@ select {
 
 .rifa-admin-datos {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         repeat(
+
+
 
             2,
 
+
+
             minmax(0, 1fr)
 
+
+
         );
+
+
+
+
 
 
 
@@ -4904,9 +9806,21 @@ select {
 
 
 
+
+
+
+
     margin-top: 17px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4914,7 +9828,13 @@ select {
 
 .rifa-admin-dato {
 
+
+
     padding: 10px;
+
+
+
+
 
 
 
@@ -4922,9 +9842,21 @@ select {
 
 
 
+
+
+
+
     border-radius: 8px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4932,7 +9864,13 @@ select {
 
 .rifa-admin-dato span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -4940,7 +9878,15 @@ select {
 
 
 
+
+
+
+
     color: #7d8fa2;
+
+
+
+
 
 
 
@@ -4948,13 +9894,29 @@ select {
 
 
 
+
+
+
+
     text-transform: uppercase;
+
+
+
+
 
 
 
     letter-spacing: .5px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4962,9 +9924,19 @@ select {
 
 .rifa-admin-dato strong {
 
+
+
     font-size: 12px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -4972,7 +9944,13 @@ select {
 
 .rifa-premios-resumen {
 
+
+
     margin-top: 15px;
+
+
+
+
 
 
 
@@ -4980,9 +9958,19 @@ select {
 
 
 
+
+
+
+
     border-top:
 
+
+
         1px solid #24374b;
+
+
+
+
 
 
 
@@ -4990,13 +9978,29 @@ select {
 
 
 
+
+
+
+
     font-size: 10px;
+
+
+
+
 
 
 
     line-height: 1.7;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5004,378 +10008,757 @@ select {
 
 .rifa-premios-resumen strong {
 
+
+
     color: white;
 
+
+
 }
+
+
+
+
+
+
 
 
 
 
 
 /* ===================================================
+
    OPERACIÓN / ENTREGAS DE RIFA
+
 =================================================== */
 
+
+
 .rifa-operacion-panel,
+
 .rifa-entregas-panel,
+
 .rifa-ranking-panel,
+
 .rifa-historial-panel {
+
     max-width: 1050px;
+
     margin-left: auto;
+
     margin-right: auto;
+
 }
+
+
 
 .rifa-operacion-dashboard {
+
     display: grid;
+
     grid-template-columns:
+
         repeat(
+
             4,
+
             minmax(0, 1fr)
+
         );
+
     gap: 12px;
+
 }
+
+
 
 .rifa-operacion-stat {
+
     position: relative;
+
     overflow: hidden;
+
     min-height: 112px;
+
     padding: 17px;
+
     background: #091622;
+
     border: 1px solid #283d53;
+
     border-radius: 13px;
+
 }
+
+
 
 .rifa-operacion-stat::before {
+
     content: "";
+
     position: absolute;
+
     left: 0;
+
     top: 0;
+
     bottom: 0;
+
     width: 3px;
+
     background: var(--red);
+
 }
+
+
 
 .rifa-operacion-stat span,
+
 .rifa-operacion-stat small {
+
     display: block;
+
     color: #7f91a5;
+
     font-size: 9px;
+
 }
+
+
 
 .rifa-operacion-stat strong {
+
     display: block;
+
     margin: 9px 0 7px;
+
     font-size: 23px;
+
 }
+
+
 
 .lista-entregas-rifa {
+
     display: grid;
+
     gap: 14px;
+
 }
+
+
 
 .rifa-entrega-card {
+
     padding: 20px;
+
     background:
+
         linear-gradient(
+
             145deg,
+
             #0d1b2a,
+
             #091521
+
         );
+
     border: 1px solid #283d53;
+
     border-radius: 16px;
+
 }
+
+
 
 .rifa-entrega-top {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: flex-start;
+
     gap: 18px;
+
 }
+
+
 
 .rifa-entrega-top h3 {
+
     margin: 7px 0 0;
+
     font-size: 18px;
+
 }
+
+
 
 .rifa-entrega-estado {
+
     display: inline-flex;
+
     align-items: center;
+
     padding: 7px 10px;
+
     border-radius: 999px;
+
     font-size: 9px;
+
     font-weight: 900;
+
     white-space: nowrap;
+
 }
+
+
 
 .rifa-entrega-estado-pendiente {
+
     background: rgba(255, 193, 7, .13);
+
     color: #ffd966;
+
 }
+
+
 
 .rifa-entrega-estado-aprobada {
+
     background: var(--green-bg);
+
     color: var(--green);
+
 }
+
+
 
 .rifa-entrega-estado-rechazada {
+
     background: var(--danger-bg);
+
     color: var(--danger);
+
 }
+
+
 
 .rifa-entrega-resumen {
+
     display: grid;
+
     grid-template-columns:
+
         repeat(
+
             4,
+
             minmax(0, 1fr)
+
         );
+
     gap: 9px;
+
     margin-top: 18px;
+
 }
+
+
 
 .rifa-entrega-resumen > div {
+
     padding: 12px;
+
     background: #101e2e;
+
     border-radius: 9px;
+
 }
+
+
 
 .rifa-entrega-resumen span {
+
     display: block;
+
     margin-bottom: 5px;
+
     color: #7f91a5;
+
     font-size: 9px;
+
 }
+
+
 
 .rifa-entrega-resumen strong {
+
     font-size: 12px;
+
     overflow-wrap: anywhere;
+
 }
+
+
 
 .rifa-entrega-observacion {
+
     margin-top: 14px;
+
     padding: 12px 14px;
+
     background: #101e2e;
+
     border-left: 3px solid #274b7a;
+
     border-radius: 9px;
+
     color: #9eb0c2;
+
     font-size: 11px;
+
     line-height: 1.55;
+
 }
+
+
 
 .rifa-entrega-observacion strong {
+
     color: white;
+
 }
+
+
 
 .rifa-compradores-bloque {
+
     margin-top: 17px;
+
     padding-top: 15px;
+
     border-top: 1px solid #24374b;
+
 }
+
+
 
 .rifa-compradores-titulo {
+
     display: flex;
+
     justify-content: space-between;
+
     gap: 15px;
+
     margin-bottom: 10px;
+
 }
+
+
 
 .rifa-compradores-titulo strong {
+
     font-size: 12px;
+
 }
+
+
 
 .rifa-compradores-titulo span {
+
     color: #7f91a5;
+
     font-size: 10px;
+
 }
+
+
 
 .rifa-compradores-lista {
+
     display: grid;
+
     gap: 7px;
+
 }
+
+
 
 .rifa-comprador-fila {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     gap: 15px;
+
     padding: 10px 12px;
+
     background: #081521;
+
     border: 1px solid #21364b;
+
     border-radius: 9px;
+
 }
+
+
 
 .rifa-comprador-fila span {
+
     color: #dce5ef;
+
     font-size: 11px;
+
 }
+
+
 
 .rifa-comprador-fila strong {
+
     color: #a9cfff;
+
     font-size: 10px;
+
     white-space: nowrap;
+
 }
+
+
 
 .rifa-compradores-vacio {
+
     padding: 13px;
+
     color: #7f91a5;
+
     background: #081521;
+
     border-radius: 9px;
+
     font-size: 10px;
+
     text-align: center;
+
 }
+
+
 
 .rifa-entrega-revision {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 5px;
+
     margin-top: 14px;
+
     padding: 12px 14px;
+
     background: #101e2e;
+
     border-left: 3px solid #274b7a;
+
     border-radius: 9px;
+
 }
+
+
 
 .rifa-entrega-revision strong {
+
     font-size: 11px;
+
 }
+
+
 
 .rifa-entrega-revision span {
+
     color: var(--muted);
+
     font-size: 10px;
+
 }
+
+
 
 .rifa-entrega-revision .motivo-rechazo {
+
     color: #ff858b;
+
 }
+
+
 
 .rifa-entrega-acciones {
+
     align-items: center;
+
 }
+
+
 
 .lista-ranking-rifa {
+
     display: grid;
+
     gap: 9px;
+
 }
+
+
 
 .rifa-ranking-fila {
+
     display: grid;
+
     grid-template-columns:
+
         48px
+
         minmax(0, 1.4fr)
+
         minmax(120px, .7fr)
+
         minmax(135px, .8fr);
+
     align-items: center;
+
     gap: 12px;
+
     padding: 13px 15px;
+
     background: #091622;
+
     border: 1px solid #263a50;
+
     border-radius: 12px;
+
 }
+
+
 
 .rifa-ranking-posicion {
+
     width: 36px;
+
     height: 36px;
+
     display: grid;
+
     place-items: center;
+
     border-radius: 10px;
+
     background: #163453;
+
     color: #a7d2ff;
+
     font-size: 12px;
+
     font-weight: 900;
+
 }
+
+
 
 .rifa-ranking-jugador strong,
+
 .rifa-ranking-dato strong {
+
     display: block;
+
     font-size: 12px;
+
 }
 
+
+
 .rifa-ranking-jugador span,
+
 .rifa-ranking-dato span {
+
     display: block;
+
     margin-bottom: 3px;
+
     color: #7f91a5;
+
     font-size: 9px;
+
 }
+
+
 
 @media (max-width: 900px) {
 
+
+
     .rifa-operacion-dashboard,
+
     .rifa-entrega-resumen {
+
         grid-template-columns:
+
             repeat(
+
                 2,
+
                 minmax(0, 1fr)
+
             );
+
     }
+
+
 
     .rifa-ranking-fila {
+
         grid-template-columns:
+
             42px
+
             minmax(0, 1fr)
+
             minmax(110px, .6fr);
+
     }
+
+
 
     .rifa-ranking-dato:last-child {
+
         grid-column: 2 / -1;
+
     }
 
+
+
 }
+
+
 
 @media (max-width: 600px) {
 
+
+
     .rifa-operacion-dashboard,
+
     .rifa-entrega-resumen {
+
         grid-template-columns: 1fr;
+
     }
+
+
 
     .rifa-entrega-top,
+
     .rifa-comprador-fila {
+
         align-items: flex-start;
+
         flex-direction: column;
+
     }
+
+
 
     .rifa-entrega-acciones .btn {
+
         width: 100%;
+
     }
+
+
 
     .rifa-ranking-fila {
+
         grid-template-columns:
+
             42px
+
             1fr;
+
     }
+
+
 
     .rifa-ranking-dato,
+
     .rifa-ranking-dato:last-child {
+
         grid-column: 2;
+
     }
 
+
+
 }
+
+
+
 
 
 /* ===================================================
 
+
+
    MI CUENTA
 
+
+
 =================================================== */
+
+
+
+
 
 
 
 .admin-cuenta-card {
 
+
+
     max-width: 620px;
+
+
+
+
 
 
 
     margin:
 
+
+
         0 auto;
+
+
+
+
 
 
 
     text-align: center;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5383,7 +10766,13 @@ select {
 
 .admin-cuenta-avatar {
 
+
+
     width: 100px;
+
+
+
+
 
 
 
@@ -5391,7 +10780,15 @@ select {
 
 
 
+
+
+
+
     display: grid;
+
+
+
+
 
 
 
@@ -5399,11 +10796,23 @@ select {
 
 
 
+
+
+
+
     margin:
+
+
 
         0 auto
 
+
+
         17px;
+
+
+
+
 
 
 
@@ -5411,15 +10820,33 @@ select {
 
 
 
+
+
+
+
     background: #091622;
+
+
+
+
 
 
 
     border:
 
+
+
         1px solid #2c4157;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5427,7 +10854,13 @@ select {
 
 .admin-cuenta-avatar img {
 
+
+
     width: 74px;
+
+
+
+
 
 
 
@@ -5435,9 +10868,21 @@ select {
 
 
 
+
+
+
+
     object-fit: contain;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5445,7 +10890,13 @@ select {
 
 .admin-cuenta-info span {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -5453,7 +10904,15 @@ select {
 
 
 
+
+
+
+
     font-size: 10px;
+
+
+
+
 
 
 
@@ -5461,9 +10920,21 @@ select {
 
 
 
+
+
+
+
     letter-spacing: .7px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5471,7 +10942,13 @@ select {
 
 .admin-cuenta-info strong {
 
+
+
     display: block;
+
+
+
+
 
 
 
@@ -5479,9 +10956,21 @@ select {
 
 
 
+
+
+
+
     font-size: 22px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5489,19 +10978,37 @@ select {
 
 .admin-cuenta-datos {
 
+
+
     display: grid;
+
+
+
+
 
 
 
     grid-template-columns:
 
+
+
         repeat(
+
+
 
             3,
 
+
+
             minmax(0, 1fr)
 
+
+
         );
+
+
+
+
 
 
 
@@ -5509,11 +11016,25 @@ select {
 
 
 
+
+
+
+
     margin:
+
+
 
         25px 0;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5521,7 +11042,13 @@ select {
 
 .admin-cuenta-datos div {
 
+
+
     padding: 13px;
+
+
+
+
 
 
 
@@ -5529,13 +11056,29 @@ select {
 
 
 
+
+
+
+
     border-radius: 10px;
+
+
+
+
 
 
 
     text-align: left;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5543,11 +11086,21 @@ select {
 
 .admin-cuenta-datos span {
 
+
+
     display: block;
 
 
 
+
+
+
+
     margin-bottom: 5px;
+
+
+
+
 
 
 
@@ -5555,9 +11108,21 @@ select {
 
 
 
+
+
+
+
     font-size: 9px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5565,7 +11130,11 @@ select {
 
 .admin-cuenta-datos strong {
 
+
+
     font-size: 12px;
+
+
 
 }
 
@@ -5573,17 +11142,37 @@ select {
 
 
 
+
+
+
+
+
+
 /* ===================================================
 
+
+
    FOOTER
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 .admin-footer {
 
+
+
     display: flex;
+
+
+
+
 
 
 
@@ -5591,29 +11180,59 @@ select {
 
 
 
+
+
+
+
     gap: 20px;
+
+
+
+
 
 
 
     padding:
 
+
+
         21px
+
+
 
         clamp(
 
+
+
             22px,
+
+
 
             4vw,
 
+
+
             48px
+
+
 
         );
 
 
 
+
+
+
+
     border-top:
 
+
+
         1px solid #1d3043;
+
+
+
+
 
 
 
@@ -5621,9 +11240,21 @@ select {
 
 
 
+
+
+
+
     font-size: 10px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -5631,33 +11262,67 @@ select {
 
 /* ===================================================
 
+
+
    RESPONSIVE
+
+
 
 =================================================== */
 
 
 
+
+
+
+
 @media (
 
+
+
     max-width: 1150px
+
+
 
 ) {
 
 
 
+
+
+
+
     .dashboard {
+
+
 
         grid-template-columns:
 
+
+
             repeat(
+
+
 
                 2,
 
+
+
                 minmax(0, 1fr)
+
+
 
             );
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5665,17 +11330,33 @@ select {
 
     .accesos-grid {
 
+
+
         grid-template-columns:
+
+
 
             repeat(
 
+
+
                 2,
+
+
 
                 minmax(0, 1fr)
 
+
+
             );
 
+
+
     }
+
+
+
+
 
 
 
@@ -5685,35 +11366,75 @@ select {
 
 
 
+
+
+
+
+
+
 @media (
 
+
+
     max-width: 980px
+
+
 
 ) {
 
 
 
+
+
+
+
     .admin-sidebar {
 
+
+
         transform:
+
+
 
             translateX(-105%);
 
 
 
+
+
+
+
         transition:
+
+
 
             transform .25s ease;
 
 
 
+
+
+
+
         box-shadow:
+
+
 
             18px 0 50px
 
+
+
             rgba(0, 0, 0, .45);
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5721,11 +11442,23 @@ select {
 
     .admin-sidebar.abierto {
 
+
+
         transform:
+
+
 
             translateX(0);
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5733,9 +11466,19 @@ select {
 
     .admin-main {
 
+
+
         margin-left: 0;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5743,13 +11486,25 @@ select {
 
     .admin-menu-mobile {
 
+
+
         display: grid;
+
+
+
+
 
 
 
         place-items: center;
 
+
+
     }
+
+
+
+
 
 
 
@@ -5759,19 +11514,43 @@ select {
 
 
 
+
+
+
+
+
+
 @media (
 
+
+
     max-width: 800px
+
+
 
 ) {
 
 
 
+
+
+
+
     .jugadores-grid {
+
+
 
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5779,9 +11558,19 @@ select {
 
     .lista-rifas-admin {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5789,9 +11578,19 @@ select {
 
     .form-rifa-grid {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5799,9 +11598,19 @@ select {
 
     .detalle-resumen {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5809,11 +11618,23 @@ select {
 
     .cuota-detalle {
 
+
+
         grid-template-columns:
+
+
 
             1fr 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5821,11 +11642,19 @@ select {
 
     .premio-rifa-fila {
 
+
+
         grid-template-columns:
+
+
 
             42px
 
+
+
             1fr;
+
+
 
     }
 
@@ -5833,13 +11662,31 @@ select {
 
 
 
+
+
+
+
+
+
     .premio-rifa-fila
+
+
 
     .premio-descripcion {
 
+
+
         grid-column: 2;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5847,11 +11694,21 @@ select {
 
     .premio-rifa-fila
 
+
+
     .btn-eliminar-premio {
+
+
 
         grid-column: 2;
 
+
+
     }
+
+
+
+
 
 
 
@@ -5861,25 +11718,55 @@ select {
 
 
 
+
+
+
+
+
+
 @media (
 
+
+
     max-width: 680px
+
+
 
 ) {
 
 
 
+
+
+
+
     .admin-content {
+
+
 
         padding:
 
+
+
             24px
+
+
 
             16px
 
+
+
             40px;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5887,13 +11774,27 @@ select {
 
     .admin-topbar {
 
+
+
         padding:
+
+
 
             15px
 
+
+
             16px;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5901,9 +11802,19 @@ select {
 
     .admin-usuario-mini div:last-child {
 
+
+
         display: none;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5911,13 +11822,27 @@ select {
 
     .admin-hero {
 
+
+
         padding:
+
+
 
             24px
 
+
+
             21px;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5925,9 +11850,19 @@ select {
 
     .admin-hero-logo {
 
+
+
         display: none;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5935,9 +11870,19 @@ select {
 
     .dashboard {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5945,11 +11890,23 @@ select {
 
     .accesos-grid {
 
+
+
         grid-template-columns:
+
+
 
             1fr 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5957,13 +11914,27 @@ select {
 
     .admin-section {
 
+
+
         padding:
+
+
 
             20px
 
+
+
             17px;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5971,13 +11942,27 @@ select {
 
     .section-heading {
 
+
+
         flex-direction: column;
+
+
+
+
 
 
 
         align-items: flex-start;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5985,9 +11970,19 @@ select {
 
     .section-heading-center {
 
+
+
         align-items: center;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -5995,9 +11990,19 @@ select {
 
     .pago-top {
 
+
+
         flex-direction: column;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6005,9 +12010,19 @@ select {
 
     .datos {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6015,9 +12030,19 @@ select {
 
     .acciones {
 
+
+
         flex-direction: column;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6025,9 +12050,19 @@ select {
 
     .acciones .btn {
 
+
+
         width: 100%;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6035,9 +12070,19 @@ select {
 
     .filtros-pagos {
 
+
+
         align-items: stretch;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6045,11 +12090,23 @@ select {
 
     .filtros-pagos
 
+
+
     .buscador-jugadores {
+
+
 
         width: 100%;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6057,19 +12114,39 @@ select {
 
     .filtros-estado-pagos {
 
+
+
         display: grid;
+
+
+
+
 
 
 
         grid-template-columns:
 
+
+
             1fr 1fr;
+
+
+
+
 
 
 
         width: 100%;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6077,13 +12154,27 @@ select {
 
     .mensualidades-accion {
 
+
+
         flex-direction: column;
+
+
+
+
 
 
 
         align-items: stretch;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6091,9 +12182,19 @@ select {
 
     .btn-generar-cuotas {
 
+
+
         width: 100%;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6101,13 +12202,27 @@ select {
 
     .premios-rifa-header {
 
+
+
         flex-direction: column;
+
+
+
+
 
 
 
         align-items: stretch;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6115,9 +12230,19 @@ select {
 
     .btn-agregar-premio {
 
+
+
         width: 100%;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6125,9 +12250,19 @@ select {
 
     .rifa-admin-top {
 
+
+
         flex-direction: column;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6135,9 +12270,19 @@ select {
 
     .admin-cuenta-datos {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6145,17 +12290,35 @@ select {
 
     .admin-footer {
 
+
+
         flex-direction: column;
+
+
+
+
 
 
 
         text-align: center;
 
+
+
     }
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -6163,25 +12326,51 @@ select {
 
 @media (
 
+
+
     max-width: 500px
+
+
 
 ) {
 
 
 
+
+
+
+
     .admin-login-card {
+
+
 
         padding:
 
+
+
             30px
+
+
 
             22px;
 
 
 
+
+
+
+
         border-radius: 20px;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6189,9 +12378,19 @@ select {
 
     .accesos-grid {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6199,9 +12398,19 @@ select {
 
     .jugador-admin-header {
 
+
+
         flex-direction: column;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6209,9 +12418,19 @@ select {
 
     .jugador-finanzas {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6219,9 +12438,19 @@ select {
 
     .detalle-jugador-header {
 
+
+
         flex-direction: column;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6229,9 +12458,19 @@ select {
 
     .cuota-detalle {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6239,9 +12478,19 @@ select {
 
     .rifa-admin-datos {
 
+
+
         grid-template-columns: 1fr;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -6249,577 +12498,1362 @@ select {
 
     .filtros-estado-pagos {
 
+
+
         grid-template-columns: 1fr;
+
+
 
     }
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
 #premios-rifa-editar {
 
+
+
     display: grid;
+
+
 
     gap: 10px;
 
+
+
 }
 
+
+
 /* ===================================================
+
    EGRESOS
+
 =================================================== */
+
+
 
 .egresos-heading {
+
     align-items: center;
+
 }
+
+
 
 .egresos-stats {
+
     display: grid;
+
     grid-template-columns: repeat(4, minmax(0, 1fr));
+
     gap: 16px;
+
     margin-bottom: 18px;
+
 }
+
+
 
 .egresos-layout {
+
     display: grid;
+
     grid-template-columns: minmax(320px, .88fr) minmax(0, 1.45fr);
+
     gap: 18px;
+
     align-items: start;
+
 }
+
+
 
 .egreso-form-card,
+
 .egresos-historial-card {
+
     min-width: 0;
+
 }
+
+
 
 .section-mini-heading {
+
     display: flex;
+
     align-items: flex-start;
+
     justify-content: space-between;
+
     gap: 16px;
+
     margin-bottom: 20px;
+
 }
+
+
 
 .section-mini-heading h3 {
+
     margin: 5px 0 0;
+
 }
+
+
 
 .form-help {
+
     display: block;
+
     margin-top: 7px;
+
     color: var(--muted);
+
     font-size: 11px;
+
     line-height: 1.45;
+
 }
+
+
 
 .mensaje-egreso {
+
     min-height: 20px;
+
     margin-top: 12px;
+
     color: var(--yellow);
+
     font-size: 12px;
+
     line-height: 1.5;
+
 }
+
+
 
 .egresos-historial-heading {
+
     align-items: center;
+
 }
+
+
 
 .filtro-egresos {
+
     width: auto;
+
     min-width: 145px;
+
 }
+
+
 
 .egresos-lista {
+
     display: grid;
+
     gap: 12px;
+
 }
+
+
 
 .egreso-card {
+
     padding: 17px;
+
     border: 1px solid rgba(255, 255, 255, .075);
+
     border-radius: 16px;
+
     background: rgba(255, 255, 255, .035);
+
 }
+
+
 
 .egreso-card.anulado {
+
     opacity: .7;
+
     border-color: rgba(255, 111, 119, .16);
+
 }
+
+
 
 .egreso-card-top {
+
     display: flex;
+
     align-items: flex-start;
+
     justify-content: space-between;
+
     gap: 16px;
+
 }
+
+
 
 .egreso-card-top h4 {
+
     margin: 3px 0 5px;
+
     font-size: 15px;
+
 }
+
+
 
 .egreso-categoria {
+
     display: inline-flex;
+
     align-items: center;
+
     min-height: 24px;
+
     padding: 4px 8px;
+
     border-radius: 999px;
+
     background: rgba(55, 104, 166, .2);
+
     color: #a9d2ff;
+
     font-size: 10px;
+
     font-weight: 800;
+
     letter-spacing: .04em;
+
 }
+
+
 
 .egreso-monto {
+
     white-space: nowrap;
+
     font-size: 20px;
+
     font-weight: 900;
+
 }
+
+
 
 .egreso-meta {
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 8px 14px;
+
     margin-top: 12px;
+
     color: var(--muted);
+
     font-size: 11px;
+
 }
+
+
 
 .egreso-observaciones {
+
     margin-top: 12px;
+
     padding: 11px 12px;
+
     border-radius: 12px;
+
     background: rgba(255, 255, 255, .035);
+
     color: #c8d2dc;
+
     font-size: 11px;
+
     line-height: 1.5;
+
 }
+
+
 
 .egreso-acciones {
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 8px;
+
     margin-top: 14px;
+
 }
+
+
 
 .egreso-acciones .btn {
+
     min-height: 36px;
+
     padding: 8px 12px;
+
     font-size: 11px;
+
 }
+
+
 
 .btn-anular-egreso {
+
     border: 1px solid rgba(255, 111, 119, .28);
+
     background: rgba(180, 35, 44, .13);
+
     color: #ff8c92;
+
 }
+
+
 
 .egreso-estado {
+
     display: inline-flex;
+
     align-items: center;
+
     padding: 4px 8px;
+
     border-radius: 999px;
+
     font-size: 10px;
+
     font-weight: 900;
+
 }
+
+
 
 .egreso-estado.registrado {
+
     background: rgba(64, 175, 112, .14);
+
     color: #75dca1;
+
 }
+
+
 
 .egreso-estado.anulado {
+
     background: rgba(220, 70, 80, .13);
+
     color: #ff9298;
+
 }
+
+
 
 @media (max-width: 1180px) {
+
     .egresos-stats {
+
         grid-template-columns: repeat(2, minmax(0, 1fr));
+
     }
+
+
 
     .egresos-layout {
+
         grid-template-columns: 1fr;
+
     }
+
 }
 
+
+
 @media (max-width: 640px) {
+
     .egresos-stats {
+
         grid-template-columns: 1fr;
+
     }
+
+
 
     .egreso-card-top {
+
         flex-direction: column;
+
     }
+
+
 
     .egreso-monto {
+
         font-size: 18px;
+
     }
+
+
 
     .egresos-historial-heading {
+
         align-items: stretch;
+
         flex-direction: column;
+
     }
 
+
+
     .filtro-egresos {
+
         width: 100%;
+
     }
+
+}
+
+
+
+
+
+/* ===================================================
+
+   PULIDO VISUAL ADMIN / EGRESOS
+
+=================================================== */
+
+
+
+.menu-btn {
+
+    min-height: 46px;
+
+    gap: 13px;
+
+    padding: 11px 12px;
+
+    border: 1px solid transparent;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    letter-spacing: -.01em;
+
+}
+
+
+
+.menu-btn:hover {
+
+    border-color: rgba(255,255,255,.06);
+
+    background: rgba(255,255,255,.045);
+
+    transform: none;
+
+}
+
+
+
+.menu-btn.activo {
+
+    background: linear-gradient(135deg, #d71920, #b91218);
+
+    border-color: rgba(255,255,255,.07);
+
+    box-shadow: 0 10px 28px rgba(215,25,32,.18);
+
+}
+
+
+
+.menu-icon {
+
+    width: 30px;
+
+    height: 30px;
+
+    flex: 0 0 30px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,.045);
+
+    color: #8fa2b7;
+
+}
+
+
+
+.menu-btn.activo .menu-icon {
+
+    background: rgba(255,255,255,.14);
+
+    color: white;
+
+}
+
+
+
+.menu-icon svg {
+
+    width: 17px;
+
+    height: 17px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+
+.menu-icon svg path[fill],
+
+.menu-icon svg rect[fill] {
+
+    fill: currentColor;
+
+    stroke: none;
+
+}
+
+
+
+#vista-egresos .section-heading {
+
+    margin-bottom: 22px;
+
+}
+
+
+
+#vista-egresos .section-heading h2 {
+
+    margin-top: 5px;
+
+    margin-bottom: 5px;
+
+    font-size: clamp(22px, 2vw, 30px);
+
+}
+
+
+
+#vista-egresos .section-heading p {
+
+    max-width: 680px;
+
+    color: #8798aa;
+
+    line-height: 1.55;
+
+}
+
+
+
+#vista-egresos .badge-admin {
+
+    padding: 8px 12px;
+
+    border-radius: 999px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: rgba(255,255,255,.035);
+
+    color: #b9c7d5;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+
+.egresos-stats {
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+#vista-egresos .stat-card {
+
+    min-height: 118px;
+
+    padding: 18px 18px 16px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: linear-gradient(145deg, rgba(18,31,47,.92), rgba(12,24,38,.92));
+
+    box-shadow: none;
+
+    overflow: hidden;
+
+    position: relative;
+
+}
+
+
+
+#vista-egresos .stat-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0 auto 0 0;
+
+    width: 3px;
+
+    background: linear-gradient(#e3262d, #a60f15);
+
+}
+
+
+
+#vista-egresos .stat-card span {
+
+    color: #91a2b4;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+
+#vista-egresos .stat-card strong {
+
+    margin: 8px 0 4px;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+}
+
+
+
+#vista-egresos .stat-card small {
+
+    color: #637589;
+
+    font-size: 10px;
+
+}
+
+
+
+.egresos-layout {
+
+    grid-template-columns: minmax(390px, .95fr) minmax(520px, 1.45fr);
+
+    gap: 20px;
+
+}
+
+
+
+#vista-egresos .admin-section {
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: linear-gradient(145deg, rgba(18,31,47,.96), rgba(10,21,34,.96));
+
+    border-radius: 20px;
+
+    box-shadow: 0 18px 42px rgba(0,0,0,.14);
+
+}
+
+
+
+.egreso-form-card,
+
+.egresos-historial-card {
+
+    padding: 22px;
+
+}
+
+
+
+.egreso-form-intro {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: -4px 0 22px;
+
+    padding: 13px 14px;
+
+    border: 1px solid rgba(255,255,255,.065);
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.025);
+
+}
+
+
+
+.egreso-form-intro-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: rgba(215,25,32,.13);
+
+    color: #ff6f75;
+
+}
+
+
+
+.egreso-form-intro-icon svg {
+
+    width: 18px;
+
+    height: 18px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+
+.egreso-form-intro strong,
+
+.egreso-form-intro span {
+
+    display: block;
+
+}
+
+
+
+.egreso-form-intro strong {
+
+    color: #ecf2f8;
+
+    font-size: 12px;
+
+    margin-bottom: 3px;
+
+}
+
+
+
+.egreso-form-intro span {
+
+    color: #788b9f;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+}
+
+
+
+.egreso-form .form-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+}
+
+
+
+.egreso-form .form-group {
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.egreso-form .form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #cbd7e2;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+
+.egreso-form input,
+
+.egreso-form select,
+
+.egreso-form textarea,
+
+.filtro-egresos {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 11px 12px;
+
+    border: 1px solid #2f4154;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    background: #091521;
+
+    color: #edf3f8;
+
+    font-size: 12px;
+
+    transition: border-color .18s, box-shadow .18s, background .18s;
+
+}
+
+
+
+.egreso-form textarea {
+
+    min-height: 96px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+
+}
+
+
+
+.egreso-form input::placeholder,
+
+.egreso-form textarea::placeholder {
+
+    color: #56687b;
+
+}
+
+
+
+.egreso-form input:focus,
+
+.egreso-form select:focus,
+
+.egreso-form textarea:focus,
+
+.filtro-egresos:focus {
+
+    border-color: rgba(215,25,32,.85);
+
+    box-shadow: 0 0 0 3px rgba(215,25,32,.10);
+
+    background: #0b1927;
+
+}
+
+
+
+.egreso-form input[type="file"] {
+
+    padding: 7px 8px;
+
+    color: #8ea0b2;
+
+}
+
+
+
+.egreso-form input[type="file"]::file-selector-button {
+
+    margin-right: 10px;
+
+    padding: 8px 11px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: #1a2b3e;
+
+    color: #dbe5ee;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+
+
+.egreso-submit {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 2px;
+
+    border-radius: 12px;
+
+    font-weight: 900;
+
+}
+
+
+
+.egreso-submit svg {
+
+    width: 17px;
+
+    height: 17px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+
+}
+
+
+
+.egresos-historial-heading {
+
+    padding-bottom: 16px;
+
+    margin-bottom: 16px;
+
+    border-bottom: 1px solid rgba(255,255,255,.06);
+
+}
+
+
+
+.filtro-egresos {
+
+    width: 150px;
+
+    min-height: 38px;
+
+    padding: 8px 10px;
+
+}
+
+
+
+.egresos-empty {
+
+    min-height: 250px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    text-align: center;
+
+    color: #6f8194;
+
+}
+
+
+
+.egresos-empty-icon {
+
+    width: 46px;
+
+    height: 46px;
+
+    display: grid;
+
+    place-items: center;
+
+    margin-bottom: 5px;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.035);
+
+    color: #71869b;
+
+}
+
+
+
+.egresos-empty-icon svg {
+
+    width: 22px;
+
+    height: 22px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.6;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+
+.egresos-empty strong {
+
+    color: #aebdca;
+
+    font-size: 12px;
+
+}
+
+
+
+.egresos-empty span:last-child {
+
+    max-width: 340px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+}
+
+
+
+@media (max-width: 1180px) {
+
+    .egresos-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+
+@media (max-width: 720px) {
+
+    .egreso-form .form-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+
+
+    .egreso-form-card,
+
+    .egresos-historial-card {
+
+        padding: 17px;
+
+    }
+
 }
 
 
 /* ===================================================
-   PULIDO VISUAL ADMIN / EGRESOS
+   MENSUALIDADES / CONTROL DE DEUDAS
 =================================================== */
 
-.menu-btn {
-    min-height: 46px;
-    gap: 13px;
-    padding: 11px 12px;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    font-size: 13px;
-    letter-spacing: -.01em;
-}
-
-.menu-btn:hover {
-    border-color: rgba(255,255,255,.06);
-    background: rgba(255,255,255,.045);
-    transform: none;
-}
-
-.menu-btn.activo {
-    background: linear-gradient(135deg, #d71920, #b91218);
-    border-color: rgba(255,255,255,.07);
-    box-shadow: 0 10px 28px rgba(215,25,32,.18);
-}
-
-.menu-icon {
-    width: 30px;
-    height: 30px;
-    flex: 0 0 30px;
+.mensualidades-stats {
     display: grid;
-    place-items: center;
-    border-radius: 9px;
-    background: rgba(255,255,255,.045);
-    color: #8fa2b7;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 28px;
 }
 
-.menu-btn.activo .menu-icon {
-    background: rgba(255,255,255,.14);
-    color: white;
-}
+.mensualidad-stat-total::before { background: var(--yellow); }
+.mensualidad-stat-historico::before,
+.detalle-stat-historico::before { background: #f0a94a; }
 
-.menu-icon svg {
-    width: 17px;
-    height: 17px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.menu-icon svg path[fill],
-.menu-icon svg rect[fill] {
-    fill: currentColor;
-    stroke: none;
-}
-
-#vista-egresos .section-heading {
+.mensualidades-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
     margin-bottom: 22px;
 }
 
-#vista-egresos .section-heading h2 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: clamp(22px, 2vw, 30px);
+.filtro-deuda-jugador {
+    min-width: 210px;
+    padding: 12px 14px;
+    border: 1px solid #3a4e64;
+    border-radius: 10px;
+    background: #07131f;
+    color: white;
+    font-size: 13px;
 }
 
-#vista-egresos .section-heading p {
-    max-width: 680px;
-    color: #8798aa;
-    line-height: 1.55;
+.filtro-deuda-jugador:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(215, 25, 32, .10);
 }
 
-#vista-egresos .badge-admin {
-    padding: 8px 12px;
+.lista-deudas-jugadores {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.deuda-jugador-card {
+    padding: 20px;
+    background: linear-gradient(145deg, #0d1b2a, #091521);
+    border: 1px solid #283d53;
+    border-radius: 16px;
+    transition: transform .18s ease, border-color .18s ease;
+}
+
+.deuda-jugador-card:hover {
+    transform: translateY(-2px);
+    border-color: #486783;
+}
+
+.deuda-jugador-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.deuda-jugador-top h3 { margin: 6px 0 0; font-size: 17px; }
+
+.deuda-jugador-resumen {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 17px;
+}
+
+.deuda-dato {
+    min-width: 0;
+    padding: 12px;
+    background: #101e2e;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+
+.deuda-dato-historico { border-color: rgba(240, 169, 74, .18); }
+.deuda-dato-total {
+    border-color: rgba(215, 25, 32, .24);
+    background: rgba(215, 25, 32, .08);
+}
+
+.deuda-dato span {
+    display: block;
+    margin-bottom: 6px;
+    color: #7c8da0;
+    font-size: 9px;
+}
+
+.deuda-dato strong {
+    display: block;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.deuda-meses {
+    margin-top: 15px;
+    padding-top: 14px;
+    border-top: 1px solid #22364a;
+}
+
+.deuda-meses-label {
+    display: block;
+    margin-bottom: 9px;
+    color: #7f91a5;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .55px;
+}
+
+.deuda-meses-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.deuda-mes-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 9px;
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.08);
-    background: rgba(255,255,255,.035);
-    color: #b9c7d5;
-    font-size: 11px;
+    background: var(--danger-bg);
+    color: #ff979d;
+    font-size: 9px;
     font-weight: 800;
 }
 
-.egresos-stats {
-    gap: 14px;
-    margin-bottom: 20px;
+.deuda-mes-chip-ok { background: var(--green-bg); color: var(--green); }
+.deuda-btn-detalle { margin-top: 16px; }
+
+.jugador-finanza-historico { border: 1px solid rgba(240, 169, 74, .16); }
+.jugador-finanza-total {
+    border: 1px solid rgba(215, 25, 32, .22);
+    background: rgba(215, 25, 32, .07);
 }
 
-#vista-egresos .stat-card {
-    min-height: 118px;
-    padding: 18px 18px 16px;
-    border: 1px solid rgba(255,255,255,.08);
-    background: linear-gradient(145deg, rgba(18,31,47,.92), rgba(12,24,38,.92));
-    box-shadow: none;
-    overflow: hidden;
-    position: relative;
+.detalle-resumen-financiero {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-#vista-egresos .stat-card::before {
+.detalle-stat { position: relative; overflow: hidden; }
+.detalle-stat::before {
     content: "";
     position: absolute;
-    inset: 0 auto 0 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 3px;
-    background: linear-gradient(#e3262d, #a60f15);
+    background: #274b7a;
 }
-
-#vista-egresos .stat-card span {
-    color: #91a2b4;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-#vista-egresos .stat-card strong {
-    margin: 8px 0 4px;
-    font-size: 24px;
-    line-height: 1;
-}
-
-#vista-egresos .stat-card small {
-    color: #637589;
-    font-size: 10px;
-}
-
-.egresos-layout {
-    grid-template-columns: minmax(390px, .95fr) minmax(520px, 1.45fr);
-    gap: 20px;
-}
-
-#vista-egresos .admin-section {
-    border: 1px solid rgba(255,255,255,.08);
-    background: linear-gradient(145deg, rgba(18,31,47,.96), rgba(10,21,34,.96));
-    border-radius: 20px;
-    box-shadow: 0 18px 42px rgba(0,0,0,.14);
-}
-
-.egreso-form-card,
-.egresos-historial-card {
-    padding: 22px;
-}
-
-.egreso-form-intro {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: -4px 0 22px;
-    padding: 13px 14px;
-    border: 1px solid rgba(255,255,255,.065);
-    border-radius: 14px;
-    background: rgba(255,255,255,.025);
-}
-
-.egreso-form-intro-icon {
-    width: 38px;
-    height: 38px;
-    flex: 0 0 38px;
-    display: grid;
-    place-items: center;
-    border-radius: 11px;
-    background: rgba(215,25,32,.13);
-    color: #ff6f75;
-}
-
-.egreso-form-intro-icon svg {
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.egreso-form-intro strong,
-.egreso-form-intro span {
+.detalle-stat-total::before { background: var(--red); }
+.detalle-stat small {
     display: block;
-}
-
-.egreso-form-intro strong {
-    color: #ecf2f8;
-    font-size: 12px;
-    margin-bottom: 3px;
-}
-
-.egreso-form-intro span {
-    color: #788b9f;
-    font-size: 10px;
+    margin-top: 7px;
+    color: #64768a;
+    font-size: 9px;
     line-height: 1.4;
 }
 
-.egreso-form .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+.cuota-detalle-historica {
+    border-color: rgba(240, 169, 74, .30);
+    background: linear-gradient(145deg, rgba(240, 169, 74, .07), #091622);
 }
 
-.egreso-form .form-group {
-    margin-bottom: 15px;
+@media (max-width: 1100px) {
+    .mensualidades-stats,
+    .detalle-resumen-financiero {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .lista-deudas-jugadores { grid-template-columns: 1fr; }
 }
 
-.egreso-form .form-group label {
-    display: block;
-    margin-bottom: 7px;
-    color: #cbd7e2;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-.egreso-form input,
-.egreso-form select,
-.egreso-form textarea,
-.filtro-egresos {
-    width: 100%;
-    min-height: 44px;
-    padding: 11px 12px;
-    border: 1px solid #2f4154;
-    border-radius: 11px;
-    outline: none;
-    background: #091521;
-    color: #edf3f8;
-    font-size: 12px;
-    transition: border-color .18s, box-shadow .18s, background .18s;
-}
-
-.egreso-form textarea {
-    min-height: 96px;
-    resize: vertical;
-    line-height: 1.5;
-}
-
-.egreso-form input::placeholder,
-.egreso-form textarea::placeholder {
-    color: #56687b;
-}
-
-.egreso-form input:focus,
-.egreso-form select:focus,
-.egreso-form textarea:focus,
-.filtro-egresos:focus {
-    border-color: rgba(215,25,32,.85);
-    box-shadow: 0 0 0 3px rgba(215,25,32,.10);
-    background: #0b1927;
-}
-
-.egreso-form input[type="file"] {
-    padding: 7px 8px;
-    color: #8ea0b2;
-}
-
-.egreso-form input[type="file"]::file-selector-button {
-    margin-right: 10px;
-    padding: 8px 11px;
-    border: 0;
-    border-radius: 8px;
-    background: #1a2b3e;
-    color: #dbe5ee;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.egreso-submit {
-    width: 100%;
-    min-height: 46px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    margin-top: 2px;
-    border-radius: 12px;
-    font-weight: 900;
-}
-
-.egreso-submit svg {
-    width: 17px;
-    height: 17px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-}
-
-.egresos-historial-heading {
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid rgba(255,255,255,.06);
-}
-
-.filtro-egresos {
-    width: 150px;
-    min-height: 38px;
-    padding: 8px 10px;
-}
-
-.egresos-empty {
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    text-align: center;
-    color: #6f8194;
-}
-
-.egresos-empty-icon {
-    width: 46px;
-    height: 46px;
-    display: grid;
-    place-items: center;
-    margin-bottom: 5px;
-    border-radius: 14px;
-    background: rgba(255,255,255,.035);
-    color: #71869b;
-}
-
-.egresos-empty-icon svg {
-    width: 22px;
-    height: 22px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.egresos-empty strong {
-    color: #aebdca;
-    font-size: 12px;
-}
-
-.egresos-empty span:last-child {
-    max-width: 340px;
-    font-size: 10px;
-    line-height: 1.5;
-}
-
-@media (max-width: 1180px) {
-    .egresos-layout {
+@media (max-width: 700px) {
+    .mensualidades-stats,
+    .detalle-resumen-financiero,
+    .deuda-jugador-resumen {
         grid-template-columns: 1fr;
     }
+    .mensualidades-toolbar { align-items: stretch; }
+    .mensualidades-toolbar .buscador-jugadores,
+    .filtro-deuda-jugador { width: 100%; min-width: 0; }
+    .deuda-jugador-top { flex-direction: column; }
 }
 
-@media (max-width: 720px) {
-    .egreso-form .form-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
 
-    .egreso-form-card,
-    .egresos-historial-card {
-        padding: 17px;
-    }
-}
+/* ===================================================
+   INICIO · RESUMEN FINANCIERO
+=================================================== */
+.dashboard-finanzas { margin-bottom: 14px; }
+.stat-card-saldo::before { background: var(--green); }
+.stat-card-ingresos::before { background: #8fc2ff; }
+.stat-card-deuda::before { background: var(--yellow); }
+.stat-card-egresos::before { background: var(--danger); }
+.stat-card-saldo strong { color: #b7f1cf; }
+.stat-card-ingresos strong { color: #b9dbff; }
+.stat-card-deuda strong { color: #ffe17a; }
+.stat-card-egresos strong { color: #ff9da3; }
+.dashboard-status { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:28px; }
+.dashboard-status-item { display:flex; align-items:center; justify-content:space-between; gap:14px; min-height:54px; padding:12px 15px; background:rgba(10,23,36,.82); border:1px solid #24384e; border-radius:12px; }
+.dashboard-status-item span { color:#8091a5; font-size:10px; font-weight:700; }
+.dashboard-status-item strong { color:#f4f7fb; font-size:16px; }
+.acceso-icon svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+@media (max-width:900px) { .dashboard-status { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:560px) { .dashboard-status { grid-template-columns:1fr; } .dashboard-status-item { min-height:50px; } }
