@@ -443,9 +443,9 @@ function combinarPerfilJugador(
                 legacy.capitan
             ),
 
+        // No publicar fotos cargadas desde Portal Deportivo.
         foto:
-            obtenerFotoOficial(
-                oficial.foto_path,
+            obtenerFotoPublicaClub(
                 legacy.foto
             ),
 
@@ -527,39 +527,13 @@ function normalizarJugadorLegacy(
 
 
 /* ===================================================
-   FOTO OFICIAL
+   FOTO PÚBLICA DEL CLUB
+   No leer foto_path (foto personal del Portal Deportivo).
+   Se conserva la fotografía curada en plantel.json o el avatar.
 =================================================== */
 
-function obtenerFotoOficial(
-    fotoPath,
-    fotoLegacy
-) {
-
-    if (fotoPath) {
-
-        const {
-            data
-        } =
-            supabase.storage
-                .from(
-                    "fotos-jugadores"
-                )
-                .getPublicUrl(
-                    fotoPath
-                );
-
-        if (data?.publicUrl) {
-
-            return data.publicUrl;
-
-        }
-
-    }
-
-    return fotoLegacy ||
-        FOTO_JUGADOR_RESPALDO ||
-        LOGO_CLUB;
-
+function obtenerFotoPublicaClub(fotoLegacy) {
+    return fotoLegacy || FOTO_JUGADOR_RESPALDO || LOGO_CLUB;
 }
 
 
