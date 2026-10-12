@@ -3282,196 +3282,35 @@ async function abrirComprobante(
 }
 
 
-async function aprobarPago(
-    pagoId
-) {
+async function aprobarPago(pagoId) {
+    if (!pagoId) return;
 
-    if (!pagoId) {
-        return;
-    }
+    const confirmar = confirm(
+        "¿Confirmas que recibiste correctamente esta transferencia?"
+    );
+    if (!confirmar) return;
 
+    mensaje.textContent = "Verificando y aprobando pago...";
 
-    const confirmar =
-        confirm(
-            "¿Confirmas que recibiste correctamente esta transferencia?"
-        );
+    // La RPC valida en el servidor: administrador activo, pago pendiente,
+    // suma de cuotas, propiedad del jugador y montos completos.
+    // Supabase ejecuta los cambios a pago y cuotas de forma atómica.
+    const { error } = await supabase.rpc(
+        "aprobar_pago_y_cuotas_admin",
+        { p_pago_id: pagoId }
+    );
 
-
-    if (!confirmar) {
-        return;
-    }
-
-
-    mensaje.textContent =
-        "Aprobando pago...";
-
-
-    /* ===============================================
-       OBTENER ADMINISTRADOR CONECTADO
-    =============================================== */
-
-    const {
-        data: usuarioData,
-        error: errorUsuario
-    } =
-        await supabase.auth
-            .getUser();
-
-
-    if (
-        errorUsuario ||
-        !usuarioData?.user
-    ) {
-
+    if (error) {
+        console.error("Error al aprobar pago:", error);
         mensaje.textContent =
-            "No se pudo identificar al administrador.";
-
+            "No se pudo aprobar el pago. Verifica sus cuotas y el monto aplicado. " +
+            "No se realizaron cambios parciales.";
         return;
     }
 
-
-    const usuario =
-        usuarioData.user;
-
-
-    /* ===============================================
-       OBTENER CUOTAS ASOCIADAS
-    =============================================== */
-
-    const {
-        data: relaciones,
-        error: errorRelaciones
-    } =
-        await supabase
-            .from(
-                "pago_cuotas"
-            )
-            .select(`
-                cuota_id,
-                monto_aplicado
-            `)
-            .eq(
-                "pago_id",
-                pagoId
-            );
-
-
-    if (errorRelaciones) {
-
-        console.error(
-            errorRelaciones
-        );
-
-        mensaje.textContent =
-            "No se pudieron cargar las cuotas asociadas.";
-
-        return;
-    }
-
-
-    const cuotaIds =
-        (relaciones || [])
-            .map(
-                (relacion) =>
-                    relacion.cuota_id
-            )
-            .filter(Boolean);
-
-
-    /* ===============================================
-       MARCAR CUOTAS PAGADAS
-    =============================================== */
-
-    if (cuotaIds.length > 0) {
-
-        const {
-            error: errorCuotas
-        } =
-            await supabase
-                .from(
-                    "cuotas"
-                )
-                .update({
-                    estado: "PAGADO"
-                })
-                .in(
-                    "id",
-                    cuotaIds
-                );
-
-
-        if (errorCuotas) {
-
-            console.error(
-                errorCuotas
-            );
-
-            mensaje.textContent =
-                "No se pudieron actualizar las cuotas.";
-
-            return;
-        }
-
-    }
-
-
-    /* ===============================================
-       APROBAR PAGO
-    =============================================== */
-
-    const {
-        error: errorPago
-    } =
-        await supabase
-            .from(
-                "pagos"
-            )
-            .update({
-
-                estado:
-                    "APROBADO",
-
-                revisado_por:
-                    usuario.id,
-
-                revisado_at:
-                    new Date()
-                        .toISOString(),
-
-                motivo_rechazo:
-                    null
-
-            })
-            .eq(
-                "id",
-                pagoId
-            );
-
-
-    if (errorPago) {
-
-        console.error(
-            errorPago
-        );
-
-        mensaje.textContent =
-            "No se pudo aprobar el pago.";
-
-        return;
-    }
-
-
-    mensaje.textContent =
-        "Pago aprobado correctamente.";
-
-
-    await Promise.all([
-        cargarPagos(),
-        cargarJugadores()
-    ]);
-
+    mensaje.textContent = "Pago aprobado correctamente.";
+    await Promise.all([cargarPagos(), cargarJugadores()]);
     await actualizarRecaudacionGeneral();
-
 }
 
 

@@ -134,12 +134,12 @@
 
             <div class="hero-stats">
 
-                <div class="hero-stat">
+                <div class="hero-stat" id="hero-stat-posicion-card">
                     <h3 id="hero-posicion">--</h3>
                     <span>Posición</span>
                 </div>
 
-                <div class="hero-stat">
+                <div class="hero-stat" id="hero-stat-puntos-card">
                     <h3 id="hero-puntos">--</h3>
                     <span>Puntos</span>
                 </div>
@@ -202,7 +202,7 @@
     <div id="contenido-partidos" hidden>
 
         <!-- RESUMEN -->
-        <section class="section dark">
+        <section class="section dark" id="seccion-resumen">
             <div class="container">
 
                 <div class="section-title">
@@ -250,21 +250,20 @@
         </section>
 
         <!-- TABLA -->
-        <section class="section">
+        <section class="section" id="seccion-tabla">
             <div class="container">
 
                 <div class="section-title">
                     <span class="club-badge">Clasificación</span>
-                    <h2 class="mt-3">Tabla de Posiciones</h2>
-                    <p>Clasificación del torneo seleccionado.</p>
+                    <h2 class="mt-3" id="titulo-tabla">Tabla de Posiciones</h2>
+                    <p id="texto-tabla">Clasificación del torneo seleccionado.</p>
                 </div>
 
                 <div id="tabla-vacia" class="card-custom text-center" hidden>
                     <i class="bi bi-table fs-1 text-warning"></i>
                     <h3 class="mt-3">Tabla aún no disponible</h3>
                     <p class="mb-0">
-                        Se mostrará automáticamente cuando agregues equipos a
-                        <code>tabla.json</code>.
+                        Esta competición no utiliza tabla de posiciones o todavía no tiene datos publicados.
                     </p>
                 </div>
 
@@ -292,21 +291,20 @@
         </section>
 
         <!-- FIXTURE -->
-        <section class="section dark">
+        <section class="section dark" id="seccion-fixture">
             <div class="container">
 
                 <div class="section-title">
                     <span class="club-badge">Calendario</span>
-                    <h2 class="mt-3">Fixture del Torneo</h2>
-                    <p>Partidos agrupados automáticamente por fecha.</p>
+                    <h2 class="mt-3" id="titulo-fixture">Fixture del Torneo</h2>
+                    <p id="texto-fixture">Partidos agrupados automáticamente por fecha.</p>
                 </div>
 
                 <div id="fixture-vacio" class="card-custom text-center" hidden>
                     <i class="bi bi-calendar-event fs-1 text-warning"></i>
                     <h3 class="mt-3">Fixture aún no disponible</h3>
                     <p class="mb-0">
-                        Se mostrará automáticamente cuando agregues partidos a
-                        <code>fixture.json</code>.
+                        Todavía no hay partidos disponibles para esta competición.
                     </p>
                 </div>
 
@@ -316,7 +314,7 @@
         </section>
 
         <!-- DATOS ADICIONALES -->
-        <section class="section">
+        <section class="section" id="seccion-rendimiento">
             <div class="container">
 
                 <div class="section-title">
@@ -351,11 +349,11 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6" id="rendimiento-puntos-card">
                         <div class="stat-box">
-                            <i class="bi bi-award-fill"></i>
+                            <i class="bi bi-award-fill" id="stat-pts-icono"></i>
                             <h2 id="stat-pts">0</h2>
-                            <p>Puntos</p>
+                            <p id="stat-pts-label">Puntos</p>
                         </div>
                     </div>
 
@@ -603,7 +601,7 @@
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/partidos.js"></script>
+<script type="module" src="assets/js/partidos.js"></script>
 
 </body>
 </html>

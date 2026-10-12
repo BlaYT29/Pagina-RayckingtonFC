@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Deportivo | Rayckington FC</title>
+    <link rel="stylesheet" href="assets/css/portal-deportivo.css?v=20261012-cal1">
+    <link rel="stylesheet" href="assets/css/mobile-portales.css?v=20261012-m1">
+    <link rel="stylesheet" href="assets/css/profile-positions.css?v=20261012-b">
+</head>
+<body class="rayck-sport-player">
+<section id="login-player" class="player-login">
+    <div class="player-login-card">
+        <img src="assets/img/logo/logo.png" alt="Rayckington FC" class="login-logo">
+        <span class="eyebrow">ÁREA DEL JUGADOR</span>
+        <h1>Portal Deportivo</h1>
+        <p>Rayckington FC</p>
+        <form id="form-login-player" class="login-form">
+            <label>Correo electrónico
+                <input id="player-email" type="email" autocomplete="email" required>
+            </label>
+            <label>Contraseña
+                <input id="player-password" type="password" autocomplete="current-password" required>
+            </label>
+            <button class="btn btn-primary btn-full" type="submit">Ingresar</button>
+            <p id="login-message" class="form-message"></p>
+        </form>
+    </div>
+</section>
+
+<div id="player-shell" class="player-shell" hidden>
+    <aside id="player-sidebar" class="sidebar">
+        <div class="sidebar-brand">
+            <img src="assets/img/logo/logo.png" alt="Rayckington FC">
+            <div><strong>Rayckington FC</strong><span>Portal Deportivo</span></div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="nav-btn active" data-view="inicio" type="button"><span class="nav-icon">⌂</span>Inicio</button>
+            <button class="nav-btn" data-view="perfil" type="button"><span class="nav-icon">◉</span>Mi perfil</button>
+            <button class="nav-btn" data-view="estadisticas" type="button"><span class="nav-icon">▥</span>Mis estadísticas</button>
+            <button class="nav-btn" data-view="enviar" type="button"><span class="nav-icon">＋</span>Enviar estadísticas</button>
+            <button class="nav-btn" data-view="partidos" type="button"><span class="nav-icon">⚽</span>Partidos</button>
+        </nav>
+
+        <div class="sidebar-separator"></div>
+        <a class="module-link" href="portal.html"><span class="nav-icon">$</span>Ir a Tesorería</a>
+
+        <div class="sidebar-footer">
+            <span>Rayckington FC</span>
+            <small>Nacimos para competir,<br>jugamos para ganar.</small>
+        </div>
+    </aside>
+
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button id="btn-menu" class="icon-btn mobile-only" type="button">☰</button>
+                <div><span class="brand-mini">RAYCKINGTON FC</span><h1 id="page-title">Mi Rayckington</h1></div>
+            </div>
+            <div class="topbar-user">
+                <span id="top-avatar" class="avatar">R</span>
+                <div><strong id="top-name">Jugador</strong><small>Cuenta deportiva</small></div>
+                <button id="btn-logout" class="icon-btn" type="button" title="Cerrar sesión">↪</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div id="global-message" class="global-message" hidden></div>
+
+            <section id="view-inicio" class="view active">
+                <section class="hero-player">
+                    <div class="hero-copy">
+                        <span class="eyebrow">MI RAYCKINGTON</span>
+                        <h2 id="welcome-name">Hola</h2>
+                        <p>Tu temporada, tus partidos y tus estadísticas oficiales en un solo lugar.</p>
+                    </div>
+                    <img src="assets/img/logo/logo.png" alt="Rayckington FC" class="hero-logo">
+                </section>
+
+                <section class="dashboard-player-grid">
+                    <article class="fifa-card">
+                        <div class="fifa-glow"></div>
+                        <div class="fifa-topline"><span id="card-dorsal">--</span><span id="card-posicion">JUGADOR</span></div>
+                        <div class="player-photo-wrap">
+                            <img id="card-photo" src="assets/img/logo/logo.png" alt="Foto del jugador">
+                        </div>
+                        <img class="fifa-club-logo" src="assets/img/logo/logo.png" alt="Rayckington FC">
+                        <h3 id="card-name">Jugador</h3>
+                        <p id="card-subtitle">Rayckington FC</p>
+                        <div class="fifa-mini-stats">
+                            <div><strong id="card-pj">0</strong><span>PJ</span></div>
+                            <div><strong id="card-goles">0</strong><span>G</span></div>
+                            <div><strong id="card-asistencias">0</strong><span>A</span></div>
+                        </div>
+                    </article>
+
+                    <div class="dashboard-right">
+                        <div class="filter-strip">
+                            <label>Temporada<select id="inicio-temporada"></select></label>
+                            <label>Competición<select id="inicio-competicion"></select></label>
+                        </div>
+                        <div class="stats-grid six">
+                            <article class="stat-card accent-blue"><span>Partidos</span><strong id="stat-pj">0</strong><small>Oficiales</small></article>
+                            <article class="stat-card accent-yellow"><span>Minutos</span><strong id="stat-minutos">0</strong><small>Acumulados</small></article>
+                            <article class="stat-card accent-red"><span>Goles</span><strong id="stat-goles">0</strong><small>Oficiales</small></article>
+                            <article class="stat-card accent-green"><span>Asistencias</span><strong id="stat-asistencias">0</strong><small>Oficiales</small></article>
+                            <article class="stat-card accent-orange"><span>Amarillas</span><strong id="stat-amarillas">0</strong><small>Temporada</small></article>
+                            <article class="stat-card accent-violet"><span>MVP</span><strong id="stat-mvp">0</strong><small>Elegido por el club</small></article>
+                        </div>
+                        <div class="home-panels">
+                            <article class="panel-card">
+                                <div class="section-head compact"><div><span class="eyebrow">AGENDA</span><h3>Próximo partido</h3></div></div>
+                                <div id="next-match" class="empty-state">Cargando próximo partido...</div>
+                            </article>
+                            <article class="panel-card">
+                                <div class="section-head compact"><div><span class="eyebrow">ESTADO</span><h3>Últimos envíos</h3></div></div>
+                                <div id="recent-submissions" class="compact-list"></div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <section id="view-perfil" class="view">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">MI CUENTA DEPORTIVA</span>
+                        <h2>Mi perfil</h2>
+                        <p>Tu ficha oficial de Rayckington FC y tus números aprobados por el club.</p>
+                    </div>
+                </div>
+
+                <div class="profile-fifa-layout">
+                    <article class="profile-fifa-card">
+                        <div class="profile-fifa-glow"></div>
+
+                        <div class="profile-fifa-top">
+                            <div>
+                                <strong id="profile-dorsal">—</strong>
+                                <span id="profile-position">JUGADOR</span>
+                            </div>
+                            <img src="assets/img/logo/logo.png" alt="Rayckington FC">
+                        </div>
+
+                        <div class="profile-fifa-photo">
+                            <img id="profile-photo" src="assets/img/logo/logo.png" alt="Foto de perfil">
+                        </div>
+
+                        <div class="profile-fifa-name">
+                            <h3 id="profile-name">Jugador</h3>
+                            <p id="profile-role">Rayckington FC</p>
+                        </div>
+
+                        <div class="profile-fifa-numbers">
+                            <div><strong id="profile-stat-pj">0</strong><span>PJ</span></div>
+                            <div><strong id="profile-stat-g">0</strong><span>G</span></div>
+                            <div><strong id="profile-stat-a">0</strong><span>A</span></div>
+                            <div><strong id="profile-stat-min">0</strong><span>MIN</span></div>
+                        </div>
+
+                        <label class="upload-zone profile-upload-zone">
+                            Actualizar foto
+                            <input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+                            <span>JPG, PNG o WEBP · máx. 5 MB</span>
+                        </label>
+
+                        <button id="btn-upload-photo" class="btn btn-primary btn-full" type="button">
+                            Subir foto
+                        </button>
+
+                        <p id="photo-message" class="form-message"></p>
+                    </article>
+
+                    <div class="profile-fifa-right">
+                        <article class="panel-card">
+                            <div class="section-head compact">
+                                <div>
+                                    <span class="eyebrow">FICHA OFICIAL</span>
+                                    <h3>Datos deportivos</h3>
+                                </div>
+                            </div>
+
+                            <div class="profile-data-grid">
+                                <div><span>Nombre deportivo</span><strong id="profile-sport-name">—</strong></div>
+                                <div><span>Posición secundaria</span><strong id="profile-position-2">—</strong></div>
+                                <div><span>Pierna hábil</span><strong id="profile-foot">—</strong></div>
+                                <div><span>Fecha de ingreso</span><strong id="profile-entry">—</strong></div>
+                            </div>
+
+                            <div class="notice-box">
+                                Puedes elegir tus posiciones una única vez. Una vez guardadas, los cambios deben solicitarse a administración. El dorsal y nombre deportivo los administra el club.
+                            </div>
+                        </article>
+
+                        <article class="panel-card player-positions-card" id="player-positions-card">
+                            <div class="section-head compact"><div><span class="eyebrow">TU POSICIÓN EN EL EQUIPO</span><h3>Configurar posiciones</h3></div></div>
+                            <p id="positions-state" class="positions-state" aria-live="polite">Comprobando configuración...</p>
+                            <form id="positions-once-form" class="positions-once-form" hidden>
+                                <div class="positions-form-grid">
+                                    <label>Posición principal <select id="player-position-main" required>
+                                        <option value="">Selecciona tu posición</option>
+                                        <option value="ARQ">ARQ · Arquero</option><option value="DFC">DFC · Defensa central</option>
+                                        <option value="LI">LI · Lateral izquierdo</option><option value="LD">LD · Lateral derecho</option>
+                                        <option value="MCD">MCD · Volante defensivo</option><option value="MC">MC · Mediocampista central</option>
+                                        <option value="MCO">MCO · Mediocampista ofensivo</option><option value="MI">MI · Volante izquierdo</option>
+                                        <option value="MD">MD · Volante derecho</option><option value="EI">EI · Extremo izquierdo</option>
+                                        <option value="ED">ED · Extremo derecho</option><option value="DC">DC · Delantero centro</option>
+                                    </select></label>
+                                    <label>Posición secundaria <select id="player-position-second">
+                                        <option value="">Ninguna / por definir</option>
+                                        <option value="ARQ">ARQ · Arquero</option><option value="DFC">DFC · Defensa central</option>
+                                        <option value="LI">LI · Lateral izquierdo</option><option value="LD">LD · Lateral derecho</option>
+                                        <option value="MCD">MCD · Volante defensivo</option><option value="MC">MC · Mediocampista central</option>
+                                        <option value="MCO">MCO · Mediocampista ofensivo</option><option value="MI">MI · Volante izquierdo</option>
+                                        <option value="MD">MD · Volante derecho</option><option value="EI">EI · Extremo izquierdo</option>
+                                        <option value="ED">ED · Extremo derecho</option><option value="DC">DC · Delantero centro</option>
+                                    </select></label>
+                                    <label>Pierna hábil (opcional) <select id="player-position-foot">
+                                        <option value="">Mantener actual / por definir</option>
+                                        <option value="Derecha">Derecha</option><option value="Izquierda">Izquierda</option><option value="Ambas">Ambas</option>
+                                    </select></label>
+                                </div>
+                                <label class="positions-confirm"><input type="checkbox" id="player-position-confirm" required> Confirmo que estas son mis posiciones. Solo puedo guardarlas una vez; para corregirlas después debo avisar al club.</label>
+                                <button class="btn btn-primary" id="player-position-save" type="submit">Guardar posiciones definitivamente</button>
+                                <p id="positions-message" class="form-message" aria-live="polite"></p>
+                            </form>
+                        </article>
+
+                        <article class="panel-card profile-performance-card">
+                            <div class="section-head compact profile-performance-head">
+                                <div>
+                                    <span class="eyebrow">RENDIMIENTO</span>
+                                    <h3>Resumen deportivo</h3>
+                                </div>
+                                <span id="profile-filter-label" class="profile-filter-label">Toda la carrera</span>
+                            </div>
+
+                            <div class="profile-filter-strip">
+                                <label>
+                                    Temporada
+                                    <select id="profile-temporada"></select>
+                                </label>
+
+                                <label>
+                                    Competición
+                                    <select id="profile-competicion"></select>
+                                </label>
+                            </div>
+
+                            <div class="profile-stats-grid">
+                                <div><strong id="profile-stat-tit">0</strong><span>Titularidades</span></div>
+                                <div><strong id="profile-stat-ta">0</strong><span>Amarillas</span></div>
+                                <div><strong id="profile-stat-tr">0</strong><span>Rojas</span></div>
+                                <div><strong id="profile-stat-mvp">0</strong><span>MVP</span></div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <section id="view-estadisticas" class="view">
+                <div class="section-head"><div><span class="eyebrow">RENDIMIENTO</span><h2>Mis estadísticas</h2><p>Solo aparecen registros oficiales aprobados por Rayckington FC.</p></div></div>
+                <div id="historico-status" class="notice-box" role="status">Consultando históricos del Clausura...</div>
+                <div class="toolbar-card panel-card filters-row">
+                    <label>Temporada<select id="stats-temporada"></select></label>
+                    <label>Competición<select id="stats-competicion"></select></label>
+                </div>
+                <div class="stats-grid six">
+                    <article class="stat-card accent-blue"><span>PJ</span><strong id="stats-pj">0</strong><small>Partidos</small></article>
+                    <article class="stat-card accent-yellow"><span>MIN</span><strong id="stats-min">0</strong><small>Minutos</small></article>
+                    <article class="stat-card accent-red"><span>G</span><strong id="stats-g">0</strong><small>Goles</small></article>
+                    <article class="stat-card accent-green"><span>A</span><strong id="stats-a">0</strong><small>Asistencias</small></article>
+                    <article class="stat-card accent-orange"><span>TA</span><strong id="stats-ta">0</strong><small>Amarillas</small></article>
+                    <article class="stat-card accent-violet"><span>MVP</span><strong id="stats-mvp">0</strong><small>Distinciones</small></article>
+                </div>
+                <article class="panel-card">
+                    <div class="section-head compact"><div><span class="eyebrow">PARTIDO A PARTIDO</span><h3>Historial oficial e histórico</h3></div></div>
+                    <div id="official-history" class="official-history"></div>
+                </article>
+            </section>
+
+            <section id="view-enviar" class="view">
+                <div class="section-head"><div><span class="eyebrow">AUTOREPORTE</span><h2>Enviar estadísticas</h2><p>Solo partidos nuevos a partir de la Fecha 3 del Clausura 2026, una vez finalizados. Los históricos anteriores los carga el club.</p></div></div>
+                <div class="submit-layout">
+                    <article class="panel-card">
+                        <form id="stats-submit-form" class="form-grid">
+                            <label class="full">Partido<select id="submit-match" required></select></label>
+                            <div id="submit-eligibility-note" class="notice-box full" role="status">Cargando partidos habilitados...</div>
+                            <label class="switch-row"><input id="submit-titular" type="checkbox"><span>Fui titular</span></label>
+                            <label>Minutos<input id="submit-minutos" type="number" min="0" max="150" value="0" required></label>
+                            <label>Goles<input id="submit-goles" type="number" min="0" value="0" required></label>
+                            <label>Asistencias<input id="submit-asistencias" type="number" min="0" value="0" required></label>
+                            <label>Amarillas<input id="submit-amarillas" type="number" min="0" value="0" required></label>
+                            <label>Rojas<input id="submit-rojas" type="number" min="0" value="0" required></label>
+                            <label>Posición jugada<input id="submit-posicion" type="text" placeholder="Ej. MC, DC, LD"></label>
+                            <div id="goalkeeper-fields" class="goalkeeper-fields full">
+                                <label>Goles recibidos<input id="submit-goles-recibidos" type="number" min="0" value="0"></label>
+                                <label>Penales atajados<input id="submit-penales-atajados" type="number" min="0" value="0"></label>
+                                <label class="switch-row"><input id="submit-valla" type="checkbox"><span>Valla invicta</span></label>
+                            </div>
+                            <label class="full">Observaciones<textarea id="submit-observaciones" rows="3" placeholder="Opcional"></textarea></label>
+                            <div class="notice-box full">El MVP lo define la administración. Los goles, asistencias y tarjetas se contrastarán con el Match Center cuando existan eventos oficiales.</div>
+                            <button class="btn btn-primary full" type="submit">Enviar para revisión</button>
+                            <p id="submit-message" class="form-message full"></p>
+                        </form>
+                    </article>
+                    <article class="panel-card">
+                        <div class="section-head compact"><div><span class="eyebrow">SEGUIMIENTO</span><h3>Mis envíos</h3></div></div>
+                        <div id="submission-history" class="submission-history"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="view-partidos" class="view">
+                <div class="section-head"><div><span class="eyebrow">CALENDARIO</span><h2>Partidos</h2><p>Fixture y resultados deportivos disponibles para tu cuenta.</p></div></div>
+                <div class="matches-filters" aria-label="Filtros de partidos">
+                    <label>Competición
+                        <select id="player-match-competition"><option value="">Todas las competiciones</option></select>
+                    </label>
+                    <label>Estado
+                        <select id="player-match-status">
+                            <option value="TODOS">Todos los estados</option>
+                            <option value="PROXIMOS">Próximos / en vivo</option>
+                            <option value="FINALIZADO">Finalizados</option>
+                        </select>
+                    </label>
+                </div>
+                <p id="player-matches-count" class="match-results-count" aria-live="polite"></p>
+                <div id="player-matches" class="matches-list"></div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<script type="module" src="assets/js/portal-deportivo.js?v=20261012-positions2"></script>
+</body>
+</html>

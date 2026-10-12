@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sigue los partidos, goles, cambios y formaciones de Rayckington FC.">
+  <title>Rayckington Live | Rayckington FC</title>
+  <link rel="icon" href="assets/img/logo/logo.png">
+  <link rel="stylesheet" href="assets/css/rayck-live.css">
+</head>
+<body>
+  <header class="live-header">
+    <a href="partidos.html" class="back">← Volver a Partidos</a>
+    <div class="live-brand"><img src="assets/img/logo/logo.png" alt="Escudo Rayckington FC"><span>RAYCKINGTON <b>LIVE</b></span></div>
+  </header>
+  <main class="live-container">
+    <div id="live-error" class="live-notice" role="status">Cargando información del partido…</div>
+    <div id="live-content" hidden>
+      <div class="live-eyebrow" id="live-stage">PARTIDO</div>
+      <section class="live-score" aria-label="Marcador del partido">
+        <div class="live-team"><img id="live-logo-local" alt=""><strong id="live-local">Equipo local</strong></div>
+        <div class="live-center"><div id="live-score" class="live-score-numbers">– : –</div><div id="live-clock" class="live-clock">Programado</div></div>
+        <div class="live-team"><img id="live-logo-visita" alt=""><strong id="live-visita">Equipo visitante</strong></div>
+      </section>
+      <div class="live-match-meta"><span id="live-date"></span><span id="live-place"></span><span id="live-updated"></span></div>
+      <div class="live-grid">
+        <section class="live-card" aria-labelledby="live-lineup-title">
+          <h2 id="live-lineup-title">Alineación de Rayckington</h2>
+          <p class="live-subtitle" id="live-scheme"></p>
+          <div id="live-pitch" class="live-pitch" hidden aria-label="Distribución de jugadores"></div>
+          <div id="live-starting" class="live-player-list"></div>
+          <h3>Banco de suplentes</h3>
+          <div id="live-bench" class="live-player-list"></div>
+        </section>
+        <section class="live-card" aria-labelledby="live-events-title">
+          <h2 id="live-events-title">Minuto a minuto</h2>
+          <p class="live-subtitle">Jugadas y cambios registrados desde Match Center</p>
+          <div id="live-events" class="live-events" aria-live="polite"></div>
+        </section>
+      </div>
+      <p class="live-disclaimer">Seguimiento informativo, no transmisión de video. Los datos reflejan lo ingresado por la administración del club.</p>
+    </div>
+  </main>
+  <script type="module" src="assets/js/rayck-live.js"></script>
+</body>
+</html>

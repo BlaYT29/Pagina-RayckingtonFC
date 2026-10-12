@@ -63,6 +63,7 @@
     <!-- CSS específico -->
 
     <link rel="stylesheet" href="assets/css/plantel.css">
+    <link rel="stylesheet" href="assets/css/rankings-plantel.css?v=20261012">
     
     <!-- ===========================
          FAVICON
@@ -380,6 +381,23 @@
 
     </div>
 
+</section>
+
+<!-- ===========================================
+      LÍDERES DEPORTIVOS · DATOS CONFIRMADOS
+=========================================== -->
+<section class="section rayck-rank-section" id="ranking-plantel" aria-labelledby="rankings-title">
+    <div class="container">
+        <div class="section-title">
+            <span class="club-badge">Estadísticas oficiales</span>
+            <h2 id="rankings-title" class="mt-3">Líderes del plantel</h2>
+            <p>Los destacados de <strong id="ranking-temporada">Clausura 2026</strong>. Estadísticas históricas más partidos posteriores confirmados.</p>
+        </div>
+        <p class="rayck-ranking-note">Los rankings se actualizan al cargar la página con los datos públicos disponibles en Supabase. Las cifras sin confirmar no se suman.</p>
+        <div class="rayck-rank-grid" id="rankings-listado" aria-live="polite">
+            <p class="rayck-ranking-loading">Cargando clasificaciones…</p>
+        </div>
+    </div>
 </section>
 
 <!-- ===========================================
@@ -1191,7 +1209,7 @@
 
 <script src="assets/js/main.js"></script>
 
-<script src="assets/js/plantel.js"></script>
+<script type="module" src="assets/js/plantel.js"></script>
 
 </body>
 

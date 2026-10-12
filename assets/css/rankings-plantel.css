@@ -1,0 +1,24 @@
+/* Rayckington FC · rankings en el plantel público */
+.rayck-rank-section { scroll-margin-top: 105px; background: radial-gradient(ellipse at 15% 0%, rgba(205,13,29,.13), transparent 48%), #0c111c; }
+.rayck-rank-section .section-title h2 { color: #fff; }
+.rayck-ranking-note { text-align: center; max-width: 760px; margin: 0 auto 28px; color: #b5c1d0; font-size: 13px; }
+.rayck-rank-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+.rayck-ranking-card { min-width: 0; background: linear-gradient(165deg,#182438,#101824 78%); border: 1px solid #334057; border-radius: 19px; padding: 20px; box-shadow: 0 18px 38px rgba(0,0,0,.18); }
+.rayck-ranking-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 17px; }
+.rayck-ranking-card-head small { display: block; color: #ffd21a; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; font-size: 10px; }
+.rayck-ranking-card-head h3 { font-size: 18px; font-family: Poppins,sans-serif; color: #fff; margin: 4px 0 0; }
+.rayck-ranking-icon { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border-radius: 13px; background: rgba(255,210,26,.13); color: #ffda36; font-size: 20px; }
+.rayck-ranking-list { margin: 0; padding: 0; list-style: none; }
+.rayck-ranking-list li + li { border-top: 1px solid rgba(255,255,255,.09); }
+.rayck-ranking-player { min-width: 0; display: flex; align-items: center; gap: 10px; padding: 11px 3px; border-radius: 9px; color: #f7f9fc; text-decoration: none; }
+.rayck-ranking-player:hover,.rayck-ranking-player:focus-visible { background: rgba(255,255,255,.06); color: #fff; }
+.rayck-ranking-place { color: #ffd21a; font-weight: 800; font-size: 13px; width: 17px; flex: 0 0 17px; text-align: center; }
+.rayck-ranking-player img { width: 33px; height: 35px; border-radius: 10px; flex: 0 0 33px; object-fit: cover; background: #243149; }
+.rayck-ranking-name { flex: 1; min-width: 0; font-weight: 650; font-size: 12px; line-height: 1.4; }
+.rayck-ranking-player strong { text-align: right; color: #fff; font-size: 17px; font-weight: 850; white-space: nowrap; }
+.rayck-ranking-player strong small { display: block; font-size: 9px; font-weight: 550; color: #9cacc0; }
+.rayck-ranking-empty { padding: 19px 6px; color: #a5b2c5; font-size: 12px; line-height: 1.6; }
+.rayck-ranking-loading { grid-column: 1/-1; color: #a5b2c5; text-align: center; }
+@media(max-width:1000px) { .rayck-rank-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:650px) { .rayck-rank-grid { grid-template-columns: 1fr; gap: 12px; } .rayck-ranking-card { padding: 15px; } .rayck-ranking-card-head h3 { font-size: 17px; } .rayck-ranking-note { font-size: 12px; } }
+@media(prefers-reduced-motion:reduce) { .rayck-ranking-player { transition: none; } }

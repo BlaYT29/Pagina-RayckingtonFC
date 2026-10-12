@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Escudo genérico de equipo">
+  <path d="M128 19 213 48v71c0 56-37 96-85 118-48-22-85-62-85-118V48Z" fill="#1b2230" stroke="#9da9be" stroke-width="8"/>
+  <path d="M128 39 195 62v57c0 43-27 76-67 97-40-21-67-54-67-97V62Z" fill="none" stroke="#39475d" stroke-width="3"/>
+  <circle cx="128" cy="92" r="23" fill="none" stroke="#bfc8d9" stroke-width="4"/>
+  <path d="m128 79 12 9-5 15h-14l-5-15Z" fill="#bfc8d9"/>
+  <text x="128" y="167" text-anchor="middle" font-family="Arial,sans-serif" font-size="40" font-weight="700" fill="#e8edf5">FC</text>
+</svg>

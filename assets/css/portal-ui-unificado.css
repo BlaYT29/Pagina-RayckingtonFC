@@ -1,0 +1,123 @@
+/* Rayckington FC · Interfaz de portales deportivos v1.
+   Estilos solo para #panel-admin y #player-shell.
+   No altera Tesorería, formularios ni lógica de autenticación. */
+.admin-shell, .player-shell { --sidebar: 258px; }
+.admin-shell .sidebar, .player-shell .sidebar {
+    width: var(--sidebar);
+    padding: 22px 14px 18px;
+    background: linear-gradient(180deg, #101726 0%, #0a111b 70%, #080d17 100%);
+    border-right: 1px solid #29354b;
+    box-shadow: 14px 0 40px rgba(0,0,0,.12);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.admin-shell .sidebar-brand, .player-shell .sidebar-brand {
+    padding: 2px 10px 22px;
+    gap: 13px;
+    align-items: center;
+    border-bottom: 1px solid #243147;
+}
+.admin-shell .sidebar-brand img, .player-shell .sidebar-brand img {
+    width: 42px; height: 52px; object-fit: contain;
+}
+.admin-shell .sidebar-brand strong, .player-shell .sidebar-brand strong {
+    font-size: 14px; font-weight: 800; letter-spacing: -.015em;
+}
+.admin-shell .sidebar-brand span, .player-shell .sidebar-brand span {
+    font-size: 11px; color: #a1b1c9; margin-top: 4px;
+}
+.admin-shell .sidebar-nav, .player-shell .sidebar-nav {
+    display: grid; gap: 6px; padding-top: 18px;
+}
+.admin-shell .sidebar-nav-label, .player-shell .sidebar-nav-label {
+    display: block; color: #71839d; font-size: 10px;
+    font-weight: 850; letter-spacing: .12em;
+    padding: 6px 13px; margin-bottom: 2px;
+}
+.admin-shell .sidebar-secondary-label, .player-shell .sidebar-secondary-label { margin-top: 4px; }
+.admin-shell .nav-btn, .player-shell .nav-btn,
+.admin-shell .module-link, .player-shell .module-link {
+    min-height: 49px; border-radius: 11px; padding: 0 12px;
+    font-size: 13px; font-weight: 700; gap: 12px;
+    color: #c3d0df; transition: background .18s,color .18s,transform .18s;
+    position: relative;
+}
+.admin-shell .nav-btn:hover, .player-shell .nav-btn:hover,
+.admin-shell .module-link:hover, .player-shell .module-link:hover {
+    background: #19273b; color: #fff; transform: translateX(2px);
+}
+.admin-shell .nav-btn.active, .player-shell .nav-btn.active {
+    background: linear-gradient(100deg,#d71423,#b40d19);
+    color: #fff; box-shadow: 0 9px 23px rgba(205,17,32,.19);
+}
+.admin-shell .nav-icon, .player-shell .nav-icon {
+    width: 30px; height: 30px; flex: 0 0 30px;
+    border-radius: 9px; background: #1a2536; color: #c0cce0;
+    font-size: 14px;
+}
+.admin-shell .nav-btn.active .nav-icon, .player-shell .nav-btn.active .nav-icon {
+    background: rgba(255,255,255,.17); color: #fff;
+}
+.admin-shell .nav-icon svg, .player-shell .nav-icon svg {
+    width: 16px; height: 16px; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.admin-shell .sidebar-separator, .player-shell .sidebar-separator {
+    margin: 18px 8px 8px; background: #28364b;
+}
+.admin-shell .public-rankings-link, .player-shell .public-rankings-link { color: #ffe08b; }
+.admin-shell .sidebar-footer, .player-shell .sidebar-footer {
+    margin-top: auto; padding: 20px 12px 2px;
+}
+.admin-shell .sidebar-footer span, .player-shell .sidebar-footer span { font-size: 11px; }
+.admin-shell .sidebar-footer small, .player-shell .sidebar-footer small {
+    font-size: 10px; color: #8e9db2;
+}
+.admin-shell .main-area, .player-shell .main-area { margin-left: var(--sidebar); }
+.admin-shell .topbar, .player-shell .topbar {
+    height: 84px; padding: 0 35px; border-color: #29354b;
+    background: rgba(10,16,27,.93);
+}
+.admin-shell .topbar h1, .player-shell .topbar h1 { font-size: clamp(19px,2vw,26px); }
+.admin-shell .topbar-user strong, .player-shell .topbar-user strong { font-size: 12px; }
+.admin-shell .topbar-user small, .player-shell .topbar-user small { font-size: 10px; }
+.admin-shell .brand-mini, .player-shell .brand-mini { font-size: 10px; }
+.admin-shell .content, .player-shell .content { padding-top: 28px; }
+.admin-shell .nav-btn:focus-visible, .player-shell .nav-btn:focus-visible,
+.admin-shell .module-link:focus-visible, .player-shell .module-link:focus-visible,
+.admin-shell .icon-btn:focus-visible, .player-shell .icon-btn:focus-visible {
+    outline: 2px solid #ffd21a; outline-offset: 3px;
+}
+@media(max-width:900px) {
+    .admin-shell .sidebar, .player-shell .sidebar {
+        width: min(82vw,290px); transform: translateX(-105%);
+        transition: transform .22s ease;
+        z-index: 50;
+    }
+    .admin-shell .sidebar.open, .player-shell .sidebar.open { transform: translateX(0); }
+    .admin-shell .sidebar-backdrop, .player-shell .sidebar-backdrop {
+        position: fixed; inset: 0; background: rgba(0,0,0,.68);
+        z-index: 45; display: none;
+    }
+    .admin-shell .sidebar-backdrop.show, .player-shell .sidebar-backdrop.show { display: block; }
+    .admin-shell .main-area, .player-shell .main-area { margin-left: 0; }
+    .admin-shell .mobile-only, .player-shell .mobile-only { display: grid; }
+    .admin-shell .topbar, .player-shell .topbar { height: 74px; padding: 0 16px; }
+    .admin-shell .content, .player-shell .content { padding: 20px 15px 48px; }
+    .admin-shell .topbar-user > div, .player-shell .topbar-user > div { display: none; }
+    .admin-shell .topbar h1, .player-shell .topbar h1 { font-size: 19px; }
+}
+@media(max-width:550px) {
+    .admin-shell .topbar, .player-shell .topbar { gap: 10px; }
+    .admin-shell .hero-card, .player-shell .hero-player { padding: 19px; }
+    .admin-shell .hero-card img, .player-shell .hero-logo { width: 60px; height: 70px; margin-right: 0; }
+    .admin-shell .content, .player-shell .content { padding: 16px 11px 38px; }
+    .admin-shell .sidebar-nav, .player-shell .sidebar-nav { gap: 3px; }
+    .admin-shell .stats-grid, .player-shell .stats-grid { gap: 9px; }
+    .admin-shell .stat-card, .player-shell .stat-card { padding: 12px; }
+    .admin-shell .section-head, .player-shell .section-head { flex-wrap: wrap; }
+}
+@media(prefers-reduced-motion:reduce) {
+    .admin-shell .sidebar, .player-shell .sidebar,
+    .admin-shell .nav-btn, .player-shell .nav-btn { transition: none; }
+}

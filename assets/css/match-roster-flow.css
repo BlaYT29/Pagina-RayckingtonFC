@@ -1,0 +1,11 @@
+/* Rayckington F.C. · convocatoria previa y banco en cancha */
+.mc-pitch-step{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#122439;border:1px solid #355273;border-radius:12px;padding:12px 15px;margin-bottom:15px;color:#e7eef9;font-size:12px}
+.mc-pitch-step strong{color:#ffd544}.mc-pitch-step .btn{margin-left:auto}
+.mc-pitch-bench-panel{padding:15px;border:1px solid #345470;border-radius:13px;background:#0a1b2b;margin-top:14px}
+.mc-pitch-bench-panel h4{margin:0 0 10px;color:#fce07a;font-size:14px}
+.mc-pitch-bench-panel>small{display:block;color:#a9bed0;margin-top:9px;font-size:11px;line-height:1.5}
+.mc-pitch-bench{display:flex;flex-wrap:wrap;gap:8px;min-height:42px;align-items:center}
+.mc-bench-chip{display:flex;flex-direction:column;background:#1c3044;border:1px solid #47617d;border-radius:10px;padding:8px 12px;color:white;font-size:12px;font-weight:700}
+.mc-bench-chip small{font-size:10px;color:#a9c4d7;font-weight:400;margin-top:2px}
+.mc-bench-empty{color:#b8c7d7;font-size:12px;margin:5px 0}
+@media(max-width:740px){.mc-pitch-step{align-items:flex-start}.mc-pitch-step .btn{margin:0;width:100%}.mc-bench-chip{font-size:11px;flex:1 1 125px}}

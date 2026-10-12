@@ -475,3 +475,192 @@
 
 
 }
+
+
+/* ================================================================
+   RAYCKINGTON F.C. — PÁGINA PÚBLICA MÓVIL V1
+   Ajustes no destructivos. CSS exclusivo del sitio público.
+   Conserva los datos, los scripts, la navegación y los JSON.
+   ================================================================ */
+
+@media (max-width: 991.98px) {
+  /* Estructura compartida */
+  body .section { padding-block: clamp(42px, 7vw, 74px); }
+  body .section-title { margin-bottom: 30px; }
+  body .section-title h2 { font-size: clamp(1.75rem, 5vw, 2.4rem); line-height: 1.16; overflow-wrap: anywhere; }
+  body .page-header h1 { font-size: clamp(1.9rem, 5.8vw, 3rem); line-height: 1.13; overflow-wrap: anywhere; }
+  body .section p, body .page-header p { overflow-wrap: break-word; }
+  body .navbar-club .navbar-collapse { max-height: calc(100dvh - 83px); overflow-y: auto; overscroll-behavior: contain; }
+  body .navbar-club .navbar-nav .nav-link { min-height: 44px; display: flex; align-items: center; }
+  body .navbar-club .navbar-toggler { min-width: 44px; min-height: 44px; }
+  body .btn-primary-club, body .btn-club, body .news-card-button, body .player-profile-button { min-height: 44px; }
+  body .hero-panel { max-width: min(100%, 650px); margin-inline: auto; }
+
+  /* Página de plantilla y personal técnico */
+  body .squad-summary-card { height: 100%; padding: 18px 14px; }
+  body .player-card, body .staff-card { height: 100%; }
+  body .plantel-cta-content, body .contact-cta-content { min-width: 0; }
+
+  /* Perfil público: ficha + historial */
+  body .player-profile-image { min-height: 380px; }
+  body .player-profile-content { padding: 28px 25px; }
+  body .player-stats-heading { gap: 14px; }
+  body .player-stats-toolbar { min-width: 0; }
+  body .player-history { padding: 16px; }
+  body .player-history-list { gap: 12px; }
+  /* Tablet: las métricas se muestran completas, sin ocultarlas. */
+  body .player-history-list .player-history-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+  body .player-history-row .player-history-match { flex: 1 1 65%; min-width: 0; }
+  body .player-history-row .player-history-score { flex: 0 0 auto; }
+  body .player-history-row .player-history-metric,
+  body .player-history-row .player-history-metric:nth-of-type(n+4),
+  body .player-history-row .player-history-metric:nth-of-type(n+5),
+  body .player-history-row .player-history-metric:nth-last-child(-n+3) {
+    display: block;
+    flex: 1 1 calc((100% - 30px) / 4);
+    padding: 7px 4px;
+    background: rgba(255,255,255,.035);
+    border-radius: 9px;
+  }
+
+  /* Partidos y tablas: scroll dentro del bloque, no de la página */
+  body .table-responsive { max-width: 100%; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+  body .table-responsive .table-club { min-width: 620px; }
+  body .fixture-round-card, body .match-visual-card { min-width: 0; }
+  body .fixture-round-grid { grid-template-columns: 1fr; }
+  body .match-visual-team { min-width: 0; }
+  body .match-visual-team > span { overflow-wrap: anywhere; }
+
+  /* Noticias, galería, contacto */
+  body .featured-news-image { min-height: 280px; }
+  body .featured-news-content { min-width: 0; }
+  body .news-tools, body .gallery-tools { width: 100%; }
+  body .news-search, body .gallery-search { width: 100%; }
+  body .news-filter, body .gallery-filter { min-height: 44px; }
+  body .contact-card, body .schedule-card, body .process-card { height: 100%; }
+  body .map-container iframe { max-width: 100%; }
+
+  /* Ranking del Plantel: prioridad al nombre y resultado, sin recortes */
+  body .rayck-rank-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body .rayck-ranking-card { min-width: 0; }
+  body .rayck-ranking-name { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 575.98px) {
+  body .container { width: calc(100% - 28px); max-width: 100%; }
+  body .section { padding-block: 48px; }
+  body .page-header { padding-inline: 10px; }
+  body .section-title h2 { font-size: clamp(1.6rem, 8vw, 2rem); }
+  body .navbar-club { padding-block: 10px; }
+  body .navbar-club .navbar-brand { max-width: calc(100% - 65px); }
+  body .navbar-club .navbar-brand img { width: 48px; height: 48px; }
+  body .hero { padding-top: 108px; padding-bottom: 52px; }
+  body .hero-content h1 { font-size: clamp(2rem, 10vw, 2.65rem); line-height: 1.04; overflow-wrap: anywhere; }
+  body .hero-content h2 { font-size: clamp(1.1rem, 5vw, 1.45rem); }
+  body .hero-panel { padding: 18px 14px; }
+  body .hero-vs { gap: 8px; }
+  body .hero-vs > div { min-width: 0; }
+  body .hero-vs p { overflow-wrap: anywhere; font-size: .72rem; }
+  body .hero-match .row { gap: 8px 0; }
+
+  body .squad-summary-card { padding: 16px 9px; }
+  body .squad-summary-card strong { font-size: clamp(1.5rem, 7vw, 2rem); }
+  body .squad-summary-card span { font-size: .77rem; }
+  body .player-card, body .staff-card { border-radius: 18px; }
+  body .player-card .player-image img { max-height: 310px; }
+
+  body .player-profile { border-radius: 20px; }
+  body .player-profile-image { min-height: 320px; max-height: 410px; }
+  body .player-profile-content { padding: 22px 16px; }
+  body .player-profile-content h2 { font-size: clamp(1.65rem, 7vw, 2.25rem); overflow-wrap: anywhere; }
+  body .player-fifa-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  body .player-mini-stat { min-width: 0; padding: 13px 8px; }
+  body .player-stats-toolbar { grid-template-columns: 1fr; }
+  body .player-stats-toolbar label { min-width: 0; }
+  body .player-stats-toolbar select { min-height: 46px; }
+  body .player-history { padding: 12px; border-radius: 17px; }
+  body .player-history-head { gap: 8px; }
+
+  /* En el perfil, conservar TODAS las métricas que el CSS original ocultaba */
+  body .player-history-list .player-history-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 8px;
+    padding: 13px 11px;
+    border-radius: 14px;
+  }
+  body .player-history-row .player-history-match { flex: 1 1 65%; min-width: 0; }
+  body .player-history-row .player-history-match strong { overflow-wrap: anywhere; }
+  body .player-history-row .player-history-score { flex: 0 0 auto; text-align: right; margin: 0; }
+  body .player-history-row .player-history-metric,
+  body .player-history-row .player-history-metric:nth-of-type(n+4),
+  body .player-history-row .player-history-metric:nth-of-type(n+5),
+  body .player-history-row .player-history-metric:nth-last-child(-n+3) {
+    display: block;
+    flex: 1 1 calc((100% - 16px) / 3);
+    min-width: 0;
+    padding: 7px 4px;
+    text-align: center;
+    background: rgba(255,255,255,.035);
+    border-radius: 9px;
+  }
+  body .player-history-row .player-history-metric span { font-size: .64rem; }
+  body .player-stats-empty { padding: 14px; }
+
+  body .hero-stats { gap: 8px; }
+  body .hero-stat { min-width: 0; flex: 1 1 calc(50% - 8px); padding: 13px 8px; border-radius: 14px; }
+  body .hero-stat h3 { font-size: 1.4rem; }
+  body .hero-stat span { font-size: .74rem; }
+  body .fixture-round-card { padding: 14px; border-radius: 17px; }
+  body .fixture-round-header { flex-wrap: wrap; gap: 8px; }
+  body .match-visual-card { padding: 12px 9px; }
+  body .match-visual-main,
+  body .friendly-match-card .match-visual-main { grid-template-columns: minmax(0,1fr) minmax(58px,auto) minmax(0,1fr); gap: 5px; }
+  body .match-visual-team > span,
+  body .friendly-match-card .match-visual-team > span { font-size: .67rem; }
+  body .match-visual-score strong { font-size: clamp(1rem, 5vw, 1.25rem); }
+  body .match-visual-meta { flex-wrap: wrap; font-size: .72rem; }
+  body .match-visual-top { flex-wrap: wrap; gap: 7px; }
+
+  body .news-filters, body .gallery-filters { gap: 7px; }
+  body .news-filter, body .gallery-filter { padding: 10px 12px; font-size: .78rem; }
+  body .featured-news-image { min-height: 215px; height: 225px; }
+  body .featured-news-content { padding: 20px 16px; }
+  body .featured-news-content h2 { font-size: 1.45rem; overflow-wrap: anywhere; }
+  body .news-grid-content { padding: 18px 16px; }
+  body .news-grid-content h3 { font-size: 1.15rem; overflow-wrap: anywhere; }
+  body .gallery-card-content { padding: 16px; }
+  body .gallery-modal-content { border-radius: 12px; }
+  body .article-detail-header h1 { overflow-wrap: anywhere; }
+  body .article-gallery-item img { max-width: 100%; }
+  body .contact-cta, body .plantel-cta { padding: 20px 16px; }
+  body .contact-cta-logo, body .plantel-cta-logo { max-width: 100%; }
+  body .rayck-rank-grid { grid-template-columns: 1fr; gap: 12px; }
+  body .rayck-ranking-card { padding: 14px; }
+  body .rayck-ranking-card-head h3 { font-size: 1.02rem; }
+  body .rayck-ranking-player { min-height: 44px; }
+  body .rayck-ranking-name { font-size: .78rem; }
+  body .rayck-ranking-player strong { font-size: 1rem; }
+}
+
+@media (max-width: 375px) {
+  body .container { width: calc(100% - 20px); }
+  body .hero-panel { padding: 14px 10px; }
+  body .player-history-row .player-history-metric,
+  body .player-history-row .player-history-metric:nth-of-type(n+4),
+  body .player-history-row .player-history-metric:nth-of-type(n+5),
+  body .player-history-row .player-history-metric:nth-last-child(-n+3) {
+    flex-basis: calc((100% - 8px) / 2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body .player-card, body .staff-card, body .news-grid-card,
+  body .match-visual-card, body .gallery-card { transition: none; }
+}

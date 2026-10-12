@@ -1,0 +1,692 @@
+/* Rayckington FC · adaptación móvil progresiva: portales deportivo y financiero.
+   No altera operaciones de Supabase, autenticación ni formularios. */
+body.rayck-sport-player,body.rayck-sport-admin,
+body.rayck-finance-player,body.rayck-finance-admin{overflow-wrap:break-word}
+body.rayck-sport-player :is(.panel-card,.dashboard-right,.stats-grid,.match-row,.profile-fifa-right),
+body.rayck-sport-admin :is(.panel-card,.stats-grid,.match-row,.main-area,.content){min-width:0}
+@media(max-width:860px){
+  body.rayck-sport-player .sidebar,body.rayck-sport-admin .sidebar{
+    width:min(285px,86vw);max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;
+    padding-bottom:max(15px,env(safe-area-inset-bottom));
+  }
+  body.rayck-sport-player .topbar,body.rayck-sport-admin .topbar{
+    min-height:68px;height:auto;padding:12px 14px;gap:8px;
+  }
+  body.rayck-sport-player .topbar-left,body.rayck-sport-admin .topbar-left{min-width:0}
+  body.rayck-sport-player .topbar h1,body.rayck-sport-admin .topbar h1{
+    font-size:clamp(16px,4.4vw,22px);overflow-wrap:anywhere;
+  }
+  body.rayck-sport-player .content,body.rayck-sport-admin .content{
+    max-width:100%;padding:18px 12px max(58px,env(safe-area-inset-bottom));
+  }
+  body.rayck-sport-player #btn-menu,body.rayck-sport-admin #btn-menu{min-width:44px;min-height:44px;font-size:22px}
+  body.rayck-sport-player :is(.nav-btn,.module-link),
+  body.rayck-sport-admin :is(.nav-btn,.module-link){min-height:48px;font-size:13px}
+  body.rayck-sport-player :is(.btn,button:not(.nav-btn):not(.icon-btn)),
+  body.rayck-sport-admin :is(.btn,button:not(.nav-btn):not(.icon-btn)){
+    min-height:43px;
+  }
+  body.rayck-sport-player :is(input,textarea,select),
+  body.rayck-sport-admin :is(input,textarea,select){font-size:16px;min-height:44px}
+  body.rayck-sport-player .sidebar-backdrop.show,
+  body.rayck-sport-admin .sidebar-backdrop.show{touch-action:manipulation}
+}
+@media(max-width:680px){
+  body.rayck-sport-admin :is(.panel-card,.toolbar-card){padding:16px 12px}
+  body.rayck-sport-player :is(.panel-card,.toolbar-card){padding:16px 12px}
+  body.rayck-sport-admin :is(.head-actions,.mc-control-actions,.modal-actions){flex-wrap:wrap}
+  body.rayck-sport-admin :is(.head-actions,.mc-control-actions,.modal-actions) > .btn{flex:1 1 140px}
+  body.rayck-sport-admin .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.rayck-sport-player .stats-grid,
+  body.rayck-sport-player .stats-grid.six{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.rayck-sport-player .filter-strip{display:grid;grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-player .filter-strip label{min-width:0}
+  body.rayck-sport-admin .hero-card{padding:16px 12px;gap:9px}
+  body.rayck-sport-admin .hero-card img{width:54px;height:54px;margin:0}
+  body.rayck-sport-player .hero-player{padding:18px 14px}
+  body.rayck-sport-player .hero-logo{width:58px;height:58px;margin-right:0}
+  body.rayck-sport-admin .mc-mode-selector{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.rayck-sport-admin .mc-mode-selector button{padding:12px 5px}
+  body.rayck-sport-admin .mc-pitch-field-wrap{
+    overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;border-radius:14px;
+  }
+  body.rayck-sport-admin .mc-pitch-field{
+    min-width:600px;min-height:680px;
+  }
+  body.rayck-sport-admin .mc-pitch-free .mc-pitch-slot{width:115px}
+  body.rayck-sport-admin .mc-pitch-row{gap:8px}
+  body.rayck-sport-admin .mc-pitch-slot select{font-size:11px;min-height:40px}
+  body.rayck-sport-admin .mc-pitch-marker{width:35px;height:35px;font-size:12px}
+  body.rayck-sport-admin .mc-pitch-position{font-size:11px}
+  body.rayck-sport-admin .modal{padding:9px}
+  body.rayck-sport-admin .modal-card{
+    border-radius:14px;padding:18px 12px;max-height:calc(100dvh - 18px);width:100%;
+  }
+  body.rayck-sport-admin .mc-v4-row{grid-template-columns:1fr}
+  body.rayck-sport-player :is(.match-competition-group,.submission-history,.official-history){min-width:0}
+  body.rayck-sport-player .match-competition-group h3{font-size:14px}
+  body.rayck-sport-player .profile-fifa-card{max-width:100%}
+  body.rayck-sport-player .profile-fifa-photo{height:250px}
+  body.rayck-sport-player .profile-fifa-photo img{width:min(220px,85%);height:235px}
+}
+@media(max-width:370px){
+  body.rayck-sport-player .topbar .avatar{display:none}
+  body.rayck-sport-admin .stat-card,body.rayck-sport-player .stat-card{padding:12px 10px}
+  body.rayck-sport-admin .stat-card strong,body.rayck-sport-player .stat-card strong{font-size:22px}
+}
+/* Portales financieros: mejoras no invasivas sobre sus responsive ya existentes */
+@media(max-width:680px){
+  body.rayck-finance-player :is(button,input,select,textarea),
+  body.rayck-finance-admin :is(button,input,select,textarea){touch-action:manipulation}
+  body.rayck-finance-player :is(input,select,textarea),
+  body.rayck-finance-admin :is(input,select,textarea){font-size:max(16px,1em)}
+  body.rayck-finance-player img,body.rayck-finance-admin img{max-width:100%}
+}
+
+/* ==============================================================
+   Rayckington F.C. · Portal Deportivo · Mobile V2 (12 Oct 2026)
+   CSS-only, sin alterar scripts, datos, derechos ni funcionalidad.
+   Agregar DESPUES de las reglas de mobile-portales.css existentes.
+   ============================================================= */
+@media (max-width: 860px) {
+  body.rayck-sport-player {
+    width: 100%;
+    overflow-x: clip;
+  }
+  body.rayck-sport-player .player-shell,
+  body.rayck-sport-player .main-area,
+  body.rayck-sport-player .content,
+  body.rayck-sport-player .view,
+  body.rayck-sport-player .panel-card,
+  body.rayck-sport-player .profile-fifa-right,
+  body.rayck-sport-player .dashboard-right,
+  body.rayck-sport-player .submit-layout { min-width: 0; max-width: 100%; }
+
+  /* Menú existente, con una zona tocable y sin ocultar el contenido */
+  body.rayck-sport-player .sidebar {
+    width: min(300px, 88vw);
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    box-shadow: 16px 0 55px rgba(0, 0, 0, .38);
+  }
+  body.rayck-sport-player .sidebar-nav { gap: 6px; }
+  body.rayck-sport-player .nav-btn,
+  body.rayck-sport-player .module-link {
+    min-height: 48px;
+    font-size: 14px;
+    line-height: 1.3;
+    padding-inline: 12px;
+  }
+  body.rayck-sport-player .sidebar-brand strong { font-size: 14px; }
+  body.rayck-sport-player .sidebar-brand span { font-size: 11px; }
+  body.rayck-sport-player .sidebar-footer small { font-size: 10px; }
+
+  body.rayck-sport-player .topbar {
+    min-height: 70px;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  body.rayck-sport-player .topbar h1 {
+    font-size: clamp(17px, 4.7vw, 23px);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+  body.rayck-sport-player .brand-mini { font-size: 10px; }
+  body.rayck-sport-player .topbar-left,
+  body.rayck-sport-player .topbar-user { min-width: 0; }
+  body.rayck-sport-player .topbar-user { flex-shrink: 0; }
+  body.rayck-sport-player .topbar .icon-btn {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 12px;
+  }
+  body.rayck-sport-player #btn-menu {
+    background: #182337;
+    border: 1px solid #2b3a53;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  body.rayck-sport-player .content {
+    padding: 18px clamp(12px, 3.8vw, 22px)
+      max(40px, env(safe-area-inset-bottom));
+  }
+  body.rayck-sport-player .global-message { top: 80px; }
+
+  /* Inicio: tarjeta deportiva + indicadores legibles */
+  body.rayck-sport-player .hero-player {
+    padding: 18px;
+    gap: 12px;
+    min-height: 125px;
+  }
+  body.rayck-sport-player .hero-copy { min-width: 0; position: relative; z-index: 2; }
+  body.rayck-sport-player .hero-player h2 {
+    font-size: clamp(21px, 5.8vw, 29px);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+  body.rayck-sport-player .hero-player p { font-size: 12px; line-height: 1.5; }
+  body.rayck-sport-player .hero-logo {
+    width: clamp(56px, 18vw, 78px);
+    height: auto;
+    max-height: 88px;
+    flex-shrink: 0;
+    margin: 0;
+  }
+  body.rayck-sport-player .dashboard-player-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+  body.rayck-sport-player .fifa-card {
+    min-height: auto;
+    width: min(100%, 370px);
+    padding-bottom: 22px;
+  }
+  body.rayck-sport-player .stats-grid,
+  body.rayck-sport-player .stats-grid.six {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 14px 0;
+  }
+  body.rayck-sport-player .stat-card {
+    padding: 14px 12px;
+    min-height: 94px;
+    min-width: 0;
+  }
+  body.rayck-sport-player .stat-card span { font-size: 11px; }
+  body.rayck-sport-player .stat-card strong { font-size: 25px; }
+  body.rayck-sport-player .stat-card small { font-size: 10px; }
+  body.rayck-sport-player .home-panels {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  /* Mi perfil FIFA: ninguna columna debe exceder la pantalla */
+  body.rayck-sport-player .profile-fifa-layout,
+  body.rayck-sport-player .profile-fifa-right,
+  body.rayck-sport-player .submit-layout { grid-template-columns: minmax(0, 1fr); }
+  body.rayck-sport-player .profile-fifa-card {
+    margin-inline: auto;
+    width: min(100%, 390px);
+    max-width: 100%;
+  }
+  body.rayck-sport-player .profile-data-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+  body.rayck-sport-player .profile-data-grid > div { min-width: 0; padding: 12px; }
+  body.rayck-sport-player .profile-data-grid strong {
+    overflow-wrap: anywhere;
+    font-size: 14px;
+  }
+  body.rayck-sport-player .profile-filter-strip,
+  body.rayck-sport-player .positions-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  body.rayck-sport-player .profile-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  body.rayck-sport-player .profile-stats-grid > div { min-width: 0; }
+  body.rayck-sport-player #positions-once-form .positions-confirm {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
+    gap: 10px;
+    overflow-wrap: anywhere;
+    line-height: 1.55;
+  }
+  body.rayck-sport-player #positions-once-form .positions-confirm input[type="checkbox"] {
+    flex: 0 0 18px;
+    width: 18px;
+    min-width: 18px;
+    max-width: 18px;
+    height: 18px;
+    min-height: 18px;
+    max-height: 18px;
+    padding: 0;
+    margin: 2px 0 0;
+  }
+
+  /* Filtros, formularios y controles en una columna y de tamaño táctil */
+  body.rayck-sport-player .filters-row,
+  body.rayck-sport-player .filter-strip,
+  body.rayck-sport-player .matches-filters,
+  body.rayck-sport-player .form-grid,
+  body.rayck-sport-player .goalkeeper-fields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  body.rayck-sport-player :is(.filter-strip,.filters-row,.matches-filters) label { min-width: 0; }
+  body.rayck-sport-player label,
+  body.rayck-sport-player .positions-form-grid label { min-width: 0; }
+  body.rayck-sport-player :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea) {
+    min-width: 0;
+    max-width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+  }
+  body.rayck-sport-player :is(input[type="checkbox"], input[type="radio"]) {
+    width: 18px;
+    height: 18px;
+    min-height: 18px;
+    flex: 0 0 18px;
+    padding: 0;
+  }
+  body.rayck-sport-player .switch-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+  }
+  body.rayck-sport-player .switch-row span { min-width: 0; }
+  body.rayck-sport-player .btn-primary,
+  body.rayck-sport-player #player-position-save { min-height: 46px; }
+  body.rayck-sport-player #player-position-save { width: 100%; }
+  body.rayck-sport-player .notice-box,
+  body.rayck-sport-player .positions-state,
+  body.rayck-sport-player .form-message { overflow-wrap: anywhere; line-height: 1.55; }
+  body.rayck-sport-player .submission-item { overflow-wrap: anywhere; }
+
+  /* Historial oficial: las siete métricas permanecen visibles en móvil */
+  body.rayck-sport-player .official-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+    padding: 13px 10px;
+  }
+  body.rayck-sport-player .official-row > div:first-child {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin-bottom: 4px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  body.rayck-sport-player .official-row .metric,
+  body.rayck-sport-player .official-row .metric:nth-child(n+5),
+  body.rayck-sport-player .official-row .metric:nth-child(n+6) {
+    display: block;
+    min-width: 0;
+    text-align: center;
+    padding: 9px 3px;
+    background: #131f31;
+    border: 1px solid #253750;
+    border-radius: 9px;
+  }
+  body.rayck-sport-player .official-row .metric small { font-size: 10px; }
+
+  /* Calendario: fecha / marcador arriba, nombre y lugar abajo */
+  body.rayck-sport-player .matches-filters {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  body.rayck-sport-player .match-results-count {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 10px 0 16px;
+  }
+  body.rayck-sport-player .match-competition-group { min-width: 0; margin-block: 14px 20px; }
+  body.rayck-sport-player .match-competition-group > h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 15px;
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+  body.rayck-sport-player .match-competition-group > h3 span {
+    color: var(--muted);
+    font-size: 11px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  body.rayck-sport-player .match-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "fecha resultado" "detalle detalle";
+    align-items: center;
+    gap: 9px 10px;
+    padding: 13px 14px;
+    margin-bottom: 9px;
+  }
+  body.rayck-sport-player .match-date { grid-area: fecha; font-size: 11px; }
+  body.rayck-sport-player .match-score {
+    grid-area: resultado;
+    font-size: 17px;
+    text-align: right;
+    max-width: 145px;
+    overflow-wrap: anywhere;
+  }
+  body.rayck-sport-player .match-main { grid-area: detalle; min-width: 0; }
+  body.rayck-sport-player .match-main strong { font-size: 14px; overflow-wrap: anywhere; }
+  body.rayck-sport-player .match-main span { font-size: 11px; line-height: 1.55; overflow-wrap: anywhere; }
+}
+
+@media (max-width: 390px) {
+  body.rayck-sport-player .topbar { padding-inline: 9px; }
+  body.rayck-sport-player .topbar h1 { font-size: 17px; }
+  body.rayck-sport-player .topbar-user .avatar { display: none; }
+  body.rayck-sport-player .hero-logo { width: 52px; }
+  body.rayck-sport-player .hero-player { padding: 14px 11px; }
+  body.rayck-sport-player .hero-player h2 { font-size: 20px; }
+  body.rayck-sport-player .profile-data-grid { grid-template-columns: minmax(0, 1fr); }
+  body.rayck-sport-player .official-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  body.rayck-sport-player .fifa-card { padding-inline: 13px; }
+  body.rayck-sport-player .fifa-mini-stats strong { font-size: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.rayck-sport-player .sidebar { transition-duration: .01ms; }
+}
+
+/* ========================================================================
+   Rayckington FC · Gestión Deportiva, versión móvil V1 · 12 Oct 2026
+   Extensión SOLO CSS: conserva todos los estilos móviles del Portal Deportivo.
+   Sin cambios de datos, formularios, JS, permisos ni lógica deportiva.
+   ======================================================================== */
+
+/* Evita que tarjetas y cuadrículas amplíen el ancho de toda la pantalla. */
+body.rayck-sport-admin .main-area,
+body.rayck-sport-admin :is(.view,.panel-card,.match-hero,.mc-roster-panel,.mc-pitch-area,.mc-v4-panel,
+  .competition-layout,.competition-fixture,.fixture-full-card,.section-head,.scoreboard,.match-control-grid,
+  .match-data-grid,.mc-roster-workflow,.mc-roster-columns,.competition-picker,.review-summary,
+  .stats-toolbar,.quick-event-card,.quick-event-editor,.mc-control-panel){min-width:0;max-width:100%}
+body.rayck-sport-admin :is(.panel-card,.match-hero,.event-row,.request-card,.mc-roster-player,
+  .mc-v4-row,.player-card,.form-message,.global-message){overflow-wrap:anywhere}
+
+@media (max-width: 860px) {
+  body.rayck-sport-admin .sidebar {
+    width:min(310px,86vw);
+    max-height:100dvh;
+    overflow-y:auto;
+    box-sizing:border-box;
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  body.rayck-sport-admin .sidebar.open{z-index:55}
+  body.rayck-sport-admin .sidebar-backdrop.show{z-index:48}
+  body.rayck-sport-admin .topbar{gap:8px;position:sticky;top:0;z-index:30}
+  body.rayck-sport-admin .topbar-left{flex:1;min-width:0}
+  body.rayck-sport-admin .topbar-user{gap:6px;flex:none}
+  body.rayck-sport-admin .topbar #btn-menu,
+  body.rayck-sport-admin .topbar #btn-logout{min-width:44px;min-height:44px;flex:none}
+  body.rayck-sport-admin .topbar .brand-mini{font-size:9px}
+  body.rayck-sport-admin .topbar #page-title{font-size:clamp(16px,4.3vw,22px);line-height:1.15}
+  body.rayck-sport-admin .content{padding:18px 12px max(56px,env(safe-area-inset-bottom));overflow-x:clip}
+  body.rayck-sport-admin .panel-card{padding:17px 14px}
+  body.rayck-sport-admin .section-head{gap:11px}
+  body.rayck-sport-admin .section-head :is(h2,h3){line-height:1.18}
+  body.rayck-sport-admin :is(.filters-row,.dashboard-grid,.match-control-grid,.match-data-grid,
+     .mc-roster-workflow,.mc-roster-columns,.season-grid){grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin :is(.competition-layout,.competition-summary-grid){min-width:0}
+  body.rayck-sport-admin .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.rayck-sport-admin .quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.rayck-sport-admin .review-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.rayck-sport-admin .match-row{
+    display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:15px 13px
+  }
+  body.rayck-sport-admin .match-main{min-width:0}
+  body.rayck-sport-admin .match-actions{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+  body.rayck-sport-admin .match-actions .btn{flex:1 1 120px}
+  body.rayck-sport-admin :is(.match-compare-card,.standings-wrap,.competition-fixture,
+     .fixture-full-card,.comparison-grid){max-width:100%;min-width:0}
+  /* Las tablas deportivas se desplazan en su propia sección, no toda la página. */
+  body.rayck-sport-admin :is(.standings-wrap,.competition-fixture,.fixture-full-card) {overflow-x:auto;-webkit-overflow-scrolling:touch}
+  body.rayck-sport-admin :is(.standings-table,table){max-width:none}
+  body.rayck-sport-admin .head-actions,
+  body.rayck-sport-admin .mc-control-actions{display:flex;flex-wrap:wrap;gap:9px}
+  body.rayck-sport-admin .head-actions .btn,
+  body.rayck-sport-admin .mc-control-actions .btn{flex:1 1 135px;white-space:normal;min-height:44px}
+  body.rayck-sport-admin :is(.mc-roster-form,.mc-v4-row,.mc-control-player){min-width:0}
+  body.rayck-sport-admin .mc-v4-row{grid-template-columns:minmax(0,1fr);gap:11px}
+  body.rayck-sport-admin .mc-v4-row .btn{width:100%;white-space:normal}
+  body.rayck-sport-admin .mc-roster-player-actions{display:flex;flex-wrap:wrap;gap:7px}
+  body.rayck-sport-admin .mc-roster-player-actions .btn{min-height:42px;flex:1 1 115px}
+  body.rayck-sport-admin :is(.mc-v4-summary,.mc-roster-summary,.mc-control-summary){gap:7px}
+  body.rayck-sport-admin .mc-pitch-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  body.rayck-sport-admin .mc-pitch-tools > label:first-child{grid-column:1/-1;width:100%;max-width:none}
+  body.rayck-sport-admin .mc-pitch-filter-toggle{grid-column:1/-1}
+  body.rayck-sport-admin .mc-pitch-tools > .btn{width:100%;min-width:0;min-height:44px}
+  body.rayck-sport-admin .mc-pitch-tools > span,
+  body.rayck-sport-admin .mc-pitch-tools > small{grid-column:1/-1;margin-left:0;overflow-wrap:anywhere}
+  body.rayck-sport-admin .mc-pitch-field-wrap{
+    width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;scrollbar-width:thin;border-radius:13px
+  }
+  body.rayck-sport-admin .mc-pitch-field{min-width:600px;min-height:660px}
+  body.rayck-sport-admin .mc-pitch-slot select{min-height:44px;font-size:12px;touch-action:manipulation}
+  body.rayck-sport-admin .mc-pitch-free .mc-pitch-marker{touch-action:none}
+  body.rayck-sport-admin .mc-pitch-step{display:flex;flex-wrap:wrap;gap:7px;line-height:1.6}
+  body.rayck-sport-admin .mc-pitch-step .btn{width:100%}
+  body.rayck-sport-admin .mc-pitch-bench-panel{min-width:0}
+  body.rayck-sport-admin :is(.mc-pitch-bench,.mc-roster-list){min-width:0;max-width:100%}
+  body.rayck-sport-admin .mc-mode-selector{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  body.rayck-sport-admin .mc-mode-selector button{white-space:normal;min-height:44px;padding:10px 7px}
+  body.rayck-sport-admin .mc-roster-minute-row{display:flex;flex-wrap:wrap;gap:8px}
+  body.rayck-sport-admin .mc-roster-minute-row > input{flex:1 1 90px;min-width:0;width:auto}
+  body.rayck-sport-admin .mc-roster-minute-row .btn{flex:1 1 125px;min-height:44px}
+  body.rayck-sport-admin .modal{padding:9px;align-items:start}
+  body.rayck-sport-admin .modal-card{
+    width:100%;max-width:100%;box-sizing:border-box;max-height:calc(100dvh - 18px);
+    margin:auto 0;padding:18px 13px;border-radius:15px;overscroll-behavior:contain
+  }
+  body.rayck-sport-admin .modal-close{min-width:44px;min-height:44px}
+  body.rayck-sport-admin :is(.modal-card,.modal-form) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){
+    box-sizing:border-box;max-width:100%;min-width:0;font-size:16px
+  }
+  /* Evita repetir el fallo de la palomita: checkbox no ocupa ancho completo. */
+  body.rayck-sport-admin :is(input[type="checkbox"],input[type="radio"]){
+    width:18px;height:18px;min-width:18px;min-height:18px;flex:0 0 18px;padding:0;accent-color:#facc39
+  }
+  body.rayck-sport-admin .check-row{display:flex;align-items:start;gap:9px}
+  body.rayck-sport-admin .check-grid{gap:12px}
+}
+
+@media (max-width: 560px) {
+  body.rayck-sport-admin .content{padding:14px 10px max(60px,env(safe-area-inset-bottom))}
+  body.rayck-sport-admin .panel-card{padding:15px 11px}
+  body.rayck-sport-admin :is(.hero-card,.match-hero){padding:16px 11px}
+  body.rayck-sport-admin .hero-card{align-items:center;min-height:130px;gap:10px}
+  body.rayck-sport-admin .hero-card img{width:58px;height:58px;flex:none;margin:0}
+  body.rayck-sport-admin .hero-card h2{font-size:clamp(22px,6vw,29px)}
+  body.rayck-sport-admin .topbar{padding:10px 9px}
+  body.rayck-sport-admin .topbar .brand-mini{font-size:8px}
+  body.rayck-sport-admin .topbar #page-title{font-size:clamp(15px,4.3vw,18px)}
+  body.rayck-sport-admin :is(.form-grid.two,.form-grid.three,.filters-row){grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin .span-two{grid-column:auto}
+  body.rayck-sport-admin .scoreboard{grid-template-columns:minmax(0,1fr) 96px minmax(0,1fr);gap:3px;margin:15px auto}
+  body.rayck-sport-admin .score-block{font-size:clamp(25px,7vw,34px);min-width:0}
+  body.rayck-sport-admin .team-block{min-width:0}
+  body.rayck-sport-admin .team-block strong{max-width:100%;font-size:11px;overflow-wrap:anywhere}
+  body.rayck-sport-admin .team-block img,
+  body.rayck-sport-admin .rival-badge{width:51px;height:51px}
+  body.rayck-sport-admin .match-meta-row{gap:9px;flex-wrap:wrap}
+  body.rayck-sport-admin .match-detail-line{line-height:1.6}
+  body.rayck-sport-admin .control-buttons{grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin .minute-control{grid-template-columns:minmax(0,1fr);gap:9px}
+  body.rayck-sport-admin .event-row{grid-template-columns:40px minmax(0,1fr);gap:9px}
+  body.rayck-sport-admin .event-row > :last-child:not(:first-child){max-width:100%}
+  body.rayck-sport-admin .mc-control-player{grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin .mc-control-player-actions,
+  body.rayck-sport-admin .mc-control-player-actions .btn{width:100%;justify-content:stretch}
+  body.rayck-sport-admin .review-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.rayck-sport-admin .official-stat-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.rayck-sport-admin .stats-tabs{width:100%;display:flex;flex-wrap:wrap}
+  body.rayck-sport-admin .stats-tab{flex:1 1 110px}
+  body.rayck-sport-admin .modal-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  body.rayck-sport-admin .modal-actions .btn{width:100%}
+  body.rayck-sport-admin .player-profile-editor{grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin .player-profile-stats-preview{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.rayck-sport-admin .request-card{grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin .request-actions{display:flex;flex-wrap:wrap;gap:8px}
+  body.rayck-sport-admin .request-actions .btn{flex:1 1 120px}
+}
+
+@media (max-width: 365px) {
+  body.rayck-sport-admin .quick-grid{grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin .stats-grid{gap:8px}
+  body.rayck-sport-admin .stat-card{padding:12px 10px}
+  body.rayck-sport-admin .stat-card strong{font-size:22px}
+  body.rayck-sport-admin .mc-pitch-tools{grid-template-columns:minmax(0,1fr)}
+  body.rayck-sport-admin .mc-pitch-tools > *{grid-column:1/-1}
+  body.rayck-sport-admin .scoreboard{grid-template-columns:minmax(0,1fr) 81px minmax(0,1fr)}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.rayck-sport-admin :is(.sidebar,.modal-card){transition-duration:.01ms}
+}
+
+/* ========================================================================
+   Rayckington FC · Tesorería móvil V2 · 12-10-2026
+   Complementa el Portal Deportivo y Gestión Deportiva ya validados.
+   Solo presentación: no cambia solicitudes, pagos, rifas, auth ni Supabase.
+   ======================================================================== */
+@media (max-width: 980px) {
+  /* Las dos áreas financieras conservan su navegación propia. */
+  body.rayck-finance-player,
+  body.rayck-finance-admin { max-width: 100%; overflow-x: clip; }
+  body.rayck-finance-player :is(.portal-contenedor,.portal-vista,.portal-card,.cuota,.pago-historial,.rifa-jugador-card,.cuenta-card),
+  body.rayck-finance-admin :is(.admin-main,.admin-content,.vista-admin,.admin-section,.pago-card,.jugador-admin-card,.deuda-jugador-card,.rifa-entrega-card) {
+    min-width: 0; max-width: 100%;
+  }
+  body.rayck-finance-player :is(.portal-contenedor,.portal-card,.portal-vista),
+  body.rayck-finance-admin :is(.admin-main,.admin-content,.admin-section) { overflow-wrap: break-word; }
+
+  /* Menú superior de la cuenta de jugador. */
+  body.rayck-finance-player .portal-header-inner { min-width: 0; gap: 10px; }
+  body.rayck-finance-player .club-brand { min-width: 0; }
+  body.rayck-finance-player .club-brand strong { overflow-wrap: anywhere; }
+  body.rayck-finance-player .menu-mobile-btn { flex: 0 0 auto; min-width: 44px; min-height: 44px; }
+  body.rayck-finance-player .portal-menu.abierto {
+    max-height: min(72dvh, 560px); overflow-y: auto; overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.rayck-finance-player .portal-menu-btn { min-height: 45px; }
+
+  /* Panel administrativo: mismo menú con un área tocable cómoda. */
+  body.rayck-finance-admin .admin-sidebar {
+    max-width: min(295px, 88vw);
+    max-height: 100dvh; overflow-y: auto; overscroll-behavior: contain;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
+  body.rayck-finance-admin .admin-menu-mobile { min-width: 44px; min-height: 44px; }
+  body.rayck-finance-admin .admin-topbar-left { min-width: 0; }
+  body.rayck-finance-admin .admin-topbar h1 { overflow-wrap: anywhere; }
+  body.rayck-finance-admin .menu-btn { min-height: 48px; }
+}
+
+@media (max-width: 680px) {
+  body.rayck-finance-player :is(button,.btn,.portal-menu-btn),
+  body.rayck-finance-admin :is(button,.btn,.menu-btn) { touch-action: manipulation; }
+  body.rayck-finance-player :is(.form-group input:not([type="checkbox"]),.form-group select,.form-group textarea),
+  body.rayck-finance-admin :is(.admin-form-group input:not([type="checkbox"]),.form-group input:not([type="checkbox"]),.form-group select,.form-group textarea,.form-rifa input:not([type="checkbox"]),.form-rifa select,.form-rifa textarea,.filtro-deuda-jugador,.filtro-egresos) {
+    max-width: 100%; min-width: 0; font-size: 16px; /* evita zoom en iOS */
+  }
+
+  /* Jugador: cuotas, historial, comprobantes y rifas. */
+  body.rayck-finance-player .portal-contenedor { width: 100%; max-width: 100%; padding: 20px 13px max(50px, env(safe-area-inset-bottom)); }
+  body.rayck-finance-player .portal-vista { min-width: 0; }
+  body.rayck-finance-player :is(.section-heading,.card-heading) { min-width: 0; gap: 9px; }
+  body.rayck-finance-player .section-heading h2 { font-size: clamp(24px, 7vw, 30px); line-height: 1.15; }
+  body.rayck-finance-player .bienvenida-card { padding: 24px 18px; }
+  body.rayck-finance-player .bienvenida-card h1 { font-size: clamp(25px, 7.4vw, 33px); line-height: 1.12; overflow-wrap: anywhere; }
+  body.rayck-finance-player .resumen-financiero { gap: 10px; }
+  body.rayck-finance-player .resumen-card { min-width: 0; padding: 16px 14px; }
+  body.rayck-finance-player .resumen-card strong { overflow-wrap: anywhere; }
+  body.rayck-finance-player .portal-card { padding: 19px 15px; }
+  body.rayck-finance-player .cuotas-grid,
+  body.rayck-finance-player .form-grid { grid-template-columns: minmax(0,1fr); }
+  body.rayck-finance-player .cuota { min-width: 0; padding: 19px 16px; }
+  body.rayck-finance-player .cuota :is(h3,.monto) { overflow-wrap: anywhere; }
+  body.rayck-finance-player :is(.btn-pagar-cuota,.registrar-pago-card .btn-primary) { width: 100%; min-height: 46px; }
+  body.rayck-finance-player .cuota-pago-opcion { min-width: 0; align-items: flex-start; padding: 13px 11px; }
+  body.rayck-finance-player .cuota-pago-opcion input[type="checkbox"] { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; }
+  body.rayck-finance-player .cuota-pago-opcion > span { min-width: 0; }
+  body.rayck-finance-player :is(.pago-historial,.rifa-entrega-card,.rifa-jugador-card) { min-width: 0; }
+  body.rayck-finance-player .pago-historial-top { gap: 8px; }
+  body.rayck-finance-player .pago-historial-monto { overflow-wrap: anywhere; }
+  body.rayck-finance-player .rifa-jugador-hero { padding: 18px 15px; }
+  body.rayck-finance-player .rifa-datos-grid { gap: 8px; padding: 15px 13px; }
+  body.rayck-finance-player .rifa-datos-grid > div { min-width: 0; }
+  body.rayck-finance-player .rifa-datos-grid strong { overflow-wrap: anywhere; }
+  body.rayck-finance-player .rifa-premios-bloque,
+  body.rayck-finance-player .rifa-entrega-bloque,
+  body.rayck-finance-player .rifa-historial-bloque { padding: 16px 13px; }
+  body.rayck-finance-player .comprador-rifa-fila { grid-template-columns: minmax(0,1fr) minmax(88px,0.55fr) 42px; }
+  body.rayck-finance-player .comprador-rifa-fila > * { min-width: 0; }
+  body.rayck-finance-player .rifa-entrega-card-top { flex-wrap: wrap; }
+  body.rayck-finance-player .cuenta-card { max-width: 100%; }
+  body.rayck-finance-player .cuenta-datos { grid-template-columns: minmax(0,1fr); }
+  body.rayck-finance-player .cuenta-datos > div { min-width: 0; }
+  body.rayck-finance-player .cuenta-datos strong { overflow-wrap: anywhere; }
+
+  /* Administración: legibilidad y control cómodo de pagos y saldos. */
+  body.rayck-finance-admin .admin-topbar { min-height: 65px; padding: 12px 13px; gap: 8px; }
+  body.rayck-finance-admin .admin-topbar h1 { font-size: clamp(16px,4.9vw,23px); line-height: 1.14; }
+  body.rayck-finance-admin .admin-content { padding: 18px 12px max(54px, env(safe-area-inset-bottom)); }
+  body.rayck-finance-admin :is(.admin-section,.pago-card,.jugador-admin-card,.deuda-jugador-card,.rifa-entrega-card) { min-width: 0; }
+  body.rayck-finance-admin .admin-section { padding: 17px 13px; }
+  body.rayck-finance-admin :is(.admin-hero,.mensualidades-accion) { padding: 18px 15px; }
+  body.rayck-finance-admin .admin-hero h2 { font-size: clamp(23px,7vw,34px); line-height: 1.15; }
+  body.rayck-finance-admin .dashboard,
+  body.rayck-finance-admin .dashboard-finanzas,
+  body.rayck-finance-admin .mensualidades-stats,
+  body.rayck-finance-admin .egresos-stats,
+  body.rayck-finance-admin .detalle-resumen-financiero { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  body.rayck-finance-admin .stat-card { padding: 15px 12px; min-width: 0; }
+  body.rayck-finance-admin .stat-card strong { font-size: clamp(18px,5vw,25px); overflow-wrap: anywhere; }
+  body.rayck-finance-admin .filtros-pagos,
+  body.rayck-finance-admin .filtros-estado-pagos,
+  body.rayck-finance-admin .admin-toolbar,
+  body.rayck-finance-admin .mensualidades-toolbar { flex-wrap: wrap; align-items: stretch; gap: 10px; }
+  body.rayck-finance-admin :is(.buscador-jugadores,.filtro-deuda-jugador,.filtro-egresos) { width: 100%; min-width: 0; }
+  body.rayck-finance-admin .filtros-estado-pagos .filtro-pago-btn { flex: 1 1 95px; min-height: 43px; }
+  body.rayck-finance-admin .acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+  body.rayck-finance-admin .acciones :is(.btn,button) { flex: 1 1 135px; min-width: 0; min-height: 44px; }
+  body.rayck-finance-admin .pago-top,
+  body.rayck-finance-admin .rifa-entrega-top,
+  body.rayck-finance-admin .deuda-jugador-top { flex-wrap: wrap; gap: 11px; }
+  body.rayck-finance-admin .pago-jugador,
+  body.rayck-finance-admin .pago-concepto { min-width: 0; overflow-wrap: anywhere; }
+  body.rayck-finance-admin .cuota-detalle { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 13px 12px; gap: 9px; }
+  body.rayck-finance-admin .cuota-detalle > * { min-width: 0; overflow-wrap: anywhere; }
+  body.rayck-finance-admin .lista-deudas-jugadores,
+  body.rayck-finance-admin .egresos-layout { grid-template-columns: minmax(0,1fr); }
+  body.rayck-finance-admin .deuda-jugador-card { padding: 16px 13px; }
+  body.rayck-finance-admin .deuda-jugador-resumen { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body.rayck-finance-admin .deuda-dato { min-width: 0; }
+  body.rayck-finance-admin .rifa-operacion-dashboard { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body.rayck-finance-admin .form-rifa-grid,
+  body.rayck-finance-admin .egreso-form .form-grid { grid-template-columns: minmax(0,1fr); }
+  body.rayck-finance-admin .premio-rifa-fila { grid-template-columns: 38px minmax(0,1fr); }
+  body.rayck-finance-admin .premio-rifa-fila > * { min-width: 0; }
+  body.rayck-finance-admin .premio-rifa-fila .premio-descripcion,
+  body.rayck-finance-admin .premio-rifa-fila .btn-eliminar-premio { grid-column: 2; }
+  body.rayck-finance-admin .egreso-form-card,
+  body.rayck-finance-admin .egresos-historial-card { padding: 17px 13px; }
+  body.rayck-finance-admin :is(.btn-aprobar,.btn-rechazar,.btn-generar-cuotas,.egreso-submit) { min-height: 46px; }
+}
+
+@media (max-width: 390px) {
+  body.rayck-finance-player .rifa-datos-grid { grid-template-columns: minmax(0,1fr); }
+  body.rayck-finance-player .comprador-rifa-fila { grid-template-columns: minmax(0,1fr) 42px; }
+  body.rayck-finance-player .comprador-rifa-fila .form-group:nth-child(2) { grid-column: 1; }
+  body.rayck-finance-player .comprador-rifa-fila .btn-eliminar-comprador { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
+  body.rayck-finance-admin .dashboard,
+  body.rayck-finance-admin .dashboard-finanzas,
+  body.rayck-finance-admin .mensualidades-stats,
+  body.rayck-finance-admin .egresos-stats,
+  body.rayck-finance-admin .detalle-resumen-financiero,
+  body.rayck-finance-admin .deuda-jugador-resumen,
+  body.rayck-finance-admin .rifa-operacion-dashboard { grid-template-columns: minmax(0,1fr); }
+}

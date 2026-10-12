@@ -79,7 +79,7 @@
 
 .player-image{
     position:relative;
-    height:360px;
+    height:280px;
     overflow:hidden;
     background:#202020;
 }
@@ -170,7 +170,7 @@
     flex:1;
     display:flex;
     flex-direction:column;
-    padding:28px;
+    padding:22px;
 }
 
 .player-position{
@@ -366,7 +366,7 @@
 @media(max-width:991px){
 
     .player-image{
-        height:330px;
+        height:260px;
     }
 
     .staff-image{
@@ -391,12 +391,12 @@
 @media(max-width:768px){
 
     .player-image{
-        height:300px;
+        height:250px;
     }
 
     .player-content,
     .staff-content{
-        padding:24px;
+        padding:22px;
     }
 
     .plantel-cta{
@@ -416,7 +416,7 @@
 @media(max-width:480px){
 
     .player-image{
-        height:275px;
+        height:235px;
     }
 
     .staff-image{
@@ -458,4 +458,17 @@
         width:150px;
     }
 
+}
+
+/* ===================================================
+   ESTADO VACÍO · PLANTEL PÚBLICO V2
+=================================================== */
+
+.plantel-empty-state{
+    padding:28px 24px;
+    border:1px dashed rgba(255,255,255,.12);
+    border-radius:20px;
+    background:rgba(255,255,255,.025);
+    color:#999;
+    text-align:center;
 }

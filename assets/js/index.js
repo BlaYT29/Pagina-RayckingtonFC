@@ -5,6 +5,13 @@
 
 "use strict";
 
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const SUPABASE_URL_INICIO = "https://auutiadcyhhwxzkeernd.supabase.co";
+const SUPABASE_KEY_INICIO = "sb_publishable_luWCBHYOSUsFbmgPU4GoiQ_9nmBMRHe";
+const supabaseInicio = createClient(SUPABASE_URL_INICIO, SUPABASE_KEY_INICIO);
+
+
 
 /* ===================================================
    RUTAS GENERALES
@@ -34,7 +41,7 @@ const LOGO_RAYCKINGTON =
     "assets/img/logo/logo.png";
 
 const LOGO_RIVAL_DEFAULT =
-    "assets/img/logo/rivales/default.png";
+    "assets/img/logo/rivales/rival-default.svg";
 
 const FOTO_JUGADOR_DEFAULT =
     "assets/img/jugadores/jugador-default.webp";
@@ -69,6 +76,12 @@ let competicionesCargadasInicio = [];
 let todosLosPartidosInicio = [];
 
 let todasLasEstadisticasInicio = [];
+
+let modoDeportivoSupabaseInicio = false;
+let competicionesSupabaseInicio = [];
+let partidosSupabaseInicio = [];
+let intervaloDeportivoInicio = null;
+let intervaloRelojInicio = null;
 
 
 /* ===================================================
@@ -163,7 +176,17 @@ async function iniciarPaginaInicio() {
             rutaBaseAnio
         );
 
+        /*
+         * Supabase pasa a ser la fuente prioritaria de partidos,
+         * resultados y tabla. Si todavía no hay competición pública
+         * (o no estamos autenticados como admin para previsualizar),
+         * la portada conserva automáticamente los JSON actuales.
+         */
+        await cargarDeportivoSupabaseInicio();
+
         prepararPaginaInicio();
+
+        iniciarActualizacionDeportivoInicio();
 
     } catch (error) {
 
@@ -323,6 +346,632 @@ async function cargarCompeticionesInicio(
 }
 
 
+
+/* ===================================================
+   DEPORTIVO DESDE SUPABASE
+=================================================== */
+
+async function cargarDeportivoSupabaseInicio() {
+
+    try {
+
+        const {
+            data: competiciones,
+            error: errorCompeticiones
+        } = await supabaseInicio.rpc(
+            "obtener_competiciones_web"
+        );
+
+        if (errorCompeticiones) {
+            throw errorCompeticiones;
+        }
+
+        const listaCompeticiones =
+            Array.isArray(competiciones)
+                ? competiciones
+                : [];
+
+        if (listaCompeticiones.length === 0) {
+
+            modoDeportivoSupabaseInicio = false;
+
+            return false;
+        }
+
+        const {
+            data: partidos,
+            error: errorPartidos
+        } = await supabaseInicio.rpc(
+            "obtener_partidos_rayckington_web"
+        );
+
+        if (errorPartidos) {
+            throw errorPartidos;
+        }
+
+        competicionesSupabaseInicio =
+            listaCompeticiones;
+
+        partidosSupabaseInicio =
+            Array.isArray(partidos)
+                ? partidos
+                : [];
+
+        todosLosPartidosInicio =
+            partidosSupabaseInicio.map(
+                normalizarPartidoSupabaseInicio
+            );
+
+        await cargarTablaSupabaseInicio();
+
+        modoDeportivoSupabaseInicio = true;
+
+        return true;
+
+    } catch (error) {
+
+        console.warn(
+            "Supabase deportivo no disponible en Inicio. Se mantienen los JSON:",
+            error
+        );
+
+        modoDeportivoSupabaseInicio = false;
+
+        return false;
+    }
+
+}
+
+
+async function cargarTablaSupabaseInicio() {
+
+    const competicionLiga =
+        competicionesSupabaseInicio
+            .filter(
+                item =>
+                    String(item.tipo || "").toUpperCase() === "LIGA"
+            )
+            .sort(
+                (a, b) => {
+
+                    const activaA =
+                        String(a.estado || "").toUpperCase() === "ACTIVA"
+                            ? 1
+                            : 0;
+
+                    const activaB =
+                        String(b.estado || "").toUpperCase() === "ACTIVA"
+                            ? 1
+                            : 0;
+
+                    if (activaA !== activaB) {
+                        return activaB - activaA;
+                    }
+
+                    return (
+                        Number(b.temporada_anio || 0) -
+                        Number(a.temporada_anio || 0)
+                    );
+                }
+            )[0];
+
+    if (!competicionLiga) {
+        return;
+    }
+
+    const {
+        data: tabla,
+        error
+    } = await supabaseInicio.rpc(
+        "obtener_tabla_competicion",
+        {
+            p_competicion_id:
+                competicionLiga.id
+        }
+    );
+
+    if (error) {
+        console.warn(
+            "No se pudo cargar tabla pública en Inicio:",
+            error
+        );
+        return;
+    }
+
+    const filaRayckington =
+        (Array.isArray(tabla) ? tabla : [])
+            .find(
+                fila =>
+                    normalizarTextoEquipoInicio(
+                        fila.equipo
+                    ) === "rayckington fc"
+            );
+
+    if (!filaRayckington) {
+        return;
+    }
+
+    todasLasEstadisticasInicio = [
+        {
+            competicionId:
+                competicionLiga.id,
+
+            activa:
+                String(
+                    competicionLiga.estado || ""
+                ).toUpperCase() === "ACTIVA",
+
+            estadisticas: {
+                posicion:
+                    filaRayckington.posicion,
+
+                pj:
+                    filaRayckington.pj,
+
+                pg:
+                    filaRayckington.pg,
+
+                pe:
+                    filaRayckington.pe,
+
+                pp:
+                    filaRayckington.pp,
+
+                gf:
+                    filaRayckington.gf,
+
+                gc:
+                    filaRayckington.gc,
+
+                dg:
+                    filaRayckington.dg,
+
+                pts:
+                    filaRayckington.puntos
+            }
+        }
+    ];
+
+}
+
+
+function normalizarPartidoSupabaseInicio(
+    partido
+) {
+
+    const rayckingtonLocal =
+        String(
+            partido.condicion || ""
+        ).toUpperCase() === "LOCAL";
+
+    const fechaHora =
+        partido.fecha_hora
+            ? new Date(partido.fecha_hora)
+            : null;
+
+    const fechaPartido =
+        fechaHora &&
+        !Number.isNaN(fechaHora.getTime())
+            ? fechaLocalISOInicio(
+                fechaHora
+            )
+            : "";
+
+    const hora =
+        fechaHora &&
+        !Number.isNaN(fechaHora.getTime())
+            ? fechaHora.toLocaleTimeString(
+                "es-CL",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                }
+            )
+            : "Horario por confirmar";
+
+    return {
+
+        id:
+            partido.id,
+
+        estado:
+            traducirEstadoSupabaseInicio(
+                partido.estado
+            ),
+
+        estadoSupabase:
+            partido.estado,
+
+        competencia:
+            partido.competicion_nombre ||
+            "Partido de Rayckington FC",
+
+        temporada:
+            partido.temporada_nombre ||
+            "Temporada 2026",
+
+        tipoCompeticion:
+            partido.competicion_tipo ||
+            "",
+
+        competicionId:
+            partido.competicion_id ||
+            "",
+
+        mostrarEnInicio:
+            true,
+
+        usarParaResultados:
+            true,
+
+        fechaPartido,
+
+        hora,
+
+        estadio:
+            partido.lugar ||
+            "Recinto por confirmar",
+
+        local:
+            rayckingtonLocal
+                ? "Rayckington FC"
+                : partido.rival_nombre,
+
+        visita:
+            rayckingtonLocal
+                ? partido.rival_nombre
+                : "Rayckington FC",
+
+        golesLocal:
+            rayckingtonLocal
+                ? partido.goles_rayckington
+                : partido.goles_rival,
+
+        golesVisita:
+            rayckingtonLocal
+                ? partido.goles_rival
+                : partido.goles_rayckington,
+
+        minutoActual:
+            partido.minuto_actual,
+
+        periodoPartido:
+            partido.periodo_partido,
+
+        cronometroInicioAt:
+            partido.cronometro_inicio_at,
+
+        cronometroSegundosAcumulados:
+            partido.cronometro_segundos_acumulados,
+
+        cronometroCorriendo:
+            partido.cronometro_corriendo,
+
+        duracionMinutos:
+            partido.duracion_minutos,
+
+        duracionPrimerTiempo:
+            partido.duracion_primer_tiempo
+    };
+
+}
+
+
+function traducirEstadoSupabaseInicio(
+    estado
+) {
+
+    const valor =
+        String(
+            estado || ""
+        ).toUpperCase();
+
+    const estados = {
+        PROGRAMADO:
+            "Programado",
+
+        EN_VIVO:
+            "En juego",
+
+        ENTRETIEMPO:
+            "En juego",
+
+        FINALIZADO:
+            "Finalizado",
+
+        SUSPENDIDO:
+            "Suspendido",
+
+        CANCELADO:
+            "Cancelado"
+    };
+
+    return (
+        estados[valor] ||
+        estado ||
+        "Programado"
+    );
+
+}
+
+
+function fechaLocalISOInicio(
+    fecha
+) {
+
+    const anio =
+        fecha.getFullYear();
+
+    const mes =
+        String(
+            fecha.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const dia =
+        String(
+            fecha.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    return `${anio}-${mes}-${dia}`;
+
+}
+
+
+function partidoEnDirectoInicio(
+    partido
+) {
+
+    const estado =
+        String(
+            partido?.estadoSupabase ||
+            partido?.estado ||
+            ""
+        )
+            .trim()
+            .toLowerCase();
+
+    return (
+        estado === "en_vivo" ||
+        estado === "entretiempo" ||
+        estado.includes("en juego") ||
+        estado.includes("en vivo") ||
+        estado.includes("en directo") ||
+        estado.includes("en curso")
+    );
+
+}
+
+
+function obtenerSegundosRelojInicio(
+    partido
+) {
+
+    let segundos =
+        Number(
+            partido?.cronometroSegundosAcumulados ??
+            partido?.cronometro_segundos_acumulados ??
+            0
+        );
+
+    if (!Number.isFinite(segundos)) {
+        segundos = 0;
+    }
+
+    const corriendo =
+        Boolean(
+            partido?.cronometroCorriendo ??
+            partido?.cronometro_corriendo
+        );
+
+    const inicio =
+        partido?.cronometroInicioAt ??
+        partido?.cronometro_inicio_at;
+
+    if (
+        corriendo &&
+        inicio
+    ) {
+
+        const inicioMs =
+            new Date(
+                inicio
+            ).getTime();
+
+        if (!Number.isNaN(inicioMs)) {
+
+            segundos +=
+                Math.max(
+                    0,
+                    Math.floor(
+                        (
+                            Date.now() -
+                            inicioMs
+                        ) / 1000
+                    )
+                );
+        }
+    }
+
+    return segundos;
+
+}
+
+
+function formatearRelojInicio(
+    partido
+) {
+
+    const segundos =
+        obtenerSegundosRelojInicio(
+            partido
+        );
+
+    const minutos =
+        Math.floor(
+            segundos / 60
+        );
+
+    const resto =
+        segundos % 60;
+
+    return (
+        `${String(minutos).padStart(2, "0")}:` +
+        `${String(resto).padStart(2, "0")}`
+    );
+
+}
+
+
+function etiquetaPeriodoInicio(
+    partido
+) {
+
+    const periodo =
+        String(
+            partido?.periodoPartido ||
+            partido?.periodo_partido ||
+            ""
+        ).toUpperCase();
+
+    const etiquetas = {
+        PREVIA:
+            "PREVIA",
+
+        PRIMER_TIEMPO:
+            "1ER TIEMPO",
+
+        ENTRETIEMPO:
+            "ENTRETIEMPO",
+
+        SEGUNDO_TIEMPO:
+            "2º TIEMPO",
+
+        FINALIZADO:
+            "FINAL"
+    };
+
+    return (
+        etiquetas[periodo] ||
+        "EN VIVO"
+    );
+
+}
+
+
+function textoRelojPartidoInicio(
+    partido
+) {
+
+    if (!partidoEnDirectoInicio(partido)) {
+        return "";
+    }
+
+    return (
+        `${etiquetaPeriodoInicio(partido)} · ` +
+        `${formatearRelojInicio(partido)}`
+    );
+
+}
+
+
+function iniciarActualizacionDeportivoInicio() {
+
+    if (
+        intervaloDeportivoInicio
+    ) {
+        clearInterval(
+            intervaloDeportivoInicio
+        );
+    }
+
+    if (
+        intervaloRelojInicio
+    ) {
+        clearInterval(
+            intervaloRelojInicio
+        );
+    }
+
+    intervaloRelojInicio =
+        window.setInterval(
+            actualizarRelojesVisiblesInicio,
+            1000
+        );
+
+    intervaloDeportivoInicio =
+        window.setInterval(
+            async () => {
+
+                if (
+                    !modoDeportivoSupabaseInicio
+                ) {
+                    return;
+                }
+
+                const actualizado =
+                    await cargarDeportivoSupabaseInicio();
+
+                if (!actualizado) {
+                    return;
+                }
+
+                renderizarPartidosInicio();
+
+                renderizarEstadisticasInicio();
+
+            },
+            10000
+        );
+
+}
+
+
+function actualizarRelojesVisiblesInicio() {
+
+    const partido =
+        buscarProximoPartidoInicio();
+
+    if (
+        !partido ||
+        !partidoEnDirectoInicio(partido)
+    ) {
+        return;
+    }
+
+    const texto =
+        textoRelojPartidoInicio(
+            partido
+        );
+
+    [
+        "hero-live-clock",
+        "inicio-live-clock"
+    ].forEach(
+        id => {
+
+            const elemento =
+                document.getElementById(
+                    id
+                );
+
+            if (elemento) {
+                elemento.textContent =
+                    texto;
+            }
+        }
+    );
+
+}
+
+
+
 /* ===================================================
    PREPARAR TODA LA PORTADA
 =================================================== */
@@ -475,68 +1124,23 @@ async function cargarJsonSeguroInicio(
 =================================================== */
 
 const LOGOS_EQUIPOS_INICIO = {
-
-    "rayckington fc":
-        "assets/img/logo/logo.png",
-
-    "real santa rosa":
-        "assets/img/logo/rivales/logosgrande/santarosa.png",
-
-    "el método":
-        "assets/img/logo/rivales/logosgrande/ElMetodo.png",
-
-    "el metodo":
-        "assets/img/logo/rivales/logosgrande/ElMetodo.png",
-
-    "atlético independiente":
-        "assets/img/logo/rivales/logosgrande/atletico-independiente.png",
-
-    "atletico independiente":
-        "assets/img/logo/rivales/logosgrande/atletico-independiente.png",
-
-    "atlético tobalaba":
-        "assets/img/logo/rivales/logosgrande/atletico-tobalaba.png",
-
-    "atletico tobalaba":
-        "assets/img/logo/rivales/logosgrande/atletico-tobalaba.png",
-
-    "huachalomo":
-        "assets/img/logo/rivales/logosgrande/huachalomo.png",
-
-    "la plaza":
-        "assets/img/logo/rivales/logosgrande/la-plaza-united.png",
-
-    "unión gloriosa":
-        "assets/img/logo/rivales/logosgrande/union-gloriosa.png",
-
-    "union gloriosa":
-        "assets/img/logo/rivales/logosgrande/union-gloriosa.png",
-
-    "7h hermanos":
-        "assets/img/logo/rivales/logosgrande/7h-hermanos.png",
-
-"atletico fc":
-    "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-
-"atletico":
-    "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-
-    "unab medicina":
-        "assets/img/logo/rivales/logosgrande/unabmedicina.png",
-
-    "universidad andrés bello - medicina":
-        "assets/img/logo/rivales/logosgrande/unabmedicina.png",
-
-    "universidad andres bello - medicina":
-        "assets/img/logo/rivales/logosgrande/unabmedicina.png",
-
-    "valle central":
-    "assets/img/logo/rivales/logospequeños/atletico-valle-central.png",
-
-    "valle central":
-    "assets/img/logo/rivales/logospequeños/atletico-valle-central.png" 
-
-
+    "rayckington fc": "assets/img/logo/logo.png",
+    "real santa rosa": "assets/img/logo/rivales/logospequeños/rsr-115x128.png",
+    "el metodo": "assets/img/logo/rivales/logospequeños/el-metodo-115x128.png",
+    "atletico independiente": "assets/img/logo/rivales/logospequeños/atl-independiente-128x126.png",
+    "atletico tobalaba": "assets/img/logo/rivales/logospequeños/atletico-tobalaba-128x126.png",
+    "huachalomo": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
+    "huachalomo f.c": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
+    "huachalomo fc": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
+    "la plaza": "assets/img/logo/rivales/logospequeños/plaza-115x128.png",
+    "la plaza united": "assets/img/logo/rivales/logospequeños/plaza-115x128.png",
+    "atletico": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
+    "atletico f.c": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
+    "atletico fc": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
+    "unab medicina": "assets/img/logo/rivales/logospequeños/unab-medicina.png",
+    "universidad andres bello - medicina": "assets/img/logo/rivales/logospequeños/unab-medicina.png",
+    "atletico valle central": "assets/img/logo/rivales/logospequeños/atletico-valle-central.png",
+    "valle central": "assets/img/logo/rivales/logospequeños/atletico-valle-central.png"
 };
 
 
@@ -637,9 +1241,9 @@ function renderizarPartidoHeroInicio(
             .toLowerCase();
 
     const enDirecto =
-        estado.includes("en juego") ||
-        estado.includes("en directo") ||
-        estado.includes("en curso");
+        partidoEnDirectoInicio(
+            partido
+        );
 
     const golesLocal =
         partido.local?.goles !== null &&
@@ -670,7 +1274,9 @@ function renderizarPartidoHeroInicio(
 
     const textoHora =
         enDirecto
-            ? "Partido en desarrollo"
+            ? textoRelojPartidoInicio(
+                partido
+            )
             : escaparInicio(
                 partido.hora
             );
@@ -728,7 +1334,7 @@ function renderizarPartidoHeroInicio(
 
                 </strong>
 
-                <p>
+                <p id="${enDirecto ? "hero-live-clock" : ""}">
 
                     ${textoHora}
 
@@ -824,9 +1430,9 @@ function renderizarProximoPartidoInicio(
             .toLowerCase();
 
     const enDirecto =
-        estado.includes("en juego") ||
-        estado.includes("en directo") ||
-        estado.includes("en curso");
+        partidoEnDirectoInicio(
+            partido
+        );
 
     const golesLocal =
         partido.local?.goles !== null &&
@@ -859,7 +1465,9 @@ function renderizarProximoPartidoInicio(
 
     const textoHora =
         enDirecto
-            ? "Partido en desarrollo"
+            ? textoRelojPartidoInicio(
+                partido
+            )
             : escaparInicio(
                 partido.hora
             );
@@ -908,7 +1516,9 @@ function renderizarProximoPartidoInicio(
 
                         <i class="bi bi-clock me-2"></i>
 
-                        ${textoHora}
+                        <span id="${enDirecto ? "inicio-live-clock" : ""}">
+                            ${textoHora}
+                        </span>
 
                     </p>
 
@@ -1217,7 +1827,47 @@ function normalizarPartidoInicio(
             goles:
                 partido.golesVisita
 
-        }
+        },
+
+        estadoSupabase:
+            partido.estadoSupabase ||
+            partido.estado_supabase ||
+            "",
+
+        minutoActual:
+            partido.minutoActual ??
+            partido.minuto_actual ??
+            0,
+
+        periodoPartido:
+            partido.periodoPartido ||
+            partido.periodo_partido ||
+            "",
+
+        cronometroInicioAt:
+            partido.cronometroInicioAt ||
+            partido.cronometro_inicio_at ||
+            null,
+
+        cronometroSegundosAcumulados:
+            partido.cronometroSegundosAcumulados ??
+            partido.cronometro_segundos_acumulados ??
+            0,
+
+        cronometroCorriendo:
+            partido.cronometroCorriendo ??
+            partido.cronometro_corriendo ??
+            false,
+
+        duracionMinutos:
+            partido.duracionMinutos ??
+            partido.duracion_minutos ??
+            null,
+
+        duracionPrimerTiempo:
+            partido.duracionPrimerTiempo ??
+            partido.duracion_primer_tiempo ??
+            null
 
     };
 
@@ -1525,6 +2175,9 @@ function partidoFinalizadoInicio(
         "en juego",
         "en directo",
         "en curso",
+        "en_vivo",
+        "en vivo",
+        "entretiempo",
         "suspendido",
         "aplazado",
         "postergado"
@@ -1583,6 +2236,31 @@ function partidoFinalizadoInicio(
 =================================================== */
 
 function buscarProximoPartidoInicio() {
+
+    const enVivo =
+        todosLosPartidosInicio
+            .filter(
+                partido =>
+                    partido.mostrarEnInicio === true &&
+                    participaRayckingtonInicio(
+                        partido
+                    ) &&
+                    partidoEnDirectoInicio(
+                        partido
+                    )
+            )
+            .sort(
+                ordenarPartidosPorFechaYHoraInicio
+            );
+
+    if (
+        enVivo.length > 0
+    ) {
+
+        return normalizarPartidoInicio(
+            enVivo[0]
+        );
+    }
 
     const hoy =
         new Date();

@@ -1,17 +1,37 @@
 /* ===================================================
    RAYCKINGTON FC
-   PLANTEL.JS
+   PLANTEL.JS · PLANTEL PÚBLICO V2
+   Supabase = nómina y ficha deportiva oficial
+   plantel.json = compatibilidad temporal de slug/capitán/categoría
 =================================================== */
 
 "use strict";
+
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 
 /* ===================================================
    CONFIGURACIÓN
 =================================================== */
 
+const SUPABASE_URL =
+    "https://auutiadcyhhwxzkeernd.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_luWCBHYOSUsFbmgPU4GoiQ_9nmBMRHe";
+
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
 const RUTA_PLANTEL =
     "assets/data/plantel/plantel.json";
+
+// El SQL histórico contiene el acumulado de las primeras dos fechas.
+// Solo se suman registros oficiales del Clausura fechados DESPUÉS del corte.
+const FIN_ACUMULADO_CLAUSURA = "2026-10-11";
 
 const FOTO_RESPALDO =
     "assets/img/jugadores/jugador-default.webp";
@@ -22,8 +42,10 @@ const FOTO_RESPALDO =
 =================================================== */
 
 let datosPlantel = null;
-
 let jugadoresPlantel = [];
+let plantelOficialDisponible = false;
+let estadisticasOficialesActivas = false;
+let nombreCompeticionOficial = "";
 
 
 /* ===================================================
@@ -35,22 +57,21 @@ const ORDEN_POSICIONES = {
     PO: 1,
 
     DFC: 2,
-
     LI: 3,
-
     LD: 4,
 
     MCD: 5,
-
     MC: 6,
+    MCO: 7,
+    MD: 8,
+    MI: 9,
 
-    EXD: 7,
-
-    EXI: 8,
-
-    F9: 9,
-
-    DC: 10
+    EXD: 10,
+    EXI: 11,
+    ED: 12,
+    EI: 13,
+    F9: 14,
+    DC: 15
 
 };
 
@@ -73,12 +94,17 @@ const GRUPOS_PLANTEL = {
 
     mediocampistas: [
         "MCD",
-        "MC"
+        "MC",
+        "MCO",
+        "MD",
+        "MI"
     ],
 
     delanteros: [
         "EXD",
         "EXI",
+        "ED",
+        "EI",
         "F9",
         "DC"
     ]
@@ -107,9 +133,70 @@ async function iniciarPlantel() {
         datosPlantel =
             await cargarDatosPlantel();
 
+        const jugadoresLegacy =
+            Array.isArray(
+                datosPlantel?.jugadores
+            )
+                ? datosPlantel.jugadores
+                : [];
+
+        const [oficiales, historicos] = await Promise.all([
+            cargarPlantelOficial(),
+            cargarHistoricosClausuraPlantel()
+        ]);
+
+        if (oficiales.length > 0) {
+
+            plantelOficialDisponible = true;
+
+            estadisticasOficialesActivas =
+                oficiales.some(
+                    jugador =>
+                        Boolean(
+                            jugador.modo_estadisticas_oficiales
+                        )
+                );
+
+            nombreCompeticionOficial =
+                oficiales.find(
+                    jugador =>
+                        jugador.competicion_nombre
+                )?.competicion_nombre || "";
+
+            jugadoresPlantel =
+                oficiales.map(
+                    oficial =>
+                        combinarJugadorOficial(
+                            oficial,
+                            buscarJugadorLegacy(
+                                oficial,
+                                jugadoresLegacy
+                            ),
+                            historicos
+                        )
+                );
+
+        } else {
+
+            /*
+             * Fallback seguro durante la migración.
+             * Si Supabase no está disponible, el sitio público
+             * continúa funcionando exactamente con plantel.json.
+             */
+
+            jugadoresPlantel =
+                jugadoresLegacy.map(legacy =>
+                    normalizarJugadorLegacy(
+                        legacy,
+                        historicos.get(legacy.slug)
+                    )
+                );
+
+        }
+
         jugadoresPlantel =
             prepararJugadores(
-                datosPlantel.jugadores
+                jugadoresPlantel
             );
 
         actualizarInformacionGeneral();
@@ -117,6 +204,17 @@ async function iniciarPlantel() {
         renderizarPlantelCompleto();
 
         ocultarCargaPlantel();
+
+        // La página se muestra inmediatamente con los acumulados.
+        // Si ya existen registros posteriores aprobados, se actualizan
+        // las tarjetas en segundo plano sin bloquear el render inicial.
+        if (oficiales.length && historicos.size > 0) {
+            actualizarAcumuladosClausuraPosteriores(historicos)
+                .catch(error => console.warn(
+                    "No se pudieron actualizar las estadísticas posteriores del plantel:",
+                    error
+                ));
+        }
 
     } catch (error) {
 
@@ -126,8 +224,7 @@ async function iniciarPlantel() {
         );
 
         mostrarErrorPlantel(
-            "No fue posible cargar el plantel. " +
-            "Revisa plantel.json y abre la página con Live Server."
+            "No fue posible cargar el plantel."
         );
 
     }
@@ -136,7 +233,7 @@ async function iniciarPlantel() {
 
 
 /* ===================================================
-   CARGAR JSON
+   CARGAR JSON DE COMPATIBILIDAD
 =================================================== */
 
 async function cargarDatosPlantel() {
@@ -162,7 +259,9 @@ async function cargarDatosPlantel() {
 
     if (
         !datos ||
-        !Array.isArray(datos.jugadores)
+        !Array.isArray(
+            datos.jugadores
+        )
     ) {
 
         throw new Error(
@@ -177,17 +276,483 @@ async function cargarDatosPlantel() {
 
 
 /* ===================================================
+   CARGAR PLANTEL OFICIAL SUPABASE
+=================================================== */
+
+async function cargarPlantelOficial() {
+
+    const {
+        data,
+        error
+    } =
+        await supabase.rpc(
+            "obtener_plantel_publico"
+        );
+
+    if (error) {
+
+        console.warn(
+            "Supabase todavía no pudo alimentar el plantel público. Se mantiene plantel.json como respaldo:",
+            error
+        );
+
+        return [];
+
+    }
+
+    return Array.isArray(data)
+        ? data
+        : [];
+
+}
+
+
+/* ===================================================
+   ACUMULADOS CLAUSURA DESDE SUPABASE (SOLO LECTURA)
+=================================================== */
+
+async function cargarHistoricosClausuraPlantel() {
+    const { data, error } = await supabase
+        .from("deportivo_estadisticas_historicas")
+        .select("jugador_slug,partidos,titularidades,suplencias,minutos,goles,asistencias,amarillas,rojas,porterias_invictas,mvp")
+        .eq("temporada", "Clausura 2026")
+        .eq("competicion", "Liga Tobalaba Todo Competidor");
+
+    if (error) {
+        console.warn("No se pudo consultar el histórico del Clausura; el plantel mantiene su respaldo:", error);
+        return new Map();
+    }
+    return new Map((data || []).map(fila => [fila.jugador_slug, fila]));
+}
+
+function convertirHistoricoAEstadisticas(fila) {
+    return {
+        partidos: Number(fila.partidos) || 0,
+        titularidades: Number(fila.titularidades) || 0,
+        suplencias: Number(fila.suplencias) || 0,
+        minutos: Number(fila.minutos) || 0,
+        goles: Number(fila.goles) || 0,
+        asistencias: Number(fila.asistencias) || 0,
+        amarillas: Number(fila.amarillas) || 0,
+        rojas: Number(fila.rojas) || 0,
+        mvp: Number(fila.mvp) || 0,
+        porteriasInvictas: Number(fila.porterias_invictas) || 0,
+        penalesAtajados: 0
+    };
+}
+
+
+/* ===================================================
+   CLAUSURA 2026 · ESTADÍSTICAS OFICIALES POSTERIORES
+   Sin nuevo SQL, sin editar plantel.json y sin doble conteo.
+   Se utiliza el mismo RPC público que usa jugador.js.
+=================================================== */
+
+function esNombreClausura2026(nombre = "") {
+    const texto = String(nombre).toLowerCase();
+    return texto.includes("clausura") && texto.includes("2026");
+}
+
+function esFilaOficialPosteriorClausura(fila) {
+    if (!esNombreClausura2026(`${fila.competicion_nombre || ""} ${fila.temporada_nombre || ""}`)) {
+        return false;
+    }
+    const fecha = String(fila.fecha_hora || "").slice(0, 10);
+    // Si falta fecha, se excluye para prevenir duplicación.
+    return Boolean(fecha) && fecha > FIN_ACUMULADO_CLAUSURA;
+}
+
+function combinarAcumuladoYPartidosPosteriores(historico, oficiales) {
+    const total = convertirHistoricoAEstadisticas(historico);
+    for (const fila of oficiales) {
+        if (!esFilaOficialPosteriorClausura(fila)) continue;
+        if (fila.jugo) total.partidos += 1;
+        if (fila.jugo && fila.titular) total.titularidades += 1;
+        if (fila.jugo && !fila.titular) total.suplencias += 1;
+        total.minutos += Number(fila.minutos) || 0;
+        total.goles += Number(fila.goles) || 0;
+        total.asistencias += Number(fila.asistencias) || 0;
+        total.amarillas += Number(fila.amarillas) || 0;
+        total.rojas += Number(fila.rojas) || 0;
+        total.mvp += fila.mvp ? 1 : 0;
+        total.porteriasInvictas += fila.valla_invicta ? 1 : 0;
+        total.penalesAtajados += Number(fila.penales_atajados) || 0;
+    }
+    return total;
+}
+
+async function actualizarAcumuladosClausuraPosteriores(historicos) {
+    // El plantel es un resumen de la competición activa, no del historial
+    // completo. No mezclamos estadísticas de Apertura o amistosos.
+    if (!esNombreClausura2026(nombreCompeticionOficial)) return;
+
+    const candidatos = jugadoresPlantel.filter(j =>
+        j.usaHistoricoClausura && j.id && historicos.has(j.slug)
+    );
+    if (!candidatos.length) return;
+
+    // Normalmente no hay fechas nuevas: una consulta ligera evita hacer
+    // una petición por jugador innecesariamente.
+    const partidos = await supabase.rpc("obtener_partidos_rayckington_web");
+    if (!partidos.error && Array.isArray(partidos.data)) {
+        const hayPartidosNuevos = partidos.data.some(p =>
+            String(p.estado || "").toUpperCase() === "FINALIZADO" &&
+            String(p.fecha_hora || "").slice(0, 10) > FIN_ACUMULADO_CLAUSURA
+        );
+        if (!hayPartidosNuevos) return;
+    }
+
+    // Limitar a cinco consultas simultáneas para cuidar el rendimiento.
+    // Si falla una lectura, se conserva el acumulado anterior del jugador.
+    let seActualizo = false;
+    for (let i = 0; i < candidatos.length; i += 5) {
+        const lote = candidatos.slice(i, i + 5);
+        const resultados = await Promise.all(lote.map(async j => {
+            const { data, error } = await supabase.rpc(
+                "obtener_estadisticas_publicas_jugador",
+                { p_jugador_id: j.id }
+            );
+            if (error || !Array.isArray(data)) return null;
+            const posteriores = data.filter(esFilaOficialPosteriorClausura);
+            if (!posteriores.length) return null;
+            return {
+                id: j.id,
+                estadisticas: combinarAcumuladoYPartidosPosteriores(
+                    historicos.get(j.slug), posteriores
+                )
+            };
+        }));
+        for (const resultado of resultados) {
+            if (!resultado) continue;
+            const jugador = jugadoresPlantel.find(j => j.id === resultado.id);
+            if (jugador) {
+                jugador.estadisticas = resultado.estadisticas;
+                seActualizo = true;
+            }
+        }
+    }
+    if (seActualizo) renderizarPlantelCompleto();
+}
+
+
+/* ===================================================
+   COMBINAR SUPABASE + COMPATIBILIDAD
+=================================================== */
+
+function combinarJugadorOficial(
+    oficial,
+    legacy,
+    historicos
+) {
+
+    const posicion =
+        oficial.posicion ||
+        legacy?.posicion ||
+        "";
+
+    const usaEstadisticasOficiales =
+        Boolean(
+            oficial.modo_estadisticas_oficiales
+        );
+
+    const historico = historicos.get(legacy?.slug);
+    // No se suma el total agregado del RPC al histórico: sus fechas 1 y 2
+    // podrían estar incluidas. Las fechas posteriores se cargan aparte.
+    const usarHistorico = Boolean(historico) && (
+        !usaEstadisticasOficiales ||
+        esNombreClausura2026(oficial.competicion_nombre || nombreCompeticionOficial)
+    );
+
+    const estadisticas =
+        usarHistorico
+            ? convertirHistoricoAEstadisticas(historico)
+            : usaEstadisticasOficiales
+            ? {
+                partidos:
+                    Number(oficial.partidos) || 0,
+
+                titularidades:
+                    Number(oficial.titularidades) || 0,
+
+                minutos:
+                    Number(oficial.minutos) || 0,
+
+                goles:
+                    Number(oficial.goles) || 0,
+
+                asistencias:
+                    Number(oficial.asistencias) || 0,
+
+                amarillas:
+                    Number(oficial.amarillas) || 0,
+
+                rojas:
+                    Number(oficial.rojas) || 0,
+
+                mvp:
+                    Number(oficial.mvp) || 0,
+
+                porteriasInvictas:
+                    Number(oficial.vallas_invictas) || 0,
+
+                penalesAtajados:
+                    Number(oficial.penales_atajados) || 0
+            }
+            : (
+                legacy?.estadisticas ||
+                {}
+            );
+
+    return {
+
+        id:
+            oficial.id,
+
+        slug:
+            legacy?.slug ||
+            crearSlugPlantel(
+                oficial.nombre_deportivo ||
+                oficial.nombre ||
+                oficial.nombre_completo ||
+                "jugador"
+            ),
+
+        nombre:
+            oficial.nombre_deportivo ||
+            oficial.nombre ||
+            legacy?.nombre ||
+            oficial.nombre_completo ||
+            "Jugador",
+
+        nombreCompleto:
+            oficial.nombre_completo ||
+            legacy?.nombreCompleto ||
+            oficial.nombre ||
+            legacy?.nombre ||
+            "Jugador",
+
+        numero:
+            oficial.dorsal ??
+            legacy?.numero ??
+            "—",
+
+        posicion,
+
+        nombrePosicion:
+            obtenerNombrePosicion(
+                posicion
+            ) ||
+            legacy?.nombrePosicion ||
+            "Por definir",
+
+        posicionSecundaria:
+            oficial.posicion_secundaria ||
+            "",
+
+        piernaHabil:
+            oficial.pierna_habil ||
+            "",
+
+        fechaIngreso:
+            oficial.fecha_ingreso ||
+            "",
+
+        fechaNacimiento:
+            oficial.fecha_nacimiento ||
+            legacy?.fechaNacimiento ||
+            "",
+
+        /*
+         * ACTIVO/INACTIVO viene de Supabase.
+         * El estado deportivo LESIONADO todavía vive en el JSON,
+         * por eso se conserva temporalmente para jugadores activos.
+         */
+        estado:
+            obtenerEstadoPublicoCombinado(
+                oficial.estado,
+                legacy?.estado
+            ),
+
+        categoria:
+            legacy?.categoria ||
+            "Adulta",
+
+        capitan:
+            Boolean(
+                legacy?.capitan
+            ),
+
+        foto:
+            obtenerFotoOficial(
+                oficial.foto_path,
+                legacy?.foto
+            ),
+
+        estadisticas,
+
+        usaEstadisticasOficiales,
+        usaHistoricoClausura: usarHistorico
+
+    };
+
+}
+
+
+function normalizarJugadorLegacy(
+    legacy,
+    historico = null
+) {
+
+    return {
+
+        ...legacy,
+
+        foto:
+            legacy?.foto ||
+            FOTO_RESPALDO,
+
+        estadisticas:
+            historico
+                ? convertirHistoricoAEstadisticas(historico)
+                : (legacy?.estadisticas || {}),
+
+        usaEstadisticasOficiales:
+            false
+
+    };
+
+}
+
+
+/* ===================================================
+   BUSCAR EQUIVALENTE LEGACY
+=================================================== */
+
+function buscarJugadorLegacy(
+    oficial,
+    jugadoresLegacy
+) {
+
+    const candidatos = [
+        oficial.nombre_completo,
+        oficial.nombre,
+        oficial.nombre_deportivo
+    ]
+        .filter(Boolean)
+        .map(normalizarTextoPlantel);
+
+    return jugadoresLegacy.find(
+        legacy => {
+
+            const nombresLegacy = [
+                legacy.nombreCompleto,
+                legacy.nombre
+            ]
+                .filter(Boolean)
+                .map(normalizarTextoPlantel);
+
+            return candidatos.some(
+                candidato =>
+                    nombresLegacy.includes(
+                        candidato
+                    )
+            );
+
+        }
+    ) || null;
+
+}
+
+
+/* ===================================================
+   FOTO OFICIAL
+=================================================== */
+
+function obtenerFotoOficial(
+    fotoPath,
+    fotoLegacy
+) {
+
+    if (fotoPath) {
+
+        const {
+            data
+        } =
+            supabase.storage
+                .from(
+                    "fotos-jugadores"
+                )
+                .getPublicUrl(
+                    fotoPath
+                );
+
+        if (data?.publicUrl) {
+            return data.publicUrl;
+        }
+
+    }
+
+    return fotoLegacy ||
+        FOTO_RESPALDO;
+
+}
+
+
+/* ===================================================
+   ESTADO PÚBLICO TEMPORAL
+=================================================== */
+
+function obtenerEstadoPublicoCombinado(
+    estadoOficial,
+    estadoLegacy
+) {
+
+    const oficial =
+        String(
+            estadoOficial ||
+            "ACTIVO"
+        ).toUpperCase();
+
+    if (oficial === "INACTIVO") {
+        return "INACTIVO";
+    }
+
+    const legacy =
+        String(
+            estadoLegacy ||
+            ""
+        ).toUpperCase();
+
+    if (
+        legacy === "LESIONADO" ||
+        legacy === "DISPONIBLE"
+    ) {
+        return legacy;
+    }
+
+    return "DISPONIBLE";
+
+}
+
+
+/* ===================================================
    PREPARAR JUGADORES
 =================================================== */
 
-function prepararJugadores(jugadores) {
+function prepararJugadores(
+    jugadores
+) {
 
     return jugadores
 
         .filter(
             jugador =>
                 jugador &&
-                jugador.estado !== "INACTIVO"
+                String(
+                    jugador.estado ||
+                    ""
+                ).toUpperCase() !==
+                    "INACTIVO"
         )
 
         .sort(
@@ -204,9 +769,7 @@ function prepararJugadores(jugadores) {
                     ] || 99;
 
                 if (ordenA !== ordenB) {
-
                     return ordenA - ordenB;
-
                 }
 
                 const numeroA =
@@ -219,7 +782,18 @@ function prepararJugadores(jugadores) {
                         jugadorB.numero
                     ) || 999;
 
-                return numeroA - numeroB;
+                if (numeroA !== numeroB) {
+                    return numeroA - numeroB;
+                }
+
+                return String(
+                    jugadorA.nombre || ""
+                ).localeCompare(
+                    String(
+                        jugadorB.nombre || ""
+                    ),
+                    "es"
+                );
 
             }
         );
@@ -233,9 +807,23 @@ function prepararJugadores(jugadores) {
 
 function actualizarInformacionGeneral() {
 
-    const temporada =
+    let temporada =
         datosPlantel?.temporada ||
         "Temporada 2026";
+
+    if (
+        estadisticasOficialesActivas &&
+        nombreCompeticionOficial
+    ) {
+
+        temporada =
+            nombreCompeticionOficial
+                .replace(
+                    /^Torneo\s+/i,
+                    ""
+                );
+
+    }
 
     const disponibles =
         jugadoresPlantel.filter(
@@ -255,6 +843,7 @@ function actualizarInformacionGeneral() {
         "plantel-temporada",
         temporada
     );
+    colocarTextoPlantel("ranking-temporada", temporada);
 
     colocarTextoPlantel(
         "total-jugadores",
@@ -300,8 +889,62 @@ function renderizarPlantelCompleto() {
         GRUPOS_PLANTEL.delanteros
     );
 
+    renderizarRankingsPlantel();
+
 }
 
+
+/* ===================================================
+   RANKINGS PÚBLICOS · COMPETICIÓN ACTIVA
+   Solo sobre jugadores preparados y cifras públicas ya consolidadas.
+   No pide permisos financieros ni calcula valores de partidos no aprobados.
+=================================================== */
+
+const RANKING_CATEGORIAS = [
+    { titulo: "Goleadores", etiqueta: "Goles", campo: "goles", icono: "bi-bullseye", unidad: "goles" },
+    { titulo: "Asistidores", etiqueta: "Asistencias", campo: "asistencias", icono: "bi-stars", unidad: "asistencias" },
+    { titulo: "Más minutos", etiqueta: "Minutos", campo: "minutos", icono: "bi-stopwatch", unidad: "min" },
+    { titulo: "Más partidos", etiqueta: "Participaciones", campo: "partidos", icono: "bi-calendar-check", unidad: "PJ" },
+    { titulo: "Más MVP", etiqueta: "Distinciones", campo: "mvp", icono: "bi-trophy", unidad: "MVP" },
+    { titulo: "Vallas invictas", etiqueta: "Arqueros", campo: "porteriasInvictas", icono: "bi-shield-check", unidad: "vallas", arqueros: true }
+];
+
+function renderizarRankingsPlantel() {
+    const contenedor = document.getElementById("rankings-listado");
+    if (!contenedor) return;
+
+    contenedor.innerHTML = RANKING_CATEGORIAS.map(categoria => {
+        const elegibles = jugadoresPlantel
+            .filter(jugador => !categoria.arqueros || jugador.posicion === "PO")
+            .filter(jugador => Number(jugador.estadisticas?.[categoria.campo]) > 0)
+            .sort((a, b) => {
+                const diferencia = (Number(b.estadisticas?.[categoria.campo]) || 0) - (Number(a.estadisticas?.[categoria.campo]) || 0);
+                return diferencia || String(a.nombre || "").localeCompare(String(b.nombre || ""), "es");
+            })
+            .slice(0, 5);
+
+        const lista = elegibles.length
+            ? `<ol class="rayck-ranking-list">${elegibles.map((jugador, indice) => `
+                <li>
+                    <a class="rayck-ranking-player" href="${escaparPlantel(crearEnlacePerfilJugador(jugador.slug))}">
+                        <span class="rayck-ranking-place">${indice + 1}</span>
+                        <img src="${escaparPlantel(jugador.foto || FOTO_RESPALDO)}"
+                            alt="" loading="lazy" onerror="this.onerror=null;this.src='${FOTO_RESPALDO}'">
+                        <span class="rayck-ranking-name">${escaparPlantel(jugador.nombre || "Jugador")}</span>
+                        <strong>${obtenerNumeroSeguro(jugador.estadisticas?.[categoria.campo])}<small>${categoria.unidad}</small></strong>
+                    </a>
+                </li>`).join("")}</ol>`
+            : '<div class="rayck-ranking-empty">Aún no hay registros confirmados en esta categoría.</div>';
+
+        return `<article class="rayck-ranking-card">
+            <div class="rayck-ranking-card-head">
+                <span class="rayck-ranking-icon"><i class="bi ${categoria.icono}" aria-hidden="true"></i></span>
+                <div><small>${categoria.etiqueta}</small><h3>${categoria.titulo}</h3></div>
+            </div>
+            ${lista}
+        </article>`;
+    }).join("");
+}
 
 /* ===================================================
    RENDERIZAR GRUPO
@@ -318,9 +961,7 @@ function renderizarGrupoPlantel(
         );
 
     if (!contenedor) {
-
         return;
-
     }
 
     const jugadores =
@@ -332,6 +973,20 @@ function renderizarGrupoPlantel(
         );
 
     contenedor.innerHTML = "";
+
+    if (!jugadores.length) {
+
+        contenedor.innerHTML = `
+            <div class="col-12">
+                <div class="plantel-empty-state">
+                    No hay jugadores registrados en esta posición.
+                </div>
+            </div>
+        `;
+
+        return;
+
+    }
 
     jugadores.forEach(
         jugador => {
@@ -357,11 +1012,15 @@ function renderizarGrupoPlantel(
     );
 
 }
+
+
 /* ===================================================
    CREAR TARJETA DE JUGADOR
 =================================================== */
 
-function crearTarjetaJugador(jugador) {
+function crearTarjetaJugador(
+    jugador
+) {
 
     const edad =
         calcularEdad(
@@ -396,18 +1055,15 @@ function crearTarjetaJugador(jugador) {
                     ">
 
                 <span class="player-number">
-
                     ${escaparPlantel(
                         jugador.numero
                     )}
-
                 </span>
 
                 <span
                     class="player-status ${estado.clase}">
 
                     <i class="${estado.icono}"></i>
-
                     ${estado.texto}
 
                 </span>
@@ -420,7 +1076,6 @@ function crearTarjetaJugador(jugador) {
                                 title="Capitán del equipo">
 
                                 <i class="bi bi-award-fill"></i>
-
                                 Capitán
 
                             </span>
@@ -433,45 +1088,36 @@ function crearTarjetaJugador(jugador) {
             <div class="player-content">
 
                 <span class="player-position">
-
                     ${escaparPlantel(
                         jugador.nombrePosicion ||
-                        jugador.posicion
+                        jugador.posicion ||
+                        "Por definir"
                     )}
-
                 </span>
 
                 <h3>
-
                     ${escaparPlantel(
                         jugador.nombre
                     )}
-
                 </h3>
 
                 <div class="player-info">
 
                     <span>
-
                         <i class="bi bi-person-fill me-2"></i>
-
                         ${
                             edad !== null
                                 ? `${edad} años`
                                 : "Edad por confirmar"
                         }
-
                     </span>
 
                     <span>
-
                         <i class="bi bi-shield-fill me-2"></i>
-
                         ${escaparPlantel(
                             jugador.categoria ||
                             "Adulta"
                         )}
-
                     </span>
 
                 </div>
@@ -479,57 +1125,30 @@ function crearTarjetaJugador(jugador) {
                 <div class="player-stats">
 
                     <div class="player-stat">
-
                         <strong>
-
                             ${obtenerNumeroSeguro(
                                 estadisticas.partidos
                             )}
-
                         </strong>
-
-                        <span>
-
-                            Partidos
-
-                        </span>
-
+                        <span>Partidos</span>
                     </div>
 
                     <div class="player-stat">
-
                         <strong>
-
                             ${obtenerNumeroSeguro(
                                 estadisticas.goles
                             )}
-
                         </strong>
-
-                        <span>
-
-                            Goles
-
-                        </span>
-
+                        <span>Goles</span>
                     </div>
 
                     <div class="player-stat">
-
                         <strong>
-
                             ${obtenerNumeroSeguro(
                                 estadisticas.asistencias
                             )}
-
                         </strong>
-
-                        <span>
-
-                            Asistencias
-
-                        </span>
-
+                        <span>Asistencias</span>
                     </div>
 
                 </div>
@@ -541,7 +1160,6 @@ function crearTarjetaJugador(jugador) {
                     class="btn btn-primary-club player-profile-button">
 
                     Ver perfil
-
                     <i class="bi bi-arrow-right ms-2"></i>
 
                 </a>
@@ -556,19 +1174,68 @@ function crearTarjetaJugador(jugador) {
 
 
 /* ===================================================
+   NOMBRE DE POSICIÓN
+=================================================== */
+
+function obtenerNombrePosicion(
+    posicion
+) {
+
+    const posiciones = {
+
+        PO: "Arquero",
+
+        DFC: "Defensa central",
+        LI: "Lateral izquierdo",
+        LD: "Lateral derecho",
+
+        MCD: "Mediocampista defensivo",
+        MC: "Mediocampista",
+        MCO: "Mediocampista ofensivo",
+        MD: "Mediocampista derecho",
+        MI: "Mediocampista izquierdo",
+
+        EXD: "Extremo derecho",
+        EXI: "Extremo izquierdo",
+        ED: "Extremo derecho",
+        EI: "Extremo izquierdo",
+        F9: "Falso 9",
+        DC: "Delantero centro"
+
+    };
+
+    return posiciones[
+        String(
+            posicion || ""
+        ).toUpperCase()
+    ] || "";
+
+}
+
+
+/* ===================================================
    ESTADO DEL JUGADOR
 =================================================== */
 
-function obtenerEstadoJugador(estado) {
+function obtenerEstadoJugador(
+    estado
+) {
 
     const valor =
         String(
-            estado || "DISPONIBLE"
+            estado ||
+            "DISPONIBLE"
         ).toUpperCase();
 
     const estados = {
 
         DISPONIBLE: {
+            texto: "Disponible",
+            clase: "status-available",
+            icono: "bi bi-check-circle-fill"
+        },
+
+        ACTIVO: {
             texto: "Disponible",
             clase: "status-available",
             icono: "bi bi-check-circle-fill"
@@ -600,7 +1267,9 @@ function obtenerEstadoJugador(estado) {
    CREAR ENLACE AL PERFIL
 =================================================== */
 
-function crearEnlacePerfilJugador(slug) {
+function crearEnlacePerfilJugador(
+    slug
+) {
 
     return `jugador.html?slug=${encodeURIComponent(
         slug
@@ -610,15 +1279,53 @@ function crearEnlacePerfilJugador(slug) {
 
 
 /* ===================================================
+   SLUG DE RESPALDO
+=================================================== */
+
+function crearSlugPlantel(
+    valor
+) {
+
+    return normalizarTextoPlantel(
+        valor
+    )
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") ||
+        "jugador";
+
+}
+
+
+/* ===================================================
+   NORMALIZAR TEXTO PARA MATCH
+=================================================== */
+
+function normalizarTextoPlantel(
+    valor
+) {
+
+    return String(
+        valor || ""
+    )
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+
+}
+
+
+/* ===================================================
    CALCULAR EDAD
 =================================================== */
 
-function calcularEdad(fechaNacimiento) {
+function calcularEdad(
+    fechaNacimiento
+) {
 
     if (!fechaNacimiento) {
-
         return null;
-
     }
 
     const nacimiento =
@@ -631,9 +1338,7 @@ function calcularEdad(fechaNacimiento) {
             nacimiento.getTime()
         )
     ) {
-
         return null;
-
     }
 
     const hoy =
@@ -656,9 +1361,7 @@ function calcularEdad(fechaNacimiento) {
         );
 
     if (aunNoCumple) {
-
         edad--;
-
     }
 
     return edad;
@@ -670,16 +1373,24 @@ function calcularEdad(fechaNacimiento) {
    NÚMERO SEGURO
 =================================================== */
 
-function obtenerNumeroSeguro(valor) {
+function obtenerNumeroSeguro(
+    valor
+) {
 
     const numero =
-        Number(valor);
+        Number(
+            valor
+        );
 
-    return Number.isFinite(numero)
+    return Number.isFinite(
+        numero
+    )
         ? numero
         : 0;
 
 }
+
+
 /* ===================================================
    OCULTAR CARGA DEL PLANTEL
 =================================================== */
@@ -692,9 +1403,7 @@ function ocultarCargaPlantel() {
         );
 
     if (carga) {
-
         carga.hidden = true;
-
     }
 
 }
@@ -704,7 +1413,9 @@ function ocultarCargaPlantel() {
    MOSTRAR ERROR DEL PLANTEL
 =================================================== */
 
-function mostrarErrorPlantel(mensaje) {
+function mostrarErrorPlantel(
+    mensaje
+) {
 
     const carga =
         document.getElementById(
@@ -712,9 +1423,7 @@ function mostrarErrorPlantel(mensaje) {
         );
 
     if (!carga) {
-
         return;
-
     }
 
     carga.hidden = false;
@@ -745,15 +1454,18 @@ function mostrarErrorPlantel(mensaje) {
    COLOCAR TEXTO EN EL HTML
 =================================================== */
 
-function colocarTextoPlantel(id, valor) {
+function colocarTextoPlantel(
+    id,
+    valor
+) {
 
     const elemento =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if (!elemento) {
-
         return;
-
     }
 
     elemento.textContent =
@@ -766,34 +1478,18 @@ function colocarTextoPlantel(id, valor) {
    ESCAPAR TEXTO
 =================================================== */
 
-function escaparPlantel(valor) {
+function escaparPlantel(
+    valor
+) {
 
-    return String(valor ?? "")
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    return String(
+        valor ?? ""
+    )
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
@@ -803,5 +1499,5 @@ function escaparPlantel(valor) {
 =================================================== */
 
 console.log(
-    "⚽ Sistema de plantel de Rayckington FC cargado."
+    "⚽ Plantel público conectado a Supabase."
 );

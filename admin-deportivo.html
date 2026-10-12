@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Deportiva | Rayckington FC</title>
+    <link rel="stylesheet" href="assets/css/admin-deportivo.css?v=20261012-roster2">
+    <link rel="stylesheet" href="assets/css/mobile-portales.css?v=20261012-m1">
+    <link rel="stylesheet" href="assets/css/match-roster-flow.css?v=20261012-b">
+</head>
+<body class="rayck-sport-admin">
+
+<section id="login-admin" class="admin-login">
+    <div class="admin-login-card">
+        <div class="admin-login-brand">
+            <img src="assets/img/logo/logo.png" alt="Rayckington FC" class="admin-login-logo">
+            <span class="eyebrow">Área privada</span>
+            <h1>Gestión Deportiva</h1>
+            <p>Rayckington FC</p>
+        </div>
+
+        <form id="form-login-admin" class="admin-login-form">
+            <label>
+                Correo electrónico
+                <input id="admin-email" type="email" autocomplete="email" placeholder="correo@ejemplo.cl" required>
+            </label>
+            <label>
+                Contraseña
+                <input id="admin-password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+            </label>
+            <button class="btn btn-primary btn-full" type="submit">Ingresar al panel</button>
+            <p id="mensaje-login" class="form-message"></p>
+        </form>
+    </div>
+</section>
+
+<div id="panel-admin" class="admin-shell" hidden>
+    <aside id="admin-sidebar" class="sidebar">
+        <div class="sidebar-brand">
+            <img src="assets/img/logo/logo.png" alt="Rayckington FC">
+            <div>
+                <strong>Rayckington FC</strong>
+                <span>Gestión Deportiva</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Navegación deportiva">
+            <button class="nav-btn active" data-view="inicio" type="button">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"/></svg></span>
+                Inicio
+            </button>
+            <button class="nav-btn" data-view="partidos" type="button">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m12 7 3 2.2-1.1 3.5H10l-1.1-3.5L12 7Zm-7.3 5.8 3.2.3 1 3.1-2 2.4m12.4-5.8-3.2.3-1 3.1 2 2.4M9.4 20l1.6-2.7h3L15.6 20"/></svg></span>
+                Partidos
+            </button>
+            <button class="nav-btn" data-view="competicion" type="button">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5M8 17h8"/></svg></span>
+                Competición
+            </button>
+            <button class="nav-btn" data-view="temporadas" type="button">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></svg></span>
+                Temporadas
+            </button>
+            <button class="nav-btn" data-view="estadisticas" type="button">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10m7 10V4m7 16v-7"/></svg></span>
+                Estadísticas
+                <span id="nav-pendientes" class="nav-badge" hidden>0</span>
+            </button>
+            <button class="nav-btn" data-view="jugadores" type="button">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c.4-4 2.1-6 5.5-6s5.1 2 5.5 6M16 7.5a2.5 2.5 0 1 1 0 5m1 2c2.5.5 3.7 2.2 4 5.5"/></svg></span>
+                Jugadores
+            </button>
+        </nav>
+
+        <div class="sidebar-separator"></div>
+
+        <a class="module-link" href="admin-tesoreria.html">
+            <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18m-4 4h1"/></svg></span>
+            Ir a Tesorería
+        </a>
+
+        <div class="sidebar-footer">
+            <span>Rayckington FC</span>
+            <small>Nacimos para competir,<br>jugamos para ganar.</small>
+        </div>
+    </aside>
+
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button id="btn-menu" class="icon-btn mobile-only" type="button" aria-label="Abrir menú">
+                    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                </button>
+                <div>
+                    <span class="brand-mini">RAYCKINGTON FC</span>
+                    <h1 id="page-title">Gestión Deportiva</h1>
+                </div>
+            </div>
+            <div class="topbar-user">
+                <span id="admin-avatar" class="avatar">R</span>
+                <div>
+                    <strong id="admin-name">Administrador</strong>
+                    <small>Acceso autorizado</small>
+                </div>
+                <button id="btn-logout" class="icon-btn" type="button" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <svg viewBox="0 0 24 24"><path d="M10 5H5v14h5m4-4 4-3-4-3m4 3H9"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div id="global-message" class="global-message" hidden></div>
+
+            <!-- INICIO -->
+            <section id="view-inicio" class="view active">
+                <section class="hero-card">
+                    <div>
+                        <span class="eyebrow">GESTIÓN DEPORTIVA</span>
+                        <h2 id="saludo-admin">Bienvenido</h2>
+                        <p>Controla temporadas, fixture, partidos en vivo y estadísticas oficiales del club.</p>
+                    </div>
+                    <img src="assets/img/logo/logo.png" alt="Rayckington FC">
+                </section>
+
+                <div class="stats-grid">
+                    <article class="stat-card accent-blue">
+                        <span>Partidos cargados</span>
+                        <strong id="stat-partidos">0</strong>
+                        <small>Base deportiva</small>
+                    </article>
+                    <article class="stat-card accent-red">
+                        <span>Partidos en vivo</span>
+                        <strong id="stat-vivo">0</strong>
+                        <small>Actividad actual</small>
+                    </article>
+                    <article class="stat-card accent-yellow">
+                        <span>Próximos partidos</span>
+                        <strong id="stat-proximos">0</strong>
+                        <small>Estado programado</small>
+                    </article>
+                    <article class="stat-card accent-green">
+                        <span>Estadísticas por revisar</span>
+                        <strong id="stat-solicitudes">0</strong>
+                        <small>Envíos de jugadores</small>
+                    </article>
+                </div>
+
+                <div class="dashboard-grid">
+                    <section class="panel-card next-match-card">
+                        <div class="section-head compact">
+                            <div>
+                                <span class="eyebrow">PRÓXIMO PARTIDO</span>
+                                <h3>Agenda deportiva</h3>
+                            </div>
+                        </div>
+                        <div id="next-match" class="empty-state">Cargando próximo partido...</div>
+                    </section>
+
+                    <section class="panel-card">
+                        <div class="section-head compact">
+                            <div>
+                                <span class="eyebrow">ACCESOS RÁPIDOS</span>
+                                <h3>Operación deportiva</h3>
+                            </div>
+                        </div>
+                        <div class="quick-grid">
+                            <button class="quick-card" type="button" data-go="partidos">
+                                <span class="quick-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m12 7 3 2.2-1.1 3.5H10l-1.1-3.5L12 7Z"/></svg></span>
+                                <strong>Partidos</strong><small>Fixture y Match Center</small>
+                            </button>
+                            <button class="quick-card" type="button" data-go="estadisticas">
+                                <span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M5 20V10m7 10V4m7 16v-7"/></svg></span>
+                                <strong>Estadísticas</strong><small>Revisar solicitudes</small>
+                            </button>
+                            <button class="quick-card" type="button" data-go="competicion">
+                                <span class="quick-icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5M8 17h8"/></svg></span>
+                                <strong>Competición</strong><small>Tabla y resultados</small>
+                            </button>
+                            <a class="quick-card" href="admin-tesoreria.html">
+                                <span class="quick-icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></span>
+                                <strong>Tesorería</strong><small>Abrir módulo financiero</small>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- PARTIDOS -->
+            <section id="view-partidos" class="view">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">GESTIÓN DEPORTIVA</span>
+                        <h2>Partidos</h2>
+                        <p>Administra el fixture y abre el Match Center de cada encuentro.</p>
+                    </div>
+                    <button id="btn-new-match" class="btn btn-primary" type="button">+ Nuevo partido</button>
+                </div>
+
+                <section class="panel-card toolbar-card">
+                    <div class="filters-row">
+                        <label>Estado
+                            <select id="filter-match-status">
+                                <option value="TODOS">Todos</option>
+                                <option value="PROGRAMADO">Programados</option>
+                                <option value="EN_VIVO">En vivo</option>
+                                <option value="ENTRETIEMPO">Entretiempo</option>
+                                <option value="FINALIZADO">Finalizados</option>
+                                <option value="SUSPENDIDO">Suspendidos</option>
+                                <option value="CANCELADO">Cancelados</option>
+                            </select>
+                        </label>
+                        <label>Competición
+                            <select id="filter-match-competition"><option value="TODAS">Todas</option></select>
+                        </label>
+                        <label class="search-grow">Buscar rival
+                            <input id="filter-match-search" type="search" placeholder="Ej. Atlético...">
+                        </label>
+                    </div>
+                </section>
+
+                <div id="matches-list" class="matches-list"></div>
+            </section>
+
+            <!-- COMPETICIÓN -->
+            <section id="view-competicion" class="view">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">COMPETICIÓN</span>
+                        <h2>Tabla y resultados</h2>
+                        <p>Actualiza resultados del resto de la liga y mantén la clasificación calculada automáticamente.</p>
+                    </div>
+                    <label class="competition-picker">Competición
+                        <select id="competition-view-select"></select>
+                    </label>
+                </div>
+
+                <div class="competition-summary-grid">
+                    <article class="stat-card accent-blue"><span>Equipos</span><strong id="comp-stat-teams">0</strong><small>Inscritos</small></article>
+                    <article class="stat-card accent-yellow"><span>Jornadas</span><strong id="comp-stat-rounds">0</strong><small>Calendario</small></article>
+                    <article class="stat-card accent-green"><span>Finalizados</span><strong id="comp-stat-finished">0</strong><small>Resultados cargados</small></article>
+                    <article class="stat-card accent-red"><span>Partidos</span><strong id="comp-stat-matches">0</strong><small>Fixture completo</small></article>
+                </div>
+
+                <div class="competition-layout">
+                    <section class="panel-card standings-card">
+                        <div class="section-head compact">
+                            <div><span class="eyebrow">CLASIFICACIÓN</span><h3>Tabla de posiciones</h3></div>
+                        </div>
+                        <div class="standings-wrap">
+                            <table class="standings-table">
+                                <thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GC</th><th>DG</th><th>PTS</th></tr></thead>
+                                <tbody id="standings-body"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="panel-card fixture-full-card">
+                        <div class="section-head compact">
+                            <div><span class="eyebrow">FIXTURE OFICIAL</span><h3>Resultados por fecha</h3></div>
+                        </div>
+                        <div id="competition-fixture" class="competition-fixture"></div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- MATCH CENTER -->
+            <section id="view-match-center" class="view">
+                <button id="btn-back-matches" class="back-btn" type="button">← Volver a partidos</button>
+
+                <section class="match-hero">
+                    <div class="match-meta-row">
+                        <div>
+                            <span id="mc-competition" class="eyebrow">COMPETICIÓN</span>
+                            <div id="mc-round" class="muted">Fecha —</div>
+                        </div>
+                        <span id="mc-status" class="status-pill status-programado">PROGRAMADO</span>
+                    </div>
+
+                    <div class="scoreboard">
+                        <div class="team-block">
+                            <img src="assets/img/logo/logo.png" alt="Rayckington FC">
+                            <strong>Rayckington FC</strong>
+                        </div>
+                        <div class="score-block">
+                            <span id="mc-score-home">0</span>
+                            <small>–</small>
+                            <span id="mc-score-away">0</span>
+                            <div id="mc-minute" class="live-minute">0'</div>
+                        </div>
+                        <div class="team-block">
+                            <div class="rival-badge">R</div>
+                            <strong id="mc-rival">Rival</strong>
+                        </div>
+                    </div>
+
+                    <div id="mc-details" class="match-detail-line"></div>
+                </section>
+
+                <div class="match-control-grid">
+                    <section class="panel-card">
+                        <div class="section-head compact">
+                            <div><span class="eyebrow">CONTROL</span><h3>Estado del partido</h3></div>
+                        </div>
+                        <div class="match-clock-card">
+                            <span id="mc-period" class="clock-period">PREVIA</span>
+                            <strong id="mc-clock" class="clock-value">00:00</strong>
+                            <small id="mc-clock-config">60 min · 30 + 30</small>
+                        </div>
+                        <div class="control-buttons clock-controls">
+                            <button class="btn btn-live" data-clock-action="INICIAR" type="button">▶ Iniciar / Reanudar</button>
+                            <button class="btn btn-secondary" data-clock-action="PAUSAR" type="button">Ⅱ Pausar</button>
+                            <button class="btn btn-secondary" data-clock-action="ENTRETIEMPO" type="button">Entretiempo</button>
+                            <button class="btn btn-primary" data-clock-action="SEGUNDO_TIEMPO" type="button">▶ Segundo tiempo</button>
+                            <button class="btn btn-success" data-clock-action="FINALIZAR" type="button">✓ Finalizar</button>
+                            <button class="btn btn-ghost" data-match-state="SUSPENDIDO" type="button">Suspender</button>
+                        </div>
+                        <div class="minute-control manual-minute">
+                            <label>Minuto oficial / corrección manual
+                                <input id="mc-minute-input" type="number" min="0" max="150" value="0">
+                            </label>
+                            <button id="btn-update-minute" class="btn btn-secondary" type="button">Actualizar minuto</button>
+                        </div>
+                    </section>
+
+                    <section class="panel-card event-card quick-event-card">
+                        <div class="section-head compact quick-head">
+                            <div>
+                                <span class="eyebrow">MATCH CENTER</span>
+                                <h3>Acciones rápidas</h3>
+                                <p class="quick-help">El minuto se toma automáticamente del cronómetro.</p>
+                            </div>
+                            <div class="quick-team-toggle" role="group" aria-label="Equipo del evento">
+                                <button class="quick-team-btn active" data-quick-team="RAYCKINGTON" type="button">Rayckington</button>
+                                <button class="quick-team-btn" data-quick-team="RIVAL" type="button">Rival</button>
+                            </div>
+                        </div>
+
+                        <div class="quick-actions-grid">
+                            <button class="quick-action quick-goal" data-quick-event="GOL" type="button"><strong>⚽</strong><span>Gol</span></button>
+                            <button class="quick-action" data-quick-event="TIRO_ARCO" type="button"><strong>🎯</strong><span>Tiro al arco</span></button>
+                            <button class="quick-action" data-quick-event="TIRO" type="button"><strong>🥅</strong><span>Tiro</span></button>
+                            <button class="quick-action" data-quick-event="CORNER" type="button"><strong>🚩</strong><span>Córner</span></button>
+                            <button class="quick-action" data-quick-event="FALTA" type="button"><strong>⚠</strong><span>Falta</span></button>
+                            <button class="quick-action" data-quick-event="OFFSIDE" type="button"><strong>↗</strong><span>Offside</span></button>
+                            <button class="quick-action quick-yellow" data-quick-event="AMARILLA" type="button"><strong>▮</strong><span>Amarilla</span></button>
+                            <button class="quick-action quick-red" data-quick-event="ROJA" type="button"><strong>▮</strong><span>Roja</span></button>
+                        </div>
+
+                        <div id="quick-event-editor" class="quick-event-editor" hidden>
+                            <div class="quick-event-editor-head">
+                                <div>
+                                    <span id="quick-event-minute-label" class="eyebrow">MINUTO 0'</span>
+                                    <h4 id="quick-event-title">Registrar evento</h4>
+                                </div>
+                                <button id="quick-event-cancel" class="quick-close" type="button" aria-label="Cancelar">×</button>
+                            </div>
+
+                            <label id="quick-player-wrap">Jugador Rayckington
+                                <select id="quick-player"><option value="">Seleccionar jugador</option></select>
+                            </label>
+
+                            <label id="quick-assist-wrap" hidden>Asistencia
+                                <select id="quick-assist"><option value="">Sin asistencia</option></select>
+                            </label>
+
+                            <label id="quick-rival-player-wrap" hidden>Jugador rival <span class="muted">(opcional)</span>
+                                <input id="quick-rival-player" type="text" placeholder="Nombre del jugador">
+                            </label>
+
+                            <div class="quick-editor-actions">
+                                <button id="quick-event-confirm" class="btn btn-primary" type="button">Registrar</button>
+                            </div>
+                        </div>
+
+                        <p id="quick-event-message" class="form-message"></p>
+
+                        <details class="advanced-event-details">
+                            <summary>+ Evento avanzado</summary>
+                            <form id="event-form" class="event-form advanced-event-form">
+                                <div class="form-grid two">
+                                    <label>Equipo
+                                        <select id="event-team" required>
+                                            <option value="RAYCKINGTON">Rayckington</option>
+                                            <option value="RIVAL">Rival</option>
+                                        </select>
+                                    </label>
+                                    <label>Evento
+                                        <select id="event-type" required>
+                                            <option value="GOL">⚽ Gol</option>
+                                            <option value="AUTOGOL">Autogol</option>
+                                            <option value="AMARILLA">🟨 Amarilla</option>
+                                            <option value="SEGUNDA_AMARILLA">🟨🟥 Segunda amarilla</option>
+                                            <option value="ROJA">🟥 Roja</option>
+                                            <option value="CORNER">🚩 Córner</option>
+                                            <option value="TIRO">Tiro</option>
+                                            <option value="TIRO_ARCO">Tiro al arco</option>
+                                            <option value="FALTA">Falta</option>
+                                            <option value="PENAL">Penal</option>
+                                            <option value="PENAL_FALLADO">Penal fallado</option>
+                                            <option value="OFFSIDE">Fuera de juego</option>
+                                            <option value="CAMBIO">Cambio</option>
+                                        </select>
+                                    </label>
+                                    <label>Minuto
+                                        <input id="event-minute" type="number" min="0" max="150" required value="0">
+                                    </label>
+                                    <label>Adicional
+                                        <input id="event-extra" type="number" min="0" max="30" value="0">
+                                    </label>
+                                </div>
+
+                                <label id="event-player-wrap">Jugador Rayckington
+                                    <select id="event-player"><option value="">Sin seleccionar</option></select>
+                                </label>
+
+                                <label id="event-assist-wrap">Asistencia
+                                    <select id="event-assist"><option value="">Sin asistencia</option></select>
+                                </label>
+
+                                <label id="event-rival-player-wrap" hidden>Jugador rival
+                                    <input id="event-rival-player" type="text" placeholder="Nombre opcional">
+                                </label>
+
+                                <label>Detalle opcional
+                                    <input id="event-detail" type="text" maxlength="250" placeholder="Observación del evento">
+                                </label>
+
+                                <button class="btn btn-secondary btn-full" type="submit">Registrar evento avanzado</button>
+                                <p id="event-message" class="form-message"></p>
+                            </form>
+                        </details>
+                    </section>
+                </div>
+
+                <div class="match-data-grid">
+                    <section class="panel-card">
+                        <div class="section-head compact"><div><span class="eyebrow">EN VIVO</span><h3>Estadísticas del partido</h3></div></div>
+                        <div id="mc-stats" class="match-stats"></div>
+                    </section>
+
+                    <section class="panel-card">
+                        <div class="section-head compact"><div><span class="eyebrow">CRONOLOGÍA</span><h3>Eventos</h3></div></div>
+                        <div id="mc-events" class="timeline"></div>
+                    </section>
+                </div>
+
+                <!-- NUEVO: convocatoria, titulares, suplentes y sustituciones -->
+                <section class="panel-card mc-roster-panel" aria-labelledby="mc-roster-title">
+                    <div class="section-head compact mc-control-head">
+                        <div>
+                            <span class="eyebrow">ALINEACIÓN</span>
+                            <h3 id="mc-roster-title">Convocados y cambios</h3>
+                            <p>Configura los titulares y suplentes antes del partido. Registra los cambios durante el juego y revisa los minutos estimados.</p>
+                        </div>
+                        <div class="mc-control-actions">
+                            <button id="mc-roster-refresh" class="btn btn-secondary" type="button">Actualizar convocatoria</button>
+                            <button id="mc-roster-undo" class="btn btn-secondary" type="button">Deshacer último cambio</button>
+                        </div>
+                    </div>
+                    <div id="mc-roster-summary" class="mc-roster-summary" aria-live="polite"></div>
+                    <div class="mc-mode-selector" role="group" aria-label="Modo de alineación">
+                        <button id="mc-mode-pitch" type="button" aria-pressed="true">⚽ Cancha táctica</button>
+                        <button id="mc-mode-list" type="button" aria-pressed="false">☷ Lista tradicional</button>
+                    </div>
+                    <div id="mc-pitch-area" class="mc-pitch-area">
+                        <div class="mc-pitch-step"><strong>1. Convoca</strong> desde Lista tradicional <span aria-hidden="true">→</span> <strong>2. Forma el once</strong> en la cancha <span aria-hidden="true">→</span> <strong>3. Revisa el banco</strong>
+                            <button id="mc-go-roster" type="button" class="btn btn-secondary compact-btn">+ Ir a convocatoria</button>
+                        </div>
+                        <div class="mc-pitch-tools">
+                            <label>Esquema de juego
+                                <select id="mc-formation-select">
+                                    <option value="4-3-3">4-3-3</option><option value="4-4-2">4-4-2</option><option value="4-4-1-1">4-4-1-1</option>
+                                    <option value="4-2-3-1">4-2-3-1</option><option value="3-5-2">3-5-2</option>
+                                    <option value="5-3-2">5-3-2</option><option value="4-1-4-1">4-1-4-1</option>
+                                </select>
+                            </label>
+                            <label class="mc-pitch-filter-toggle">
+                                <input id="mc-pitch-show-all" type="checkbox">
+                                Mostrar jugadores fuera de posición
+                            </label>
+                            <button id="mc-pitch-move" type="button" class="btn btn-secondary" aria-pressed="false">↔ Mover puestos</button>
+                            <button id="mc-pitch-reset" type="button" class="btn btn-secondary" hidden>Restaurar distribución</button>
+                            <span id="mc-pitch-count" aria-live="polite"></span>
+                            <small id="mc-pitch-save-state"></small>
+                        </div>
+                        <div class="mc-pitch-field-wrap"><div id="mc-pitch-field" class="mc-pitch-field" aria-label="Formación de titulares por posición"></div></div>
+                        <div class="mc-pitch-bench-panel">
+                            <h4>Banco de suplentes</h4>
+                            <div id="mc-pitch-bench" class="mc-pitch-bench" aria-live="polite"></div>
+                            <small>Los suplentes son los convocados que no forman parte del once titular. Durante el encuentro, los cambios se registran en la sección Sustituciones.</small>
+                        </div>
+                        <p id="mc-pitch-help" class="mc-pitch-help"></p>
+                        <p id="mc-pitch-message" class="form-message" aria-live="polite"></p>
+                    </div>
+                    <div class="mc-roster-workflow">
+                        <form id="mc-roster-add-form" class="mc-roster-form">
+                            <h4>1. Convocar jugador</h4>
+                            <label>Jugador
+                                <select id="mc-roster-player" required></select>
+                            </label>
+                            <label>Condición
+                                <select id="mc-roster-role">
+                                    <option value="SUPLENTE">Suplente / convocado</option>
+                                    <option value="TITULAR">Titular (opcional)</option>
+                                </select>
+                            </label>
+                            <button id="mc-roster-add" class="btn btn-primary" type="submit">Guardar convocatoria</button>
+                            <small>Primero convoca a todos como suplentes; después elige los once titulares en la cancha.</small>
+                        </form>
+                        <form id="mc-sub-form" class="mc-roster-form">
+                            <h4>2. Registrar sustitución</h4>
+                            <label>Sale de la cancha
+                                <select id="mc-sub-out" required></select>
+                            </label>
+                            <label>Entra a la cancha
+                                <select id="mc-sub-in" required></select>
+                            </label>
+                            <label>Minuto del cambio
+                                <div class="mc-roster-minute-row">
+                                    <input id="mc-sub-minute" type="number" min="0" max="180" value="0" required>
+                                    <button id="mc-sub-use-current" class="btn btn-secondary compact-btn" type="button">Minuto actual</button>
+                                </div>
+                            </label>
+                            <button id="mc-sub-save" class="btn btn-primary" type="submit">Confirmar cambio</button>
+                            <small>Se registra de forma conjunta: salida, entrada e historial.</small>
+                        </form>
+                    </div>
+                    <p id="mc-roster-message" class="form-message" aria-live="polite"></p>
+                    <div id="mc-roster-columns" class="mc-roster-columns">
+                        <div>
+                            <h4>Titulares <span id="mc-roster-starters-count">0</span></h4>
+                            <div id="mc-roster-starters" class="mc-roster-list"></div>
+                        </div>
+                        <div>
+                            <h4>Suplentes <span id="mc-roster-subs-count">0</span></h4>
+                            <div id="mc-roster-subs" class="mc-roster-list"></div>
+                        </div>
+                    </div>
+                    <div class="mc-roster-history">
+                        <h4>Cambios registrados</h4>
+                        <div id="mc-roster-changes"></div>
+                    </div>
+                    <p class="mc-control-help">Los minutos son una <strong>estimación</strong> según el reloj, los cambios y la duración del partido. Se pueden sugerir al formulario oficial, pero nunca se publican ni reemplazan estadísticas automáticamente.</p>
+                </section>
+
+                <!-- MATCH CENTER V4: borrador, no publica ni escribe por sí solo -->
+                <section id="mc-v4-panel" class="panel-card mc-v4-panel" aria-labelledby="mc-v4-title">
+                    <div class="section-head compact mc-control-head">
+                        <div>
+                            <span class="eyebrow">MATCH CENTER V4</span>
+                            <h3 id="mc-v4-title">Preparar cierre deportivo</h3>
+                            <p>Combina convocatoria, sustituciones y eventos para sugerir las estadísticas del encuentro. Antes de publicarlas, cada ficha requiere revisión del administrador.</p>
+                        </div>
+                        <div class="mc-control-actions">
+                            <button id="mc-v4-refresh" class="btn btn-secondary" type="button">Actualizar borrador</button>
+                        </div>
+                    </div>
+                    <p id="mc-v4-state" class="mc-v4-state" role="status" aria-live="polite"></p>
+                    <div id="mc-v4-summary" class="mc-v4-summary" aria-live="polite"></div>
+                    <div id="mc-v4-alerts" class="mc-v4-alerts"></div>
+                    <div id="mc-v4-list" class="mc-v4-list"></div>
+                    <p class="mc-control-help">Los minutos son estimados y deben confirmarse. No se deducen automáticamente MVP, posición ni estadísticas de arquero. Los acumulados históricos de las Fechas 1 y 2 se mantienen separados.</p>
+                </section>
+
+                <!-- CONTROL DE CIERRE: no escribe estadísticas automáticamente. -->
+                <section class="panel-card mc-control-panel" aria-labelledby="mc-control-title">
+                    <div class="section-head compact mc-control-head">
+                        <div>
+                            <span class="eyebrow">CIERRE DEPORTIVO</span>
+                            <h3 id="mc-control-title">Control de estadísticas por jugador</h3>
+                            <p>Compara los eventos del Match Center con las estadísticas oficiales de este partido.</p>
+                        </div>
+                        <div class="mc-control-actions">
+                            <button id="mc-control-refresh" class="btn btn-secondary" type="button">Actualizar</button>
+                            <button id="mc-control-toggle-all" class="btn btn-secondary" type="button" aria-pressed="false">Ver plantel completo</button>
+                            <button id="mc-control-add" class="btn btn-primary" type="button">+ Registrar jugador</button>
+                        </div>
+                    </div>
+                    <div id="mc-control-summary" class="mc-control-summary" aria-live="polite"></div>
+                    <p class="mc-control-help">Los goles, asistencias y tarjetas provienen de eventos no anulados. Confirma minutos, titularidad, posición y MVP antes de guardar: los eventos no determinan esos datos.</p>
+                    <div id="mc-control-list" class="mc-control-list"></div>
+                </section>
+            </section>
+
+            <!-- TEMPORADAS -->
+            <section id="view-temporadas" class="view">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">ESTRUCTURA DEPORTIVA</span>
+                        <h2>Temporadas y competiciones</h2>
+                        <p>Base organizativa para fixture, estadísticas e historial.</p>
+                    </div>
+                    <div class="head-actions">
+                        <button id="btn-new-season" class="btn btn-secondary" type="button">+ Temporada</button>
+                        <button id="btn-new-competition" class="btn btn-primary" type="button">+ Competición</button>
+                    </div>
+                </div>
+                <div id="seasons-list" class="season-grid"></div>
+            </section>
+
+            <!-- ESTADISTICAS -->
+            <section id="view-estadisticas" class="view">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">VALIDACIÓN OFICIAL</span>
+                        <h2>Estadísticas de jugadores</h2>
+                        <p>Compara lo declarado con el Match Center y administra el registro oficial por partido.</p>
+                    </div>
+                    <div class="head-actions">
+                        <button id="btn-manual-stat" class="btn btn-primary" type="button">+ Registrar manualmente</button>
+                    </div>
+                </div>
+
+                <div class="review-summary review-summary-four">
+                    <article><span>Pendientes</span><strong id="review-pending-count">0</strong></article>
+                    <article><span>Solicitudes aprobadas</span><strong id="review-approved-count">0</strong></article>
+                    <article><span>Rechazadas</span><strong id="review-rejected-count">0</strong></article>
+                    <article><span>Registros oficiales</span><strong id="official-stats-count">0</strong></article>
+                </div>
+
+                <div class="stats-toolbar">
+                    <div class="stats-tabs" role="tablist" aria-label="Vista de estadísticas">
+                        <button id="stats-tab-pending" class="stats-tab active" type="button" data-stats-tab="pendientes">Pendientes</button>
+                        <button id="stats-tab-official" class="stats-tab" type="button" data-stats-tab="oficiales">Oficiales</button>
+                    </div>
+                    <div class="stats-toolbar-note">Solo los registros oficiales alimentarán las fichas públicas.</div>
+                </div>
+
+                <div id="stats-pane-pending" class="stats-pane active">
+                    <div id="stats-requests-list" class="requests-list"></div>
+                </div>
+
+                <div id="stats-pane-official" class="stats-pane">
+                    <div id="official-stats-list" class="official-stats-list"></div>
+                </div>
+            </section>
+
+            <!-- JUGADORES -->
+            <section id="view-jugadores" class="view">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">PLANTEL</span>
+                        <h2>Jugadores</h2>
+                        <p>Vista deportiva de la nómina oficial. Las fichas estilo FIFA se construirán sobre estos datos.</p>
+                    </div>
+                </div>
+                <div id="players-grid" class="players-grid"></div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL PARTIDO -->
+<div id="match-modal" class="modal" hidden>
+    <div class="modal-card modal-lg">
+        <button class="modal-close" data-close-modal="match-modal" type="button">×</button>
+        <span class="eyebrow">PARTIDO</span>
+        <h2 id="match-modal-title">Nuevo partido</h2>
+        <form id="match-form" class="modal-form">
+            <input id="match-id" type="hidden">
+            <div class="form-grid two">
+                <label>Temporada
+                    <select id="match-season" required></select>
+                </label>
+                <label>Competición
+                    <select id="match-competition"></select>
+                </label>
+                <label>Fecha / jornada
+                    <input id="match-round" type="number" min="1" placeholder="Ej. 1">
+                </label>
+                <label>Condición
+                    <select id="match-condition" required>
+                        <option value="LOCAL">Local</option>
+                        <option value="VISITANTE">Visitante</option>
+                        <option value="NEUTRAL">Neutral</option>
+                    </select>
+                </label>
+                <label>Rival
+                    <input id="match-rival" type="text" required placeholder="Nombre del rival">
+                </label>
+                <label>Fecha y hora
+                    <input id="match-datetime" type="datetime-local">
+                </label>
+                <label>Duración total (min)
+                    <input id="match-duration" type="number" min="1" max="180" value="60">
+                </label>
+                <label>Primer tiempo (min)
+                    <input id="match-first-half" type="number" min="1" max="90" value="30">
+                </label>
+                <label class="span-two">Lugar
+                    <input id="match-place" type="text" placeholder="Cancha / complejo">
+                </label>
+            </div>
+            <label class="check-row"><input id="match-published" type="checkbox"> Marcar como publicado en la nueva base deportiva</label>
+            <label>Observaciones
+                <textarea id="match-notes" rows="3" placeholder="Opcional"></textarea>
+            </label>
+            <button class="btn btn-primary btn-full" type="submit">Guardar partido</button>
+            <p id="match-form-message" class="form-message"></p>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL TEMPORADA -->
+<div id="season-modal" class="modal" hidden>
+    <div class="modal-card">
+        <button class="modal-close" data-close-modal="season-modal" type="button">×</button>
+        <span class="eyebrow">TEMPORADA</span>
+        <h2>Nueva temporada</h2>
+        <form id="season-form" class="modal-form">
+            <label>Nombre<input id="season-name" required placeholder="Temporada 2027"></label>
+            <label>Año<input id="season-year" type="number" min="2020" max="2100" required></label>
+            <button class="btn btn-primary btn-full" type="submit">Crear temporada</button>
+            <p id="season-message" class="form-message"></p>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL COMPETICION -->
+<div id="competition-modal" class="modal" hidden>
+    <div class="modal-card">
+        <button class="modal-close" data-close-modal="competition-modal" type="button">×</button>
+        <span class="eyebrow">COMPETICIÓN</span>
+        <h2>Nueva competición</h2>
+        <form id="competition-form" class="modal-form">
+            <label>Temporada<select id="competition-season" required></select></label>
+            <label>Nombre<input id="competition-name" required placeholder="Torneo Apertura 2027"></label>
+            <div class="form-grid two">
+                <label>Tipo
+                    <select id="competition-type">
+                        <option value="LIGA">Liga</option>
+                        <option value="COPA">Copa</option>
+                        <option value="TORNEO">Torneo</option>
+                        <option value="AMISTOSO">Amistoso</option>
+                        <option value="OTRO">Otro</option>
+                    </select>
+                </label>
+                <label>Total jornadas<input id="competition-rounds" type="number" min="1"></label>
+            </div>
+            <button class="btn btn-primary btn-full" type="submit">Crear competición</button>
+            <p id="competition-message" class="form-message"></p>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL REVISAR ESTADISTICA -->
+<div id="review-modal" class="modal" hidden>
+    <div class="modal-card modal-xl">
+        <button class="modal-close" data-close-modal="review-modal" type="button">×</button>
+        <span class="eyebrow">ESTADÍSTICA OFICIAL</span>
+        <h2 id="review-title">Revisar envío</h2>
+
+        <section class="match-compare-card">
+            <div class="compare-heading">
+                <div>
+                    <span class="eyebrow">CONTROL MATCH CENTER</span>
+                    <h3>Declarado vs registro oficial del partido</h3>
+                </div>
+                <small>Minutos, titularidad y posición dependen de revisión administrativa.</small>
+            </div>
+            <div id="review-comparison" class="comparison-grid">
+                <div class="empty-state">Cargando comparación...</div>
+            </div>
+        </section>
+
+        <form id="review-form" class="modal-form">
+            <input id="review-request-id" type="hidden">
+            <div class="form-grid three">
+                <label>Minutos<input id="review-minutes" type="number" min="0" max="150"></label>
+                <label>Goles<input id="review-goals" type="number" min="0"></label>
+                <label>Asistencias<input id="review-assists" type="number" min="0"></label>
+                <label>Amarillas<input id="review-yellows" type="number" min="0"></label>
+                <label>Rojas<input id="review-reds" type="number" min="0"></label>
+                <label>Posición<input id="review-position" type="text"></label>
+                <label>Goles recibidos<input id="review-goals-against" type="number" min="0"></label>
+                <label>Penales atajados<input id="review-penalties-saved" type="number" min="0"></label>
+            </div>
+            <div class="check-grid">
+                <label class="check-row"><input id="review-starter" type="checkbox"> Titular</label>
+                <label class="check-row"><input id="review-mvp" type="checkbox"> MVP del partido</label>
+                <label class="check-row"><input id="review-clean-sheet" type="checkbox"> Valla invicta</label>
+            </div>
+            <div class="modal-actions">
+                <button id="btn-reject-request" class="btn btn-danger" type="button">Rechazar</button>
+                <button class="btn btn-success" type="submit">Aprobar estadísticas</button>
+            </div>
+            <p id="review-message" class="form-message"></p>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL REGISTRO MANUAL -->
+<div id="manual-stat-modal" class="modal" hidden>
+    <div class="modal-card modal-xl">
+        <button class="modal-close" data-close-modal="manual-stat-modal" type="button">×</button>
+        <span class="eyebrow">REGISTRO OFICIAL</span>
+        <h2 id="manual-stat-title">Registrar estadísticas manualmente</h2>
+        <p class="mc-control-help">Los valores sugeridos por el Match Center se pueden corregir. Completa minutos, titularidad, posición y MVP según el registro real.</p>
+        <p class="modal-intro">Úsalo cuando un jugador no envíe sus estadísticas o cuando necesites corregir directamente un registro oficial.</p>
+
+        <form id="manual-stat-form" class="modal-form">
+            <div class="form-grid two">
+                <label>Partido
+                    <select id="manual-stat-match" required></select>
+                </label>
+                <label>Jugador
+                    <select id="manual-stat-player" required></select>
+                </label>
+            </div>
+
+            <div class="check-grid manual-primary-checks">
+                <label class="check-row"><input id="manual-stat-played" type="checkbox" checked> Jugó</label>
+                <label class="check-row"><input id="manual-stat-starter" type="checkbox"> Titular</label>
+                <label class="check-row"><input id="manual-stat-mvp" type="checkbox"> MVP</label>
+                <label class="check-row"><input id="manual-stat-clean-sheet" type="checkbox"> Valla invicta</label>
+            </div>
+
+            <div class="form-grid three">
+                <label>Minutos<input id="manual-stat-minutes" type="number" min="0" max="150" value="0"></label>
+                <label>Goles<input id="manual-stat-goals" type="number" min="0" value="0"></label>
+                <label>Asistencias<input id="manual-stat-assists" type="number" min="0" value="0"></label>
+                <label>Amarillas<input id="manual-stat-yellows" type="number" min="0" value="0"></label>
+                <label>Rojas<input id="manual-stat-reds" type="number" min="0" value="0"></label>
+                <label>Posición<input id="manual-stat-position" type="text" placeholder="Ej. MC"></label>
+                <label>Goles recibidos<input id="manual-stat-goals-against" type="number" min="0" value="0"></label>
+                <label>Penales atajados<input id="manual-stat-penalties-saved" type="number" min="0" value="0"></label>
+            </div>
+
+            <button class="btn btn-primary btn-full" type="submit">Guardar estadística oficial</button>
+            <p id="manual-stat-message" class="form-message"></p>
+        </form>
+    </div>
+</div>
+
+
+<!-- MODAL FICHA DEPORTIVA JUGADOR -->
+<div id="player-profile-modal" class="modal" hidden>
+    <div class="modal-card modal-lg">
+        <button class="modal-close" data-close-modal="player-profile-modal" type="button">×</button>
+        <span class="eyebrow">FICHA DEPORTIVA</span>
+        <h2 id="player-profile-title">Editar jugador</h2>
+        <p class="modal-intro">Estos datos alimentarán el Portal Deportivo y, más adelante, la ficha pública del jugador.</p>
+
+        <form id="player-profile-form" class="modal-form">
+            <input id="player-profile-id" type="hidden">
+
+            <div class="player-profile-editor">
+                <div class="player-profile-preview">
+                    <div class="player-profile-photo">
+                        <img id="player-profile-photo-preview" src="assets/img/logo/logo.png" alt="Foto del jugador">
+                    </div>
+                    <strong id="player-profile-preview-name">Jugador</strong>
+                    <span id="player-profile-preview-meta">Rayckington FC</span>
+
+                    <label class="admin-photo-upload">
+                        Cambiar foto
+                        <input id="player-profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+                        <small>JPG, PNG o WEBP · máx. 5 MB</small>
+                    </label>
+                </div>
+
+                <div class="player-profile-fields">
+                    <div class="form-grid two">
+                        <label>Nombre deportivo
+                            <input id="player-profile-sport-name" type="text" placeholder="Ej. Alexander Rayo">
+                        </label>
+
+                        <label>Dorsal
+                            <input id="player-profile-number" type="number" min="1" max="99" placeholder="17">
+                        </label>
+
+                        <label>Posición principal
+                            <select id="player-profile-position">
+                                <option value="">Por definir</option>
+                                <option value="ARQ">ARQ · Arquero</option>
+                                <option value="DFC">DFC · Defensa central</option>
+                                <option value="LD">LD · Lateral derecho</option>
+                                <option value="LI">LI · Lateral izquierdo</option>
+                                <option value="MCD">MCD · Mediocentro defensivo</option>
+                                <option value="MC">MC · Mediocampista</option>
+                                <option value="MCO">MCO · Mediocentro ofensivo</option>
+                                <option value="ED">ED · Extremo derecho</option>
+                                <option value="EI">EI · Extremo izquierdo</option>
+                                <option value="DC">DC · Delantero centro</option>
+                            </select>
+                        </label>
+
+                        <label>Posición secundaria
+                            <select id="player-profile-position-2">
+                                <option value="">Sin posición secundaria</option>
+                                <option value="ARQ">ARQ · Arquero</option>
+                                <option value="DFC">DFC · Defensa central</option>
+                                <option value="LD">LD · Lateral derecho</option>
+                                <option value="LI">LI · Lateral izquierdo</option>
+                                <option value="MCD">MCD · Mediocentro defensivo</option>
+                                <option value="MC">MC · Mediocampista</option>
+                                <option value="MCO">MCO · Mediocentro ofensivo</option>
+                                <option value="ED">ED · Extremo derecho</option>
+                                <option value="EI">EI · Extremo izquierdo</option>
+                                <option value="DC">DC · Delantero centro</option>
+                            </select>
+                        </label>
+
+                        <label>Pierna hábil
+                            <select id="player-profile-foot">
+                                <option value="">Por definir</option>
+                                <option value="Derecha">Derecha</option>
+                                <option value="Izquierda">Izquierda</option>
+                                <option value="Ambas">Ambas</option>
+                            </select>
+                        </label>
+
+                        <label>Fecha de ingreso
+                            <input id="player-profile-entry" type="date">
+                        </label>
+                    </div>
+
+                    <div id="player-profile-stats-preview" class="player-profile-stats-preview"></div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-full" type="submit">Guardar ficha deportiva</button>
+            <p id="player-profile-message" class="form-message"></p>
+        </form>
+    </div>
+</div>
+
+
+<script type="module" src="assets/js/admin-deportivo.js?v=20261012-m1"></script>
+</body>
+</html>

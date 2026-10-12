@@ -1,0 +1,51 @@
+/* Rayckington F.C. · Elección única de posiciones personales */
+.player-positions-card{margin-top:16px}
+.positions-state{line-height:1.6;color:#b8cce0;margin:0 0 16px}
+.positions-once-form{display:grid;gap:15px}
+.positions-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.positions-form-grid label{display:grid;gap:7px;color:#c7d4e2;font-size:12px;font-weight:600}
+.positions-form-grid select{min-width:0;width:100%;min-height:44px;padding:10px;border-radius:10px;border:1px solid #39506b;background:#111f31;color:#fff}
+.positions-confirm{display:flex;gap:10px;align-items:start;color:#f4d886;line-height:1.5;font-size:12px}
+.positions-confirm input{accent-color:#ec2639;flex:0 0 auto;margin-top:3px}
+.positions-once-form .btn{justify-self:start}
+@media(max-width:620px){.positions-form-grid{grid-template-columns:1fr}.positions-once-form .btn{width:100%}}
+
+/* V1.1 - Corrección visual: la regla global de inputs ponía width:100%
+   también sobre el checkbox y empujaba el aviso amarillo fuera del panel. */
+#positions-once-form .positions-confirm {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.55;
+  font-size: 12px;
+  color: #f4d886;
+  overflow-wrap: break-word;
+  text-align: left;
+  cursor: pointer;
+}
+#positions-once-form .positions-confirm input[type="checkbox"] {
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 18px;
+  width: 18px;
+  min-width: 18px;
+  max-width: 18px;
+  height: 18px;
+  min-height: 18px;
+  max-height: 18px;
+  padding: 0;
+  margin: 1px 0 0;
+  border-radius: 4px;
+  accent-color: #e92639;
+  cursor: pointer;
+}
+@media (max-width: 620px) {
+  #positions-once-form .positions-confirm { font-size: 12px; }
+}

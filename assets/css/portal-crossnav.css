@@ -1,0 +1,31 @@
+/* Rayckington F.C. - accesos entre portales. No altera los menús de vistas. */
+.hub-switch-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 10px 14px;
+    min-height: 40px;
+    border: 1px solid rgba(76,145,229,.42);
+    border-radius: 10px;
+    color: #e8f2ff;
+    background: rgba(29,75,139,.25);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: background .18s,border-color .18s;
+}
+.hub-switch-link:hover,
+.hub-switch-link:focus-visible {
+    color: #fff;
+    background: rgba(36,92,167,.52);
+    border-color: rgba(130,190,255,.85);
+    outline-offset: 2px;
+}
+.hub-switch-link--sidebar { width:100%; justify-content:flex-start; margin-top:12px; }
+.hub-switch-link--sidebar span:last-child { margin-left:auto; }
+@media(max-width:900px){
+    .hub-switch-link--top { width:100%; justify-content:center; }
+}
