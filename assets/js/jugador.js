@@ -234,42 +234,92 @@ async function cargarPlantelJugador() {
    PERFIL OFICIAL SUPABASE
 =================================================== */
 
-async function cargarPerfilOficial(
-    legacy
-) {
+async function cargarPerfilOficial(legacy) {
+    // Se intenta mantener primero el RPC que ya utilizaba la página.
+    const perfilInicial = await consultarPerfilPublicoPorNombre(
+        legacy.nombre || null,
+        legacy.nombreCompleto || null
+    );
 
-    const {
-        data,
-        error
-    } =
-        await supabase.rpc(
-            "obtener_perfil_publico_jugador",
-            {
-                p_nombre:
-                    legacy.nombre || null,
-
-                p_nombre_completo:
-                    legacy.nombreCompleto || null
-            }
-        );
-
-    if (error) {
-
-        console.warn(
-            "No se pudo cargar perfil deportivo oficial:",
-            error
-        );
-
-        return null;
-
+    if (perfilInicial && correspondeAlJugadorLegacy(perfilInicial, legacy)) {
+        return perfilInicial;
     }
 
-    return Array.isArray(data)
-        ? data[0] || null
-        : data || null;
+    // Ejemplo real: "Benjamín Lackington" (JSON) / "Benjamin Lackington"
+    // (Supabase). Reintentar sin tildes sin alterar datos guardados.
+    const nombreSinTildes = normalizarTildesPerfil(legacy.nombre || '');
+    const completoSinTildes = normalizarTildesPerfil(legacy.nombreCompleto || '');
+    const cambiaronTildes =
+        nombreSinTildes !== (legacy.nombre || '') ||
+        completoSinTildes !== (legacy.nombreCompleto || '');
 
+    if (cambiaronTildes) {
+        const perfilAlternativo = await consultarPerfilPublicoPorNombre(
+            nombreSinTildes || null,
+            completoSinTildes || null
+        );
+        if (perfilAlternativo && correspondeAlJugadorLegacy(perfilAlternativo, legacy)) {
+            return perfilAlternativo;
+        }
+    }
+
+    // Último intento: el mismo listado público que ya alimenta Plantel.
+    // Coincidencia por nombre COMPLETO normalizado, sin coincidencias
+    // parciales por apellido; rechazamos empates para no mezclar fichas.
+    const { data, error } = await supabase.rpc('obtener_plantel_publico');
+    if (error || !Array.isArray(data)) {
+        console.warn('No se pudo enlazar la ficha con el plantel público:', error);
+        return null;
+    }
+    const coincidencias = data.filter(item =>
+        item?.id && correspondeAlJugadorLegacy(item, legacy)
+    );
+    if (coincidencias.length === 1) {
+        return coincidencias[0];
+    }
+    if (coincidencias.length > 1) {
+        console.warn('Hay varias fichas con el mismo nombre normalizado; se requiere identificación por ID.');
+    } else {
+        console.warn('El jugador no figura en el plantel público; se muestran los datos históricos como respaldo.');
+    }
+    return null;
 }
 
+async function consultarPerfilPublicoPorNombre(nombre, nombreCompleto) {
+    const { data, error } = await supabase.rpc('obtener_perfil_publico_jugador', {
+        p_nombre: nombre,
+        p_nombre_completo: nombreCompleto
+    });
+    if (error) {
+        console.warn('No se pudo consultar la ficha por nombre:', error);
+        return null;
+    }
+    return Array.isArray(data) ? (data[0] || null) : (data || null);
+}
+
+function normalizarTildesPerfil(valor) {
+    return String(valor || '').normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .normalize('NFC');
+}
+
+function normalizarNombrePerfil(valor) {
+    return normalizarTildesPerfil(valor)
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function correspondeAlJugadorLegacy(perfil, legacy) {
+    const nombresFicha = [perfil.nombre_completo, perfil.nombre_deportivo, perfil.nombre]
+        .map(normalizarNombrePerfil)
+        .filter(Boolean);
+    const nombresLegacy = [legacy.nombreCompleto, legacy.nombre]
+        .map(normalizarNombrePerfil)
+        .filter(Boolean);
+    return nombresLegacy.some(nombre => nombresFicha.includes(nombre));
+}
 
 /* ===================================================
    CAMPOS PÚBLICOS DE FICHA V1
