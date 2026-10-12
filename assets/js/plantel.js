@@ -34,7 +34,7 @@ const RUTA_PLANTEL =
 const FIN_ACUMULADO_CLAUSURA = "2026-10-11";
 
 const FOTO_RESPALDO =
-    "assets/img/jugadores/jugador-default.webp";
+    "assets/img/jugadores/jugador-rayck-placeholder.svg";
 
 
 /* ===================================================
@@ -163,17 +163,25 @@ async function iniciarPlantel() {
                         jugador.competicion_nombre
                 )?.competicion_nombre || "";
 
+            // Completar fecha de ingreso, pierna y posición secundaria
+            // sin cambiar ni duplicar las estadísticas oficiales.
+            const camposPublicos = await cargarCamposPublicosPlantel();
             jugadoresPlantel =
                 oficiales.map(
-                    oficial =>
-                        combinarJugadorOficial(
-                            oficial,
-                            buscarJugadorLegacy(
-                                oficial,
-                                jugadoresLegacy
-                            ),
+                    oficial => {
+                        const extra = camposPublicos.get(oficial.id);
+                        const combinado = extra ? {
+                            ...oficial,
+                            posicion_secundaria: extra.posicion_secundaria,
+                            pierna_habil: extra.pierna_habil,
+                            fecha_ingreso: extra.fecha_ingreso
+                        } : oficial;
+                        return combinarJugadorOficial(
+                            combinado,
+                            buscarJugadorLegacy(combinado, jugadoresLegacy),
                             historicos
-                        )
+                        );
+                    }
                 );
 
         } else {
@@ -304,6 +312,21 @@ async function cargarPlantelOficial() {
         ? data
         : [];
 
+}
+
+
+/* ===================================================
+   CAMPOS DE FICHAS PÚBLICAS · UNA CONSULTA PARA EL PLANTEL
+=================================================== */
+async function cargarCamposPublicosPlantel() {
+    const { data, error } = await supabase.rpc("obtener_campos_ficha_publica_v1");
+    if (error) {
+        console.warn("No se pudieron cargar los campos públicos del plantel:", error);
+        return new Map();
+    }
+    return new Map((Array.isArray(data) ? data : [])
+        .filter(fila => fila?.id)
+        .map(fila => [fila.id, fila]));
 }
 
 
@@ -610,8 +633,7 @@ function normalizarJugadorLegacy(
         ...legacy,
 
         foto:
-            legacy?.foto ||
-            FOTO_RESPALDO,
+            obtenerFotoPublicaClub(legacy?.foto),
 
         estadisticas:
             historico
@@ -673,7 +695,12 @@ function buscarJugadorLegacy(
 =================================================== */
 
 function obtenerFotoPublicaClub(fotoLegacy) {
-    return fotoLegacy || FOTO_RESPALDO;
+    const ruta = String(fotoLegacy || "").trim();
+    if (!ruta || /jugador-default\.webp(?:[?#]|$)/i.test(ruta)) {
+        return FOTO_RESPALDO;
+    }
+    // Exclusivamente rutas del JSON seleccionadas por el club.
+    return ruta;
 }
 
 

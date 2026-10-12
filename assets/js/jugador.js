@@ -30,7 +30,7 @@ const RUTA_DATOS_JUGADOR =
     "assets/data/plantel/plantel.json";
 
 const FOTO_JUGADOR_RESPALDO =
-    "assets/img/jugadores/jugador-default.webp";
+    "assets/img/jugadores/jugador-rayck-placeholder.svg";
 
 const LOGO_CLUB =
     "assets/img/logo/logo.png";
@@ -137,6 +137,17 @@ async function iniciarPerfilJugador() {
                 combinarHistoricoConOficiales([], historico);
 
         } else {
+
+            // Complementa el RPC antiguo con campos oficiales confirmados.
+            // Se consulta por UUID y no por apellido/nombre ambiguo.
+            const camposFicha = await cargarCamposPublicosFicha(perfilOficial.id);
+            if (camposFicha && camposFicha.id === perfilOficial.id) {
+                Object.assign(perfilOficial, {
+                    posicion_secundaria: camposFicha.posicion_secundaria,
+                    pierna_habil: camposFicha.pierna_habil,
+                    fecha_ingreso: camposFicha.fecha_ingreso
+                });
+            }
 
             jugadorActual =
                 combinarPerfilJugador(
@@ -257,6 +268,24 @@ async function cargarPerfilOficial(
         ? data[0] || null
         : data || null;
 
+}
+
+
+/* ===================================================
+   CAMPOS PÚBLICOS DE FICHA V1
+   No se lee foto_path ni datos de acceso del jugador.
+=================================================== */
+async function cargarCamposPublicosFicha(jugadorId) {
+    if (!jugadorId) return null;
+    const { data, error } = await supabase.rpc(
+        "obtener_campos_ficha_publica_v1",
+        { p_jugador_id: jugadorId }
+    );
+    if (error) {
+        console.warn("No se pudieron consultar los campos públicos de la ficha:", error);
+        return null;
+    }
+    return Array.isArray(data) ? (data[0] || null) : (data || null);
 }
 
 
@@ -514,8 +543,7 @@ function normalizarJugadorLegacy(
             ),
 
         foto:
-            legacy.foto ||
-            FOTO_JUGADOR_RESPALDO,
+            obtenerFotoPublicaClub(legacy.foto),
 
         estadisticasLegacy:
             legacy.estadisticas ||
@@ -533,7 +561,12 @@ function normalizarJugadorLegacy(
 =================================================== */
 
 function obtenerFotoPublicaClub(fotoLegacy) {
-    return fotoLegacy || FOTO_JUGADOR_RESPALDO || LOGO_CLUB;
+    const ruta = String(fotoLegacy || "").trim();
+    if (!ruta || /jugador-default\.webp(?:[?#]|$)/i.test(ruta)) {
+        return FOTO_JUGADOR_RESPALDO;
+    }
+    // Exclusivamente rutas del JSON seleccionadas por el club.
+    return ruta;
 }
 
 
