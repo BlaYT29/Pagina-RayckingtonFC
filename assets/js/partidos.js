@@ -9,7 +9,15 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const SUPABASE_URL_PARTIDOS = "https://auutiadcyhhwxzkeernd.supabase.co";
 const SUPABASE_KEY_PARTIDOS = "sb_publishable_luWCBHYOSUsFbmgPU4GoiQ_9nmBMRHe";
-const supabasePartidos = createClient(SUPABASE_URL_PARTIDOS, SUPABASE_KEY_PARTIDOS);
+// Cliente exclusivamente público: no usa sesiones antiguas del navegador.
+// No modifica la autenticación de los portales de jugadores o administradores.
+const supabasePartidos = createClient(SUPABASE_URL_PARTIDOS, SUPABASE_KEY_PARTIDOS, {
+    auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false
+    }
+});
 
 
 /* ===================================================
@@ -49,6 +57,7 @@ const contenidoPartidos = document.getElementById("contenido-partidos");
 const estadoTemporada = document.getElementById("estado-temporada");
 
 let competicionesSupabasePartidos = [];
+let detalleErrorConexionPartidos = "";
 let modoSupabasePartidos = false;
 let competicionActualPartidos = null;
 let competicionActualTipoPartidos = "";
@@ -125,7 +134,14 @@ async function iniciarSistemaPartidos() {
             aviso.id = "aviso-fixture-respaldo";
             aviso.className = "alert alert-warning mt-3 text-start";
             aviso.setAttribute("role", "status");
-            aviso.innerHTML = `<strong>Calendario no actualizado:</strong> no se pudo conectar con Supabase. Se muestra una copia local que solo llega hasta la fecha 2. `;
+            aviso.innerHTML = `<strong>Calendario no actualizado:</strong> la consulta pública de competiciones no devolvió datos utilizables. Se muestra una copia local que solo llega hasta la fecha 2. `;
+            // Mostrar el motivo real al administrador incluso en celulares sin consola.
+            if (detalleErrorConexionPartidos) {
+                const diagnostico = document.createElement("small");
+                diagnostico.className = "d-block mt-2";
+                diagnostico.textContent = `Diagnóstico: ${detalleErrorConexionPartidos.slice(0, 220)}`;
+                aviso.appendChild(diagnostico);
+            }
             const reintentar = document.createElement("button");
             reintentar.type = "button";
             reintentar.className = "btn btn-sm btn-dark ms-2 mt-1";
@@ -146,27 +162,38 @@ async function iniciarSistemaPartidos() {
 
 async function prepararSelectorSupabasePartidos() {
 
+    detalleErrorConexionPartidos = "";
+
     try {
 
-        const {
-            data,
-            error
-        } = await supabasePartidos.rpc(
-            "obtener_competiciones_web"
-        );
+        let competicionesRecibidas = [];
 
-        if (error) {
-            throw error;
+        // Segundo intento para conexiones móviles que fallan transitoriamente.
+        for (let intento = 0; intento < 2; intento++) {
+            const { data, error } = await supabasePartidos.rpc(
+                "obtener_competiciones_web"
+            );
+
+            if (!error && Array.isArray(data) && data.length > 0) {
+                competicionesRecibidas = data;
+                break;
+            }
+
+            detalleErrorConexionPartidos = error
+                ? `${error.code || "RPC"}: ${error.message || "Error de consulta"}`
+                : Array.isArray(data)
+                    ? "Supabase respondió correctamente, pero no devolvió competiciones visibles."
+                    : `La función devolvió un formato inesperado: ${data === null ? "null" : typeof data}.`;
+
+            if (intento === 0) {
+                await new Promise(resolve => setTimeout(resolve, 650));
+            }
         }
 
-        competicionesSupabasePartidos =
-            Array.isArray(data)
-                ? data
-                : [];
+        competicionesSupabasePartidos = competicionesRecibidas;
 
-        if (
-            competicionesSupabasePartidos.length === 0
-        ) {
+        if (competicionesSupabasePartidos.length === 0) {
+            console.warn("No hay competiciones públicas disponibles:", detalleErrorConexionPartidos);
             return false;
         }
 
@@ -236,6 +263,7 @@ async function prepararSelectorSupabasePartidos() {
 
     } catch (error) {
 
+        detalleErrorConexionPartidos = `${error?.code || "ERROR"}: ${error?.message || String(error)}`;
         console.warn(
             "Supabase deportivo no disponible en Partidos. Se mantienen los JSON:",
             error

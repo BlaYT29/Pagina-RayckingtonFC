@@ -9,7 +9,15 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const SUPABASE_URL_INICIO = "https://auutiadcyhhwxzkeernd.supabase.co";
 const SUPABASE_KEY_INICIO = "sb_publishable_luWCBHYOSUsFbmgPU4GoiQ_9nmBMRHe";
-const supabaseInicio = createClient(SUPABASE_URL_INICIO, SUPABASE_KEY_INICIO);
+// Consultas públicas aisladas de la sesión de los portales privados.
+// Evita que un token viejo en el teléfono afecte Inicio.
+const supabaseInicio = createClient(SUPABASE_URL_INICIO, SUPABASE_KEY_INICIO, {
+    auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false
+    }
+});
 
 
 
