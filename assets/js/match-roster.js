@@ -14,6 +14,45 @@ export function calcularMinutosConvocado(fila, minutoCorte, partidoComenzado) {
     return Math.max(0, Math.min(180, Math.round(fin)) - Math.max(0, entrada));
 }
 
+/**
+ * Reconstruye la participación sumando todos los intervalos en cancha.
+ * TITULAR designa al once INICIAL, no el estado actual después de los cambios.
+ * El historial de deportivo_cambios_partido es la fuente de verdad.
+ */
+export function calcularParticipacionesRotativas(alineacion = [], cambios = [], minutoCorte = 0, partidoComenzado = true) {
+    const corte = Math.max(0, Math.min(180, Number(minutoCorte) || 0));
+    const resultado = new Map();
+    for (const f of alineacion) {
+        if (!f?.jugador_id) continue;
+        const inicio = partidoComenzado && f.rol === "TITULAR" ? 0 : null;
+        resultado.set(f.jugador_id, {
+            jugo: inicio != null, titular: f.rol === "TITULAR", minutos: 0,
+            enCancha: inicio != null, entradaActual: inicio
+        });
+    }
+    if (!partidoComenzado) return resultado;
+    const ordenados = [...cambios].sort((a, b) => Number(a.minuto) - Number(b.minuto) || Number(a.id) - Number(b.id));
+    for (const c of ordenados) {
+        const m = Number(c.minuto);
+        if (!Number.isFinite(m) || m < 0 || m > corte) continue;
+        const sale = resultado.get(c.jugador_sale_id);
+        const entra = resultado.get(c.jugador_entra_id);
+        // Si hay registros históricos inconsistentes, no inventamos minutos.
+        if (!sale?.enCancha || !entra || entra.enCancha || m < sale.entradaActual) continue;
+        sale.minutos += Math.max(0, m - sale.entradaActual);
+        sale.enCancha = false;
+        sale.entradaActual = null;
+        entra.jugo = true;
+        entra.enCancha = true;
+        entra.entradaActual = m;
+    }
+    for (const row of resultado.values()) {
+        if (row.enCancha) row.minutos += Math.max(0, corte - row.entradaActual);
+        row.minutos = Math.min(180, Math.round(row.minutos));
+    }
+    return resultado;
+}
+
 export function crearModuloPlantelPartido({ supabase, obtenerPartido, obtenerJugadores, nombreJugador, escapar, onSugerir, onActualizar = () => {}, recargarJugadores = async () => {} }) {
     const $ = (id) => document.getElementById(id);
     let partidoId = null;
@@ -58,7 +97,7 @@ export function crearModuloPlantelPartido({ supabase, obtenerPartido, obtenerJug
         if (p.estado === "FINALIZADO") return Math.max(real, Number(p.duracion_minutos) || 60);
         return Math.min(180, real);
     };
-    const minutos = (fila) => calcularMinutosConvocado(fila, minutoCorte(), iniciado());
+    const participaciones = () => calcularParticipacionesRotativas(alineacion, cambios, minutoCorte(), iniciado());
     const mensaje = (texto = "", tipo = "") => {
         const el = $("mc-roster-message");
         if (!el) return;
@@ -76,7 +115,8 @@ export function crearModuloPlantelPartido({ supabase, obtenerPartido, obtenerJug
         const titulares = lista.filter((x) => x.rol === "TITULAR");
         const suplentes = lista.filter((x) => x.rol === "SUPLENTE");
         const enCancha = lista.filter((x) => x.minuto_entrada != null && x.minuto_salida == null);
-        const enBanco = suplentes.filter((x) => x.minuto_entrada == null);
+        // Un jugador que salió vuelve a quedar disponible, aunque haya empezado como TITULAR.
+        const enBanco = lista.filter((x) => x.minuto_entrada == null || x.minuto_salida != null);
         const sePuedeConvocar = preparacion() && disponible && !ocupada;
         const sePuedeCambiar = cambioPermitido() && disponible && !ocupada && enCancha.length > 0 && enBanco.length > 0;
 
@@ -84,8 +124,8 @@ export function crearModuloPlantelPartido({ supabase, obtenerPartido, obtenerJug
         $("mc-roster-subs-count").textContent = suplentes.length;
         $("mc-roster-summary").innerHTML = `
             <span><strong>${lista.length}</strong> convocados</span>
-            <span><strong>${titulares.length}</strong> titulares</span>
-            <span><strong>${enBanco.length}</strong> suplentes disponibles</span>
+            <span><strong>${titulares.length}</strong> titulares iniciales</span>
+            <span><strong>${enBanco.length}</strong> en banco / disponibles</span>
             <span><strong>${cambios.length}</strong> cambios</span>
             <span><strong>${enCancha.length}</strong> en cancha</span>
         `;
@@ -105,12 +145,15 @@ export function crearModuloPlantelPartido({ supabase, obtenerPartido, obtenerJug
         $("mc-roster-refresh").disabled = ocupada;
         $("mc-roster-undo").disabled = !cambioPermitido() || !disponible || ocupada || !cambios.length;
 
+        const participacion = participaciones();
         const renderFila = (f) => {
             const entro = f.minuto_entrada != null;
             let descripcion = "Pendiente de ingresar";
-            if (f.minuto_salida != null) descripcion = `Salió al ${f.minuto_salida}'`;
-            else if (entro) descripcion = f.rol === "TITULAR" ? "En cancha desde el inicio" : `Entró al ${f.minuto_entrada}'`;
-            const min = iniciado() && entro ? `${minutos(f)} min estimados` : "Sin minutos confirmados";
+            if (f.minuto_salida != null) descripcion = `En banco · salió al ${f.minuto_salida}' · puede reingresar`;
+            else if (entro) descripcion = f.rol === "TITULAR" && Number(f.minuto_entrada) === 0
+                ? "En cancha desde el inicio" : `En cancha · ingresó al ${f.minuto_entrada}'`;
+            const min = iniciado() && participacion.get(f.jugador_id)?.jugo
+                ? `${participacion.get(f.jugador_id).minutos} min acumulados` : "Sin minutos confirmados";
             const botones = sePuedeConvocar ? `
                 <button class="btn btn-secondary compact-btn" type="button" data-roster-toggle="${escapar(f.jugador_id)}">${f.rol === "TITULAR" ? "A suplente" : "A titular"}</button>
                 <button class="btn btn-secondary compact-btn" type="button" data-roster-remove="${escapar(f.jugador_id)}">Quitar</button>` : "";
@@ -132,7 +175,7 @@ export function crearModuloPlantelPartido({ supabase, obtenerPartido, obtenerJug
         const prevSale = salida.value;
         const prevEntra = entrada.value;
         salida.innerHTML = opciones(enCancha.map(itemJugador).sort((a,b) => a.nombre.localeCompare(b.nombre, "es")), "Jugador que sale");
-        entrada.innerHTML = opciones(enBanco.map(itemJugador).sort((a,b) => a.nombre.localeCompare(b.nombre, "es")), "Suplente que entra");
+        entrada.innerHTML = opciones(enBanco.map(itemJugador).sort((a,b) => a.nombre.localeCompare(b.nombre, "es")), "Jugador que entra o reingresa");
         if (enCancha.some((x) => x.jugador_id === prevSale)) salida.value = prevSale;
         if (enBanco.some((x) => x.jugador_id === prevEntra)) entrada.value = prevEntra;
         salida.disabled = !sePuedeCambiar;
@@ -292,10 +335,11 @@ export function crearModuloPlantelPartido({ supabase, obtenerPartido, obtenerJug
         sugerencia(jugadorId) {
             const f = alineacion.find((x) => x.jugador_id === jugadorId);
             if (!f || !iniciado()) return null;
+            const p = participaciones().get(jugadorId);
             return {
                 titular: f.rol === "TITULAR",
-                jugo: f.minuto_entrada != null,
-                minutos: minutos(f)
+                jugo: !!p?.jugo,
+                minutos: p?.minutos ?? 0
             };
         }
     };

@@ -970,6 +970,7 @@ function renderCierreV4() {
     const listaSolicitudes = solicitudes.filter((o) => o.partido_id === p.id);
     const borrador = prepararBorradorCierre({
         alineacion: snapshot.alineacion,
+        cambios: snapshot.cambios,
         eventos: cargaV4.eventos ? eventosActuales : [],
         oficiales: cargaV4.oficiales ? listaOficial : [],
         solicitudes: cargaV4.solicitudes ? listaSolicitudes : [],

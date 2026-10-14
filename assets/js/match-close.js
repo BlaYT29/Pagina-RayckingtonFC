@@ -4,22 +4,25 @@
 */
 "use strict";
 
+import { calcularParticipacionesRotativas } from "./match-roster.js";
+
 const ESTADISTICAS = ["goles", "asistencias", "amarillas", "rojas"];
 const TIPOS_JUGADOR = new Set(["GOL", "AMARILLA", "SEGUNDA_AMARILLA", "ROJA"]);
 
-export function prepararBorradorCierre({ alineacion = [], eventos = [], oficiales = [], solicitudes = [], minutoFinal = 0 } = {}) {
+export function prepararBorradorCierre({ alineacion = [], cambios = [], eventos = [], oficiales = [], solicitudes = [], minutoFinal = 0 } = {}) {
     const ids = new Set();
     const filasAlineacion = new Map();
     const registroOficial = new Map();
     const registroSolicitud = new Map();
     const eventosPorJugador = new Map();
     const incidencias = [];
+    const participaciones = calcularParticipacionesRotativas(alineacion, cambios, minutoFinal, true);
 
     for (const fila of alineacion) {
         if (!fila?.jugador_id) continue;
         filasAlineacion.set(fila.jugador_id, fila);
         // El suplente que no entró no debe sumar participación.
-        if (fila.minuto_entrada != null) ids.add(fila.jugador_id);
+        if (participaciones.get(fila.jugador_id)?.jugo) ids.add(fila.jugador_id);
     }
     for (const row of oficiales) {
         if (row?.jugador_id) { ids.add(row.jugador_id); registroOficial.set(row.jugador_id, row); }
@@ -58,13 +61,10 @@ export function prepararBorradorCierre({ alineacion = [], eventos = [], oficiale
         const oficial = registroOficial.get(id) || null;
         const pendiente = registroSolicitud.get(id) || null;
         const avisos = [];
-        const jugo = fila?.minuto_entrada != null;
-        const minutoEntrada = Number(fila?.minuto_entrada);
-        const minutoSalida = fila?.minuto_salida == null ? corte : Number(fila.minuto_salida);
-        let minutos = null;
-        if (jugo && Number.isFinite(minutoEntrada) && Number.isFinite(minutoSalida) && minutoSalida >= minutoEntrada && minutoSalida <= 180) {
-            minutos = Math.max(0, Math.round(minutoSalida - minutoEntrada));
-        }
+        const participacion = participaciones.get(id);
+        const jugo = !!participacion?.jugo;
+        const minutos = fila && jugo && Number.isFinite(corte) && corte >= 0 && corte <= 180
+            ? participacion.minutos : null;
         if (!fila) avisos.push("Sin convocatoria: participación y minutos por confirmar.");
         else if (!jugo) avisos.push("Figura como suplente sin ingreso.");
         if (fila && jugo && minutos == null) avisos.push("Revisar entrada, salida y minuto final.");
