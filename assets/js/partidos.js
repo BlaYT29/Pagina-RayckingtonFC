@@ -117,6 +117,23 @@ async function iniciarSistemaPartidos() {
         await cargarTemporada(
             selectorTemporada.value
         );
+
+        // Respaldo de 2026/Clausura: solamente contiene fechas 1 y 2.
+        // Avisar si la conexión a Supabase falló, especialmente en celulares.
+        if (estadoTemporada && !document.getElementById("aviso-fixture-respaldo")) {
+            const aviso = document.createElement("div");
+            aviso.id = "aviso-fixture-respaldo";
+            aviso.className = "alert alert-warning mt-3 text-start";
+            aviso.setAttribute("role", "status");
+            aviso.innerHTML = `<strong>Calendario no actualizado:</strong> no se pudo conectar con Supabase. Se muestra una copia local que solo llega hasta la fecha 2. `;
+            const reintentar = document.createElement("button");
+            reintentar.type = "button";
+            reintentar.className = "btn btn-sm btn-dark ms-2 mt-1";
+            reintentar.textContent = "Reintentar conexión";
+            reintentar.addEventListener("click", () => window.location.reload());
+            aviso.appendChild(reintentar);
+            estadoTemporada.insertAdjacentElement("afterend", aviso);
+        }
     }
 
     iniciarRelojesPartidos();
@@ -351,6 +368,14 @@ async function cargarCompeticionSupabasePartidos(
                         normalizarFixtureSupabasePartidos
                     );
 
+            // Rayckington Live: añadir al calendario un partido oficial del club
+            // cuando aún no exista su fila correspondiente en el fixture de liga.
+            // Conservar el fixture completo; nunca reemplazarlo por los partidos del club.
+            fixture = incorporarPartidosClubFaltantesFixture(
+                fixture,
+                partidosRayckington
+            );
+
             tabla =
                 (
                     Array.isArray(
@@ -501,6 +526,43 @@ async function cargarCompeticionSupabasePartidos(
         return false;
     }
 
+}
+
+
+/* ===================================================
+   COMPLETAR FIXTURE CON PARTIDOS DEL CLUB
+   No duplica un partido si ya está enlazado por UUID
+   o si coincide la jornada y el par de equipos.
+=================================================== */
+
+function incorporarPartidosClubFaltantesFixture(fixtureOriginal, partidosClub) {
+    const fixture = Array.isArray(fixtureOriginal)
+        ? fixtureOriginal.slice()
+        : [];
+
+    for (const [indice, partido] of (Array.isArray(partidosClub) ? partidosClub : []).entries()) {
+        const jornada = Number(partido.jornada);
+        // Sin jornada confirmada no inventamos una nueva fecha de liga.
+        if (!Number.isInteger(jornada) || jornada < 1) continue;
+
+        const nuevo = normalizarPartidoClubSupabasePartidos(partido, indice);
+        const nuevoId = String(partido.id || "");
+        const equiposNuevos = [normalizar(nuevo.local), normalizar(nuevo.visita)].sort();
+
+        const yaExiste = fixture.some(existente => {
+            if (nuevoId && String(existente.partidoRayckingtonId || "") === nuevoId) {
+                return true;
+            }
+            if (Number(existente.fecha) !== jornada) return false;
+            const equiposExistentes = [normalizar(existente.local), normalizar(existente.visita)].sort();
+            return equiposExistentes[0] === equiposNuevos[0] &&
+                   equiposExistentes[1] === equiposNuevos[1];
+        });
+
+        if (!yaExiste) fixture.push(nuevo);
+    }
+
+    return fixture;
 }
 
 

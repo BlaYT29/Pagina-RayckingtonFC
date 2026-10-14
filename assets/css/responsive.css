@@ -664,3 +664,51 @@
   body .player-card, body .staff-card, body .news-grid-card,
   body .match-visual-card, body .gallery-card { transition: none; }
 }
+
+/* ===========================================================
+   RAYCKINGTON FC — VISIBILIDAD DEL RIVAL EN CELULAR (14-10-2026)
+   En la tarjeta de Inicio ambos equipos quedan en primera fila,
+   y marcador / detalles debajo; no se oculta ninguna información.
+   =========================================================== */
+@media (max-width: 767.98px) {
+  body #inicio-proximo-partido .match-card > .row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 8px;
+    margin: 0;
+  }
+  body #inicio-proximo-partido .match-card > .row > .col-lg-4 {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 4px !important;
+  }
+  body #inicio-proximo-partido .match-card > .row > .col-lg-4:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  body #inicio-proximo-partido .match-card > .row > .col-lg-4:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  body #inicio-proximo-partido .match-card > .row > .col-lg-4:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 6px !important;
+  }
+  body #inicio-proximo-partido .match-card .team-logo {
+    width: min(84px, 100%);
+    height: 76px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  body #inicio-proximo-partido .match-card h3 {
+    font-size: clamp(.82rem, 3.8vw, 1.05rem);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+  body #inicio-proximo-partido .match-card .match-vs-title {
+    margin-top: 4px;
+  }
+}
