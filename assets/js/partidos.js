@@ -29,22 +29,22 @@ const CLUB_DESTACADO = "Rayckington FC";
 
 const LOGOS_EQUIPOS_PARTIDOS = {
     "rayckington fc": "assets/img/logo/logo.png",
-    "real santa rosa": "assets/img/logo/rivales/logospequeños/rsr-115x128.png",
-    "el metodo": "assets/img/logo/rivales/logospequeños/el-metodo-115x128.png",
-    "atletico independiente": "assets/img/logo/rivales/logospequeños/atl-independiente-128x126.png",
-    "atletico tobalaba": "assets/img/logo/rivales/logospequeños/atletico-tobalaba-128x126.png",
-    "huachalomo": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
-    "huachalomo f.c": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
-    "huachalomo fc": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
-    "la plaza": "assets/img/logo/rivales/logospequeños/plaza-115x128.png",
-    "la plaza united": "assets/img/logo/rivales/logospequeños/plaza-115x128.png",
-    "atletico": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-    "atletico f.c": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-    "atletico fc": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-    "unab medicina": "assets/img/logo/rivales/logospequeños/unab-medicina.png",
-    "universidad andres bello - medicina": "assets/img/logo/rivales/logospequeños/unab-medicina.png",
-    "atletico valle central": "assets/img/logo/rivales/logospequeños/atletico-valle-central.png",
-    "valle central": "assets/img/logo/rivales/logospequeños/atletico-valle-central.png"
+    "real santa rosa": "assets/img/logo/rivales/logos-pequenos/rsr-115x128.png",
+    "el metodo": "assets/img/logo/rivales/logos-pequenos/el-metodo-115x128.png",
+    "atletico independiente": "assets/img/logo/rivales/logos-pequenos/atl-independiente-128x126.png",
+    "atletico tobalaba": "assets/img/logo/rivales/logos-pequenos/atletico-tobalaba-128x126.png",
+    "huachalomo": "assets/img/logo/rivales/logos-pequenos/huachalomofc-128x128.png",
+    "huachalomo f.c": "assets/img/logo/rivales/logos-pequenos/huachalomofc-128x128.png",
+    "huachalomo fc": "assets/img/logo/rivales/logos-pequenos/huachalomofc-128x128.png",
+    "la plaza": "assets/img/logo/rivales/logos-pequenos/plaza-115x128.png",
+    "la plaza united": "assets/img/logo/rivales/logos-pequenos/plaza-115x128.png",
+    "atletico": "assets/img/logo/rivales/logos-pequenos/atletico-fc-1-128x126.png",
+    "atletico f.c": "assets/img/logo/rivales/logos-pequenos/atletico-fc-1-128x126.png",
+    "atletico fc": "assets/img/logo/rivales/logos-pequenos/atletico-fc-1-128x126.png",
+    "unab medicina": "assets/img/logo/rivales/logos-pequenos/unab-medicina.png",
+    "universidad andres bello - medicina": "assets/img/logo/rivales/logos-pequenos/unab-medicina.png",
+    "atletico valle central": "assets/img/logo/rivales/logos-pequenos/atletico-valle-central.png",
+    "valle central": "assets/img/logo/rivales/logos-pequenos/atletico-valle-central.png"
 };
 
 /* ===================================================
@@ -286,6 +286,8 @@ async function cargarCompeticionSupabasePartidos(
 
     try {
 
+        const avisosParciales = [];
+
         const competicion =
             competicionesSupabasePartidos.find(
                 item =>
@@ -316,7 +318,7 @@ async function cargarCompeticionSupabasePartidos(
         );
 
         if (errorPartidosClub) {
-            throw errorPartidosClub;
+            console.warn("Partidos del club no disponibles:", errorPartidosClub);
         }
 
         const partidosRayckington =
@@ -334,6 +336,12 @@ async function cargarCompeticionSupabasePartidos(
         let fixture = [];
         let tabla = [];
         libresPorFechaPartidos = {};
+        if (errorPartidosClub) {
+            avisosParciales.push(
+                "No se pudieron consultar los partidos oficiales del club; " +
+                "el fixture general puede no tener su resultado más reciente."
+            );
+        }
 
         if (
             competicionActualTipoPartidos ===
@@ -354,12 +362,11 @@ async function cargarCompeticionSupabasePartidos(
                     }
                 ),
 
+                // Función de solo lectura para competiciones publicadas.
+                // No llamar al RPC administrativo: invoca es_admin() y genera 42501 en anon.
                 supabasePartidos.rpc(
-                    "obtener_tabla_competicion",
-                    {
-                        p_competicion_id:
-                            competicionId
-                    }
+                    "obtener_tabla_competicion_publica",
+                    { p_competicion_id: competicionId }
                 ),
 
                 supabasePartidos.rpc(
@@ -372,23 +379,30 @@ async function cargarCompeticionSupabasePartidos(
 
             ]);
 
+
+            // Las consultas de tabla y equipos libres son complementarias.
+            // Si una falla, NO bloquear el calendario ni los resultados.
+            // Si falla el fixture de liga, mostrar solo los encuentros del club,
+            // advirtiendo que el calendario general está incompleto.
             if (fixtureRespuesta.error) {
-                throw fixtureRespuesta.error;
+                console.warn("Fixture de liga no disponible:", fixtureRespuesta.error);
+                avisosParciales.push("No se pudo consultar el fixture completo de la liga; solo se muestran los partidos publicados de Rayckington.");
             }
-
             if (tablaRespuesta.error) {
-                throw tablaRespuesta.error;
+                console.warn("Tabla pública oficial no disponible:", tablaRespuesta.error);
+                avisosParciales.push(
+                    "Clasificación provisional: no se pudo consultar obtener_tabla_competicion_publica " +
+                    "(revisa el RPC y sus permisos en Supabase)."
+                );
             }
-
             if (libresRespuesta.error) {
-                throw libresRespuesta.error;
+                console.warn("Equipos libres no disponibles:", libresRespuesta.error);
+                avisosParciales.push("No se pudieron consultar los equipos libres de cada fecha.");
             }
 
             fixture =
                 (
-                    Array.isArray(
-                        fixtureRespuesta.data
-                    )
+                    !fixtureRespuesta.error && Array.isArray(fixtureRespuesta.data)
                         ? fixtureRespuesta.data
                         : []
                 )
@@ -406,9 +420,7 @@ async function cargarCompeticionSupabasePartidos(
 
             tabla =
                 (
-                    Array.isArray(
-                        tablaRespuesta.data
-                    )
+                    !tablaRespuesta.error && Array.isArray(tablaRespuesta.data)
                         ? tablaRespuesta.data
                         : []
                 )
@@ -445,6 +457,23 @@ async function cargarCompeticionSupabasePartidos(
                                 fila.puntos
                         })
                     );
+
+            // Si los RPC oficiales fallan, calcular solo una clasificación
+            // PROVISIONAL; registrar también clubes programados y libres, aun
+            // cuando no tengan partidos disputados.
+            if (tabla.length === 0) {
+                const equiposLibres = (Array.isArray(libresRespuesta.data)
+                    ? libresRespuesta.data : []).map(x => x?.equipo).filter(Boolean);
+                tabla = calcularTablaProvisionalDesdeFixture(
+                    fixture, equiposLibres, competicionId
+                );
+                if (!avisosParciales.some(m => m.includes("Clasificación provisional"))) {
+                    avisosParciales.push(
+                        "Clasificación provisional: calculada con los resultados publicados, " +
+                        "hasta que la tabla oficial esté disponible."
+                    );
+                }
+            }
 
             (
                 Array.isArray(
@@ -524,6 +553,8 @@ async function cargarCompeticionSupabasePartidos(
             CLUB_DESTACADO
         );
 
+        mostrarAvisosParcialesPartidos(avisosParciales);
+
         modoSupabasePartidos = true;
 
         if (!silencioso) {
@@ -546,8 +577,9 @@ async function cargarCompeticionSupabasePartidos(
 
         if (!silencioso) {
 
+            const codigo = String(error?.code || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 24);
             mostrarError(
-                "No fue posible cargar la competición desde Supabase."
+                `No fue posible cargar la competición desde Supabase.${codigo ? ` Código: ${codigo}.` : ""}`
             );
         }
 
@@ -558,36 +590,140 @@ async function cargarCompeticionSupabasePartidos(
 
 
 /* ===================================================
+   AVISOS DE DATOS PARCIALES DE LIGA
+=================================================== */
+function mostrarAvisosParcialesPartidos(mensajes = []) {
+    const id = "aviso-datos-parciales-liga";
+    document.getElementById(id)?.remove();
+    if (!mensajes.length || !estadoTemporada) return;
+
+    const aviso = document.createElement("div");
+    aviso.id = id;
+    aviso.className = "alert alert-warning mt-3";
+    aviso.setAttribute("role", "status");
+    const titulo = document.createElement("strong");
+    titulo.textContent = "Información parcial de la competición";
+    aviso.appendChild(titulo);
+    const lista = document.createElement("ul");
+    lista.className = "mb-0 mt-2";
+    for (const mensaje of mensajes) {
+        const item = document.createElement("li");
+        item.textContent = mensaje;
+        lista.appendChild(item);
+    }
+    aviso.appendChild(lista);
+    estadoTemporada.insertAdjacentElement("afterend", aviso);
+}
+
+
+/* ===================================================
+   CLASIFICACIÓN PROVISIONAL DE RESPALDO
+   Solo resultados terminados y visibles; NO reemplaza la tabla oficial.
+=================================================== */
+function calcularTablaProvisionalDesdeFixture(partidos, equiposLibres = [], competicionId = "") {
+    const equipos = new Map();
+    const get = nombre => {
+        const key = normalizar(nombre);
+        if (!key) return null;
+        if (!equipos.has(key)) equipos.set(key, {
+            pos: 0, club: nombre, pj: 0, v: 0, e: 0, d: 0,
+            gf: 0, gc: 0, dg: 0, pts: 0
+        });
+        return equipos.get(key);
+    };
+    // La nómina del torneo no se limita a los equipos que ya jugaron.
+    const lista = Array.isArray(partidos) ? partidos : [];
+    for (const partido of lista) {
+        get(partido.local);
+        get(partido.visita);
+    }
+    equiposLibres.forEach(get);
+    // Comprobado en el resultado oficial facilitado por el club: este equipo
+    // figura en Clausura 2026 con PJ=0 y no siempre viene en el fixture inicial.
+    // La excepción se aplica únicamente al respaldo de esta competición.
+    if (String(competicionId) === '21c8a241-15eb-456b-b5e1-ab3b133ec9db') {
+        get('De 20 Van 7');
+    }
+    for (const partido of lista) {
+        if (String(partido.estado || "").toUpperCase() !== "FINALIZADO") continue;
+        if (partido.golesLocal == null || partido.golesVisita == null) continue;
+        const gl = Number(partido.golesLocal), gv = Number(partido.golesVisita);
+        if (!Number.isFinite(gl) || !Number.isFinite(gv)) continue;
+        const local = get(partido.local), visita = get(partido.visita);
+        if (!local || !visita || local === visita) continue;
+        local.pj++; visita.pj++;
+        local.gf += gl; local.gc += gv;
+        visita.gf += gv; visita.gc += gl;
+        if (gl > gv) { local.v++; local.pts += 3; visita.d++; }
+        else if (gl < gv) { visita.v++; visita.pts += 3; local.d++; }
+        else { local.e++; visita.e++; local.pts++; visita.pts++; }
+    }
+    return [...equipos.values()]
+        .map(e => ({...e, dg: e.gf-e.gc}))
+        .sort((a,b) => b.pts-a.pts || b.dg-a.dg || b.gf-a.gf ||
+            a.club.localeCompare(b.club,"es"))
+        .map((e,i) => ({...e, pos:i+1}));
+}
+
+/* ===================================================
    COMPLETAR FIXTURE CON PARTIDOS DEL CLUB
    No duplica un partido si ya está enlazado por UUID
    o si coincide la jornada y el par de equipos.
 =================================================== */
 
+function normalizarEquipoFixture(nombre) {
+    const clave = normalizar(nombre).replace(/\s+/g, " ");
+    return clave === "la plaza" ? "la plaza united" : clave;
+}
+
 function incorporarPartidosClubFaltantesFixture(fixtureOriginal, partidosClub) {
-    const fixture = Array.isArray(fixtureOriginal)
-        ? fixtureOriginal.slice()
-        : [];
+    const fixture = Array.isArray(fixtureOriginal) ? fixtureOriginal.slice() : [];
 
     for (const [indice, partido] of (Array.isArray(partidosClub) ? partidosClub : []).entries()) {
         const jornada = Number(partido.jornada);
-        // Sin jornada confirmada no inventamos una nueva fecha de liga.
         if (!Number.isInteger(jornada) || jornada < 1) continue;
 
         const nuevo = normalizarPartidoClubSupabasePartidos(partido, indice);
         const nuevoId = String(partido.id || "");
-        const equiposNuevos = [normalizar(nuevo.local), normalizar(nuevo.visita)].sort();
+        const equiposNuevos = [normalizarEquipoFixture(nuevo.local), normalizarEquipoFixture(nuevo.visita)].sort();
 
-        const yaExiste = fixture.some(existente => {
-            if (nuevoId && String(existente.partidoRayckingtonId || "") === nuevoId) {
-                return true;
-            }
+        const pos = fixture.findIndex(existente => {
+            if (nuevoId && String(existente.partidoRayckingtonId || "") === nuevoId) return true;
             if (Number(existente.fecha) !== jornada) return false;
-            const equiposExistentes = [normalizar(existente.local), normalizar(existente.visita)].sort();
-            return equiposExistentes[0] === equiposNuevos[0] &&
-                   equiposExistentes[1] === equiposNuevos[1];
+            const equiposExistentes = [normalizarEquipoFixture(existente.local), normalizarEquipoFixture(existente.visita)].sort();
+            return equiposExistentes[0] === equiposNuevos[0] && equiposExistentes[1] === equiposNuevos[1];
         });
 
-        if (!yaExiste) fixture.push(nuevo);
+        if (pos < 0) {
+            fixture.push(nuevo);
+            continue;
+        }
+
+        // Si el fixture trae la fecha 3 con estado/marcador antiguo,
+        // usar el resultado oficial ya guardado en Match Center.
+        const anterior = fixture[pos];
+        const mismoOrden = normalizarEquipoFixture(anterior.local) === normalizarEquipoFixture(nuevo.local) &&
+            normalizarEquipoFixture(anterior.visita) === normalizarEquipoFixture(nuevo.visita);
+        const ordenInvertido = normalizarEquipoFixture(anterior.local) === normalizarEquipoFixture(nuevo.visita) &&
+            normalizarEquipoFixture(anterior.visita) === normalizarEquipoFixture(nuevo.local);
+        if (!mismoOrden && !ordenInvertido) continue;
+
+        fixture[pos] = {
+            ...anterior,
+            local: mismoOrden ? nuevo.local : nuevo.visita,
+            visita: mismoOrden ? nuevo.visita : nuevo.local,
+            partidoRayckingtonId: nuevoId || anterior.partidoRayckingtonId,
+            estado: nuevo.estado,
+            golesLocal: mismoOrden ? nuevo.golesLocal : nuevo.golesVisita,
+            golesVisita: mismoOrden ? nuevo.golesVisita : nuevo.golesLocal,
+            fechaHora: nuevo.fechaHora || anterior.fechaHora,
+            lugar: nuevo.lugar || anterior.lugar,
+            periodoPartido: nuevo.periodoPartido,
+            cronometroInicioAt: nuevo.cronometroInicioAt,
+            cronometroSegundosAcumulados: nuevo.cronometroSegundosAcumulados,
+            cronometroCorriendo: nuevo.cronometroCorriendo,
+            resultadoRayckington: nuevo.resultadoRayckington
+        };
     }
 
     return fixture;

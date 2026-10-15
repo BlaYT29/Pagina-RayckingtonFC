@@ -410,7 +410,11 @@ async function cargarDeportivoSupabaseInicio() {
                 normalizarPartidoSupabaseInicio
             );
 
-        await cargarTablaSupabaseInicio();
+        try {
+            await cargarTablaSupabaseInicio();
+        } catch (errorTabla) {
+            console.warn("La tabla de posiciones no está disponible en Inicio:", errorTabla);
+        }
 
         modoDeportivoSupabaseInicio = true;
 
@@ -471,7 +475,7 @@ async function cargarTablaSupabaseInicio() {
         data: tabla,
         error
     } = await supabaseInicio.rpc(
-        "obtener_tabla_competicion",
+        "obtener_tabla_competicion_publica",
         {
             p_competicion_id:
                 competicionLiga.id
@@ -558,11 +562,15 @@ function normalizarPartidoSupabaseInicio(
             : null;
 
     const fechaPartido =
-        fechaHora &&
-        !Number.isNaN(fechaHora.getTime())
-            ? fechaLocalISOInicio(
-                fechaHora
-            )
+        fechaHora && !Number.isNaN(fechaHora.getTime())
+            ? (() => {
+                const piezas = Object.fromEntries(
+                    new Intl.DateTimeFormat("es-CL", {
+                        timeZone: "America/Santiago", year: "numeric", month: "2-digit", day: "2-digit"
+                    }).formatToParts(fechaHora).map(pieza => [pieza.type, pieza.value])
+                );
+                return `${piezas.year}-${piezas.month}-${piezas.day}`;
+            })()
             : "";
 
     const hora =
@@ -571,9 +579,8 @@ function normalizarPartidoSupabaseInicio(
             ? fechaHora.toLocaleTimeString(
                 "es-CL",
                 {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false
+                    hour: "2-digit", minute: "2-digit", hour12: false,
+                    timeZone: "America/Santiago"
                 }
             )
             : "Horario por confirmar";
@@ -1133,22 +1140,22 @@ async function cargarJsonSeguroInicio(
 
 const LOGOS_EQUIPOS_INICIO = {
     "rayckington fc": "assets/img/logo/logo.png",
-    "real santa rosa": "assets/img/logo/rivales/logospequeños/rsr-115x128.png",
-    "el metodo": "assets/img/logo/rivales/logospequeños/el-metodo-115x128.png",
-    "atletico independiente": "assets/img/logo/rivales/logospequeños/atl-independiente-128x126.png",
-    "atletico tobalaba": "assets/img/logo/rivales/logospequeños/atletico-tobalaba-128x126.png",
-    "huachalomo": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
-    "huachalomo f.c": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
-    "huachalomo fc": "assets/img/logo/rivales/logospequeños/huachalomofc-128x128.png",
-    "la plaza": "assets/img/logo/rivales/logospequeños/plaza-115x128.png",
-    "la plaza united": "assets/img/logo/rivales/logospequeños/plaza-115x128.png",
-    "atletico": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-    "atletico f.c": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-    "atletico fc": "assets/img/logo/rivales/logospequeños/atletico-fc-1-128x126.png",
-    "unab medicina": "assets/img/logo/rivales/logospequeños/unab-medicina.png",
-    "universidad andres bello - medicina": "assets/img/logo/rivales/logospequeños/unab-medicina.png",
-    "atletico valle central": "assets/img/logo/rivales/logospequeños/atletico-valle-central.png",
-    "valle central": "assets/img/logo/rivales/logospequeños/atletico-valle-central.png"
+    "real santa rosa": "assets/img/logo/rivales/logos-pequenos/rsr-115x128.png",
+    "el metodo": "assets/img/logo/rivales/logos-pequenos/el-metodo-115x128.png",
+    "atletico independiente": "assets/img/logo/rivales/logos-pequenos/atl-independiente-128x126.png",
+    "atletico tobalaba": "assets/img/logo/rivales/logos-pequenos/atletico-tobalaba-128x126.png",
+    "huachalomo": "assets/img/logo/rivales/logos-pequenos/huachalomofc-128x128.png",
+    "huachalomo f.c": "assets/img/logo/rivales/logos-pequenos/huachalomofc-128x128.png",
+    "huachalomo fc": "assets/img/logo/rivales/logos-pequenos/huachalomofc-128x128.png",
+    "la plaza": "assets/img/logo/rivales/logos-pequenos/plaza-115x128.png",
+    "la plaza united": "assets/img/logo/rivales/logos-pequenos/plaza-115x128.png",
+    "atletico": "assets/img/logo/rivales/logos-pequenos/atletico-fc-1-128x126.png",
+    "atletico f.c": "assets/img/logo/rivales/logos-pequenos/atletico-fc-1-128x126.png",
+    "atletico fc": "assets/img/logo/rivales/logos-pequenos/atletico-fc-1-128x126.png",
+    "unab medicina": "assets/img/logo/rivales/logos-pequenos/unab-medicina.png",
+    "universidad andres bello - medicina": "assets/img/logo/rivales/logos-pequenos/unab-medicina.png",
+    "atletico valle central": "assets/img/logo/rivales/logos-pequenos/atletico-valle-central.png",
+    "valle central": "assets/img/logo/rivales/logos-pequenos/atletico-valle-central.png"
 };
 
 
@@ -1248,10 +1255,9 @@ function renderizarPartidoHeroInicio(
             .trim()
             .toLowerCase();
 
-    const enDirecto =
-        partidoEnDirectoInicio(
-            partido
-        );
+    const enDirecto = partidoEnDirectoInicio(partido);
+    const ultimoResultado = partido.esUltimoResultado === true;
+    const mostrarResultado = enDirecto || ultimoResultado;
 
     const golesLocal =
         partido.local?.goles !== null &&
@@ -1273,21 +1279,14 @@ function renderizarPartidoHeroInicio(
                 <span class="live-dot"></span>
                 EN DIRECTO
               `
-            : "PRÓXIMO PARTIDO";
+            : ultimoResultado ? "ÚLTIMO RESULTADO" : "PRÓXIMO PARTIDO";
 
-    const textoCentral =
-        enDirecto
-            ? `${golesLocal} - ${golesVisita}`
-            : "VS";
+    const textoCentral = mostrarResultado
+        ? `${golesLocal} - ${golesVisita}` : "VS";
 
-    const textoHora =
-        enDirecto
-            ? textoRelojPartidoInicio(
-                partido
-            )
-            : escaparInicio(
-                partido.hora
-            );
+    const textoHora = enDirecto
+        ? textoRelojPartidoInicio(partido)
+        : ultimoResultado ? "Finalizado" : escaparInicio(partido.hora);
 
     contenedor.innerHTML = `
 
@@ -1315,7 +1314,7 @@ function renderizarPartidoHeroInicio(
             )}
 
             <span class="
-                ${enDirecto ? "hero-live-score" : ""}
+                ${mostrarResultado ? "hero-live-score" : ""}
             ">
 
                 ${textoCentral}
@@ -1437,10 +1436,9 @@ function renderizarProximoPartidoInicio(
             .trim()
             .toLowerCase();
 
-    const enDirecto =
-        partidoEnDirectoInicio(
-            partido
-        );
+    const enDirecto = partidoEnDirectoInicio(partido);
+    const ultimoResultado = partido.esUltimoResultado === true;
+    const mostrarResultado = enDirecto || ultimoResultado;
 
     const golesLocal =
         partido.local?.goles !== null &&
@@ -1456,29 +1454,16 @@ function renderizarProximoPartidoInicio(
             ? partido.visita.goles
             : 0;
 
-    const etiqueta =
-        enDirecto
-            ? `
-                <span class="live-dot"></span>
-                EN DIRECTO
-              `
-            : escaparInicio(
-                partido.temporada
-            );
+    const etiqueta = enDirecto
+        ? `<span class="live-dot"></span> EN DIRECTO`
+        : ultimoResultado ? "ÚLTIMO RESULTADO" : escaparInicio(partido.temporada);
 
-    const marcador =
-        enDirecto
-            ? `${golesLocal} - ${golesVisita}`
-            : "VS";
+    const marcador = mostrarResultado
+        ? `${golesLocal} - ${golesVisita}` : "VS";
 
-    const textoHora =
-        enDirecto
-            ? textoRelojPartidoInicio(
-                partido
-            )
-            : escaparInicio(
-                partido.hora
-            );
+    const textoHora = enDirecto
+        ? textoRelojPartidoInicio(partido)
+        : ultimoResultado ? "Finalizado" : escaparInicio(partido.hora);
 
     contenedor.innerHTML = `
 
@@ -1503,7 +1488,7 @@ function renderizarProximoPartidoInicio(
 
                     <h2 class="
                         match-vs-title
-                        ${enDirecto ? "hero-live-score" : ""}
+                        ${mostrarResultado ? "hero-live-score" : ""}
                     ">
 
                         ${marcador}
@@ -1541,11 +1526,9 @@ function renderizarProximoPartidoInicio(
                     </p>
 
                     <a
-                        href="partidos.html"
+                        href="${ultimoResultado && partido.id ? `seguimiento.html?partido=${encodeURIComponent(partido.id)}` : "partidos.html"}"
                         class="btn btn-primary-club mt-3">
-
-                        Ver Partidos
-
+                        ${ultimoResultado && partido.id ? "Ver resumen" : "Ver Partidos"}
                     </a>
 
                 </div>
@@ -1769,6 +1752,7 @@ function normalizarPartidoInicio(
 
     return {
 
+        id: partido.id || null,
         estado:
             partido.estado ||
             "Programado",
@@ -2349,6 +2333,15 @@ function buscarProximoPartidoInicio() {
 
     }
 
+    // Si Supabase está disponible y no hay próximo encuentro, destacar
+    // el resultado final más reciente en vez del marcador ficticio.
+    if (modoDeportivoSupabaseInicio) {
+        const ultimo = buscarUltimoResultadoInicio();
+        return ultimo
+            ? { ...ultimo, esUltimoResultado: true }
+            : crearProximoPartidoPendienteInicio();
+    }
+
     const respaldo =
         datosInicio
             ?.partidosRespaldo
@@ -2424,6 +2417,8 @@ function buscarUltimoResultadoInicio() {
         );
 
     }
+
+    if (modoDeportivoSupabaseInicio) return null;
 
     const respaldo =
         datosInicio
