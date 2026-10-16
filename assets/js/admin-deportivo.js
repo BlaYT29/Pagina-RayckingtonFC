@@ -216,15 +216,14 @@ async function verificarAdministrador() {
     const { data: userData, error: userError } = await supabase.auth.getUser();
     if (userError || !userData?.user) return false;
 
-    const { data: admin, error } = await supabase
-        .from("administradores")
-        .select("id,user_id,nombre,estado")
-        .eq("user_id", userData.user.id)
-        .eq("estado", "ACTIVO")
-        .maybeSingle();
-
-    if (error || !admin) return false;
-    adminActual = { ...admin, email: userData.user.email || "" };
+    // Autorización específica para Gestión Deportiva.
+    // La RPC permite admin general O deportivo, pero NO concede Tesorería.
+    const { data: acceso, error } = await supabase.rpc("obtener_sesion_admin_deportivo");
+    if (error || !acceso?.autorizado) {
+        if (error) console.error("No se pudo verificar el rol deportivo:", error.message);
+        return false;
+    }
+    adminActual = { ...acceso, email: userData.user.email || "" };
     return true;
 }
 
@@ -645,20 +644,81 @@ function actualizarEstadoBotonesCrono() {
     });
 }
 
-$$('[data-clock-action]').forEach((b) => b.addEventListener("click", async () => {
-    if (!partidoActual) return;
-    const accion = b.dataset.clockAction;
-    if (accion === "FINALIZAR" && !confirm("¿Finalizar oficialmente este partido? El resultado pasará a la tabla de la competición.")) return;
-    const { error } = await supabase.rpc("controlar_cronometro_partido_admin", {
-        p_partido_id: partidoActual.id,
-        p_accion: accion
+// Confirmación dibujada por la página, compatible con navegadores internos iOS.
+// A diferencia de window.confirm(), no depende de diálogos del navegador.
+function confirmarCierrePartidoEnPagina(partido) {
+    return new Promise((resolver) => {
+        const anterior = document.activeElement;
+        const cuadro = document.createElement("div");
+        cuadro.className = "modal";
+        cuadro.id = "mc-confirmar-finalizacion";
+        cuadro.setAttribute("role", "dialog");
+        cuadro.setAttribute("aria-modal", "true");
+        cuadro.setAttribute("aria-labelledby", "mc-confirmar-finalizacion-titulo");
+        cuadro.setAttribute("aria-describedby", "mc-confirmar-finalizacion-texto");
+        cuadro.innerHTML = `
+            <div class="modal-card" style="width:min(440px,100%);">
+                <h2 id="mc-confirmar-finalizacion-titulo">¿Finalizar el partido?</h2>
+                <p id="mc-confirmar-finalizacion-texto" style="color:#cbd5e1;line-height:1.55;">
+                    <strong>Rayckington FC ${esc(partido.goles_rayckington ?? 0)} - ${esc(partido.goles_rival ?? 0)} ${esc(partido.rival_nombre || 'Rival')}</strong>
+                    <span style="display:block;margin-top:10px;">El encuentro quedará como <strong>FINALIZADO</strong> y se detendrá el cronómetro.
+                    Revisa el marcador antes de continuar.</span>
+                </p>
+                <div class="modal-actions" style="flex-wrap:wrap;margin-top:20px;">
+                    <button class="btn btn-secondary" data-fin-accion="cancelar" type="button">Volver al partido</button>
+                    <button class="btn btn-success" data-fin-accion="confirmar" type="button">Sí, finalizar partido</button>
+                </div>
+            </div>`;
+        document.body.appendChild(cuadro);
+        let completado = false;
+        const cerrar = (acepta) => {
+            if (completado) return;
+            completado = true;
+            cuadro.remove();
+            if (anterior && anterior.isConnected && typeof anterior.focus === "function") anterior.focus();
+            resolver(acepta);
+        };
+        cuadro.querySelector('[data-fin-accion="cancelar"]').addEventListener("click", () => cerrar(false));
+        cuadro.querySelector('[data-fin-accion="confirmar"]').addEventListener("click", () => cerrar(true));
+        cuadro.addEventListener("click", (e) => { if (e.target === cuadro) cerrar(false); });
+        cuadro.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") { e.preventDefault(); cerrar(false); }
+        });
+        cuadro.querySelector('[data-fin-accion="cancelar"]').focus();
     });
-    if (error) { showMessage(error.message, "error"); return; }
-    await refrescarPartidoActual();
-    if (accion === "FINALIZAR") {
-        await refrescarCompeticionActual();
-        renderCierreV4();
-        $("mc-v4-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+let accionCronometroPendiente = false;
+$$('[data-clock-action]').forEach((b) => b.addEventListener("click", async () => {
+    if (!partidoActual || accionCronometroPendiente) return;
+    accionCronometroPendiente = true;
+    const idAlPulsar = partidoActual.id;
+    try {
+        const accion = b.dataset.clockAction;
+        if (accion === "FINALIZAR") {
+            // Si cancela, NO se envía ninguna orden a Supabase.
+            const confirmado = await confirmarCierrePartidoEnPagina(partidoActual);
+            if (!confirmado) return;
+        }
+        // Evitar que un cierre pendiente afecte a otro partido si cambió la vista.
+        if (partidoActual?.id !== idAlPulsar) return;
+        const { error } = await supabase.rpc("controlar_cronometro_partido_admin", {
+            p_partido_id: idAlPulsar,
+            p_accion: accion
+        });
+        if (error) { showMessage(error.message, "error"); return; }
+        await refrescarPartidoActual();
+        if (accion === "FINALIZAR" && partidoActual?.id === idAlPulsar) {
+            showMessage("Partido finalizado correctamente.", "success");
+            await refrescarCompeticionActual();
+            renderCierreV4();
+            $("mc-v4-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    } catch (error) {
+        showMessage(error?.message || "No fue posible controlar el partido. Intenta otra vez.", "error");
+    } finally {
+        accionCronometroPendiente = false;
+        actualizarEstadoBotonesCrono();
     }
 }));
 
@@ -1305,7 +1365,7 @@ async function refrescarCompeticionActual() {
         supabase.from("deportivo_partidos_competicion").select("*").eq("competicion_id", competicionVistaId).order("jornada", { ascending: true }),
         supabase.from("deportivo_jornadas_libres").select("*").eq("competicion_id", competicionVistaId).order("jornada", { ascending: true }),
         supabase.from("deportivo_competicion_equipos").select("*").eq("competicion_id", competicionVistaId),
-        supabase.rpc("obtener_tabla_competicion", { p_competicion_id: competicionVistaId })
+        supabase.rpc("obtener_tabla_competicion_deportivo", { p_competicion_id: competicionVistaId })
     ]);
 
     if (fx.error) console.error(fx.error); else {
