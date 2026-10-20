@@ -63,59 +63,57 @@ async function iniciarPerfilJugador() {
 
     try {
 
-        const slug =
-            obtenerParametroJugador(
-                "slug"
+        // Los jugadores nuevos se abren por UUID de Supabase.
+        // Los enlaces antiguos ?slug=... siguen funcionando.
+        const jugadorId = obtenerParametroJugador("id");
+        const slug = obtenerParametroJugador("slug");
+
+        if (!jugadorId && !slug) {
+            mostrarJugadorNoEncontrado();
+            return;
+        }
+
+        // El JSON antiguo conserva metadatos editoriales de las fichas
+        // históricas, pero NO es un requisito para fichajes nuevos.
+        const datosPlantel = await cargarPlantelJugador();
+        const jugadoresLegacy = Array.isArray(datosPlantel.jugadores)
+            ? datosPlantel.jugadores : [];
+
+        jugadorLegacy = slug ? (jugadoresLegacy.find(item =>
+            item.slug === slug &&
+            String(item.estado || "").toUpperCase() !== "INACTIVO"
+        ) || null) : null;
+
+        let perfilPorIdentificador = null;
+
+        if (jugadorId) {
+            // No consultar jugadores directamente: solo el RPC público,
+            // que excluye los datos personales privados de los socios.
+            perfilPorIdentificador = await cargarPerfilOficialPorId(jugadorId);
+        } else if (!jugadorLegacy) {
+            // Compatibilidad con enlaces ?slug= anteriores a este parche.
+            perfilPorIdentificador = await cargarPerfilOficialPorSlug(slug);
+        }
+
+        // Conservar la foto y los metadatos curados del JSON cuando existan.
+        if (perfilPorIdentificador && !jugadorLegacy) {
+            const equivalentes = jugadoresLegacy.filter(item =>
+                String(item.estado || "").toUpperCase() !== "INACTIVO" &&
+                correspondeAlJugadorLegacy(perfilPorIdentificador, item)
             );
-
-        if (!slug) {
-
-            mostrarJugadorNoEncontrado();
-
-            return;
-
+            if (equivalentes.length === 1) jugadorLegacy = equivalentes[0];
         }
 
-
-        /* ---------------------------------------------------
-           Compatibilidad con las URL actuales.
-           El JSON solamente se usa para localizar el slug
-           existente y conservar datos que aún no migramos,
-           como capitán/categoría.
-        --------------------------------------------------- */
-
-        const datosPlantel =
-            await cargarPlantelJugador();
-
-        const jugadoresLegacy =
-            Array.isArray(
-                datosPlantel.jugadores
-            )
-                ? datosPlantel.jugadores
-                : [];
-
-        jugadorLegacy =
-            jugadoresLegacy.find(
-                item =>
-                    item.slug === slug &&
-                    String(item.estado || "")
-                        .toUpperCase() !== "INACTIVO"
-            ) || null;
-
-        if (!jugadorLegacy) {
-
+        if (!jugadorLegacy && !perfilPorIdentificador) {
             mostrarJugadorNoEncontrado();
-
             return;
-
         }
-
 
         // El histórico se consulta por slug; no depende de que la cuenta
         // del jugador ya esté vinculada a Supabase.
         const [perfilOficial, historico] = await Promise.all([
-            cargarPerfilOficial(jugadorLegacy),
-            cargarHistoricoClausuraJugador(jugadorLegacy.slug)
+            perfilPorIdentificador || (jugadorLegacy ? cargarPerfilOficial(jugadorLegacy) : null),
+            cargarHistoricoClausuraJugador(jugadorLegacy?.slug)
         ]);
 
         acumuladoHistoricoClausura = historico;
@@ -233,6 +231,44 @@ async function cargarPlantelJugador() {
 /* ===================================================
    PERFIL OFICIAL SUPABASE
 =================================================== */
+
+// El listado público es la misma fuente que utiliza plantel.html.
+// No se accede directamente a la tabla privada de jugadores.
+async function cargarPerfilesPublicosParaFicha() {
+    const { data, error } = await supabase.rpc("obtener_plantel_publico");
+    if (error) {
+        console.warn("No se pudo consultar el plantel público para la ficha:", error);
+        return [];
+    }
+    return Array.isArray(data) ? data : [];
+}
+
+async function cargarPerfilOficialPorId(jugadorId) {
+    const id = String(jugadorId || "").trim();
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) {
+        return null;
+    }
+    const perfiles = await cargarPerfilesPublicosParaFicha();
+    return perfiles.find(item =>
+        String(item?.id || "").toLowerCase() === id.toLowerCase() &&
+        String(item?.estado || "ACTIVO").toUpperCase() !== "INACTIVO"
+    ) || null;
+}
+
+// Sirve para enlaces creados antes de habilitar los UUID.
+async function cargarPerfilOficialPorSlug(slug) {
+    const perfiles = await cargarPerfilesPublicosParaFicha();
+    const coincidencias = perfiles.filter(item =>
+        item?.id &&
+        String(item?.estado || "ACTIVO").toUpperCase() !== "INACTIVO" &&
+        crearSlugPerfil(item.nombre_deportivo || item.nombre || item.nombre_completo) === slug
+    );
+    return coincidencias.length === 1 ? coincidencias[0] : null;
+}
+
+function crearSlugPerfil(nombre) {
+    return normalizarNombrePerfil(nombre).replace(/\s+/g, "-") || "jugador";
+}
 
 async function cargarPerfilOficial(legacy) {
     // Se intenta mantener primero el RPC que ya utilizaba la página.
@@ -451,8 +487,10 @@ function combinarHistoricoConOficiales(oficiales, historico) {
 
 function combinarPerfilJugador(
     oficial,
-    legacy
+    legacy = null
 ) {
+
+    legacy = legacy || {};
 
     return {
 
@@ -460,7 +498,9 @@ function combinarPerfilJugador(
             oficial.id,
 
         slug:
-            legacy.slug,
+            legacy.slug || crearSlugPerfil(
+                oficial.nombre_deportivo || oficial.nombre || oficial.nombre_completo
+            ),
 
         nombre:
             oficial.nombre_deportivo ||

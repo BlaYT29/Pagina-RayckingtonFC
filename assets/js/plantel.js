@@ -531,6 +531,9 @@ function combinarJugadorOficial(
         id:
             oficial.id,
 
+        // Mantener el enlace clásico en las fichas que ya tenían JSON.
+        tieneFichaLegacy: Boolean(legacy?.slug),
+
         slug:
             legacy?.slug ||
             crearSlugPlantel(
@@ -932,7 +935,7 @@ function renderizarRankingsPlantel() {
         const lista = elegibles.length
             ? `<ol class="rayck-ranking-list">${elegibles.map((jugador, indice) => `
                 <li>
-                    <a class="rayck-ranking-player" href="${escaparPlantel(crearEnlacePerfilJugador(jugador.slug))}">
+                    <a class="rayck-ranking-player" href="${escaparPlantel(crearEnlacePerfilJugador(jugador))}">
                         <span class="rayck-ranking-place">${indice + 1}</span>
                         <img src="${escaparPlantel(jugador.foto || FOTO_RESPALDO)}"
                             alt="" loading="lazy" onerror="this.onerror=null;this.src='${FOTO_RESPALDO}'">
@@ -1160,9 +1163,9 @@ function crearTarjetaJugador(
                 </div>
 
                 <a
-                    href="${crearEnlacePerfilJugador(
-                        jugador.slug
-                    )}"
+                    href="${escaparPlantel(crearEnlacePerfilJugador(
+                        jugador
+                    ))}"
                     class="btn btn-primary-club player-profile-button">
 
                     Ver perfil
@@ -1273,14 +1276,18 @@ function obtenerEstadoJugador(
    CREAR ENLACE AL PERFIL
 =================================================== */
 
-function crearEnlacePerfilJugador(
-    slug
-) {
-
-    return `jugador.html?slug=${encodeURIComponent(
-        slug
-    )}`;
-
+function crearEnlacePerfilJugador(jugador) {
+    // No cambiar enlaces históricos que ya funcionan con plantel.json.
+    if (jugador?.tieneFichaLegacy && jugador?.slug) {
+        return `jugador.html?slug=${encodeURIComponent(jugador.slug)}`;
+    }
+    // Los fichajes nuevos usan su UUID estable de Supabase.
+    if (jugador?.id &&
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(jugador.id))) {
+        return `jugador.html?id=${encodeURIComponent(jugador.id)}`;
+    }
+    // Enlace legacy para un plantel cargado desde el JSON de respaldo.
+    return `jugador.html?slug=${encodeURIComponent(jugador?.slug || "")}`;
 }
 
 
