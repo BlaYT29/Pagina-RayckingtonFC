@@ -1,0 +1,42 @@
+/* Rayckington FC — Datos de transferencia compartidos por Tesorería y Portal Jugadores. */
+.ray-transfer-card {
+    position: relative;
+    width: 100%;
+    padding: clamp(18px, 3vw, 26px);
+    margin: 0 0 26px;
+    border-radius: 18px;
+    border: 1px solid #34506b;
+    background: linear-gradient(140deg, #152e48 0%, #0f1f32 58%, #111c2d 100%);
+    box-shadow: 0 15px 38px rgba(0, 0, 0, .18);
+    color: #f6f8fd;
+}
+.ray-transfer-header { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+.ray-transfer-mark { width: 44px; height: 44px; flex: 0 0 44px; display: grid; place-items: center; border-radius: 13px; background: #d71920; color: white; font-size: 27px; font-weight: 800; }
+.ray-transfer-eyebrow { display: inline-block; font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #ffd54a; margin-bottom: 5px; }
+.ray-transfer-header h3 { margin: 0 0 5px; font-size: clamp(19px, 2.4vw, 24px); line-height: 1.25; color: #fff; }
+.ray-transfer-header p { margin: 0; color: #b8c9dd; font-size: 13px; line-height: 1.5; }
+.ray-transfer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0; margin: 0 0 20px; }
+.ray-transfer-field { min-width: 0; margin: 0; padding: 13px 15px; border-radius: 11px; border: 1px solid #2b4159; background: rgba(3, 12, 24, .40); }
+.ray-transfer-field dt { margin: 0 0 6px; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #9fb3cb; }
+.ray-transfer-field dd { margin: 0; font-size: 15px; line-height: 1.45; font-weight: 800; color: #fff; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; }
+.ray-transfer-field-number dd { font-size: 19px; letter-spacing: .035em; font-variant-numeric: tabular-nums; }
+.ray-transfer-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.ray-transfer-btn { appearance: none; min-height: 46px; border-radius: 11px; padding: 12px 17px; font: inherit; font-size: 13px; font-weight: 800; line-height: 1.3; cursor: pointer; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.ray-transfer-btn:focus-visible { outline: 3px solid #ffd54a; outline-offset: 3px; }
+.ray-transfer-btn-primary { background: #d71920; border: 1px solid #ef363e; color: #fff; }
+.ray-transfer-btn-primary:hover { background: #b8131a; }
+.ray-transfer-btn-secondary { background: #263e56; border: 1px solid #4c6580; color: #fff; }
+.ray-transfer-btn-secondary:hover { background: #34506b; }
+.ray-transfer-hint { margin: 15px 0 0; font-size: 12px; line-height: 1.6; color: #b2c2d4; }
+.ray-transfer-feedback { min-height: 0; margin: 0; font-size: 13px; font-weight: 750; color: #91edbb; }
+.ray-transfer-feedback:not(:empty) { margin-top: 11px; }
+.ray-transfer-feedback[data-error="true"] { color: #ffd189; }
+@media (max-width: 650px) {
+    .ray-transfer-card { padding: 17px 14px; margin-bottom: 22px; border-radius: 14px; }
+    .ray-transfer-header { gap: 11px; }
+    .ray-transfer-mark { width: 38px; height: 38px; flex-basis: 38px; font-size: 22px; }
+    .ray-transfer-grid { grid-template-columns: 1fr; gap: 8px; }
+    .ray-transfer-field { padding: 11px 13px; }
+    .ray-transfer-actions { display: grid; grid-template-columns: minmax(0, 1fr); }
+    .ray-transfer-btn { width: 100%; min-height: 51px; font-size: 14px; }
+}

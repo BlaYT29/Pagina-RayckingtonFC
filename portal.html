@@ -42,6 +42,7 @@
 
     <link rel="stylesheet" href="assets/css/portal-crossnav.css?v=20261011">
     <link rel="stylesheet" href="assets/css/mobile-portales.css?v=20261012-m1">
+    <link rel="stylesheet" href="assets/css/datos-transferencia.css?v=1">
 </head>
 
 
@@ -829,7 +830,57 @@
 
 
 
-            <!-- HISTORIAL -->
+
+                <!-- DATOS DE TRANSFERENCIA DEL CLUB: tarjeta informativa, sin modificar pagos -->
+                <section class="ray-transfer-card" aria-labelledby="ray-transfer-title">
+                    <div class="ray-transfer-header">
+                        <div class="ray-transfer-mark" aria-hidden="true">↗</div>
+                        <div>
+                            <span class="ray-transfer-eyebrow">Cuenta oficial del club</span>
+                            <h3 id="ray-transfer-title">Datos para transferir</h3>
+                            <p>Utiliza estos datos para pagar mensualidades, multas u otras obligaciones.</p>
+                        </div>
+                    </div>
+                    <dl class="ray-transfer-grid">
+                        <div class="ray-transfer-field">
+                            <dt>Titular</dt>
+                            <dd data-transfer-field="holder">RAYCKINGTON FC</dd>
+                        </div>
+                        <div class="ray-transfer-field">
+                            <dt>RUT</dt>
+                            <dd data-transfer-field="rut">65.281.928-1</dd>
+                        </div>
+                        <div class="ray-transfer-field">
+                            <dt>Institución</dt>
+                            <dd data-transfer-field="bank">Mercado Pago</dd>
+                        </div>
+                        <div class="ray-transfer-field">
+                            <dt>Tipo de cuenta</dt>
+                            <dd data-transfer-field="type">Cuenta Vista</dd>
+                        </div>
+                        <div class="ray-transfer-field ray-transfer-field-number">
+                            <dt>Número de cuenta</dt>
+                            <dd data-transfer-field="account">1045871150</dd>
+                        </div>
+                        <div class="ray-transfer-field">
+                            <dt>Correo</dt>
+                            <dd data-transfer-field="email">rayckingtonfc@gmail.com</dd>
+                        </div>
+                    </dl>
+                    <div class="ray-transfer-actions">
+                        <button type="button" class="ray-transfer-btn ray-transfer-btn-primary" data-transfer-copy="all" aria-label="Copiar todos los datos bancarios de Rayckington FC">
+                            <span aria-hidden="true">▣</span> Copiar todos los datos
+                        </button>
+                        <button type="button" class="ray-transfer-btn ray-transfer-btn-secondary" data-transfer-copy="account" aria-label="Copiar el número de cuenta de Rayckington FC">
+                            Copiar número de cuenta
+                        </button>
+                    </div>
+                    <p class="ray-transfer-hint">Tras transferir, registra el pago y adjunta el comprobante en el portal. Tesorería debe validarlo antes de marcarlo como pagado.</p>
+                    <p class="ray-transfer-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+                </section>
+
+
+                        <!-- HISTORIAL -->
 
 
 
@@ -1678,6 +1729,8 @@
 
 
 
+
+<script src="assets/js/datos-transferencia.js?v=1" defer></script>
 
 </body>
 
