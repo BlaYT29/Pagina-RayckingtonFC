@@ -2219,6 +2219,10 @@ const detalleMensualidadesPendientes =
     );
 
 
+const detalleMultasPendientes =
+    document.getElementById("detalle-multas-pendientes");
+
+
 const detalleTotalPendiente =
     document.getElementById(
         "detalle-total-pendiente"
@@ -2258,6 +2262,10 @@ const mensualidadesMesesPendientes =
     document.getElementById(
         "mensualidades-meses-pendientes"
     );
+
+
+const mensualidadesMultasPendientes =
+    document.getElementById("mensualidades-multas-pendientes");
 
 
 const mensualidadesJugadoresDeuda =
@@ -5056,6 +5064,10 @@ async function cargarJugadores() {
                     normalizarEstado(cuota.concepto) === "SALDO_ANTERIOR"
                 );
 
+            const cuotasMultas = cuotasJugador.filter((cuota) =>
+                normalizarEstado(cuota.concepto) === "MULTA"
+            );
+
             const cuotasMensualesPendientes =
                 cuotasMensuales.filter((cuota) =>
                     normalizarEstado(cuota.estado) === "PENDIENTE"
@@ -5065,6 +5077,10 @@ async function cargarJugadores() {
                 cuotasSaldoAnterior.filter((cuota) =>
                     normalizarEstado(cuota.estado) === "PENDIENTE"
                 );
+
+            const multasPendientes = cuotasMultas.filter((cuota) =>
+                normalizarEstado(cuota.estado) === "PENDIENTE"
+            );
 
             const montoMensualidadesPendientes =
                 cuotasMensualesPendientes.reduce(
@@ -5078,9 +5094,15 @@ async function cargarJugadores() {
                     0
                 );
 
+            const montoMultasPendientes = multasPendientes.reduce(
+                (total, cuota) => total + (Number(cuota.monto) || 0),
+                0
+            );
+
             const deudaTotal =
                 montoMensualidadesPendientes +
-                saldoAnteriorPendiente;
+                saldoAnteriorPendiente +
+                montoMultasPendientes;
 
             const pagosAprobados =
                 pagos.filter((pago) =>
@@ -5098,14 +5120,12 @@ async function cargarJugadores() {
 
             if (normalizarEstado(jugador.estado) === "INACTIVO") {
                 estadoFinanciero = "INACTIVO";
+            } else if (deudaTotal > 0) {
+                // Una exención mensual no elimina multas disciplinarias.
+                estadoFinanciero = "CON DEUDA";
             } else if (jugador.exento_mensualidad) {
                 estadoFinanciero = "EXENTO";
-            } else if (deudaTotal > 0) {
-                estadoFinanciero = "CON DEUDA";
-            } else if (
-                cuotasMensuales.length === 0 &&
-                cuotasSaldoAnterior.length === 0
-            ) {
+            } else if (cuotasJugador.length === 0) {
                 estadoFinanciero = "SIN CUOTAS";
             }
 
@@ -5114,10 +5134,12 @@ async function cargarJugadores() {
                 totalPagado: pagado,
                 saldoAnteriorPendiente,
                 mensualidadesPendientes: montoMensualidadesPendientes,
+                multasPendientes: montoMultasPendientes,
                 totalPendiente: deudaTotal,
                 cuotasPendientes:
                     cuotasMensualesPendientes.length +
-                    saldosAnterioresPendientes.length,
+                    saldosAnterioresPendientes.length +
+                    multasPendientes.length,
                 cuotasMensualesPendientes:
                     cuotasMensualesPendientes.length,
                 cuotas: cuotasJugador,
@@ -5318,6 +5340,11 @@ function renderizarJugadores(
                                 <div class="jugador-finanza">
                                     <span>Mensualidades</span>
                                     <strong>${formatearDinero(jugador.mensualidadesPendientes)}</strong>
+                                </div>
+
+                                <div class="jugador-finanza jugador-finanza-multa">
+                                    <span>Multas</span>
+                                    <strong>${formatearDinero(jugador.multasPendientes)}</strong>
                                 </div>
 
                                 <div class="jugador-finanza jugador-finanza-total">
@@ -5577,6 +5604,11 @@ async function abrirDetalleJugador(
     detalleMensualidadesPendientes.textContent =
         formatearDinero(jugador.mensualidadesPendientes);
 
+    if (detalleMultasPendientes) {
+        detalleMultasPendientes.textContent =
+            formatearDinero(jugador.multasPendientes);
+    }
+
     detalleTotalPendiente.textContent =
         formatearDinero(jugador.totalPendiente);
 
@@ -5610,7 +5642,7 @@ async function abrirDetalleJugador(
             )
             .in(
                 "concepto",
-                ["SALDO_ANTERIOR", "MENSUALIDAD"]
+                ["SALDO_ANTERIOR", "MENSUALIDAD", "MULTA"]
             );
 
 
@@ -5735,20 +5767,23 @@ function renderizarDetalleCuotas(
             const estaPagada = estado === "PAGADO";
             const esSaldoAnterior =
                 normalizarEstado(cuota.concepto) === "SALDO_ANTERIOR";
+            const esMulta = normalizarEstado(cuota.concepto) === "MULTA";
             const claseEstado = estaPagada ? "cuota-pagada" : "cuota-pendiente";
-            const titulo =
-                esSaldoAnterior ? "Saldo anterior" : formatearMes(cuota.periodo);
-            const subtitulo =
-                esSaldoAnterior
-                    ? "Deuda histórica · abril a agosto 2026"
-                    : "Mensualidad";
-            const etiquetaFecha =
-                esSaldoAnterior ? "Corte histórico" : "Vencimiento";
-            const valorFecha =
-                esSaldoAnterior ? "31/08/2026" : formatearFecha(cuota.fecha_vencimiento);
+            const titulo = esSaldoAnterior
+                ? "Saldo anterior"
+                : esMulta
+                    ? `Multa disciplinaria · ${formatearMesCorto(cuota.periodo)}`
+                    : formatearMes(cuota.periodo);
+            const subtitulo = esSaldoAnterior
+                ? "Deuda histórica · abril a agosto 2026"
+                : esMulta ? "Sanción del club" : "Mensualidad";
+            const etiquetaFecha = esSaldoAnterior ? "Corte histórico" : "Vencimiento";
+            const valorFecha = esSaldoAnterior
+                ? "31/08/2026"
+                : formatearFecha(cuota.fecha_vencimiento);
 
             return `
-                <article class="cuota-detalle ${esSaldoAnterior ? "cuota-detalle-historica" : ""}">
+                <article class="cuota-detalle ${esSaldoAnterior ? "cuota-detalle-historica" : esMulta ? "cuota-detalle-multa" : ""}">
                     <div class="cuota-detalle-periodo">
                         <strong>${escaparHTML(titulo)}</strong>
                         <span>${escaparHTML(subtitulo)}</span>
@@ -5807,6 +5842,11 @@ function renderizarResumenMensualidades() {
         0
     );
 
+    const multasPendientes = jugadoresTesoreria.reduce(
+        (total, jugador) => total + (Number(jugador.multasPendientes) || 0),
+        0
+    );
+
     const jugadoresConDeuda = jugadoresTesoreria.filter(
         (jugador) => Number(jugador.totalPendiente) > 0
     );
@@ -5819,6 +5859,9 @@ function renderizarResumenMensualidades() {
     }
     if (mensualidadesMesesPendientes) {
         mensualidadesMesesPendientes.textContent = formatearDinero(mensualidadesPendientes);
+    }
+    if (mensualidadesMultasPendientes) {
+        mensualidadesMultasPendientes.textContent = formatearDinero(multasPendientes);
     }
     if (mensualidadesJugadoresDeuda) {
         mensualidadesJugadoresDeuda.textContent = jugadoresConDeuda.length;
@@ -5889,6 +5932,12 @@ function renderizarListaDeudasJugadores(jugadores) {
                 String(a.periodo || "").localeCompare(String(b.periodo || ""))
             );
 
+        const multasPendientesJugador = (jugador.cuotas || [])
+            .filter((cuota) =>
+                normalizarEstado(cuota.concepto) === "MULTA" &&
+                normalizarEstado(cuota.estado) === "PENDIENTE"
+            );
+
         const meses = cuotasPendientes.length
             ? cuotasPendientes.map((cuota) => `
                 <span class="deuda-mes-chip">
@@ -5901,6 +5950,13 @@ function renderizarListaDeudasJugadores(jugadores) {
                     Sin mensualidades pendientes
                 </span>
             `;
+
+        const chipsMultas = multasPendientesJugador.map((cuota) => `
+            <span class="deuda-mes-chip deuda-mes-chip-multa">
+                Multa · ${escaparHTML(formatearMesCorto(cuota.periodo))}
+                · ${formatearDinero(cuota.monto)}
+            </span>
+        `).join("");
 
         const tieneDeuda = Number(jugador.totalPendiente) > 0;
         const estadoTexto = tieneDeuda ? "CON DEUDA" : jugador.estadoFinanciero;
@@ -5933,6 +5989,10 @@ function renderizarListaDeudasJugadores(jugadores) {
                         <span>Mensualidades</span>
                         <strong>${formatearDinero(jugador.mensualidadesPendientes)}</strong>
                     </div>
+                    <div class="deuda-dato deuda-dato-multa">
+                        <span>Multas</span>
+                        <strong>${formatearDinero(jugador.multasPendientes)}</strong>
+                    </div>
                     <div class="deuda-dato deuda-dato-total">
                         <span>Total pendiente</span>
                         <strong>${formatearDinero(jugador.totalPendiente)}</strong>
@@ -5940,8 +6000,8 @@ function renderizarListaDeudasJugadores(jugadores) {
                 </div>
 
                 <div class="deuda-meses">
-                    <span class="deuda-meses-label">Mensualidades pendientes</span>
-                    <div class="deuda-meses-chips">${meses}</div>
+                    <span class="deuda-meses-label">Mensualidades y multas pendientes</span>
+                    <div class="deuda-meses-chips">${meses}${chipsMultas}</div>
                 </div>
 
                 <button

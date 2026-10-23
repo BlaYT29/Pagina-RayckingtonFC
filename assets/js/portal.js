@@ -2195,7 +2195,7 @@ ${
 
                 >
 
-                    Pagar mensualidad
+                    ${normalizarEstado(cuota.concepto) === "MULTA" ? "Pagar multa" : normalizarEstado(cuota.concepto) === "SALDO_ANTERIOR" ? "Pagar saldo anterior" : "Pagar mensualidad"}
 
                 </button>
 
@@ -8503,6 +8503,12 @@ function obtenerTituloCuota(
 
 
 
+
+    if (concepto === "MULTA") {
+        return cuota.periodo
+            ? `Multa disciplinaria · ${formatearMesAnio(cuota.periodo)}`
+            : "Multa disciplinaria";
+    }
 
     return String(
 

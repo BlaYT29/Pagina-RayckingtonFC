@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="assets/css/portal-crossnav.css?v=20261011">
     <link rel="stylesheet" href="assets/css/mobile-portales.css?v=20261012-m1">
     <link rel="stylesheet" href="assets/css/datos-transferencia.css?v=1">
+    <link rel="stylesheet" href="assets/css/multas-tesoreria.css?v=1">
 </head>
 
 
@@ -1489,10 +1490,16 @@
                             <small>Septiembre 2026 en adelante</small>
                         </article>
 
+                        <article class="detalle-stat detalle-stat-multa">
+                            <span>Multas pendientes</span>
+                            <strong id="detalle-multas-pendientes">$0</strong>
+                            <small>Sanciones disciplinarias</small>
+                        </article>
+
                         <article class="detalle-stat detalle-stat-total">
                             <span>Total pendiente</span>
                             <strong id="detalle-total-pendiente">$0</strong>
-                            <small>Saldo anterior + mensualidades</small>
+                            <small>Saldo anterior + mensualidades + multas</small>
                         </article>
 
                     </div>
@@ -1515,7 +1522,7 @@
 
                             <h3>
 
-                                Saldo anterior y mensualidades
+                                Cuotas, saldos y multas
 
                             </h3>
 
@@ -1720,7 +1727,7 @@
                     <article class="stat-card mensualidad-stat-total">
                         <span>Deuda total jugadores</span>
                         <strong id="mensualidades-deuda-total">$0</strong>
-                        <small>Saldo anterior + mensualidades</small>
+                        <small>Incluye mensualidades, saldos y multas</small>
                     </article>
 
                     <article class="stat-card mensualidad-stat-historico">
@@ -1733,6 +1740,12 @@
                         <span>Mensualidades pendientes</span>
                         <strong id="mensualidades-meses-pendientes">$0</strong>
                         <small>Septiembre 2026 en adelante</small>
+                    </article>
+
+                    <article class="stat-card mensualidad-stat-multa">
+                        <span>Multas pendientes</span>
+                        <strong id="mensualidades-multas-pendientes">$0</strong>
+                        <small>Por sanciones disciplinarias</small>
                     </article>
 
                     <article class="stat-card">
@@ -1750,8 +1763,8 @@
                             <span class="admin-eyebrow">Control de deuda</span>
                             <h2>Estado por jugador</h2>
                             <p>
-                                Revisa cuánto debe cada integrante, separando el saldo histórico
-                                de las mensualidades del sistema actual.
+                                Revisa cuánto debe cada integrante en saldo histórico,
+                                mensualidades y multas disciplinarias.
                             </p>
                         </div>
 
@@ -4137,7 +4150,7 @@
 
     type="module"
 
-    src="assets/js/admin-tesoreria.js"
+    src="assets/js/admin-tesoreria.js?v=multas-v1"
 
 ></script>
 
