@@ -7,6 +7,7 @@
   <title>Rayckington Live | Rayckington FC</title>
   <link rel="icon" href="assets/img/logo/logo.png">
   <link rel="stylesheet" href="assets/css/rayck-live.css?v=live-stats-v2">
+  <link rel="stylesheet" href="assets/css/live-share.css?v=share-v1">
 </head>
 <body>
   <header class="live-header">
@@ -23,6 +24,11 @@
         <div class="live-team"><img id="live-logo-visita" alt=""><strong id="live-visita">Equipo visitante</strong></div>
       </section>
       <div class="live-match-meta"><span id="live-date"></span><span id="live-place"></span><span id="live-updated"></span></div>
+      <!-- PARCHE WHATSAPP: controles independientes, sin escritura en Supabase -->
+      <nav class="live-share-actions" aria-label="Compartir seguimiento del partido">
+        <a id="live-share-whatsapp" class="live-share-whatsapp" href="#" target="_blank" rel="noopener noreferrer">Compartir por WhatsApp</a>
+        <button id="live-share-copy" class="live-share-copy" type="button">Copiar enlace</button>
+      </nav>
 <section class="live-card live-stats-card" aria-labelledby="live-stats-title">
   <div class="live-stats-header">
     <div>
@@ -58,5 +64,6 @@
     </div>
   </main>
   <script type="module" src="assets/js/rayck-live.js?v=live-stats-v2"></script>
+  <script src="assets/js/live-share.js?v=share-v1" defer></script>
 </body>
 </html>
