@@ -6,7 +6,7 @@
   <meta name="description" content="Sigue los partidos, goles, cambios y formaciones de Rayckington FC.">
   <title>Rayckington Live | Rayckington FC</title>
   <link rel="icon" href="assets/img/logo/logo.png">
-  <link rel="stylesheet" href="assets/css/rayck-live.css">
+  <link rel="stylesheet" href="assets/css/rayck-live.css?v=live-stats-v2">
 </head>
 <body>
   <header class="live-header">
@@ -23,6 +23,21 @@
         <div class="live-team"><img id="live-logo-visita" alt=""><strong id="live-visita">Equipo visitante</strong></div>
       </section>
       <div class="live-match-meta"><span id="live-date"></span><span id="live-place"></span><span id="live-updated"></span></div>
+<section class="live-card live-stats-card" aria-labelledby="live-stats-title">
+  <div class="live-stats-header">
+    <div>
+      <h2 id="live-stats-title">Estadísticas del partido</h2>
+      <p class="live-subtitle">Tiros, córners, faltas y tarjetas registrados en Match Center</p>
+    </div>
+    <span class="live-stats-status">● Actualización automática</span>
+  </div>
+  <div class="live-stats-teams">
+    <strong id="live-stats-local">Local</strong>
+    <strong id="live-stats-visita">Visitante</strong>
+  </div>
+  <div id="live-stats" class="live-stats" aria-label="Comparación de estadísticas entre equipos"></div>
+  <p class="live-stats-note">Datos informativos basados en los eventos ingresados por la administración del club. Sin estimaciones de posesión.</p>
+</section>
       <div class="live-grid">
         <section class="live-card" aria-labelledby="live-lineup-title">
           <h2 id="live-lineup-title">Alineación de Rayckington</h2>
@@ -36,11 +51,12 @@
           <h2 id="live-events-title">Minuto a minuto</h2>
           <p class="live-subtitle">Jugadas y cambios registrados desde Match Center</p>
           <div id="live-events" class="live-events" aria-live="polite"></div>
+          <button id="live-events-toggle" class="live-events-toggle" type="button" aria-controls="live-events" aria-expanded="false" hidden>Ver eventos anteriores</button>
         </section>
       </div>
       <p class="live-disclaimer">Seguimiento informativo, no transmisión de video. Los datos reflejan lo ingresado por la administración del club.</p>
     </div>
   </main>
-  <script type="module" src="assets/js/rayck-live.js?v=publica-v4"></script>
+  <script type="module" src="assets/js/rayck-live.js?v=live-stats-v2"></script>
 </body>
 </html>
